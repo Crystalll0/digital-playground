@@ -1,0 +1,10 @@
+爪爪衣橱 · Pawmoire
+
+网站地址：https://pawmoire-pet-atelier.wry-toast-5992.chatgpt.site/
+
+双击“打开爪爪衣橱.webloc”即可访问网站。
+网站源码：包含页面、组件、服务端接口与图片素材，可用 VS Code 打开。
+图片素材位于网站源码/public/images；生成提示词另附。
+这是当前已发布版本的备份，不会随网站后续更新自动同步。
+出于安全考虑，不包含 API 密钥、依赖安装目录及本地缓存。
+开发时需安装依赖，并自行在 .env.local 配置 OPENAI_API_KEY。请勿把密钥放入前端代码。

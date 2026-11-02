@@ -1,0 +1,212 @@
+[
+  {
+    "path": "Game-and-Website/README_SOURCE.md",
+    "bytes": 7675,
+    "sha256": "bfa13ecc8665a8a7f8bd3e7923724c94161477807d188ad7e3a12f74bb54ec21"
+  },
+  {
+    "path": "Game-and-Website/_reel/capture.html",
+    "bytes": 15591,
+    "sha256": "3f82552bf662be95c83d7fe0b2cb19469b1421afd862a8ca8e1d3ff4a5b0471e"
+  },
+  {
+    "path": "Game-and-Website/_reel/director.js",
+    "bytes": 11444,
+    "sha256": "019608a3ef5202bc52566c4341a931a62bd64917400cb6c0df79b318f0caa5c0"
+  },
+  {
+    "path": "Game-and-Website/_reel/economy.js",
+    "bytes": 5029,
+    "sha256": "e40bc79dece14a12813cc1a9a4de8b30c98ec16c1582d9c6232a1b18d39a7863"
+  },
+  {
+    "path": "Game-and-Website/_reel/engine.js",
+    "bytes": 34161,
+    "sha256": "e8cbb0139ec54af9d687030b433cfca89d5c92fb5799adbd7601339b238b2705"
+  },
+  {
+    "path": "Game-and-Website/_reel/shop-scenes.jpg",
+    "bytes": 76689,
+    "sha256": "11761860577c7ca163519000bf0c8c71c6201e11ec2869d61e83bb5fbade5cab"
+  },
+  {
+    "path": "Game-and-Website/assets/Press-Start-2P-LICENSE.txt",
+    "bytes": 4413,
+    "sha256": "705960c3281a5765ecc0b59bd4ed7ca59eed165748076bc2fc3e8fdbfeb944b0"
+  },
+  {
+    "path": "Game-and-Website/assets/diner.png",
+    "bytes": 1439154,
+    "sha256": "561b50dd7958601e1fd237bdd9f543c6bef302e55f0ad82aa1cca080299e6c38"
+  },
+  {
+    "path": "Game-and-Website/assets/favicon.svg",
+    "bytes": 383,
+    "sha256": "c216510f95330b92a5082a4ae00ff4b81ff4392e338ba6d297bd206d64fa2f27"
+  },
+  {
+    "path": "Game-and-Website/assets/midnight-diner.png",
+    "bytes": 1599771,
+    "sha256": "4f579f5ba1a7b5da8a173be8bdb5c0ab41847c9b0dc4039729766916006de423"
+  },
+  {
+    "path": "Game-and-Website/assets/p5-LICENSE.txt",
+    "bytes": 24480,
+    "sha256": "eb2f25f8f165d5f20682c1ce7e99ce69144ecfd80fbed8c17dfd327ecd8b6cb6"
+  },
+  {
+    "path": "Game-and-Website/assets/p5.min.js",
+    "bytes": 1057680,
+    "sha256": "1343f616bf9914da8253faae00201ea5f72772916998bc6add4c2a07e00a662c"
+  },
+  {
+    "path": "Game-and-Website/assets/pixel.ttf",
+    "bytes": 115280,
+    "sha256": "7b939b816f8ce185dd8c2c59e85fb05d3dcd5cde0c0b0de4a1651cb5af9c2c2b"
+  },
+  {
+    "path": "Game-and-Website/assets/strawberry-diner.png",
+    "bytes": 1396670,
+    "sha256": "789682badee28f24d2aae117df14cc366af9a98ce0dc3734affe4b0c84e90293"
+  },
+  {
+    "path": "Game-and-Website/check-progression.cjs",
+    "bytes": 4506,
+    "sha256": "da274564d587a912be91ea88eb1f9776b67d5c68f16ab0efde2297ce59198886"
+  },
+  {
+    "path": "Game-and-Website/check-rules.cjs",
+    "bytes": 3244,
+    "sha256": "8f1c40c30fb90e1a622ca40a12d869dbc1d8f3c8b1d8f6bca07890aba674fff3"
+  },
+  {
+    "path": "Game-and-Website/downloads/Hash-Brown-Catch-Source.zip",
+    "bytes": 4161888,
+    "sha256": "c103e71df27a0888066eafbca58ecd887edcdcec735418dc85e14af7b85e54c3"
+  },
+  {
+    "path": "Game-and-Website/economy.js",
+    "bytes": 5024,
+    "sha256": "ead52b9ba13d263a991f34dcc399c07c5dfdb66bf235140fa537f713dccb502b"
+  },
+  {
+    "path": "Game-and-Website/game-core.js",
+    "bytes": 3517,
+    "sha256": "72f3274c5002a13ccbf7093ef4481689a60ff0d8819784e0d2018f3538553871"
+  },
+  {
+    "path": "Game-and-Website/game.js",
+    "bytes": 33623,
+    "sha256": "e5c7804c62bc2d3d1f3d25f0ffe1cfdd5200578c4818879f0c0d7b82e08d07fb"
+  },
+  {
+    "path": "Game-and-Website/index.html",
+    "bytes": 15048,
+    "sha256": "e06fe014093c6372d419791e17a8eb9dc076f4d8f23733f2ca2d9f4e57e677b2"
+  },
+  {
+    "path": "Game-and-Website/shop.css",
+    "bytes": 8520,
+    "sha256": "b98190662d24a41c6d1f6413e7d45d6f3397888298e28b2b45ea3dea3b8c4e85"
+  },
+  {
+    "path": "Game-and-Website/shop.js",
+    "bytes": 3974,
+    "sha256": "2ce593d30c6062458932dc7fec9c22288ec8ca8dee3fa02bf09ac56ef5b808ff"
+  },
+  {
+    "path": "Game-and-Website/style.css",
+    "bytes": 21985,
+    "sha256": "3a519b7bf14435d8068a26273c2f2c15f054e18c8786e7bbac4987c73aeb6344"
+  },
+  {
+    "path": "Launch-Game.py",
+    "bytes": 997,
+    "sha256": "9227d6d84e9d00c17dba8f23f3ea9857142d711fd247e733761696199176cb1d"
+  },
+  {
+    "path": "README_EN.md",
+    "bytes": 2403,
+    "sha256": "1a649d38477a0f0d0e0fb75d4f250a092b8307167ae9d0c43c30fb0208d3464b"
+  },
+  {
+    "path": "START_HERE_中文.md",
+    "bytes": 4321,
+    "sha256": "0e2eb0cff249dc1dca0b64077c567dd02de017d7192238fc29a77081037bd968"
+  },
+  {
+    "path": "Start-Game-Mac.command",
+    "bytes": 250,
+    "sha256": "a4d8ae6924703e2056a0be46e45c54121f2f5fb54fc9c7304649c9a87d5871a6"
+  },
+  {
+    "path": "Start-Game-Windows.bat",
+    "bytes": 156,
+    "sha256": "6533db72e1cdaa74241d31b7cc1c1d3ce1fb7a4b156e45aeaedf88ceb59c66e0"
+  },
+  {
+    "path": "UI-Development-Previews/01-Original-Website-Preview.jpg",
+    "bytes": 209313,
+    "sha256": "2658a501a23fbaae2f962f571e3938e609f22c015eb31bb9b001a06802df0476"
+  },
+  {
+    "path": "UI-Development-Previews/02-Cleaner-Mascot-Study.jpg",
+    "bytes": 27705,
+    "sha256": "b86d9ac837aa530c4e9ab2570c161c4d3ffe0c3b36d252d3dbc815ed9d5bc8cb"
+  },
+  {
+    "path": "UI-Development-Previews/03-Basket-and-Plate-Collection.jpg",
+    "bytes": 101804,
+    "sha256": "abb08200b6bc50537ee7dc9f795e3544db6c53e86edc91eb7ee4ccd6d19530a7"
+  },
+  {
+    "path": "UI-Development-Previews/04-Treat-Shop-Preview.jpg",
+    "bytes": 76689,
+    "sha256": "11761860577c7ca163519000bf0c8c71c6201e11ec2869d61e83bb5fbade5cab"
+  },
+  {
+    "path": "UI-and-IP-Concepts/01-Original-UI-and-Crispy-IP-CN.png",
+    "bytes": 1808433,
+    "sha256": "d320f50b78505f89572a8dcbe1296d3a9f11fbdc64d2bed86e74098479c655bd"
+  },
+  {
+    "path": "UI-and-IP-Concepts/02-Cute-English-UI-and-Crispy-IP.png",
+    "bytes": 1792161,
+    "sha256": "ad657c88746062a30ccf4275a78833749bde4e1d1116f2c2381af090f8a46b4d"
+  },
+  {
+    "path": "UI-and-IP-Concepts/03-Crunch-Club-Diner-Concept.png",
+    "bytes": 1808087,
+    "sha256": "2008d2ec2571e05da86f69ad2b3aacffe98ea8aeabcb2bf31db34616741f102f"
+  },
+  {
+    "path": "UI-and-IP-Concepts/04-Butter-Morning-Alternative.png",
+    "bytes": 1610389,
+    "sha256": "b96d0a5b9faf747b2ee99c050f89ac76c1c4b033020e5b70b84f635bcbf12afb"
+  },
+  {
+    "path": "UI-and-IP-Concepts/05-Potato-Panic-Alternative.png",
+    "bytes": 1427327,
+    "sha256": "c4a744852471af83ac8f91e131f0647ec0461d7b1122a15e87e220a7b3bcbe81"
+  },
+  {
+    "path": "Video-and-Audio/Hash-Brown-Catch-Demo-Reel.mp4",
+    "bytes": 6342493,
+    "sha256": "eb326d5f67731660cd537bba3358e03b2f025c46a9f408f41190bb11f02f364b"
+  },
+  {
+    "path": "Video-and-Audio/Original-Music-and-SFX.wav",
+    "bytes": 6912044,
+    "sha256": "63d091859a109843da639290097ce39d0c0ef9249be95ee4a87f96d139facad3"
+  },
+  {
+    "path": "Video-and-Audio/Video-Storyboard-Contact-Sheet.jpg",
+    "bytes": 124566,
+    "sha256": "ee4251451bd79596113f06a91f1772f83ad038002b591b6577c31787d8b2f401"
+  },
+  {
+    "path": "Video-and-Audio/make_audio.py",
+    "bytes": 3667,
+    "sha256": "3fd5687f60b022bc1b00215d5883a9bfdc5f6c5200d76722f3c122062cc8c6bf"
+  }
+]

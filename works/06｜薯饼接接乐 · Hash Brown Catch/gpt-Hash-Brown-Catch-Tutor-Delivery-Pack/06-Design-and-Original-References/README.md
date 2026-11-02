@@ -1,0 +1,1 @@
+Original source and design reference archive. Use Stage-01 through Stage-05 for the scoped tutor demonstrations. Older screenshots and the original README may describe an earlier hosted version. 此处保存原始完整项目、设计与历史预览；各周请使用对应 Stage 文件夹。原始文档中的旧链接与预览不代表阶段版本。

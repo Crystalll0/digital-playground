@@ -1,0 +1,24 @@
+upload/ holds only the files that are new or changed this week. Add them to the repository at the same paths (replace files with the same name) and leave everything else as it is.
+Opening this week's upload/ folder on its own is incomplete; use preview-builds/ to see the full week.
+
+README.md
+assets/fonts/crunch-pixel.ttf
+assets/sfx/bonk.wav
+assets/sfx/boom.wav
+assets/sfx/click.wav
+assets/sfx/clock.wav
+assets/sfx/combo.wav
+assets/sfx/golden.wav
+assets/sfx/slow.wav
+assets/sfx/tick.wav
+assets/sfx/timesup.wav
+css/style.css
+docs/changelog.md
+docs/progress/2026-11-12-week2.md
+docs/test-log.md
+index.html
+js/sketch.js
+js/sprites.js
+js/ui.js
+tools/make_font.py
+tools/make_sfx.py

@@ -1,0 +1,24 @@
+upload/ 里只有这周新增或改动的文件。按相同路径放进仓库（同名文件直接替换），其他文件保持不动。
+单独打开这一周的 upload/ 是不完整的，想看完整效果请用 preview-builds/。
+
+README.md
+assets/fonts/crunch-pixel.ttf
+assets/sfx/bonk.wav
+assets/sfx/boom.wav
+assets/sfx/click.wav
+assets/sfx/clock.wav
+assets/sfx/combo.wav
+assets/sfx/golden.wav
+assets/sfx/slow.wav
+assets/sfx/tick.wav
+assets/sfx/timesup.wav
+css/style.css
+docs/changelog.md
+docs/progress/2026-11-12-week2.md
+docs/test-log.md
+index.html
+js/sketch.js
+js/sprites.js
+js/ui.js
+tools/make_font.py
+tools/make_sfx.py

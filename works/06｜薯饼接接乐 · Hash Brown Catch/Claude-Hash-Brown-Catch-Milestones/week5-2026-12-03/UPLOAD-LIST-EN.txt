@@ -1,0 +1,12 @@
+upload/ holds only the files that are new or changed this week. Add them to the repository at the same paths (replace files with the same name) and leave everything else as it is.
+Opening this week's upload/ folder on its own is incomplete; use preview-builds/ to see the full week.
+
+README.md
+assets/demo-reel.gif
+assets/demo-reel.mp4
+assets/reel-poster.jpg
+docs/changelog.md
+docs/progress/2026-12-03-week5.md
+docs/retrospective.md
+index.html
+reel.html

@@ -1,0 +1,17 @@
+upload/ 里只有这周新增或改动的文件。按相同路径放进仓库（同名文件直接替换），其他文件保持不动。
+单独打开这一周的 upload/ 是不完整的，想看完整效果请用 preview-builds/。
+
+README.md
+assets/diner-bg.jpg
+assets/sfx/crunch.wav
+assets/sfx/ding.wav
+assets/sfx/squelch.wav
+docs/changelog.md
+docs/progress/2026-11-05-week1.md
+docs/proposal.md
+docs/team.md
+index.html
+js/sketch.js
+js/sprites.js
+start.bat
+start.command

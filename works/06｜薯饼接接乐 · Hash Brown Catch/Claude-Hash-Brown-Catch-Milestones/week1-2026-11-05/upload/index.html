@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hash Brown Catch · prototype</title>
+<style>
+  body { margin: 0; background: #FFF6E3; color: #4A2412; font-family: system-ui, sans-serif; display: grid; justify-items: center; gap: 12px; padding: 16px; }
+  h1 { margin: 0; font-size: 1.2rem; letter-spacing: 0.08em; }
+  #game-canvas-wrap { line-height: 0; border: 4px solid #4A2412; border-radius: 6px; overflow: hidden; }
+  canvas { touch-action: none; image-rendering: pixelated; }
+  p { margin: 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+  <h1>HASH BROWN CATCH · week 1 prototype</h1>
+  <div id="game-canvas-wrap"></div>
+  <p>Click or tap to start. Move the mouse or drag your finger to slide the fry basket.</p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script>
+  // p5.sound cannot start its audio engine on a page opened as a local file (file://)
+  // and would leave p5 stuck on "Loading...". Load it only when served over http(s).
+  if (location.protocol !== "file:") {
+    document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"><\/script>');
+  } else {
+    window.addEventListener("DOMContentLoaded", function () {
+      var n = document.createElement("p");
+      n.className = "file-note";
+      n.textContent = "Opened as a local file, so sound is off. For sound, run a local server (see README).";
+      n.style.cssText = "margin:8px auto;max-width:640px;padding:8px 12px;background:#FFD978;color:#4A2412;border-radius:4px;font:14px/1.4 system-ui,sans-serif;text-align:center";
+      var stage = document.getElementById("game-canvas-wrap");
+      (stage && stage.closest(".wrap") || document.body).appendChild(n);
+    });
+  }
+</script>
+  <script src="js/sprites.js"></script>
+  <script src="js/sketch.js"></script>
+</body>
+</html>

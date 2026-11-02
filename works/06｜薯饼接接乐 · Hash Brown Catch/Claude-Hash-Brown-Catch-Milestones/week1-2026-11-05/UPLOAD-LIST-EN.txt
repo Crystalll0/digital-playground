@@ -1,0 +1,17 @@
+upload/ holds only the files that are new or changed this week. Add them to the repository at the same paths (replace files with the same name) and leave everything else as it is.
+Opening this week's upload/ folder on its own is incomplete; use preview-builds/ to see the full week.
+
+README.md
+assets/diner-bg.jpg
+assets/sfx/crunch.wav
+assets/sfx/ding.wav
+assets/sfx/squelch.wav
+docs/changelog.md
+docs/progress/2026-11-05-week1.md
+docs/proposal.md
+docs/team.md
+index.html
+js/sketch.js
+js/sprites.js
+start.bat
+start.command

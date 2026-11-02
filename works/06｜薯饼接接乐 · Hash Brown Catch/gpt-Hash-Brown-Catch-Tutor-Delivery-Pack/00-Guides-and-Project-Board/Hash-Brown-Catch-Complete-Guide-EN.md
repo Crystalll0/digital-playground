@@ -1,0 +1,347 @@
+# Hash Brown Catch Complete Team Delivery Guide
+
+This guide is for CHEN Yueru, MA Qianran and LI Jiarui. It covers the scope, files, ownership, demonstrations and evidence for five tutor reviews. Each stage has a separate runnable local game package with an English interface. The Chinese and English guides are separate documents.
+
+## Project details supplied by your team
+
+- Repository name: Hash-Brown-Catch
+- Repository URL: https://github.com/sd5913/Hash-Brown-Catch
+- Your team Project board: https://github.com/orgs/sd5913/projects/6
+- projects/1 is the tutor template; use projects/6 for your group planning and tracking. URLs reflect the details you supplied; the team must still verify Public / Write permissions and tutor access.
+- GitHub usernames, evidence, feedback and actual submission times remain to be completed from real activity.
+
+## How to use these prepared builds
+
+The five packages were reconstructed from an existing complete prototype on 2 November 2026. Their dates are planned review targets, not past releases, contributions or test sessions. They support incremental discussion and validation; they do not replace future weekly work, actual playtests or tutor feedback. Stage 05 is prepared for final review and does not imply final acceptance.
+
+Extract each ZIP completely and read START_HERE_EN.md. Install Python 3. On macOS run python3 Launch-Game.py; on Windows run py -3 Launch-Game.py or the batch launcher. If macOS blocks the double-click script, use the terminal command. No npm installation, API key or runtime internet connection is required. Do not open the game index.html directly. Keep the server terminal open; stop it with Ctrl+C.
+
+Each stage uses separate storage keys for coins, cosmetics, best scores and mute settings. Progress is not migrated between stages. Saves are still browser- and origin-specific: changing browsers or ports, clearing site data or moving to a deployment may produce a different save. Local progress does not automatically appear on GitHub Pages or another host.
+
+No live site, GitHub repository or board was changed for this delivery. Your team uploads the files. Each package provides an English README.md for submission and a matching README_CN.md. Replace placeholders with real information before publishing.
+
+## Course requirements and submission
+
+The project is worth 40% of the course grade. Within the project mark, creative idea is 25%, code is 50% and execution is 25%. Execution concerns sustained progress, ownership, review, testing and adaptation, rather than raw commit or card counts.
+
+- Use one shared public repository owned by sd5913, with a URL beginning https://github.com/sd5913/. Give all three members Write access.
+- The invitation has been accepted and the template is accessible. Link the group Project to the repository; link the board, progress notes, test records and usable result from the README. An accessible equivalent shared record is also valid.
+- The supplied repository and team board URLs are recorded above; complete usernames and verify access yourselves.
+- Bring a usable increment, relevant evidence and one main question each week. After the meeting, record the tutor’s actual feedback and the next actions with owners. No tutor feedback has been received yet.
+- The final Canvas deadline is Sunday 6 December 2026, 23:59 Hong Kong time. Submit the group repository URL following the Canvas group instructions. The 3 December review is separate from final submission. This group project is separate from individual Assignment 3.
+
+## Suggested ownership and cross-review
+
+- CHEN Yueru: experience and visual design, interface copy, animation feedback, integration and the final reel.
+- MA Qianran: core input, collision, scoring, difficulty, timing, pause, power-ups and technical checks.
+- LI Jiarui: wallet, shop and persistence, organizing playtests, setup instructions and access verification.
+- CHEN reviews MA’s interaction feedback; MA reviews LI’s economy and saving; LI reviews CHEN’s interface clarity and phone operation. Everyone should understand their changes and commit their own actual contributions.
+- Existing code and assets were AI-assisted. Do not attribute pre-generated work to a member as future independent authorship. Record real reading, changes, tests, review and integration instead.
+
+## Upload convention
+
+Copy each stage’s Game-and-Website contents into game/ in the same repository. Place the English README and docs at the repository root and corresponding paths. Merge and preserve earlier real progress and test records rather than deleting them. Suggested tags are v0.1, v0.2, v0.3, v0.4-rc and v1.0-review; create them when the actual commits are made, using real dates.
+
+Commit readable source files. Put runnable ZIPs and large videos in GitHub Release attachments and link them from the README where appropriate. A ZIP alone is not a substitute for accessible source. Make small meaningful commits and ask another member to review actual work; do not manufacture history or split work merely to increase counts.
+
+weekly-upload/CN and weekly-upload/EN contain matching copy-ready documentation templates. Choose one language as the main repository documents; keep the other with suffixes if useful. Do not overwrite completed historical records with blank templates. STAGE_SCOPE.json and docs/BUILD_CHECKS.txt describe build scope and generation-time checks, not future team activities.
+
+## Guide to the Tutor GitHub Project Template
+
+This section follows your screenshot of Group Project 2026 and the supplied assignment. The template URL is https://github.com/orgs/sd5913/projects/1 . Live card details could not be retrieved in this session, so this guide does not assume existing card descriptions, hidden fields or the full set of status options. Preserve any instructions already present in your copy and add your information. The text below is guidance and suggested planning, not a record of completed work.
+
+### Create or check your team Project
+
+- Use Use this template on the tutor’s template, select sd5913 as Owner, and consider the name Hash Brown Catch — CHEN MA LI. If you already copied it, do not create a duplicate.
+- Associate your existing sd5913 public repository with the team Project. Give all three members Project Write access and repository Write access; check the two permissions separately.
+- The copied Project is a planning board, not the source repository. The repository holds code and documentation; the Project holds tasks, dates, ownership and status. Record group work in your own copy rather than editing the tutor’s original template.
+- Verify tutor access to both. Link your team’s Project from the README, not only the original template. Add your actual repository URL, runnable result or download, and weekly records.
+- Complete the account mapping: CHEN Yueru → [@username]; MA Qianran → [@username]; LI Jiarui → [@username]. Select actual accounts in Assignees rather than only writing names in the description.
+
+### What to put in the six visible fields
+
+- Title: name a specific task or review. Retain the five tutor-review cards and final-submission card. For new work, use an action and outcome such as Verify pause timing and replay reset, rather than Game development.
+- Assignees: select the actual primary owner. One owner per ordinary task is a useful default; list collaborators and a reviewer in the description. A review card can have a coordinator while its description names all three participants. Coordination is not sole authorship.
+- Status: reflect actual progress. Backlog and Todo are visible in the screenshot; use the remaining options actually available in your copy. If In progress / Done or equivalent states exist, use them for active work and work that has passed acceptance. Do not mark future work complete or add statuses merely to match this guide.
+- Kind: use Team task for development, design, documentation and testing; Tutor review for the five meetings; Submission for the 6 December final submission. All three labels appear in the screenshot.
+- Delivery date: use the task’s target date. Retain 5 / 12 / 19 / 26 November and 3 December for reviews, and 6 December for submission. Ordinary tasks can be due one or two days earlier to allow review. If the field shows only a date, retain 23:59 HKT in the submission description.
+- Iteration: choose the relevant teaching week. The screenshot maps Week 9 | 05 Nov, Week 10 | 12 Nov, Week 11 | 19 Nov, Week 12 | 26 Nov and Week 13 | 03 Dec. Final submission is also in Week 13. Iteration is a work period, not completion status or your Stage 01–05 numbering.
+
+### How to use the views
+
+- Delivery dates: check milestones, dates, ownership and status; complete the preset-card fields here first.
+- Team board: review the distribution of current work and move tasks according to actual progress. A task is the same item across views; do not recreate it in every view.
+- Roadmap: check work across weeks and approaching deadlines. If bars are missing, inspect that view’s actual date / Iteration configuration in your copy.
+- Current iteration: focus on this week; Next iteration: prepare candidate work for next week. If a task is absent, check its Iteration and view filters before making a duplicate.
+- View 6: its purpose is not shown in the screenshot. It is not a sixth mandatory submission. Inspect its configuration and leave it unchanged if it serves no current need.
+
+### What to add to the seven preset cards
+
+Agree your first goal and Definition of Done: retain Team task as Kind. CHEN Yueru can coordinate, with all three members agreeing. Add the audience, first-build scope, exclusions, acceptance criteria and individual tasks. The screenshot places it in Week 8 | 29 Oct. If the actual discussion happens now, record its real date and, if appropriate, move the Iteration to the current work period, or retain the teaching-week label if the tutor requests it. Do not record a meeting as having occurred on 29 October when it did not.
+
+Suggested first goal: a first-time player can move the basket during a gentle 30-second round, understand +10 for catches and −2 for misses, and notice visual/audio feedback. Suggested Definition of Done: all members can launch it; mouse and keyboard control work; scoring matches the rules; pause freezes time; replay restarts; at least one non-developer has tried it; observed problems are documented. These are acceptance conditions to check after verification, not completed claims.
+
+- 05 Nov | Tutor review: first working interaction: select Week 9 | 05 Nov. Suggested coordinator: CHEN Yueru. Link Stage 01, interaction checks and visual-direction notes. Ask whether the interaction and scope fit the course. Add feedback and owned actions after the meeting.
+- 12 Nov | Tutor review: integrated core experience: select Week 10 | 12 Nov. Suggested coordinator: MA Qianran. Link Stage 02, round rules and timing / collision checks. Discuss hazard clarity, difficulty and the complete round flow.
+- 19 Nov | Tutor review: UX test and feedback: select Week 11 | 19 Nov. Suggested coordinator: LI Jiarui. Link Stage 03, the test plan, anonymized results and changes / retests. Show how actual feedback affects UI, difficulty or the shop; newly added features alone are insufficient evidence of testing.
+- 26 Nov | Tutor review: delivery candidate: select Week 12 | 26 Nov. Suggested coordinator: LI Jiarui. Link Stage 04, the candidate package, independent-launch checks and known issues. Explain retained extensions, scope cuts and how the tutor can access the result.
+- 03 Dec | Tutor review: final deployment and polish: select Week 13 | 03 Dec. Suggested coordinator: CHEN Yueru. Link Stage 05, final checks, the reel, contributions and reflection. Add a deployment URL only if deployed; otherwise provide a runnable local package and instructions and confirm the delivery approach with the tutor. Record final comments and pre-submission fixes.
+- 06 Dec | Canvas submission: 23:59 HKT: use Submission and Week 13 | 03 Dec. Suggested coordinator: LI Jiarui; checker: CHEN Yueru. Include the correct repository URL, permission/access checks, final build and run links. Retain 2026-12-06 23:59 HKT in the description. Only after actual submission, add the submitter, real submission time and Canvas receipt or confirmation screenshot, then mark complete. File readiness is not submission.
+
+A review card can be closed after the meeting and its feedback/actions have been recorded. Keep unfinished follow-up work in separate tasks; the meeting ending does not mean every resulting change is complete.
+
+### Description structure for each Tutor review card
+
+Copy these headings into each review description as useful. Replace brackets with actual information. Fill goals and links before the meeting; feedback and actions afterwards.
+
+- Review target: [date; exact tutorial time confirmed by the tutor]
+- Goal: [what we will demonstrate or validate]
+- Build: [weekly package / Release / playable URL and launch instructions]
+- Work completed: [actual contributions by the three members with issue and commit links]
+- Evidence: [test records, devices, dates, screenshots / recording links]
+- Main question or blocker: [one main point needing tutor guidance]
+- Tutor feedback: [Not yet received until the meeting; complete afterwards]
+- Decisions: [what we retain, change or remove, with evidence and reasons]
+- Next actions: [task, owner, target date, reviewer and linked follow-up item]
+
+### Suggested additional Team task cards
+
+These are optional work breakdowns, not a card-count target. Adapt titles, dates and scope to actual work. Use Kind = Team task and aim to finish before that week’s review with time for a cross-check.
+
+- Week 9: CHEN — Confirm diner UI and character feedback; MA — Verify movement collision and scoring; LI — Run first interaction test and document setup. Acceptance focus: usable catching, clear feedback and a recorded first test.
+- Week 10: CHEN — Clarify hazard and results UI; MA — Integrate difficulty timer and pause; LI — Test full round replay and phone controls. Acceptance focus: complete round flow, correct pause/scoring and reproducible problems.
+- Week 11: CHEN — Refine UI from observed playtest problems; MA — Fix and retest gameplay issues; LI — Validate wallet shop and organize playtests. Acceptance focus: understandable score/coins, verified purchases/saves and evidence-based handling of key problems.
+- Week 12: CHEN — Review cosmetic and power up clarity; MA — Verify power up and rare pup boundaries; LI — Validate delivery package and independent launch. Acceptance focus: correct retained extensions, independent setup and ownership of known issues.
+- Week 13: CHEN — Check visual consistency and reel; MA — Run final regression and resolve blockers; LI — Audit repository docs access and submission readiness. Acceptance focus: a consistent reel, resolved critical problems and complete access/materials. Record actual submission separately on the Submission card.
+
+### Description structure for a Team task
+
+- Purpose: [why this matters to the current weekly goal]
+- Owner: [GitHub account]; Collaborator: [account or none]; Reviewer: [another member]
+- Scope: [specific change and exclusions]
+- Definition of Done: [observable, reproducible acceptance conditions]
+- Evidence: [actual commit / PR, test or document links; not just completed]
+- Result: [actual outcome, unfinished work and reasons]
+- Next action: [link follow-up work if needed]
+
+Draft items can hold initial plans. Where code or discussion tracking is useful, create or convert an item into an Issue in your shared repository and associate it with the Project. Follow the actual menu in your copy. The screenshot’s icons do not establish the type of every card; there is no need to force every preset item into an Issue.
+
+### Weekly maintenance and README links
+
+- Before: agree the goal, owners, dates and Iteration; update actual status; prepare a usable build, evidence and one question.
+- During: each member explains their actual contribution; record tutor comments.
+- After: record feedback and adaptation in the review card and docs/progress/date.md; create owned next tasks; mark work complete only after acceptance.
+- README: add your own Project URL, sd5913 repository URL, weekly progress index, test index and runnable / download links. Put each review-card URL in its weekly record. The tutor’s original template is not evidence of your group execution.
+- Link card descriptions to repository evidence and link the README back to the Project. The views do not require duplicate uploads of the same files, and no additional weekly Canvas submission is introduced.
+
+### Information your team must supply
+
+- Team Project name and copied URL; actual repository URL; all three GitHub usernames.
+- Project/repository write permissions, tutor access and actual tutorial times.
+- The team’s agreed first goal and Definition of Done.
+- Real task owners, Iterations, target dates, status and code / documentation / test evidence.
+- Actual playtests and tutor feedback, decisions informed by them and owned follow-up work.
+- Final usable build, pre-submission checks, actual Canvas submission time and confirmation.
+
+All examples are guidance for your team to complete. Future tests, tutor feedback, member contributions and submission remain pending until they occur. Do not mark all five weeks of planned features complete at once.
+
+## Stage 01  2026-11-05  Core interaction
+
+### Local build scope
+
+A fixed, gentle 30-second interaction: move the basket; catch golden hash browns for +10; miss for −2; score never falls below zero. Includes pixel animation, synthesized sound, mash and ghost feedback, pause, results and replay. No hazards, difficulty selection, coins, shop, power-ups or rare pup. Existing basket and plate collection remains as visual feedback.
+
+Separate file: Stage-01-2026-11-05-Core-Interaction.zip.
+
+### Files to upload or update
+
+- game/: this stage’s source, required assets and check-stage.cjs.
+- README.md: complete or merge the relevant stage content.
+- docs/design-direction.md: complete or merge the relevant stage content.
+- docs/credits.md: complete or merge the relevant stage content.
+- docs/progress/2026-11-05.md: complete or merge the relevant stage content.
+- docs/tests/core-checklist.md: complete or merge the relevant stage content.
+
+- docs/evidence/: actual screenshots, short recordings or anonymized test records, linked from the documentation.
+
+### Member tasks
+
+- CHEN Yueru: confirm the diner visual direction, basic UI and character feedback; check source and AI asset credits.
+- MA Qianran: read and verify input, falling objects, collision and scoring; contribute real code changes or tests.
+- LI Jiarui: run the package from its instructions, invite at least one non-developer to try it, and record observations and setup problems.
+
+### Tutor demonstration
+
+In about 2 minutes, identify the audience and demonstrate movement, catch, miss, audiovisual feedback and restart. Show one visual direction image. Ask whether the core interaction and scope are appropriate.
+
+### Validation and next actions
+
+Check responsive movement, a single score increment per catch, correct miss penalty and score floor, audio after interaction, and frozen time while paused. Record tester, date, expected result and actual result.
+
+After the meeting, record the tutor’s words or an accurate summary and agree what to retain, change or remove, with owners. The next package is a prepared candidate scope and should be adapted to actual feedback, not treated as a requirement to add every feature.
+
+## Stage 02  2026-11-12  Complete round
+
+### Local build scope
+
+Adds a complete default 60-second round, burnt bites (−10), bombs (−20), Easy / Medium / Hard / Hell / Custom, gradual acceleration and local best scores by difficulty. Custom rounds offer 30 / 60 / 90 / 120 seconds. No permanent coins, shop, power-ups or rare pup.
+
+Separate file: Stage-02-2026-11-12-Complete-Round.zip.
+
+### Files to upload or update
+
+- game/: this stage’s source, required assets and check-stage.cjs.
+- README.md: complete or merge the relevant stage content.
+- docs/game-rules.md: complete or merge the relevant stage content.
+- docs/credits.md: complete or merge the relevant stage content.
+- docs/progress/2026-11-12.md: complete or merge the relevant stage content.
+- docs/tests/core-checklist.md: complete or merge the relevant stage content.
+
+- docs/evidence/: actual screenshots, short recordings or anonymized test records, linked from the documentation.
+
+### Member tasks
+
+- CHEN Yueru: refine hazard recognition, difficulty instructions and results UI; check that displayed rules match behavior.
+- MA Qianran: verify difficulty, hazards, timing, pause and fast collision; fix observed problems.
+- LI Jiarui: test complete rounds, replay, local records and phone interaction; document actual results.
+
+### Tutor demonstration
+
+In about 3 minutes, demonstrate the menu, difficulty, a catch, a hazard, pause/resume and results/replay. Explain how a fast crossing is detected. Ask whether hazards and difficulty are understandable.
+
+### Validation and next actions
+
+Check burnt/bomb penalties, harmless dodges, difficulty differences, pause and blur timing, one-time round ending, reset on replay, and records distinguished by custom configuration.
+
+After the meeting, record the tutor’s words or an accurate summary and agree what to retain, change or remove, with owners. The next package is a prepared candidate scope and should be adapted to actual feedback, not treated as a requirement to add every feature.
+
+## Stage 03  2026-11-19  Wallet shop and playtest
+
+### Local build scope
+
+Adds a permanent local wallet: each golden catch earns 2 coins; misses and hazards affect only the round score. The small shop offers Strawberry Social (120), Ketchup Cutie (60) and Minty Phantom (60), with the default bomb retained. Purchases equip automatically and survive reloads. No power-ups or rare pup.
+
+Separate file: Stage-03-2026-11-19-Wallet-and-Playtest.zip.
+
+### Files to upload or update
+
+- game/: this stage’s source, required assets and check-stage.cjs.
+- README.md: complete or merge the relevant stage content.
+- docs/game-rules.md: complete or merge the relevant stage content.
+- docs/credits.md: complete or merge the relevant stage content.
+- docs/progress/2026-11-19.md: complete or merge the relevant stage content.
+- docs/playtest/plan.md: complete or merge the relevant stage content.
+- docs/playtest/results.md: complete or merge the relevant stage content.
+- docs/playtest/changes.md: complete or merge the relevant stage content.
+
+- docs/evidence/: actual screenshots, short recordings or anonymized test records, linked from the documentation.
+
+### Member tasks
+
+- CHEN Yueru: improve UI, feedback and shop explanations in response to playtests; preserve before-and-after examples.
+- MA Qianran: investigate difficulty, collision and scoring problems and run regression checks.
+- LI Jiarui: review or modify the wallet and small shop, organize 3–5 non-team playtesters, and anonymize observations. This sample size is a recommendation, not a course requirement.
+
+### Tutor demonstration
+
+Present actual player task attempts, confusion or control problems, followed by changes and retest evidence. Demonstrate score versus coins, buying, equipping and reloading. Do not treat staged demo currency as player-earned evidence.
+
+### Validation and next actions
+
+Let players start without coaching. Ask them to explain catch/avoid items and score versus coins. Check insufficient balance, repeat purchases, equipping, reload persistence, and willingness to replay with reasons.
+
+After the meeting, record the tutor’s words or an accurate summary and agree what to retain, change or remove, with owners. The next package is a prepared candidate scope and should be adapted to actual feedback, not treated as a requirement to add every feature.
+
+## Stage 04  2026-11-26  Delivery candidate
+
+### Local build scope
+
+Adds clocks (+5 seconds each, capped at +15 per round), coffee (half-speed falls for 4 active seconds; repeat catches refresh duration) and cola (one non-stacking hazard shield). A pup visit is planned in about 12% of rounds, at most once; catching it doubles earlier and later coins from that round only, never the pre-existing wallet or score. Opens the complete cosmetic catalog.
+
+Separate file: Stage-04-2026-11-26-Delivery-Candidate.zip.
+
+### Files to upload or update
+
+- game/: this stage’s source, required assets and check-stage.cjs.
+- README.md: complete or merge the relevant stage content.
+- docs/game-rules.md: complete or merge the relevant stage content.
+- docs/credits.md: complete or merge the relevant stage content.
+- docs/progress/2026-11-26.md: complete or merge the relevant stage content.
+- docs/tests/release-checklist.md: complete or merge the relevant stage content.
+- docs/known-issues.md: complete or merge the relevant stage content.
+
+- docs/evidence/: actual screenshots, short recordings or anonymized test records, linked from the documentation.
+
+### Member tasks
+
+- CHEN Yueru: unify cosmetic and power-up presentation and ensure feedback does not obscure interaction.
+- MA Qianran: verify power-up timing, shields and rare-pup edge cases; run applicable rule checks.
+- LI Jiarui: verify shop, saving, package and access; ask someone who did not write the instructions to launch the project independently.
+
+### Tutor demonstration
+
+Follow the README from extraction to independent launch. Demonstrate the features retained after testing, persistence and access checks. Rare features may be shown in a clearly labeled demonstration environment; normal play keeps its original odds. Discuss remaining blockers and scope cuts.
+
+### Validation and next actions
+
+Check the +15-second clock cap, 4-second coffee and pause behavior, one-use shield, once-per-round pup doubling only current-round coins, wallet independence, persistence, setup instructions and phone layout. Automated checks do not replace user testing.
+
+After the meeting, record the tutor’s words or an accurate summary and agree what to retain, change or remove, with owners. The next package is a prepared candidate scope and should be adapted to actual feedback, not treated as a requirement to add every feature.
+
+## Stage 05  2026-12-03  Final review build
+
+### Local build scope
+
+Retains Stage 04 and adds a concise visible rules and score/coin guide, a separate Delivery Guide, and R-to-replay with a visible results-screen hint. This is a prepared final-review build, subject to future testing and tutor feedback, rather than a claim of final acceptance.
+
+Separate file: Stage-05-2026-12-03-Final-Review.zip.
+
+### Files to upload or update
+
+- game/: this stage’s source, required assets and check-stage.cjs.
+- README.md: complete or merge the relevant stage content.
+- CHANGELOG.md: complete or merge the relevant stage content.
+- docs/credits.md: complete or merge the relevant stage content.
+- docs/progress/2026-12-03.md: complete or merge the relevant stage content.
+- docs/tests/final-results.md: complete or merge the relevant stage content.
+- docs/team-contributions.md: complete or merge the relevant stage content.
+- docs/reflection.md: complete or merge the relevant stage content.
+- docs/known-issues.md: complete or merge the relevant stage content.
+
+- docs/evidence/: actual screenshots, short recordings or anonymized test records, linked from the documentation.
+
+### Member tasks
+
+- CHEN Yueru: check visual consistency, prepare the video and presentation, and ensure the reel matches the final game.
+- MA Qianran: finish fixes, run rule regression checks and prepare a core-code explanation.
+- LI Jiarui: verify the README, packages, board and permissions; compile evidence of all three members’ actual contributions.
+
+### Tutor demonstration
+
+Use about 5 minutes for audience and concept, live play, 2–3 changes informed by real feedback, the reel, contributions and limitations. The video supplements a usable build. Record final tutor comments and schedule any fixes before 6 December.
+
+### Validation and next actions
+
+Retest fixed issues, rules, launch, phone control, audio, saves, document links and access. Verify that R replays only on results and that instructions match behavior. Final team testing and tutor feedback remain pending.
+
+After the meeting, record the tutor’s words or an accurate summary and agree what to retain, change or remove, with owners. The next package is a prepared candidate scope and should be adapted to actual feedback, not treated as a requirement to add every feature.
+
+## Weekly record structure
+
+- Goal: what we will validate or change this week.
+- Actual work: contributions by all three members, with commit or issue links.
+- Test evidence: date, tester, device, steps, expected and actual results, attachments.
+- Tutor feedback: complete accurately after the meeting; state explicitly when none has been received.
+- Adaptation: what evidence informed a decision to retain, change or remove something.
+- Next actions: task, owner, target date and cross-reviewer.
+- Blocker or question: one main point requiring tutor guidance.
+
+## Before final submission
+
+Verify sd5913 ownership, Public visibility, Write access for all three members, accessible README and board, readable source, complete setup instructions, a usable result, actual progress and feedback records, accurate credits and AI disclosure, and no passwords or tokens. Submit the same repository URL by 6 December at 23:59 Hong Kong time following Canvas instructions. Prepared stage packages do not themselves satisfy permission or submission requirements.
+
+## Attachments and verification scope
+
+Each stage has a separate local ZIP. Stage 05 also includes the existing 36-second 1080p 30fps reel, WAV soundtrack and staged video source. The reel shows the complete prototype and is intended primarily for later review; earlier meetings need not expose every feature. Check consistency after future changes. The video source is HTML/JavaScript, not an AE/Premiere project; staged feature scenes are not evidence of ordinary random spawn frequency.
+
+Each package includes executable rule and scope checks and generation-time results. Browser checks are recorded separately in Verification-Report. Future user sessions, device checks, member contributions and tutor feedback remain unfilled; a prepared template is not completion evidence.

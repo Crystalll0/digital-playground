@@ -1,0 +1,10 @@
+upload/ holds only the files that are new or changed this week. Add them to the repository at the same paths (replace files with the same name) and leave everything else as it is.
+Opening this week's upload/ folder on its own is incomplete; use preview-builds/ to see the full week.
+
+README.md
+docs/assessment-map.md
+docs/changelog.md
+docs/deploy.md
+docs/media/gameplay.png
+docs/progress/2026-11-26-week4.md
+index.html

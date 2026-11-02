@@ -1,0 +1,10 @@
+upload/ 里只有这周新增或改动的文件。按相同路径放进仓库（同名文件直接替换），其他文件保持不动。
+单独打开这一周的 upload/ 是不完整的，想看完整效果请用 preview-builds/。
+
+README.md
+docs/assessment-map.md
+docs/changelog.md
+docs/deploy.md
+docs/media/gameplay.png
+docs/progress/2026-11-26-week4.md
+index.html

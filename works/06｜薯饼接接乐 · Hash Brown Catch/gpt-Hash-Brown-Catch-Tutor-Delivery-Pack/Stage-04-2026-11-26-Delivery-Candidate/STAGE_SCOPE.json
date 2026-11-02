@@ -1,0 +1,9 @@
+{
+  "prepared_on": "2026-11-02",
+  "review_target": "2026-11-26",
+  "stage": 4,
+  "scope": "Adds clocks (+5 seconds each, capped at +15 per round), coffee (half-speed falls for 4 active seconds; repeat catches refresh duration) and cola (one non-stacking hazard shield). A pup visit is planned in about 12% of rounds, at most once; catching it doubles earlier and later coins from that round only, never the pre-existing wallet or score. Opens the complete cosmetic catalog.",
+  "historical_release": false,
+  "tutor_feedback": "Not yet received",
+  "team_work_and_playtest_evidence": "Pending actual activity"
+}

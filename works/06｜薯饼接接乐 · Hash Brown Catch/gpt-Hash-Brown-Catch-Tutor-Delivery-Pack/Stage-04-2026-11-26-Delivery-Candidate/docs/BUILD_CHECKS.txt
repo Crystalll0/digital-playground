@@ -1,0 +1,34 @@
+Prepared on 2026-11-02. Actual generation checks only; future team tests and tutor feedback remain pending.
+
+$ node check-progression.cjs
+PASS wallet survives serialization with outfits and a custom ghost color
+PASS purchases debit once, equip owned cosmetics and never allow an overdraft
+PASS wallet transactions reject duplicates and invalid amounts
+PASS wallet coins are independent from score penalties
+PASS Spud Imp doubles past and future round coins, without doubling an existing wallet
+PASS missing a rare pup or a power-up has no penalty
+PASS a new run resets powers and coins while the separate wallet stays intact
+PASS clock bonuses cap at fifteen seconds per round
+PASS coffee lasts four real active seconds and refreshes without stacking
+PASS cola blocks exactly one hazard without breaking a streak
+PASS rare visit planning stays once per round and powers cannot change its spawned flag
+PASS corrupted or legacy save data cannot equip locked outfits or negative balances
+12 progression checks passed.
+
+$ node check-rules.cjs
+PASS golden catches add ten, misses cost two, score stays nonnegative
+PASS burnt and bomb penalties match the displayed rules
+PASS dodged hazards do not change score or a golden streak
+PASS a miss or caught hazard resets streak and preserves best streak
+PASS easy has no bombs, zero hazards always yields golden
+PASS presets increase in speed, rate and hazard chance
+PASS difficulty ramps gradually and caps at the end of the round
+PASS timer reaches zero exactly once, and tick is not needed while paused
+PASS swept collision catches a fast crossing, but not a miss or object already below
+PASS custom settings are preserved and records distinguish difficulty and custom recipes
+10 rule checks passed.
+
+$ node check-stage.cjs
+PASS Stage 4: scoring, scope gates, collision and applicable progression rules.
+
+PASS JavaScript syntax and local HTML asset references.

@@ -1,0 +1,19 @@
+Prepared on 2026-11-02. Actual generation checks only; future team tests and tutor feedback remain pending.
+
+$ node check-rules.cjs
+PASS golden catches add ten, misses cost two, score stays nonnegative
+PASS burnt and bomb penalties match the displayed rules
+PASS dodged hazards do not change score or a golden streak
+PASS a miss or caught hazard resets streak and preserves best streak
+PASS easy has no bombs, zero hazards always yields golden
+PASS presets increase in speed, rate and hazard chance
+PASS difficulty ramps gradually and caps at the end of the round
+PASS timer reaches zero exactly once, and tick is not needed while paused
+PASS swept collision catches a fast crossing, but not a miss or object already below
+PASS custom settings are preserved and records distinguish difficulty and custom recipes
+10 rule checks passed.
+
+$ node check-stage.cjs
+PASS Stage 3: scoring, scope gates, collision and applicable progression rules.
+
+PASS JavaScript syntax and local HTML asset references.

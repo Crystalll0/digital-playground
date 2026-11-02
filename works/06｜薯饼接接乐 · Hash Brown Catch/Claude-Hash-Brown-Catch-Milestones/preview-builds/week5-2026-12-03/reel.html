@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hash Brown Catch · Demo Reel</title>
+<!-- 30-second demo reel. Open this page at 1280×720 and screen-record it,
+     or run tools/record-reel.js to capture it automatically. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+  @font-face { font-family: "Crunch Pixel"; src: url("assets/fonts/crunch-pixel.ttf"); }
+  :root { --cream:#FFF6E3; --butter:#FFD978; --gold:#F5A623; --tomato:#E63B2E; --tomato-dark:#A9231A; --cocoa:#4A2412; --teal:#2F7D6D;
+          --f: "Press Start 2P", "Crunch Pixel", monospace; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: var(--cocoa); }
+  #reel { position: relative; width: 1280px; height: 720px; overflow: hidden; font-family: var(--f); color: var(--cocoa); }
+  #game-canvas-wrap { position: absolute; inset: 0; line-height: 0; }
+  #game-canvas { image-rendering: pixelated; }
+  canvas.pix { image-rendering: pixelated; display: block; }
+
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+           opacity: 0; transition: opacity .35s steps(4); pointer-events: none; }
+  .scene.on { opacity: 1; }
+  .veil { background: rgba(255,246,227,.82); }
+
+  .logo { margin: 0; text-align: center; line-height: 1.05; }
+  .logo .l1 { display:block; font-size: 64px; color: var(--gold); text-shadow: 5px 5px 0 var(--cocoa), -3px -3px 0 var(--cocoa), 3px -3px 0 var(--cocoa), -3px 3px 0 var(--cocoa), 8px 10px 0 rgba(74,36,18,.3); }
+  .logo .l2 { display:block; font-size: 76px; margin-top: 14px; color: var(--tomato); text-shadow: 5px 5px 0 var(--cocoa), -3px -3px 0 var(--cocoa), 3px -3px 0 var(--cocoa), -3px 3px 0 var(--cocoa), 8px 10px 0 rgba(74,36,18,.3); }
+  .tag { font-size: 16px; letter-spacing: 2px; background: var(--butter); padding: 12px 18px; }
+  .sub { font-size: 13px; letter-spacing: 3px; color: var(--cocoa); }
+  .hop { animation: hop .8s steps(4) infinite; }
+  @keyframes hop { 50% { transform: translateY(-14px); } }
+  .pop { transform: scale(.2); opacity: 0; transition: transform .3s steps(5), opacity .3s steps(3); }
+  .on .pop.in { transform: scale(1); opacity: 1; }
+
+  /* character card */
+  .card { background: var(--cream); border: 6px solid var(--cocoa); border-radius: 10px; box-shadow: 0 10px 0 var(--cocoa);
+          padding: 34px 44px; display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; width: 1100px; }
+  .card h2 { margin: 0 0 6px; font-size: 44px; font-weight: 400; }
+  .card .slogan { display: inline-block; background: var(--butter); padding: 8px 12px; font-size: 13px; margin-bottom: 22px; }
+  .card .bio { font-family: "Pixelify Sans", "Crunch Pixel", sans-serif; font-size: 22px; margin: 0 0 22px; line-height: 1.4; }
+  .row { display: flex; gap: 14px; align-items: flex-end; }
+  .row figure { margin: 0; display: grid; justify-items: center; gap: 8px; font-size: 9px; }
+  .portrait { background: radial-gradient(circle, #FFE9B0 0 60%, transparent 61%); padding: 20px; display: grid; place-items: center; }
+
+  /* lower third captions */
+  .lower { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
+           background: var(--cocoa); color: var(--cream); font-size: 20px; padding: 14px 22px; border: 4px solid var(--butter); border-radius: 6px;
+           box-shadow: 0 6px 0 rgba(0,0,0,.25); white-space: nowrap; opacity: 0; transition: opacity .25s steps(3); }
+  .lower.on { opacity: 1; }
+  .lower b { color: var(--butter); font-weight: 400; }
+  .lower .bad { color: #FF8A80; }
+  .badge { position: absolute; top: 96px; left: 50%; transform: translateX(-50%) rotate(-3deg); font-size: 34px; color: var(--cream);
+           background: var(--tomato); padding: 14px 24px; border: 5px solid var(--cocoa); box-shadow: 0 8px 0 var(--cocoa); opacity: 0; transition: opacity .2s steps(2); }
+  .badge.on { opacity: 1; }
+
+  /* levels */
+  .levels { display: grid; grid-template-columns: repeat(5, 200px); gap: 18px; }
+  .lv { background: var(--cream); border: 5px solid var(--cocoa); border-radius: 6px; box-shadow: 0 8px 0 var(--cocoa); padding: 18px 14px; display: grid; gap: 14px; justify-items: center; font-size: 16px; }
+  .lv.hell { background: var(--tomato); color: var(--cream); }
+  .lv .m { display: flex; gap: 4px; } .lv .m i { width: 14px; height: 20px; background: #EAD7AE; } .lv .m i.on { background: var(--tomato); }
+  .lv.hell .m i.on { background: var(--butter); }
+  .lv small { font-size: 9px; letter-spacing: 1px; }
+  .h1 { font-size: 40px; color: var(--cream); text-shadow: 4px 4px 0 var(--cocoa); margin: 0; }
+  .dimbg { background: rgba(74,36,18,.72); }
+
+  /* end */
+  .score { background: var(--cream); border: 6px solid var(--cocoa); border-radius: 8px; box-shadow: 0 8px 0 var(--cocoa); padding: 18px 34px; text-align: center; display: grid; gap: 10px; }
+  .score .n { font-size: 64px; color: var(--tomato); }
+  .btn { font-size: 22px; color: var(--cream); background: var(--tomato); border: 5px solid var(--cocoa); border-radius: 8px; padding: 18px 34px;
+         box-shadow: inset 0 -6px 0 var(--tomato-dark), 0 6px 0 var(--cocoa); }
+  .over-t { font-size: 54px; color: var(--tomato); margin: 0; text-shadow: 4px 4px 0 var(--cocoa), -3px -3px 0 var(--cocoa), 3px -3px 0 var(--cocoa), -3px 3px 0 var(--cocoa); }
+
+  /* shop + dex */
+  .shopbox { background: var(--cream); border: 6px solid var(--cocoa); border-radius: 10px; box-shadow: 0 10px 0 var(--cocoa); width: 1120px; overflow: hidden; }
+  .shophead { display: flex; align-items: center; justify-content: space-between; background: var(--cocoa); color: var(--cream); padding: 18px 28px; }
+  .shophead h2 { margin: 0; font-size: 28px; font-weight: 400; }
+  .wallet { display: flex; align-items: center; gap: 12px; font-size: 30px; color: var(--butter); }
+  .wallet small { font-size: 12px; color: var(--cream); }
+  .sgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 22px 28px 26px; }
+  .sc { position: relative; background: #FFF1D2; border: 4px solid var(--cocoa); border-radius: 6px; padding: 10px; display: grid; gap: 8px; justify-items: center; }
+  .sc .pv { height: 110px; width: 100%; display: grid; place-items: center; overflow: hidden; border-radius: 3px; }
+  .sc .pv img { width: 100%; height: 100%; object-fit: cover; }
+  .sc .pv canvas { height: 90px; width: auto; }
+  .sc b { font-size: 10px; font-weight: 400; }
+  .sc .price { font-size: 12px; color: var(--cream); background: var(--tomato); padding: 6px 10px; border-radius: 3px; }
+  .sc.bought { box-shadow: 0 0 0 5px var(--gold); }
+  .sc.bought .price { background: var(--teal); }
+  .stamp { position: absolute; top: 40px; left: 50%; transform: translateX(-50%) rotate(-10deg) scale(2.5); opacity: 0; font-size: 18px; color: var(--cream);
+           background: var(--teal); border: 4px solid var(--cocoa); padding: 8px 12px; transition: transform .25s steps(4), opacity .2s steps(2); }
+  .sc.bought .stamp { opacity: 1; transform: translateX(-50%) rotate(-10deg) scale(1); }
+  .dex { display: grid; grid-template-columns: repeat(5, 200px); gap: 18px; }
+  .dc { background: var(--cream); border: 5px solid var(--cocoa); border-radius: 8px; box-shadow: 0 8px 0 var(--cocoa); padding: 16px 10px; display: grid; gap: 10px; justify-items: center; text-align: center; }
+  .dc canvas { width: 140px; }
+  .dc b { font-size: 10px; font-weight: 400; line-height: 1.5; }
+  .dc i { font-style: normal; font-size: 9px; padding: 5px 7px; background: #EAD7AE; }
+  .dc i.UNCOMMON { background: #A8F0D0; } .dc i.RARE { background: #C9B6FF; } .dc i.LEGENDARY { background: var(--gold); }
+</style>
+</head>
+<body>
+<div id="reel">
+  <div id="game-canvas-wrap"></div>
+
+  <!-- 1. title -->
+  <section class="scene veil" id="s-title">
+    <p class="sub">AN 8-BIT BREAKFAST MINI-GAME</p>
+    <h1 class="logo"><span class="l1">HASH BROWN</span><span class="l2">CATCH</span></h1>
+    <canvas class="pix hop" id="t-mascot" style="width:156px"></canvas>
+    <span class="tag">A LITTLE CRUNCH. A LOT OF JOY.</span>
+  </section>
+
+  <!-- 2. character -->
+  <section class="scene veil" id="s-ip">
+    <div class="card">
+      <div class="portrait"><canvas class="pix hop" id="ip-portrait" style="width:220px"></canvas></div>
+      <div>
+        <h2>MEET CRISPY</h2>
+        <span class="slogan">SMALL POTATO. BIG FEELINGS.</span>
+        <p class="bio">A golden little daydreamer from the Crunch Club diner. Catch him before he becomes a dramatic little mash.</p>
+        <div class="row" id="ip-exprs"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lower" id="cap"></div>
+  <div class="badge" id="badge">HELL MODE</div>
+
+
+  <!-- shop -->
+  <section class="scene dimbg" id="s-shop">
+    <div class="shopbox">
+      <div class="shophead"><h2>THE COUNTER SHOP</h2><div class="wallet"><small>COINS</small><span id="r-coins">6,100</span></div></div>
+      <div class="sgrid" id="r-shop"></div>
+    </div>
+    <p class="sub" style="color:var(--butter)">EVERY POINT YOU SCORE IS BANKED AS A COIN · FOREVER</p>
+  </section>
+
+  <!-- dog-dex -->
+  <section class="scene dimbg" id="s-dex">
+    <p class="h1">COLLECT ALL 5 POTATO DOGS</p>
+    <div class="dex" id="r-dex"></div>
+  </section>
+  <!-- 5. levels -->
+  <section class="scene dimbg" id="s-levels">
+    <p class="h1">PICK YOUR RUSH</p>
+    <div class="levels" id="lv"></div>
+    <p class="sub" style="color:var(--butter)">FALL SPEED · DROP RATE · HAZARDS · BASKET SIZE</p>
+  </section>
+
+  <!-- 6. end -->
+  <section class="scene veil" id="s-end">
+    <p class="over-t">BREAKFAST COMPLETE!</p>
+    <div style="display:flex;gap:40px;align-items:center">
+      <canvas class="pix hop" id="end-mascot" style="width:150px"></canvas>
+      <div class="score"><span style="font-size:14px">SCORE</span><span class="n" id="end-score">000</span><span id="end-rank" style="font-size:11px;background:var(--butter);padding:6px">LINE COOK</span></div>
+    </div>
+    <span class="btn">PLAY AGAIN</span>
+    <p class="sub">STAY GOLDEN, LITTLE POTATO.</p>
+  </section>
+</div>
+
+<script>window.HBC_SIZE = { w: 1280, h: 720 }; window.HBC_SFX_LOG = []; window.HBC_NO_RANDOM_DOG = true;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<script>
+  // p5.sound cannot start its audio engine on a page opened as a local file (file://)
+  // and would leave p5 stuck on "Loading...". Load it only when served over http(s).
+  if (location.protocol !== "file:") {
+    document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"><\/script>');
+  } else {
+    window.addEventListener("DOMContentLoaded", function () {
+      var n = document.createElement("p");
+      n.className = "file-note";
+      n.textContent = "Opened as a local file, so sound is off. For sound, run a local server (see README).";
+      n.style.cssText = "margin:8px auto;max-width:640px;padding:8px 12px;background:#FFD978;color:#4A2412;border-radius:4px;font:14px/1.4 system-ui,sans-serif;text-align:center";
+      var stage = document.getElementById("game-canvas-wrap");
+      (stage && stage.closest(".wrap") || document.body).appendChild(n);
+    });
+  }
+</script>
+<script src="js/sprites.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/sketch.js"></script>
+<script>
+(function () {
+  var SP = HBSprites;
+  function paint(c, s) { c.width = s.w; c.height = s.h; var g = c.getContext("2d");
+    for (var y = 0; y < s.h; y++) for (var x = 0; x < s.w; x++) { var col = s.px[y * s.w + x]; if (col) { g.fillStyle = col; g.fillRect(x, y, 1, 1); } } }
+  var $ = function (id) { return document.getElementById(id); };
+  paint($("t-mascot"), SP.hashBrown({ expr: "open", limbs: "wave" }));
+  paint($("ip-portrait"), SP.hashBrown({ expr: "joy", limbs: "up" }));
+  paint($("end-mascot"), SP.hashBrown({ expr: "joy", limbs: "up" }));
+  ["happy", "joy", "wink", "smug", "worried", "sad", "dizzy"].forEach(function (e, i) {
+    var f = document.createElement("figure"), c = document.createElement("canvas");
+    c.className = "pix pop"; c.style.width = "70px"; paint(c, SP.hashBrown({ expr: e, limbs: e === "joy" ? "up" : e === "wink" ? "wave" : "down" }));
+    f.appendChild(c); f.appendChild(document.createTextNode(e.toUpperCase())); $("ip-exprs").appendChild(f);
+  });
+  var lv = [["EASY", 1], ["NORMAL", 2], ["HARD", 3], ["HELL", 5], ["CUSTOM", 0]];
+  $("lv").innerHTML = lv.map(function (l, i) {
+    var m = ""; for (var k = 1; k <= 5; k++) m += '<i class="' + (k <= l[1] ? "on" : "") + '"></i>';
+    return '<div class="lv pop ' + (l[0] === "HELL" ? "hell" : "") + '"><span>' + l[0] + '</span>' + (l[1] ? '<span class="m">' + m + "</span>" : '<small>YOUR RULES</small>') +
+      '<small>' + ["WIDE BASKET", "THE CLASSIC", "WOBBLY DROPS", "1 IN 3 HAZARDS", "S · M · L · 30-90S"][i] + "</small></div>";
+  }).join("");
+
+  function scene(id) { document.querySelectorAll(".scene").forEach(function (s) { s.classList.toggle("on", s.id === id); }); }
+  function cap(html) { var c = $("cap"); if (!html) { c.classList.remove("on"); return; } c.innerHTML = html; c.classList.add("on"); }
+  function stagger(sel) { document.querySelectorAll(sel).forEach(function (el, i) { setTimeout(function () { el.classList.add("in"); }, 140 * i); }); }
+
+  // shop cards
+  var SHOPITEMS = [["night", "MIDNIGHT DINER", 800], ["picnic", "SUNDAY PICNIC", 1500], ["space", "ORBIT BRUNCH", 3000], ["ube", "UBE SWEET POTATO", 800],
+    ["cheesy", "CHEESE MELT", 300], ["rainbow", "RAINBOW GHOSTS", 3000], ["custom", "PAINT-YOUR-OWN GHOST", 1500], ["chilibomb", "GHOST PEPPER BOMB", 800]];
+  function shopCards() {
+    $("r-shop").innerHTML = "";
+    SHOPITEMS.forEach(function (it) {
+      var card = document.createElement("div"); card.className = "sc pop"; card.id = "sc-" + it[0];
+      var pv = document.createElement("div"); pv.className = "pv";
+      if (["night", "picnic", "space"].indexOf(it[0]) >= 0) { var im = new Image(); im.src = HBC.snapshotScene(it[0], 360); pv.appendChild(im); }
+      else {
+        var c = document.createElement("canvas"); c.className = "pix";
+        if (it[0] === "ube" || it[0] === "cheesy") paint(c, SP.hashBrown({ expr: "happy", limbs: "wave", skin: it[0] }));
+        if (it[0] === "rainbow") paint(c, SP.ghostColor("#FF8A80"));
+        if (it[0] === "custom") paint(c, SP.ghostColor("#7CC8FF"));
+        if (it[0] === "chilibomb") paint(c, SP.bombStyle("chili"));
+        pv.appendChild(c);
+        if (it[0] === "rainbow") ["#FFD978", "#A8F0D0", "#C9B6FF"].forEach(function (col) { var c2 = document.createElement("canvas"); c2.className = "pix"; c2.style.height = "60px"; paint(c2, SP.ghostColor(col)); pv.appendChild(c2); });
+        if (it[0] === "rainbow") { pv.style.display = "flex"; pv.style.alignItems = "center"; pv.style.justifyContent = "center"; pv.style.gap = "4px"; }
+      }
+      card.appendChild(pv);
+      card.insertAdjacentHTML("beforeend", "<b>" + it[1] + "</b><span class='price'>" + it[2].toLocaleString("en-US") + " COINS</span><span class='stamp'>BOUGHT!</span>");
+      $("r-shop").appendChild(card);
+    });
+  }
+  var coins = 6100;
+  function buy(id, price) {
+    $("sc-" + id).classList.add("bought"); HBC.sfx("buy", 0.7);
+    var from = coins, to = coins - price, t0 = performance.now(); coins = to;
+    (function tick() { var k = Math.min(1, (performance.now() - t0) / 400); $("r-coins").textContent = Math.round(from + (to - from) * k).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(tick); })();
+  }
+  function dexCards() {
+    $("r-dex").innerHTML = "";
+    HBShop.DOGS.forEach(function (d) {
+      var card = document.createElement("div"); card.className = "dc pop";
+      var c = document.createElement("canvas"); c.className = "pix"; paint(c, SP.potatoDog(d.id)); card.appendChild(c);
+      card.insertAdjacentHTML("beforeend", "<i class='" + d.rarity + "'>" + d.rarity + "</i><b>" + d.name.toUpperCase() + "</b>");
+      $("r-dex").appendChild(card);
+    });
+  }
+  HBShop._reset();
+
+  var T = [
+    [0.0, function () { scene("s-title"); }],
+    [3.5, function () { scene("s-ip"); setTimeout(function () { stagger("#ip-exprs .pop"); }, 400); }],
+    [7.5, function () { scene(null); HBC.start("normal", null, { demo: true, duration: 90, demoMiss: 0.1 }); cap("DRAG THE BASKET <b>← →</b>"); }],
+    [9.0, function () { HBC.spawn("hash", 0.5, { sway: 0 }); }],
+    [9.7, function () { HBC.spawn("hash", 0.32, { sway: 0 }); }],
+    [10.4, function () { HBC.spawn("hash", 0.6, { sway: 0 }); }],
+    [11.1, function () { HBC.spawn("hash", 0.45, { sway: 0 }); cap("CATCH <b>+10</b> · THEY STACK UP IN THE BASKET"); }],
+    [11.8, function () { HBC.spawn("hash", 0.12, { sway: 0, ignore: true }); HBC.spawn("hash", 0.7, { sway: 0 }); }],
+    [12.5, function () { HBC.spawn("hash", 0.88, { sway: 0, ignore: true }); HBC.spawn("hash", 0.4, { sway: 0 }); }],
+    [13.2, function () { HBC.spawn("hash", 0.2, { sway: 0, ignore: true }); }],
+    [13.9, function () { cap('MISS <span class="bad">−2</span> · MASH STAYS, GHOST FLOATS UP'); }],
+    [15.2, function () { cap("1 IN 40 HASH BROWNS IS… <b>NOT A HASH BROWN</b>"); HBC.spawn("hash", 0.55, { sway: 0, dog: true, dogVariant: "boss", bait: true }); }],
+    [15.9, function () { HBC.spawn("hash", 0.15, { sway: 0, dog: true, dogVariant: "devil", ignore: true }); }],
+    [18.0, function () { cap("EVIL POTATO DOG · <b>x2 = +20</b>"); }],
+    [19.9, function () { window.R_SCORE = HBC._G.score; }],
+    [20.0, function () { cap(null); HBC.start("hell", null, { demo: true, duration: 90, demoMiss: 0.05 }); $("badge").classList.add("on"); }],
+    [21.4, function () { $("badge").classList.remove("on"); cap('DODGE <span class="bad">BURNT −5</span> & <span class="bad">BOMBS −15</span>'); HBC.spawn("burnt", 0.3); HBC.spawn("bomb", 0.7); }],
+    [22.1, function () { HBC.spawn("bomb", 0.5, { bait: true, sway: 0 }); }],
+    [23.4, function () { cap("GOLDEN <b>+30</b> · COFFEE <b>SLOW-MO</b> · CLOCK <b>+5S</b>"); HBC.spawn("golden", 0.35, { sway: 0 }); HBC.spawn("coffee", 0.65, { sway: 0 }); }],
+    [24.4, function () { HBC.spawn("clock", 0.5, { sway: 0 }); }],
+    [25.6, function () { cap(null); HBC.quitToTitle(); shopCards(); scene("s-shop"); stagger("#r-shop .pop"); }],
+    [27.0, function () { buy("picnic", 1500); }],
+    [27.8, function () { buy("ube", 800); }],
+    [28.6, function () { buy("rainbow", 3000); }],
+    [29.4, function () { buy("chilibomb", 800); }],
+    [30.4, function () {
+      HBShop.addCoins(6100); ["picnic", "ube", "rainbow", "chilibomb"].forEach(function (id) { HBShop.buy(id); });
+      scene(null); HBC.start("normal", null, { demo: true, duration: 90, demoMiss: 0.35 });
+      cap("NEW SCENE · <b>UBE</b> FLAVOUR · <b>RAINBOW</b> GHOSTS");
+    }],
+    [31.8, function () { HBC.spawn("hash", 0.3, { sway: 0 }); HBC.spawn("hash", 0.75, { sway: 0, ignore: true }); }],
+    [32.5, function () { HBC.spawn("hash", 0.55, { sway: 0 }); HBC.spawn("hash", 0.1, { sway: 0, ignore: true }); }],
+    [33.2, function () { HBC.spawn("hash", 0.4, { sway: 0 }); HBC.spawn("bomb", 0.85, { sway: 0 }); HBC.spawn("hash", 0.92, { sway: 0, ignore: true }); }],
+    [35.4, function () { cap(null); dexCards(); scene("s-dex"); stagger("#r-dex .pop"); }],
+    [38.2, function () { scene("s-levels"); stagger("#lv .pop"); }],
+    [40.6, function () { var sc = window.R_SCORE || HBC._G.score; HBC.end(); $("end-score").textContent = String(sc).padStart(3, "0");
+      $("end-rank").textContent = "+" + sc + " COINS"; scene("s-end"); }],
+    [43.6, function () { window.REEL_DONE = true; }]
+  ];
+  window.REEL_START = function () {
+    window.REEL_T0 = performance.now();
+    T.forEach(function (e) { setTimeout(e[1], e[0] * 1000); });
+  };
+  if (!/record/.test(location.search)) window.addEventListener("load", function () { setTimeout(window.REEL_START, 600); });
+})();
+</script>
+</body>
+</html>

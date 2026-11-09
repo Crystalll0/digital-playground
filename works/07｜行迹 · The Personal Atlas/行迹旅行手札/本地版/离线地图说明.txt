@@ -1,0 +1,13 @@
+行迹离线地图版
+
+下载“行迹-本地版.html”，用电脑浏览器打开。世界各国轮廓及边界已内嵌，地图、图钉和路线无需联网；照片和文字亦可离线查看。
+
+这是低精度世界概览地图，放大不会出现街道、建筑和道路导航。地名搜索仍需要联网；离线时可以直接落钉、填写经纬度或从照片读取 GPS。
+
+旧记录请先导出 JSON 备份，再在新版导入。每次修改后用“保存便携 HTML”生成携带当前内容的新文件；离线地图也会一起保存。
+
+地图来源：Natural Earth，1:110m Admin 0 Countries，公共领域数据。国界为数据源所绘制的概览，不用于权属判断或精确导航。
+来源：https://www.naturalearthdata.com/about/terms-of-use/
+数据：https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson
+
+手机本地 HTML 的运行仍取决于浏览器／文件查看器，不保证系统文件预览可执行完整程序。

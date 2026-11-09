@@ -1,0 +1,7 @@
+在线网址：https://paper-atlas-crystal-1105.wry-toast-5992.chatgpt.site/atlas
+
+压缩包内本地入口：本地版/行迹-本地版.html
+解压后点击“打开行迹.html”可选择在线或本地版。
+
+当前电脑原文件：/Users/crystal/Documents/Codex/2026-11-05/hui-y/outputs/行迹-本地版.html
+换设备后本机绝对路径会改变，请使用包内相对链接。

@@ -1,0 +1,3 @@
+Noto Sans SC（思源黑体）子集，只包含本网站用到的约 1,400 个字符。
+来源：Google / Adobe 的 Noto Sans CJK，SIL Open Font License 1.1（可自由使用和再分发）。
+离线版 HTML 已经把这些字体内嵌进去，这里的文件只是备份。

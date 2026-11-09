@@ -1,0 +1,1029 @@
+﻿餐厅,Restaurant,校内/校外,位置,菜名,Dish,价钱 HK$,类别,荤/素,备注,来源,日期
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,白汁吞拿鱼海鲜焗饭,Baked Tuna & Seafood Rice in White Sauce,45起,饭,荤,焗饭意粉，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,忌廉菠菜蘑菇焗意粉,Baked Pasta with Creamed Spinach & Mushroom,45起,薄饼意粉,素,焗饭意粉，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士茄汁肉丸蘑菇焗意粉,Baked Spaghetti with Meatballs & Mushroom in Cheesy Tomato Sauce,45起,薄饼意粉,荤,焗饭意粉，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士茄汁猪扒焗意粉,Baked Pasta with Pork Chop in Cheesy Tomato Sauce,48起,薄饼意粉,荤,焗饭意粉，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,参巴酱龙脷柳焗意粉,Baked Pasta with Sole Fillet in Sambal Sauce,48,薄饼意粉,荤,焗饭意粉,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,烧卖,Siu Mai,12,点心饺子,荤,点心,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,糯米卷,Sticky Rice Roll,22,点心饺子,荤,点心,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,叉烧包,BBQ Pork Bun,8,点心饺子,荤,点心,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,猪肉菜包,Pork & Vegetable Bun,8,点心饺子,荤,点心,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,奶黄包,Custard Bun,8,点心饺子,素,点心,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,斑斓咖椰芝士迷你华夫饼,Pandan Kaya & Cheese Mini Waffle,15,小食,素,小食,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,港式迷你华夫饼,Classic HK-style Mini Waffle,15,小食,素,小食,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,Espresso,Espresso,21起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,美式咖啡,Americano,22起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,Latte,Latte,28起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,Cappuccino,Cappuccino,28起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,Flat White,Flat White,30起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,Mocha,Mocha,30起,饮品咖啡,素,咖啡，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,椰子水 Espresso,Coconut Water Espresso,28,饮品咖啡,素,特色咖啡,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,菠萝汁咖啡配芝士奶盖,Pineapple Coffee with Cheese Foam,34,饮品咖啡,素,特色咖啡,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,经典红茶,Classic Black Tea,15起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,茉莉绿茶,Jasmine Green Tea,15起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,焙火乌龙茶,Roasted Oolong Tea,16起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,荞麦茶,Buckwheat Tea,16起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,经典奶茶,Classic Milk Tea,19起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,茉莉绿奶茶,Jasmine Green Milk Tea,19起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,焙火乌龙奶茶,Roasted Oolong Milk Tea,20起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,荞麦奶茶,Buckwheat Milk Tea,20起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,台式珍珠奶茶,Taiwanese Bubble Milk Tea,22起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,台式珍珠茉莉绿奶茶,Taiwanese Bubble Jasmine Green Milk Tea,22起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,经典鲜奶茶,Classic Fresh Milk Tea,22起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,鲜奶茉莉绿茶,Fresh Milk Jasmine Green Tea,22起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,荔枝玫瑰乌龙茶,Lychee Rose Oolong Tea,22起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,焙火乌龙珍珠奶茶,Roasted Oolong Bubble Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,鲜奶乌龙茶,Fresh Milk Oolong Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,荞麦鲜奶茶,Buckwheat Fresh Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,士多啤梨茉莉绿奶茶,Strawberry Jasmine Green Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,抹茶绿奶茶,Matcha Green Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,朱古力奶茶,Chocolate Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芋头绿奶茶,Taro Green Milk Tea,23起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,士多啤梨玫瑰茉莉绿茶,Strawberry Rose Jasmine Green Tea,24起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,荔枝玫瑰绿茶,Lychee Rose Green Tea,24起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,玫瑰绿茶,Rose Green Tea,24起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,百香果绿茶,Passion Fruit Green Tea,24起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,台式珍珠鲜奶茶,Taiwanese Bubble Fresh Milk Tea,25起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,台式珍珠鲜奶绿茶,Taiwanese Bubble Fresh Milk Green Tea,25起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,鲜奶乌龙珍珠,Fresh Milk Oolong with Bubbles,26起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,黑糖珍珠鲜奶,Brown Sugar Bubble Fresh Milk,30起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芋泥鲜奶,Taro Purée Fresh Milk,30起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,士多啤梨鲜奶,Strawberry Fresh Milk,30起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芒果绿茶,Mango Green Tea,20起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芒果绿奶茶,Mango Green Milk Tea,26起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芒果鲜奶绿茶,Mango Fresh Milk Green Tea,29起,饮品咖啡,素,手摇茶，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖红茶,Black Tea with Cheese Foam,21起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖绿茶,Green Tea with Cheese Foam,21起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖乌龙茶,Oolong Tea with Cheese Foam,22起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖鲜奶茶,Fresh Milk Tea with Cheese Foam,28起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖鲜奶绿茶,Fresh Milk Green Tea with Cheese Foam,28起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,芝士奶盖鲜奶乌龙茶,Fresh Milk Oolong with Cheese Foam,29起,饮品咖啡,素,芝士奶盖，起价,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,红绿茶,Black & Green Tea Blend,17,饮品咖啡,素,,Chill Cup 网上点餐系统,2026-11-09
+Chill Cup,Chill Cup,校内,赛马会创新楼 平台层,姜茶,Ginger Tea,20,饮品咖啡,素,,Chill Cup 网上点餐系统,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,红烧茄子鱼配饭,Braised Eggplant & Fish with Rice,38,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,香辣左宗棠鸡餐,Spicy General Tso's Chicken Set,38,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,鱼香肉丝餐,Yu-Xiang Shredded Pork Set,35,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,水煮牛肉餐,Sichuan Boiled Beef Set,46,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,火山酱骨架餐,Volcano Pork Bones Set,46,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,红烧狮子头餐,Braised Lion's Head Meatball Set,46,饭,荤,煎炒煮卤,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,白菜猪肉饺,Pork & Cabbage Dumplings,32,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,香菇猪肉饺,Pork & Shiitake Dumplings,32,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,韭菜猪肉饺,Pork & Chive Dumplings,32,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,鲜虾云吞,Shrimp Wontons,32,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,白菜猪肉饺（15 只）,Pork & Cabbage Dumplings (15 pcs),43,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,韭菜猪肉饺（15 只）,Pork & Chive Dumplings (15 pcs),43,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,香菇猪肉饺（15 只）,Pork & Shiitake Dumplings (15 pcs),43,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,鲜虾云吞（15 只）,Shrimp Wontons (15 pcs),43,点心饺子,荤,饺子工坊,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,炸酱拌面,Zhajiang Noodles,32,粉面,荤,面面俱到,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,两送饭（两素）,Two-dish Rice (2 veg),25,饭,素,素菜可选：大葱炒蛋、干煸四季豆、蒜茸白菜仔,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,两送饭（一素一肉）,Two-dish Rice (1 veg + 1 meat),28,饭,荤,自选一素一肉,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,两送饭（两肉）,Two-dish Rice (2 meat),31,饭,荤,肉可选：洋葱炒肉、酱爆鸡丁、小鸡炖蘑菇、土豆炒肉片、蒜苔炒肉丝等,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,白饭,Steamed Rice,5,饭,素,,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,鸡扒卤香肉燥饭,Chicken Chop with Braised Minced Pork Rice,36,饭,荤,肉燥饭,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,杂丸花甲粉餐,Clam Rice Noodles with Assorted Balls,48,粉面,荤,特色汤粉面,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,肥牛花甲粉餐,Clam Rice Noodles with Beef,48,粉面,荤,特色汤粉面,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,鲜鱼片花甲粉餐,Clam Rice Noodles with Fish Fillet,48,粉面,荤,特色汤粉面,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,粉葛赤小豆猪骨汤,Pork Bone Soup with Kudzu & Red Beans,6,小食,荤,香江名物（汤）,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热奶茶,Hot Milk Tea,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热即磨咖啡,Hot Fresh-ground Coffee,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热斋啡,Hot Black Coffee,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热鸳鸯,Hot Yuenyeung (coffee + milk tea),9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热柠檬水,Hot Lemon Water,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热柠檬茶,Hot Lemon Tea,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,热阿华田,Hot Ovaltine,9,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,中国茶,Chinese Tea,3,饮品咖啡,素,热饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻奶茶,Iced Milk Tea,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻咖啡,Iced Coffee,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻斋啡,Iced Black Coffee,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻柠檬咖啡,Iced Lemon Coffee,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻柠檬水,Iced Lemon Water,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻柠檬茶,Iced Lemon Tea,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻阿华田,Iced Ovaltine,11,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,可乐 12oz,Coke 12oz,10,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,无糖可乐 12oz,Coke Zero 12oz,10,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,雪碧 12oz,Sprite 12oz,10,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻柠檬可乐,Iced Lemon Coke,13,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻柠檬雪碧,Iced Lemon Sprite,13,饮品咖啡,素,冻饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,粒粒红豆冰,Red Bean Ice,15,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,柠檬酸梅梳打,Lemon Plum Soda,11,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻抹茶拿铁,Iced Matcha Latte,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻白桃红茶,Iced White Peach Black Tea,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻百香果茉莉茶,Iced Passion Fruit Jasmine Tea,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,冻白柚特饮,Iced Pomelo Special,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,巨峰提子梳打,Kyoho Grape Soda,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Communal 学生饭堂,Communal Student Canteen,校内,公共大楼（文康楼）3 楼,抹茶红豆冰,Matcha Red Bean Ice,18,饮品咖啡,素,冻特饮,Communal 学生饭堂网上点餐（截图）,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,清新凉拌面（麻酱）,Cold Noodles (sesame sauce),38,粉面,素,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,清新凉拌面（柚子醋）,Cold Noodles (yuzu ponzu),38,粉面,素,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,松露慢煮鸡肉耳朵粉沙律,Truffle Sous-vide Chicken Orecchiette Salad,43,小食,荤,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,泰式柚子虾沙律,Thai Pomelo Shrimp Salad,56,小食,荤,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,北寄贝轻盈拌饭,Surf Clam Light Rice Bowl,58,饭,荤,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,蟹肉轻盈拌饭,Crab Meat Light Rice Bowl,58,饭,荤,沙律,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,明太子烟三文鱼薯仔包,Mentaiko Smoked Salmon Potato Bun,30,汉堡三文治,荤,面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,凯撒盐酥鸡肉可丽饼,Caesar Crispy Chicken Crêpe,40,甜品,荤,可丽饼,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,杂莓可丽饼,Mixed Berry Crêpe,40,甜品,素,可丽饼,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,72% 朱古力香蕉可丽饼,72% Chocolate Banana Crêpe,40,甜品,素,可丽饼,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,芒果可丽饼,Mango Crêpe,40,甜品,素,可丽饼,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,蒲烧鳗鱼饭,Kabayaki Eel Rice,43,饭,荤,烤焗,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,巴东牛肉饭,Beef Rendang Rice,48,饭,荤,烤焗,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,印度奶油鸡饭,Butter Chicken Rice,48,饭,荤,烤焗,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,鲜茄焗三文鱼耳朵粉,Baked Salmon Orecchiette in Tomato,45,薄饼意粉,荤,烤焗,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,原味乳酪杯,Plain Yogurt Cup,28,甜品,素,,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,杂莓乳酪杯,Mixed Berry Yogurt Cup,36,甜品,素,,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,火腿芝士牛角包,Ham & Cheese Croissant,26,汉堡三文治,荤,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香草甜莓吉士牛角包,Vanilla Berry Custard Croissant,32,甜品,素,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,焙茶牛角包,Hojicha Croissant,32,甜品,素,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,蕃茄罗勒芝心薄饼冬甩,Tomato Basil Cheese Pizza Donut,34,小食,荤,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,辣肉肠爆芝薄饼冬甩,Pepperoni Cheese Pizza Donut,34,小食,荤,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,朱古力生甜甜圈,Chocolate Cream Donut,22,甜品,素,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,开心果生甜甜圈,Pistachio Cream Donut,22,甜品,素,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,草莓生甜甜圈,Strawberry Cream Donut,22,甜品,素,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,咖喱牛肉生甜甜圈,Curry Beef Donut,22,小食,荤,丹麦面包,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,提拉米苏,Tiramisu,30,甜品,素,蛋糕,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,轻怡士多啤梨橄榄蛋糕,Light Strawberry Olive Cake,51,甜品,素,蛋糕,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,台湾甲仙芋头海绵蛋糕,Taiwanese Jiaxian Taro Sponge Cake,58,甜品,素,蛋糕,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士午餐肉三文治,Cheesy Luncheon Meat Sandwich,34,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士三文鱼松三文治,Cheesy Salmon Floss Sandwich,34,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士牛肉三文治,Cheesy Beef Sandwich,34,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士午餐肉三文治（半份）,Cheesy Luncheon Meat Sandwich (half),18,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士三文鱼松三文治（半份）,Cheesy Salmon Floss Sandwich (half),18,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,香浓芝士牛肉三文治（半份）,Cheesy Beef Sandwich (half),18,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,烟三文鱼青瓜三文治,Smoked Salmon & Cucumber Sandwich,24,汉堡三文治,荤,三文治,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,榛果朱古力雪糕,Hazelnut Chocolate Ice Cream,48,甜品,素,Ice Cream,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,汤力咖啡,Coffee Tonic,27,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,抹茶鲜奶咖啡,Matcha Latte with Espresso,27,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,焦糖咖啡,Caramel Coffee,27,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,鲜奶咖啡（Latte）,Latte,27,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,泡沫咖啡（Cappuccino）,Cappuccino,27,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,朱古力咖啡,Mocha,28,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,冻朱古力咖啡,Iced Mocha,31,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,冻鲜奶咖啡,Iced Latte,29,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,冻泡沫咖啡,Iced Cappuccino,29,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,美式咖啡,Americano,22,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,冻美式咖啡,Iced Americano,24,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,双倍特浓咖啡,Double Espresso,20,饮品咖啡,素,咖啡,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,西柚菠萝红茶,Grapefruit Pineapple Black Tea,26,饮品咖啡,素,水果茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,百香果茉莉花茶,Passion Fruit Jasmine Tea,26,饮品咖啡,素,水果茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,草莓玫瑰花茶,Strawberry Rose Tea,26,饮品咖啡,素,水果茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,橙汁,Orange Juice,18,饮品咖啡,素,,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,红豆冰,Red Bean Ice,28,饮品咖啡,素,特色饮品,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,泰式冻奶茶,Thai Iced Milk Tea,28,饮品咖啡,素,特色饮品,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,热台式冬瓜茶,Hot Taiwanese Winter Melon Tea,28,饮品咖啡,素,特色饮品,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,冻台式冬瓜茶,Iced Taiwanese Winter Melon Tea,30,饮品咖啡,素,特色饮品,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,杨枝甘露特饮,Mango Pomelo Sago Drink,35,饮品咖啡,素,特色饮品,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,芒果沙冰,Mango Smoothie,28,饮品咖啡,素,沙冰,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,牛油果香蕉沙冰,Avocado Banana Smoothie,33,饮品咖啡,素,沙冰,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,羽衣甘蓝汁,Kale Juice,20,饮品咖啡,素,健康选择,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,羽衣甘蓝蜂蜜牛奶,Kale Honey Milk,25,饮品咖啡,素,健康选择,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,胶原椰子水美式咖啡,Collagen Coconut Water Americano,35,饮品咖啡,素,健康选择,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,乳清蛋白朱古力香蕉奶昔,Whey Protein Chocolate Banana Shake,40,饮品咖啡,素,健康选择,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,汤力水,Tonic Water,8,饮品咖啡,素,梳打,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,梳打水,Soda Water,8,饮品咖啡,素,梳打,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,菠萝百香果气泡水,Pineapple Passion Fruit Sparkling,24,饮品咖啡,素,梳打,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,荔枝梳打,Lychee Soda,26,饮品咖啡,素,梳打,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 英式红茶,TWG English Breakfast,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 伯爵红茶,TWG Earl Grey,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 皇家大吉岭茶,TWG Royal Darjeeling,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 摩洛哥薄荷绿茶,TWG Moroccan Mint,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 洋甘菊茶,TWG Chamomile,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Gourmet Shop,Gourmet Shop,校内,邵逸夫综合大楼 平台层,TWG 茉莉花茶,TWG Jasmine,21,饮品咖啡,素,TWG 茶,Gourmet Shop 网上点餐系统,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,番茄汤螺丝粉配烤蘑菇杂菜,Fusilli in Tomato Soup with Roast Mushrooms & Veg,39,粉面,素,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,烤猪扒沙嗲汤面,Grilled Pork Chop Satay Noodle Soup,45,粉面,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,拿破仑慢煮辣鸡胸意粉,Napoli Pasta with Spicy Sous-vide Chicken,43,薄饼意粉,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,白汁鸡皇饭,Chicken à la King Rice,43,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,拿破仑肉丸意粉,Napoli Meatball Pasta,48,薄饼意粉,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,香草酱忌廉烟三文鱼意粉,Pesto Cream Smoked Salmon Pasta,50,薄饼意粉,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,意式肉酱千层面,Beef Lasagne,55,薄饼意粉,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,泰式香辣烧猪颈肉煎蛋饭,Thai Spicy Grilled Pork Neck with Fried Egg Rice,49,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,鲜虾杂菌烩饭,Shrimp & Mushroom Risotto,52,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,韩式炆牛肋条饭,Korean Braised Beef Short Rib Rice,55,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,全州牛肉拌饭,Jeonju Beef Bibimbap,55,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,香煎鸡扒煎蛋饭,Pan-fried Chicken Chop with Fried Egg Rice,48,饭,荤,午餐,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,烤火腿芝士意式三文治,Grilled Ham & Cheese Panini,34,汉堡三文治,荤,烤意式三文治,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,慢煮鸡胸凯撒意式三文治,Sous-vide Chicken Caesar Panini,39,汉堡三文治,荤,烤意式三文治,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,牛油果车打芝士意式三文治,Avocado Cheddar Panini,39,汉堡三文治,素,烤意式三文治,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,蜜糖芥末烧牛肉野菌意式三文治,Honey Mustard Roast Beef & Mushroom Panini,42,汉堡三文治,荤,烤意式三文治,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,慢煮鸡胸凯撒墨西哥卷,Sous-vide Chicken Caesar Wrap,32,汉堡三文治,荤,墨西哥卷,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,牛油果藜麦杂菜墨西哥卷,Avocado Quinoa Veggie Wrap,32,汉堡三文治,素,墨西哥卷,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,蜜糖芥末烧牛肉蘑菇墨西哥卷,Honey Mustard Roast Beef Mushroom Wrap,36,汉堡三文治,荤,墨西哥卷,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,慢煮辣鸡胸 · 烤菠萝 · 芝士美式卷,"Spicy Chicken, Grilled Pineapple & Cheese Roll",38,汉堡三文治,荤,墨西哥卷,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,辣肉肠 · 烟三文鱼 · 芝士美式卷,"Pepperoni, Smoked Salmon & Cheese Roll",41,汉堡三文治,荤,墨西哥卷,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,苹果冰美式,Apple Iced Americano,29,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,双份特浓咖啡 2oz,Double Espresso 2oz,16,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热黑咖啡,Hot Black Coffee,20,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻黑咖啡,Iced Black Coffee,24,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热白咖啡,Hot Flat White,24,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热鲜奶咖啡,Hot Latte,24,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热泡沫咖啡,Hot Cappuccino,24,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻鲜奶咖啡,Iced Latte,28,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻泡沫咖啡,Iced Cappuccino,28,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热朱古力咖啡,Hot Mocha,29,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻朱古力咖啡,Iced Mocha,33,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,汤力咖啡,Coffee Tonic,39,饮品咖啡,素,咖啡,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,苹果柠檬冰红茶,Apple Lemon Iced Black Tea,29,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,港式奶茶,HK Milk Tea,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热柠檬茶,Hot Lemon Tea,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,蜂蜜柚子茶,Honey Citron Tea,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,柠檬水,Lemon Water,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,伯爵茶,Earl Grey Tea,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,英式早餐茶,English Breakfast Tea,16,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,港式冻奶茶,HK Iced Milk Tea,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻柠檬茶,Iced Lemon Tea,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻蜂蜜柚子茶,Iced Honey Citron Tea,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻柠檬水,Iced Lemon Water,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻伯爵茶,Iced Earl Grey,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻英式早餐茶,Iced English Breakfast,22,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,鲜奶抹茶,Matcha Fresh Milk,24,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻鲜奶抹茶,Iced Matcha Fresh Milk,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,西柚橙伯爵冰茶,Grapefruit Orange Earl Grey Iced Tea,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,百香果香橙伯爵冰茶,Passion Fruit Orange Earl Grey Iced Tea,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,柑桔柠檬柚子红茶,Calamansi Lemon Yuzu Black Tea,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,百香果柑桔柠檬红茶,Passion Fruit Calamansi Lemon Black Tea,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,白桃柠檬红茶,White Peach Lemon Black Tea,28,饮品咖啡,素,茶,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,苹果柠檬梳打,Apple Lemon Soda,29,饮品咖啡,素,,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,热鲜奶朱古力,Hot Chocolate,24,饮品咖啡,素,,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻鲜奶朱古力,Iced Chocolate,28,饮品咖啡,素,,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,朱古力狂热,Chocolate Frenzy,32,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,冻朱古力狂热,Iced Chocolate Frenzy,38,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,青瓜青柠梳打,Cucumber Lime Soda,33,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,西柚草莓梳打,Grapefruit Strawberry Soda,33,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,柑桔柠檬柚子梳打,Calamansi Lemon Yuzu Soda,33,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,百香果柑桔柠檬梳打,Passion Fruit Calamansi Lemon Soda,33,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,白桃草莓梳打,White Peach Strawberry Soda,33,饮品咖啡,素,精选特饮,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,梦幻黑森林,Black Forest Dream,32,甜品,素,甜点,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,朱古力慕丝蛋糕,Chocolate Mousse Cake,32,甜品,素,甜点,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,巴斯克焦香芝士蛋糕,Basque Burnt Cheesecake,32,甜品,素,甜点,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,巨型吉列鱼柳包配薯条及凯撒沙律,Giant Fish Fillet Burger with Fries & Caesar Salad,51,汉堡三文治,荤,,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,鸡扒烟肉煎蛋汉堡配薯条及凯撒沙律,"Chicken, Bacon & Egg Burger with Fries & Caesar Salad",51,汉堡三文治,荤,,Grove 网上点餐（截图）,2026-11-09
+Grove,Grove,校内,Y 座 平台层（与台台果腹同一处）,泰式猪颈肉汉堡配薯条及凯撒沙律,Thai Pork Neck Burger with Fries & Caesar Salad,59,汉堡三文治,荤,,Grove 网上点餐（截图）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,BBQ 猪肋排（BBQ Pork Ribs）,BBQ Pork Ribs,39.5,饭,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,娘惹咖喱鸡（Nyonya Chicken Curry）,Nyonya Chicken Curry,39.5,饭,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,虾汤海鲜米粉,Prawn Soup Rice Noodles with Seafood,50,粉面,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,虾汤猪肉丸米粉,Prawn Soup Rice Noodles with Pork Balls,50,粉面,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,高蛋白健康之选：韩式辣牛肉,High-protein: Korean Spicy Beef,52,饭,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,高蛋白健康之选：酱油猪颈肉,High-protein: Soy Pork Neck,52,饭,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,黑椒牛仔骨（Beef Short Ribs）,Beef Short Ribs with Black Pepper Sauce,48,西式主菜,荤,热餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,美式全日早餐,All-day American Breakfast,38.5,西式主菜,荤,全日早餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,素食全日早餐,Veggie All-day Breakfast,38.5,西式主菜,素,全日早餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,烟三文鱼早餐,Smoked Salmon Breakfast,48.5,西式主菜,荤,全日早餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,豪华牛扒早餐,Luxury Steak Breakfast,48.5,西式主菜,荤,全日早餐,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,牛油果酱牛肉汉堡,Guacamole Beef Burger,42.5,汉堡三文治,荤,汉堡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,招牌牛肉汉堡,Signature Beef Burger,42.5,汉堡三文治,荤,汉堡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,蜜糖芥末鸡肉汉堡,Honey Mustard Chicken Burger,42.5,汉堡三文治,荤,汉堡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,双层牛肉汉堡（The Diner's Double）,The Diner's Double Beef Burger,71.5,汉堡三文治,荤,汉堡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,肉酱热狗,Bolognese Hot Dog,30.5,汉堡三文治,荤,热狗,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,美式热狗,American Hot Dog,30.5,汉堡三文治,荤,热狗,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,火焰芝士热狗,Flame-seared Cheese Hot Dog,30.5,汉堡三文治,荤,热狗,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,汽水,Soft Drink,9,饮品咖啡,素,罐装,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,梳打水,Soda Water,9,饮品咖啡,素,罐装,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,道地乌龙茶,Tao Ti Oolong Tea,9,饮品咖啡,素,罐装,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,茶包茶,Tea (tea bag),11.5起,饮品咖啡,素,8oz 热饮；12oz $12.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,柠檬水,Lemon Water,11.5起,饮品咖啡,素,8oz 热饮；12oz $12.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,柠檬茶,Lemon Tea,11.5起,饮品咖啡,素,8oz 热饮；12oz $12.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,奶茶,Milk Tea,11.5起,饮品咖啡,素,8oz 热饮；12oz $12.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,朱古力,Chocolate,11.5起,饮品咖啡,素,8oz 热饮；12oz $12.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,薄荷朱古力,Mint Chocolate,13.5起,饮品咖啡,素,8oz 热饮；12oz $14.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,鲜奶,Fresh Milk,12.5,饮品咖啡,素,8oz 热饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,绿茶拿铁,Green Tea Latte,19.5起,饮品咖啡,素,8oz 热饮；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻柠檬水,Iced Lemon Water,12.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻柠檬茶,Iced Lemon Tea,12.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻朱古力,Iced Chocolate,12.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻鲜奶,Iced Fresh Milk,12.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻薄荷朱古力,Iced Mint Chocolate,14.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻绿茶拿铁,Iced Green Tea Latte,24.5,饮品咖啡,素,冻饮,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,美式咖啡,Americano,14.5起,饮品咖啡,素,8oz；12oz $18.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,Flat White,Flat White,16.5起,饮品咖啡,素,8oz；12oz $20.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,Cappuccino,Cappuccino,18.5起,饮品咖啡,素,8oz；12oz $22.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,Latte,Latte,18.5起,饮品咖啡,素,8oz；12oz $22.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,榛子拿铁,Hazelnut Latte,19.5起,饮品咖啡,素,8oz；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,焦糖拿铁,Caramel Latte,19.5起,饮品咖啡,素,8oz；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,玫瑰拿铁,Rose Latte,19.5起,饮品咖啡,素,8oz；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,云尼拿拿铁,Vanilla Latte,19.5起,饮品咖啡,素,8oz；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,Mocha,Mocha,19.5起,饮品咖啡,素,8oz；12oz $23.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,薄荷 Mocha,Mint Mocha,20.5起,饮品咖啡,素,8oz；12oz $24.5,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻美式咖啡,Iced Americano,22.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻斋啡（无糖）,Iced Black Coffee (no sugar),22.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻 Cappuccino,Iced Cappuccino,23.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻 Latte,Iced Latte,23.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻榛子拿铁,Iced Hazelnut Latte,24.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻焦糖拿铁,Iced Caramel Latte,24.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻玫瑰拿铁,Iced Rose Latte,24.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻云尼拿拿铁,Iced Vanilla Latte,24.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻 Mocha,Iced Mocha,24.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,冻薄荷 Mocha,Iced Mint Mocha,25.5,饮品咖啡,素,冻咖啡,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,鸡肉沙律,Chicken Salad,22,小食,荤,预制,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,薯仔鸡蛋沙律,Potato & Egg Salad,17.5,小食,素,预制,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,水果沙律,Fruit Salad,20.5,甜品,素,预制,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,田园沙律,Garden Salad,15,小食,素,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,热香饼,Hot Cake,16,甜品,素,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,烟三文鱼鸡蛋牛角包,Smoked Salmon & Egg Croissant,35,汉堡三文治,荤,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,奶油多士,Condensed Milk Butter Toast,18,小食,素,多士,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,炼奶花生酱多士,Condensed Milk Peanut Butter Toast,18,小食,素,多士,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,果酱牛油多士,Jam & Butter Toast,18,小食,素,多士,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,果酱花生酱多士,Jam & Peanut Butter Toast,18,小食,素,多士,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,多士,Toast,18,小食,素,多士,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,猪肉肠仔包,Pork Sausage Bun,24,汉堡三文治,荤,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,肉桂丹麦酥,Cinnamon Danish,18,甜品,素,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,牛角包,Croissant,16,小食,素,,H Café 网上点餐系统（ODO）,2026-11-09
+H Café 美式餐车,H Café American Diner,校内,FGHJ 座 平台中庭,火腿芝士牛角包,Ham & Cheese Croissant,24,汉堡三文治,荤,,H Café 网上点餐系统（ODO）,2026-11-09
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,水晶虾饺,Har Gow (shrimp dumplings),,点心饺子,荤,2016 年学生分享：下午茶时段点心曾 $9 一款,港大365天 理大美食攻略,2016-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,蟹仔烧卖,Siu Mai with Crab Roe,,点心饺子,荤,2016 年学生分享：下午茶时段点心曾 $9 一款,港大365天 理大美食攻略,2016-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,蚝皇叉烧包,BBQ Pork Bun,,点心饺子,荤,2016 年学生分享：下午茶时段点心曾 $9 一款,港大365天 理大美食攻略,2016-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,香滑奶黄包,Custard Bun,,点心饺子,素,2016 年学生分享：下午茶时段点心曾 $9 一款,港大365天 理大美食攻略,2016-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,豉汁蒸排骨,Steamed Spare Ribs in Black Bean,,点心饺子,荤,2016 年学生分享：下午茶时段点心曾 $9 一款,港大365天 理大美食攻略,2016-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,肠粉,Rice Noodle Roll,,点心饺子,荤,2019 年学生分享提到,留学鸟学生分享,2019-01
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,凤爪,Chicken Feet,,点心饺子,荤,2019 年学生分享提到,留学鸟学生分享,2019-01
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,烧味,Roast Meats,,饭,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Ju Yin Court 学生酒楼,Ju Yin Court (student restaurant),校内,公共大楼（文康楼）4 楼,汤粉面,Noodle Soup,,粉面,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Ju Yin House 职员酒楼,Ju Yin House (staff restaurant),校内,公共大楼（文康楼）4 楼,点心,Dim Sum,,点心饺子,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Ju Yin House 职员酒楼,Ju Yin House (staff restaurant),校内,公共大楼（文康楼）4 楼,烧味,Roast Meats,,饭,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Ju Yin House 职员酒楼,Ju Yin House (staff restaurant),校内,公共大楼（文康楼）4 楼,粤菜小菜,Cantonese Dishes,,饭,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选沙律（2 配料 + 1 蛋白质 + 1 酱汁）,Build-your-own Salad (2 toppings + 1 protein + 1 sauce),35,小食,荤,沙律,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选沙律（3 配料 + 2 蛋白质 + 1 酱汁）,Build-your-own Salad (3 toppings + 2 proteins + 1 sauce),47,小食,荤,沙律,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,三重蛋白能量沙律,Triple Protein Power Salad,47,小食,荤,沙律,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,韩式双重香辣碗,Korean Double Spicy Bowl,47,饭,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选意式面包（1 配料 + 1 蛋白质）,Build-your-own Ciabatta (1 topping + 1 protein),35,汉堡三文治,荤,意式面包,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选意式面包（3 配料 + 1 蛋白质）,Build-your-own Ciabatta (3 toppings + 1 protein),45,汉堡三文治,荤,意式面包,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,吞拿鱼沙律生菜三文治,Tuna Salad Lettuce Sandwich,22,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,烟三文鱼青瓜三文治,Smoked Salmon & Cucumber Sandwich,24,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,魔鬼三重芝士鸡肉三文治,Triple Cheese Chicken Sandwich,47,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,日式柚子双鱼荞麦面,Yuzu Soba with Two Fish,52,粉面,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选荞麦面（2 配料 + 1 蛋白质 + 1 酱汁）,Build-your-own Soba (2 toppings + 1 protein + 1 sauce),35,粉面,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,自选荞麦面（3 配料 + 2 蛋白质 + 1 酱汁）,Build-your-own Soba (3 toppings + 2 proteins + 1 sauce),47,粉面,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,特浓咖啡,Espresso,14,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,玛琪雅朵咖啡,Macchiato,16,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,美式咖啡,Americano,21,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,泡沫咖啡,Cappuccino,24,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,拿铁,Latte,24,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,白咖啡,Flat White,24,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,朱古力咖啡,Mocha,26,饮品咖啡,素,咖啡,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,抹茶拿铁,Matcha Latte,36,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冲绳黑糖鲜奶,Okinawa Brown Sugar Milk,29,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冲绳黑糖拿铁,Okinawa Brown Sugar Latte,31,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,全脂奶,Whole Milk,17,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,脱脂奶,Skimmed Milk,17,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻意式浓缩汤力水,Iced Espresso Tonic,35,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻美式咖啡,Iced Americano,23,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻泡沫咖啡,Iced Cappuccino,26,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻拿铁,Iced Latte,26,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻白咖啡,Iced Flat White,26,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻朱古力咖啡,Iced Mocha,28,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻抹茶拿铁,Iced Matcha Latte,38,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻冲绳黑糖鲜奶,Iced Okinawa Brown Sugar Milk,31,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻冲绳黑糖拿铁,Iced Okinawa Brown Sugar Latte,33,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻全脂奶,Iced Whole Milk,19,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻脱脂奶,Iced Skimmed Milk,19,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,1L 冻美式咖啡,1L Iced Americano,32,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,香浓朱古力,Rich Hot Chocolate,23,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,柠檬红茶,Lemon Black Tea,16,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,柠檬水,Lemon Water,16,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,抹茶鲜奶,Matcha Milk,31,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,抹茶朱古力,Matcha Chocolate,34,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻香浓朱古力,Iced Rich Chocolate,25,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻柠檬红茶,Iced Lemon Black Tea,18,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻柠檬水,Iced Lemon Water,18,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻抹茶鲜奶,Iced Matcha Milk,33,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,冻抹茶朱古力,Iced Matcha Chocolate,36,饮品咖啡,素,特饮,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,英式早餐茶,English Breakfast Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,伯爵茶,Earl Grey Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,薄荷茶,Mint Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,乌龙茶,Oolong Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,洋甘菊茶,Chamomile Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,茉莉花绿茶,Jasmine Green Tea,16,饮品咖啡,素,茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,苹果冰茶,Apple Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,芒果冰茶,Mango Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,荔枝冰茶,Lychee Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,热情果冰茶,Passion Fruit Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,白桃冰茶,White Peach Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,菠萝冰茶,Pineapple Iced Tea,21,饮品咖啡,素,自家制柠檬水果冰茶,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,芒果沙冰,Mango Smoothie,29,饮品咖啡,素,沙冰,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,士多啤梨沙冰,Strawberry Smoothie,29,饮品咖啡,素,沙冰,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,香蕉燕麦沙冰,Banana Oat Smoothie,31,饮品咖啡,素,沙冰,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,士多啤梨香蕉沙冰,Strawberry Banana Smoothie,31,饮品咖啡,素,沙冰,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,牛油果香蕉青瓜沙冰,Avocado Banana Cucumber Smoothie,41,饮品咖啡,素,沙冰,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,橙汁,Orange Juice,19,饮品咖啡,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,可口可乐,Coca-Cola,8,饮品咖啡,素,汽水,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,零系可口可乐,Coke Zero,8,饮品咖啡,素,汽水,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,雪碧,Sprite,8,饮品咖啡,素,汽水,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,梳打水,Soda Water,8,饮品咖啡,素,汽水,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,汤力水,Tonic Water,8,饮品咖啡,素,汽水,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,英式松饼：猪柳汉堡肠配牛油果及芝士,"English Muffin: Sausage, Avocado & Cheese",28,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,英式松饼：烟三文鱼配牛油果,English Muffin: Smoked Salmon & Avocado,34,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,牛角包：烟三文鱼配牛油果,Croissant: Smoked Salmon & Avocado,34,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,火腿芝士牛角包,Ham & Cheese Croissant,26,汉堡三文治,荤,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,香草甜莓吉士牛角包,Vanilla Berry Custard Croissant,32,甜品,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,原味乳酪,Plain Yogurt,28,甜品,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,杂莓乳酪,Mixed Berry Yogurt,36,甜品,素,,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,蝴蝶酥（盒）,Palmiers (box),60,甜品,素,曲奇,LibCafé 网上点餐系统,2026-11-09
+LibCafé,LibCafé,校内,包玉刚图书馆 平台层,榴梿曲奇（盒）,Durian Cookies (box),98,甜品,素,曲奇,LibCafé 网上点餐系统,2026-11-09
+Pacific Coffee（X 座）,Pacific Coffee (Block X),校内,X 座 平台层,咖啡,Coffee,,饮品咖啡,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Pacific Coffee（X 座）,Pacific Coffee (Block X),校内,X 座 平台层,三文治,Sandwich,,汉堡三文治,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Pacific Coffee（X 座）,Pacific Coffee (Block X),校内,X 座 平台层,沙律,Salad,,小食,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+PizzaExpress,PizzaExpress,校内,W 座 平台层,1 人套餐 A（7 寸薄饼 + 饮品）,"Combo A for 1 (7"" pizza + drink)",48,薄饼意粉,荤,可选不同薄饼,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,1 人套餐 B（7 寸薄饼 + 饮品）,"Combo B for 1 (7"" pizza + drink)",58,薄饼意粉,荤,可选不同薄饼,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,1 人套餐 C（7 寸薄饼 + 饮品）,"Combo C for 1 (7"" pizza + drink)",68,薄饼意粉,荤,可选不同薄饼,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,迷你薄饼套餐（+ 饮品）,Pocket Pizza Set (+ drink),28,小食,荤,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,意式茄酱焗肉丸套餐（+ 饮品）,Meatballs Marinara Set (+ drink),36,小食,荤,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,香烤薯角套餐（+ 饮品）,Potato Wedges Set (+ drink),36,小食,素,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,焗面包球配朱古力榛子酱套餐（+ 饮品）,Dough Balls with Nutella Set (+ drink),38,甜品,素,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,菠萝包面包球（6 粒）套餐（+ 饮品）,Pineapple Dough Balls (6) Set (+ drink),36,甜品,素,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+PizzaExpress,PizzaExpress,校内,W 座 平台层,烤焗鸡腿套餐（+ 饮品）,Roast Chicken Leg Set (+ drink),46,小食,荤,小食套餐,PizzaExpress 大学店网上点餐（Oddle）,2026-11-09
+Starbucks,Starbucks,校内,邵逸夫综合大楼 平台层,咖啡,Coffee,,饮品咖啡,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Starbucks,Starbucks,校内,邵逸夫综合大楼 平台层,蛋糕,Cake,,甜品,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Starbucks,Starbucks,校内,邵逸夫综合大楼 平台层,三文治,Sandwich,,汉堡三文治,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Subway,Subway,校内,邵逸夫综合大楼 平台层,潜艇三文治,Sub Sandwich,,汉堡三文治,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Subway,Subway,校内,邵逸夫综合大楼 平台层,沙律,Salad,,小食,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,咖喱薯仔牛肉,Curry Beef with Potato,,饭,荤,2016 年称最受欢迎，砂锅上,港大365天 理大美食攻略,2016-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,香煎西冷牛扒配黑椒汁,Pan-seared Sirloin with Black Pepper Sauce,,西式主菜,荤,,港大365天 理大美食攻略,2016-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,沙爹肥牛炒乌冬,Satay Beef Fried Udon,,粉面,荤,,港大365天 理大美食攻略,2016-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,焗饭 / 意粉,Baked Rice / Pasta,,薄饼意粉,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,汉堡,Burger,,汉堡三文治,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Theatre Lounge 剧院茶座,Theatre Lounge,校内,钟士元楼 地下,蛋糕甜品,Cakes & Desserts,,甜品,素,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,香辣牛肉干锅 · 白饭,Spicy Beef Dry Pot with Rice,49,饭,荤,需时 5–10 分钟,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,香辣鸡肉干锅 · 白饭,Spicy Chicken Dry Pot with Rice,49,饭,荤,需时 5–10 分钟,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,口水鸡 · 白饭 · 中汤,"Mouthwatering Chicken, Rice & Soup",46,饭,荤,烧味套餐,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,霸王鸡 · 白饭 · 中汤,"Soy Chicken, Rice & Soup",46,饭,荤,烧味套餐,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,南洋风味白胡椒鸡扒饭,Nanyang White Pepper Chicken Chop Rice,39,饭,荤,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,麻辣肉丁 · 叉烧饭,Spicy Diced Pork & BBQ Pork Rice,44,饭,荤,麻辣肉丁 · 烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,麻辣肉丁 · 切鸡饭,Spicy Diced Pork & White-cut Chicken Rice,44,饭,荤,麻辣肉丁 · 烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,麻辣肉丁 · 烧鸭饭,Spicy Diced Pork & Roast Duck Rice,44,饭,荤,麻辣肉丁 · 烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,麻辣肉丁 · 油鸡饭,Spicy Diced Pork & Soy Chicken Rice,44,饭,荤,麻辣肉丁 · 烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咸蛋 · 肉燥叉烧饭,"Salted Egg, Minced Pork & BBQ Pork Rice",39,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咸蛋 · 肉燥红肠饭,"Salted Egg, Minced Pork & Red Sausage Rice",39,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咸蛋 · 肉燥烧鸭饭,"Salted Egg, Minced Pork & Roast Duck Rice",39,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咸蛋 · 肉燥油鸡饭,"Salted Egg, Minced Pork & Soy Chicken Rice",39,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咸蛋 · 肉燥切鸡饭,"Salted Egg, Minced Pork & White-cut Chicken Rice",39,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肉燥 · 红肠饭,Minced Pork & Red Sausage Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肉燥 · 蜜汁叉烧饭,Minced Pork & Honey BBQ Pork Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肉燥 · 豉油鸡饭,Minced Pork & Soy Chicken Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肉燥 · 白切鸡饭,Minced Pork & White-cut Chicken Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肉燥 · 明炉烧鸭饭,Minced Pork & Roast Duck Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,烧味双拼饭,Two Roast Meats Rice,25.5,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,烧味单拼饭,One Roast Meat Rice,24,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,豉油鸡髀饭,Soy Chicken Leg Rice,33,饭,荤,烧味饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,千岛海鲜薄饼,Thousand Island Seafood Pizza,48,薄饼意粉,荤,需时 3–5 分钟,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,夏威夷菠萝火腿芝士披萨,Hawaiian Pizza,48,薄饼意粉,荤,需时 3–5 分钟,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,蕃茄芝士披萨,Tomato Cheese Pizza,44,薄饼意粉,素,需时 3–5 分钟,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,豉汁蒸鲳鱼 · 白饭,Steamed Pomfret in Black Bean with Rice,50,饭,荤,配汤,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,咖喱杂菜饭,Vegetable Curry Rice,32,饭,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,日式咖喱汁滑蛋吉列猪扒饭,Japanese Curry Pork Cutlet with Egg Rice,46,饭,荤,极上日式丼饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,鸡扒拼吉列炸虾丼,Chicken Chop & Fried Shrimp Bowl,48,饭,荤,极上日式丼饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,猪扒 · 饺子船面,Boat Noodles with Pork Chop & Dumplings,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肥牛 · 饺子船面,Boat Noodles with Beef & Dumplings,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,鸡中翼 · 饺子船面,Boat Noodles with Chicken Wings & Dumplings,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,猪扒 · 牛丸船面,Boat Noodles with Pork Chop & Beef Balls,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,肥牛 · 牛丸船面,Boat Noodles with Beef & Beef Balls,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,鸡中翼 · 牛丸船面,Boat Noodles with Chicken Wings & Beef Balls,39,粉面,荤,船面,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,焗鲜茄猪扒饭,Baked Pork Chop Rice in Tomato,32,饭,荤,焗饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,焗葡汁鸡球饭,Baked Portuguese Chicken Rice,31,饭,荤,焗饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,双餸饭（A 款 + B 款）,Two-dish Rice (A + B),27.5,饭,荤,自选双餸饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,双餸饭（A 款 + C 款）,Two-dish Rice (A + C),32,饭,荤,自选双餸饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,双餸饭（B 款 + C 款）,Two-dish Rice (B + C),35,饭,荤,自选双餸饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,素双餸饭（是日时蔬 + 炒素杂锦）,Vegetarian Two-dish Rice,27.5,饭,素,自选双餸饭,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,栀子奶茶,Gardenia Milk Tea,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,抹茶茉莉,Matcha Jasmine,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,龙井拿铁,Longjing Latte,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,抹茶咖啡,Matcha Coffee,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,龙井奶茶,Longjing Milk Tea,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,茉莉拿铁,Jasmine Latte,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,栀子拿铁,Gardenia Latte,19,饮品咖啡,素,东方茶啡,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,甜橙美式,Orange Americano,20,饮品咖啡,素,元气果咖,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,白桃美式,White Peach Americano,20,饮品咖啡,素,元气果咖,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,富士苹果美式,Fuji Apple Americano,20,饮品咖啡,素,元气果咖,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,菠萝美式,Pineapple Americano,20,饮品咖啡,素,元气果咖,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,甜橙栀香柠檬茶,Orange Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,白桃栀香柠檬茶,White Peach Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,粉荔栀香柠檬茶,Lychee Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,富士苹果栀香柠檬茶,Fuji Apple Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,甜橙茉莉柠檬茶,Orange Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,白桃茉莉柠檬茶,White Peach Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,茉莉柠檬茶,Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,甜橙龙井柠檬茶,Orange Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,白桃龙井柠檬茶,White Peach Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,粉荔龙井柠檬茶,Lychee Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,富士苹果龙井柠檬茶,Fuji Apple Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,龙井柠檬茶,Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,水蜜桃茉莉气泡茶,Peach Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,百香果茉莉气泡茶,Passion Fruit Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,青提茉莉气泡茶,Green Grape Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,红葡茉莉气泡茶,Red Grape Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,香水柠檬茉莉气泡茶,Fragrant Lemon Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 红牛（原味）,Red Bull (original),18,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 红牛（无糖）,Red Bull (sugar-free),18,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 红牛（富士苹果味）,Red Bull (Fuji apple),18,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 冻柠牛（原味）,Iced Lemon Red Bull (original),18,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 冻柠牛（无糖）,Iced Lemon Red Bull (sugar-free),24,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,Red Bull 冻柠牛（富士苹果味）,Iced Lemon Red Bull (Fuji apple),24,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,奶茶红豆冰,Milk Tea Red Bean Ice,19,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,乳香红豆冰,Milky Red Bean Ice,16,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,热奶茶,Hot Milk Tea,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,热柠檬茶,Hot Lemon Tea,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,热柠檬水,Hot Lemon Water,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,热阿华田,Hot Ovaltine,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,百事,Pepsi,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,无糖百事,Pepsi No Sugar,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,七喜,7 Up,8.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,热鲜柠蜜,Hot Lemon Honey,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻咖啡,Iced Coffee,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻黑咖啡,Iced Black Coffee,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻奶茶,Iced Milk Tea,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻柠檬茶,Iced Lemon Tea,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻柠檬水,Iced Lemon Water,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻阿华田,Iced Ovaltine,10.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻柠檬蜜,Iced Lemon Honey,12.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻柠檬可乐,Iced Lemon Coke,12.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,冻柠檬七喜,Iced Lemon 7 Up,12.5,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,白饭,Steamed Rice,12,饭,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,是日中汤,Chinese Soup of the Day,12,小食,荤,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,橙,Orange,8,小食,素,生果,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,苹果,Apple,8,小食,素,生果,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,焦糖吉士布甸,Caramel Custard Pudding,13,甜品,素,甜点,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,橙咖啡啫喱牛乳奶冻,Orange Coffee Jelly Milk Panna Cotta,15,甜品,素,甜点,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,金桔咸柠七喜,Kumquat Salted Lemon 7 Up,19,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,红芭乐梳打,Red Guava Soda,19,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,粒粒菠萝梳打,Pineapple Bits Soda,19,饮品咖啡,素,,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,粉荔茉莉柠檬茶,Lychee Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 学生饭堂,U Garden Student Canteen,校内,CD 翼 / DE 翼 平台层,富士苹果茉莉柠檬茶,Fuji Apple Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 学生饭堂网上点餐（截图）,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,葱油香茅猪扒煎蛋饭,Scallion Oil Lemongrass Pork Chop & Fried Egg Rice,39.5,饭,荤,越式扒饭,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,葱油鸡扒煎蛋饭,Scallion Oil Chicken Chop & Fried Egg Rice,39.5,饭,荤,越式扒饭,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,葱油鸳鸯扒煎蛋饭,Scallion Oil Pork & Chicken Chop with Fried Egg Rice,39.5,饭,荤,越式扒饭,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,泰式辣肉碎煎蛋饭,Thai Spicy Minced Pork & Fried Egg Rice,44,饭,荤,厨师推介,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,泰式辣红咖喱鸡饭,Thai Red Curry Chicken Rice,44,饭,荤,厨师推介,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,泰式辣红咖喱杂菜饭,Thai Red Curry Vegetable Rice,40,饭,素,厨师推介,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,泰式水门鸡 · 油饭 · 中汤,Thai Pratunam Chicken Rice & Soup,52,饭,荤,中式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,黯然销魂饭,"BBQ Pork & Fried Egg Rice (""Sorrowful Rice"")",39,饭,荤,中式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,咕噜鸡球 · 白饭,Sweet & Sour Chicken with Rice,39,饭,荤,中式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,茄子鱼柳 · 白饭,Eggplant & Fish Fillet with Rice,45,饭,荤,中式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,鲜茄滑蛋牛肉饭,"Tomato, Scrambled Egg & Beef Rice",38,饭,荤,中式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,香草烧春鸡（半只）配白饭 / 薯菜,Herb Roast Spring Chicken (half) with Rice / Potatoes,52,西式主菜,荤,西式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,焗猪扒饭,Baked Pork Chop Rice,42,饭,荤,西式精选，需时 5–10 分钟,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,焗葡国鸡饭,Baked Portuguese Chicken Rice,44,饭,荤,西式精选，需时 5–10 分钟,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,素菜意粉,Vegetable Pasta,38,薄饼意粉,素,西式精选，餐牌标明素,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,吉列大啡菇汉堡,Breaded Portobello Burger,40,汉堡三文治,素,西式精选，需时 10–15 分钟,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,日式豚肉意粉,Japanese Pork Pasta,40,薄饼意粉,荤,西式精选,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,煎封原条黄立仓鱼汤米线,Whole Pan-fried Pomfret Fish Soup Rice Noodles,52,粉面,荤,特色汤面米线,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,黄金脆鱼块汤米线,Crispy Fish Fillet Soup Rice Noodles,50,粉面,荤,特色汤面米线,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,泰式牛肉牛丸汤米粉,Thai Beef & Beef Ball Rice Noodle Soup,48,粉面,荤,特色汤面米线,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,叉烧肉丁汤意粉,BBQ Pork Macaroni Soup,32,粉面,荤,特色汤面米线,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,烧味双拼套餐 · 白饭 · 中汤,Two Roast Meats Set with Rice & Soup,48,饭,荤,,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,常餐：叉烧汤意粉 + 火腿奄列 + 香蒜多士,Set: BBQ Pork Macaroni + Ham Omelette + Garlic Toast,46,粉面,荤,天天常餐，配即磨咖啡或港式奶茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,常餐：叉烧汤意粉 + 奶油猪仔包,Set: BBQ Pork Macaroni + Condensed Milk Bun,46,粉面,荤,天天常餐，配即磨咖啡或港式奶茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,常餐：叉烧汤意粉 + 奶酱猪仔包,Set: BBQ Pork Macaroni + Peanut Butter Bun,46,粉面,荤,天天常餐，配即磨咖啡或港式奶茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,烧味双拼饭,Two Roast Meats Rice,39,饭,荤,,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,是日例汤,Soup of the Day,13,小食,荤,,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,栀子奶茶,Gardenia Milk Tea,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,龙井奶茶,Longjing Milk Tea,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,栀子拿铁,Gardenia Latte,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,茉莉拿铁,Jasmine Latte,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,龙井拿铁,Longjing Latte,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,抹茶茉莉,Matcha Jasmine,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,抹茶咖啡,Matcha Coffee,19,饮品咖啡,素,东方茶啡,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,甜橙美式,Orange Americano,19,饮品咖啡,素,元气果咖,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,白桃美式,White Peach Americano,19,饮品咖啡,素,元气果咖,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,富士苹果美式,Fuji Apple Americano,19,饮品咖啡,素,元气果咖,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,菠萝美式,Pineapple Americano,19,饮品咖啡,素,元气果咖,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,甜橙栀香柠檬茶,Orange Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,白桃栀香柠檬茶,White Peach Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,粉荔栀香柠檬茶,Lychee Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,富士苹果栀香柠檬茶,Fuji Apple Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,栀香柠檬茶,Gardenia Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,甜橙茉莉柠檬茶,Orange Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,白桃茉莉柠檬茶,White Peach Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,粉荔茉莉柠檬茶,Lychee Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,富士苹果茉莉柠檬茶,Fuji Apple Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,茉莉柠檬茶,Jasmine Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,甜橙龙井柠檬茶,Orange Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,白桃龙井柠檬茶,White Peach Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,粉荔龙井柠檬茶,Lychee Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,富士苹果龙井柠檬茶,Fuji Apple Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,龙井柠檬茶,Longjing Lemon Tea,19,饮品咖啡,素,果味柠檬茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,水蜜桃茉莉气泡茶,Peach Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,百香果茉莉气泡茶,Passion Fruit Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,青提茉莉气泡茶,Green Grape Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,香水柠檬茉莉气泡茶,Fragrant Lemon Jasmine Sparkling Tea,19,饮品咖啡,素,茉莉气泡茶,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 红牛（原味）,Red Bull (original),18,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 红牛（无糖）,Red Bull (sugar-free),18,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 红牛（富士苹果味）,Red Bull (Fuji apple),18,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 冻柠牛（原味）,Iced Lemon Red Bull (original),24,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 冻柠牛（无糖）,Iced Lemon Red Bull (sugar-free),24,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,Red Bull 冻柠牛（富士苹果味）,Iced Lemon Red Bull (Fuji apple),24,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,乳香红豆冰,Milky Red Bean Ice,17,饮品咖啡,素,,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,奶茶红豆冰,Milk Tea Red Bean Ice,20,饮品咖啡,素,,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,金桔咸柠七喜,Kumquat Salted Lemon 7 Up,20,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,金桔茉香柠檬茶,Kumquat Jasmine Lemon Tea,20,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热咖啡,Hot Coffee,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热黑咖啡,Hot Black Coffee,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热鸳鸯,Hot Yuenyeung (coffee + milk tea),9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热奶茶,Hot Milk Tea,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热柠檬茶,Hot Lemon Tea,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热柠檬水,Hot Lemon Water,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热阿华田,Hot Ovaltine,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,热鲜柠蜜,Hot Lemon Honey,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,百事,Pepsi,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,无糖百事,Pepsi No Sugar,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,七喜,7 Up,9,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻咖啡,Iced Coffee,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻黑咖啡,Iced Black Coffee,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻奶茶,Iced Milk Tea,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻柠檬茶,Iced Lemon Tea,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻柠檬水,Iced Lemon Water,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻阿华田,Iced Ovaltine,11,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻柠檬蜜,Iced Lemon Honey,12,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻柠檬七喜,Iced Lemon 7 Up,12,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,冻柠檬可乐,Iced Lemon Coke,12,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,红芭乐梳打,Red Guava Soda,19,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U Garden 花园理（职员饭堂）,U Garden Staff Canteen,校内,CD 及 DE 平台（花园理）,粒粒菠萝梳打,Pineapple Bits Soda,19,饮品咖啡,素,饮品,U Garden 手机点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,全日供应龙虾尾早餐,All-day Lobster Tail Breakfast,198,西式主菜,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,明太子三文鱼子忌廉意粉,Mentaiko & Salmon Roe Cream Pasta,108,薄饼意粉,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,韩式鸡肉拌高蛋白荞麦面,Korean Chicken High-protein Buckwheat Noodles,88,粉面,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,韩式炖美国牛肋条配白饭,Korean Braised US Beef Short Rib with Rice,78,饭,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,羽衣甘蓝番茄红石榴慢煮鸡肉沙律,"Kale, Tomato & Pomegranate Sous-vide Chicken Salad",78,小食,荤,沙律,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,凯撒沙律（慢煮鸡）,Caesar Salad (sous-vide chicken),78,小食,荤,沙律,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,凯撒沙律（烟三文鱼）,Caesar Salad (smoked salmon),78,小食,荤,沙律,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,牛油果卡津玉米沙律,Avocado Cajun Corn Salad,78,小食,素,沙律,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,是日沙律,Salad of the Day,58,小食,素,沙律,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,是日例汤,Soup of the Day,38,小食,荤,汤,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,椰子鸡汤,Coconut Chicken Soup,38,小食,荤,汤,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,蘑菇浓汤,Mushroom Soup,58,小食,素,汤,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,蔬菜浓汤（辣味番茄罗勒）,Vegetable Soup (spicy tomato basil),58,小食,素,汤,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,特选猪扒佐青胡椒酱,Pork Chop with Green Peppercorn Sauce,158,西式主菜,荤,制作约 20 分钟,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,阿根廷特选肉眼扒,Argentine Ribeye,148,西式主菜,荤,烤肉,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,阿根廷特选西冷扒,Argentine Sirloin,148,西式主菜,荤,烤肉,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,蒜蓉迷迭香羊排,Garlic Rosemary Lamb Chops,148,西式主菜,荤,烤肉,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,美国安格斯牛仔骨,US Angus Short Ribs,128,西式主菜,荤,烤肉,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,香煎澳洲鲈鱼佐柠檬欧芹油,Pan-seared Australian Barramundi with Lemon Parsley Oil,98,西式主菜,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,三文鱼樱花虾汤饭（低升糖米）,Salmon & Sakura Shrimp Rice Soup (low-GI rice),98,饭,荤,,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,香煎三文鱼佐蘑菇咖喱汁（低升糖米）,Pan-seared Salmon with Mushroom Curry (low-GI rice),108,饭,荤,亚洲美食,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,葱油猪扒煎蛋饭,Scallion Oil Pork Chop & Fried Egg Rice,78,饭,荤,亚洲美食,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,日式牛肉饭,Japanese Beef Rice,78,饭,荤,亚洲美食,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,蒜蓉蛤蜊凤尾鱼意大利面,Garlic Clam & Anchovy Spaghetti,98,薄饼意粉,荤,西式,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,番茄海鲜意粉,Tomato Seafood Pasta,98,薄饼意粉,荤,西式,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,黑松露牛肝菌芦笋炖饭,Black Truffle Porcini Asparagus Risotto,88,饭,素,西式，素,U. Green 网上点餐系统,2026-11-09
+U. Green 教职员会所餐厅,U. Green Staff Club Restaurant,校内,公共大楼（文康楼）5 楼,无限畅饮套餐,Free-flow Drinks Package,158,饮品咖啡,素,,U. Green 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 A,Daily Set Lunch A,39,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 B,Daily Set Lunch B,39,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 C,Daily Set Lunch C,41,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 D,Daily Set Lunch D,41,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 E,Daily Set Lunch E,42,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日餐汤,Soup of the Day,5,小食,荤,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,芒果布丁,Mango Pudding,5,甜品,素,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,芝麻酱杂菜沙律,Veg Salad with Sesame Dressing,5,小食,素,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G1 经典鲜茄大胃皇芝士焗饭,G1 Big Eater's Baked Cheese Rice in Tomato,47,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G2 黑椒安格斯牛肉汉堡焗饭,G2 Baked Angus Beef Patty Rice in Black Pepper,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G3 鲜茄肉酱芝士汁鱼柳鸳鸯焗饭,G3 Baked Rice with Bolognese & Fish Fillet in Cheese Sauce,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G4 鲜菌黑松茸芝士焗猪扒饭,G4 Baked Pork Chop Rice with Mushroom & Truffle Cheese,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G5 芝士焗黑椒猪扒伴白汁鸡皇鸳鸯饭,G5 Baked Black Pepper Pork Chop & Chicken à la King Rice,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G6 芝士焗肉酱意粉,G6 Baked Bolognese Spaghetti with Cheese,44,薄饼意粉,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,G7 皇牌鲜茄芝士焗猪扒饭,G7 Signature Baked Pork Chop Rice in Tomato,44,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,R1 清真咖喱鸡腿饭,R1 Halal Curry Chicken Leg Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,R2 清真咖喱牛腩饭,R2 Halal Curry Beef Brisket Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,R3 清真咖喱雪鱼柳饭,R3 Halal Curry Cod Fillet Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,S1 酸菜肥牛汤米粉,S1 Pickled Mustard Beef Rice Noodle Soup,49,粉面,荤,家乡风味米粉,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,S2 酸菜鱼片汤米粉,S2 Pickled Mustard Fish Rice Noodle Soup,49,粉面,荤,家乡风味米粉,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,J1 酱油猪软骨汤拉面,J1 Shoyu Pork Cartilage Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,J2 吉列猪扒猪骨汤拉面,J2 Pork Cutlet Tonkotsu Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,J3 炸单骨鸡翼猪骨汤拉面,J3 Fried Wing Tonkotsu Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,J4 日式叉烧猪骨汤拉面,J4 Chashu Tonkotsu Ramen,42,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,P1 寿喜烧牛肉丼,P1 Sukiyaki Beef Bowl,41,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,P2 温泉蛋牛肉丼,P2 Beef Bowl with Onsen Egg,44,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,P3 香煎牛脷丼,P3 Pan-fried Beef Tongue Bowl,44,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,P4 粟米鱼肉巨棒牛肉丼饭,P4 Corn Fish Stick & Beef Bowl,47,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,L1 熊本咖喱牛肉汉堡滑蛋包饭,L1 Kumamoto Curry Beef Patty Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,L2 熊本咖喱吉列猪扒滑蛋包饭,L2 Kumamoto Curry Pork Cutlet Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,L3 熊本咖喱单骨鸡翼滑蛋包饭,L3 Kumamoto Curry Boneless Wing Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,Z1 芝士鲜菌汁焗素吉列猪扒饭,Z1 Baked Vegetarian Cutlet Rice with Mushroom Cheese Sauce,47,饭,素,素食之选,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,W1 熟鸡胸红米饭配芝麻酱杂菜沙律,W1 Chicken Breast Red Rice with Sesame Salad,48,饭,荤,健美之选,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热奶茶,Hot Milk Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热茶走,Hot Milk Tea (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热咖啡,Hot Coffee,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热斋啡,Hot Black Coffee,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热啡走,Hot Coffee (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鸳鸯,Hot Yuenyeung (coffee + milk tea),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鸯走,Hot Yuenyeung (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热柠茶,Hot Lemon Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热柠水,Hot Lemon Water,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热阿华田,Hot Ovaltine,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热西洋菜蜜,Hot Watercress Honey Drink,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热普洱茶,Hot Pu'er Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热蜂蜜,Hot Honey Water,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热杏仁霜,Hot Almond Drink,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热朱古力,Hot Chocolate,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鲜奶,Hot Fresh Milk,11,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻奶茶,Iced Milk Tea,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻咖啡,Iced Coffee,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻斋啡,Iced Black Coffee,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻柠茶,Iced Lemon Tea,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻柠水,Iced Lemon Water,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻阿华田,Iced Ovaltine,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻西洋菜蜜,Iced Watercress Honey Drink,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻杏仁霜,Iced Almond Drink,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻朱古力,Iced Chocolate,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻鲜奶,Iced Fresh Milk,11,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻橙汁,Iced Orange Juice,11,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,百事可乐,Pepsi,9,饮品咖啡,素,汽水,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,七喜,7 Up,9,饮品咖啡,素,汽水,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,柠檬百事可乐,Lemon Pepsi,14,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,柠檬七喜,Lemon 7 Up,14,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,鲜柠西柚绿茶,Lemon Grapefruit Green Tea,16,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,百香果鲜柠绿茶,Passion Fruit Lemon Green Tea,16,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,白饭,Steamed Rice,6,饭,素,,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 学生饭堂,VA Student Canteen (The Forest),校内,邵逸夫综合大楼 地下,白粥,Plain Congee,6,小食,素,,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 A,Daily Set Lunch A,39,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 B,Daily Set Lunch B,39,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 C,Daily Set Lunch C,41,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 D,Daily Set Lunch D,41,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日午餐 E,Daily Set Lunch E,42,饭,荤,午市套餐，菜式每日不同,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,是日餐汤,Soup of the Day,5,小食,荤,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,芒果布丁,Mango Pudding,5,甜品,素,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,芝麻酱杂菜沙律,Veg Salad with Sesame Dressing,5,小食,素,追加,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G1 经典鲜茄大胃皇芝士焗饭,G1 Big Eater's Baked Cheese Rice in Tomato,47,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G2 黑椒安格斯牛肉汉堡焗饭,G2 Baked Angus Beef Patty Rice in Black Pepper,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G3 鲜茄肉酱芝士汁鱼柳鸳鸯焗饭,G3 Baked Rice with Bolognese & Fish Fillet in Cheese Sauce,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G4 鲜菌黑松茸芝士焗猪扒饭,G4 Baked Pork Chop Rice with Mushroom & Truffle Cheese,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G5 芝士焗黑椒猪扒伴白汁鸡皇鸳鸯饭,G5 Baked Black Pepper Pork Chop & Chicken à la King Rice,46,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G6 芝士焗肉酱意粉,G6 Baked Bolognese Spaghetti with Cheese,44,薄饼意粉,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,G7 皇牌鲜茄芝士焗猪扒饭,G7 Signature Baked Pork Chop Rice in Tomato,44,饭,荤,皇牌芝士焗饭，11:00 后供应,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,R1 清真咖喱鸡腿饭,R1 Halal Curry Chicken Leg Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,R2 清真咖喱牛腩饭,R2 Halal Curry Beef Brisket Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,R3 清真咖喱雪鱼柳饭,R3 Halal Curry Cod Fillet Rice,46,饭,荤,清真 Halal 咖喱,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,S1 酸菜肥牛汤米粉,S1 Pickled Mustard Beef Rice Noodle Soup,49,粉面,荤,家乡风味米粉,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,S2 酸菜鱼片汤米粉,S2 Pickled Mustard Fish Rice Noodle Soup,49,粉面,荤,家乡风味米粉,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,J1 酱油猪软骨汤拉面,J1 Shoyu Pork Cartilage Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,J2 吉列猪扒猪骨汤拉面,J2 Pork Cutlet Tonkotsu Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,J3 炸单骨鸡翼猪骨汤拉面,J3 Fried Wing Tonkotsu Ramen,46,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,J4 日式叉烧猪骨汤拉面,J4 Chashu Tonkotsu Ramen,42,粉面,荤,猪骨汤拉面,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,P1 寿喜烧牛肉丼,P1 Sukiyaki Beef Bowl,41,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,P2 温泉蛋牛肉丼,P2 Beef Bowl with Onsen Egg,44,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,P3 香煎牛脷丼,P3 Pan-fried Beef Tongue Bowl,44,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,P4 粟米鱼肉巨棒牛肉丼饭,P4 Corn Fish Stick & Beef Bowl,47,饭,荤,丼饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,L1 熊本咖喱牛肉汉堡滑蛋包饭,L1 Kumamoto Curry Beef Patty Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,L2 熊本咖喱吉列猪扒滑蛋包饭,L2 Kumamoto Curry Pork Cutlet Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,L3 熊本咖喱单骨鸡翼滑蛋包饭,L3 Kumamoto Curry Boneless Wing Omurice,47,饭,荤,咖喱滑蛋包饭,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,Z1 芝士鲜菌汁焗素吉列猪扒饭,Z1 Baked Vegetarian Cutlet Rice with Mushroom Cheese Sauce,47,饭,素,素食之选,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,W1 熟鸡胸红米饭配芝麻酱杂菜沙律,W1 Chicken Breast Red Rice with Sesame Salad,48,饭,荤,健美之选,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热奶茶,Hot Milk Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热茶走,Hot Milk Tea (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热咖啡,Hot Coffee,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热斋啡,Hot Black Coffee,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热啡走,Hot Coffee (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鸳鸯,Hot Yuenyeung (coffee + milk tea),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鸯走,Hot Yuenyeung (condensed milk),10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热柠茶,Hot Lemon Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热柠水,Hot Lemon Water,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热阿华田,Hot Ovaltine,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热西洋菜蜜,Hot Watercress Honey Drink,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热普洱茶,Hot Pu'er Tea,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热蜂蜜,Hot Honey Water,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热杏仁霜,Hot Almond Drink,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热朱古力,Hot Chocolate,10,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,热鲜奶,Hot Fresh Milk,11,饮品咖啡,素,热饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻奶茶,Iced Milk Tea,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻咖啡,Iced Coffee,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻斋啡,Iced Black Coffee,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻柠茶,Iced Lemon Tea,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻柠水,Iced Lemon Water,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻阿华田,Iced Ovaltine,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻西洋菜蜜,Iced Watercress Honey Drink,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻杏仁霜,Iced Almond Drink,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻朱古力,Iced Chocolate,13,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻鲜奶,Iced Fresh Milk,11,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,冻橙汁,Iced Orange Juice,11,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,百事可乐,Pepsi,9,饮品咖啡,素,汽水,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,七喜,7 Up,9,饮品咖啡,素,汽水,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,柠檬百事可乐,Lemon Pepsi,14,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,柠檬七喜,Lemon 7 Up,14,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,鲜柠西柚绿茶,Lemon Grapefruit Green Tea,16,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,百香果鲜柠绿茶,Passion Fruit Lemon Green Tea,16,饮品咖啡,素,冻饮,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,白饭,Steamed Rice,6,饭,素,,VA Forest 网上点餐系统,2026-11-09
+VA The Forest 职员饭堂,VA Staff Canteen (The Forest),校内,邵逸夫综合大楼 地下,白粥,Plain Congee,6,小食,素,,VA Forest 网上点餐系统,2026-11-09
+Z Café 清真,Z Café (Halal),校内,Z 座 2 楼,清真咖喱,Halal Curry,,饭,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Z Café 清真,Z Café (Halal),校内,Z 座 2 楼,汤面,Noodle Soup,,粉面,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Z Canteen,Z Canteen,校内,Z 座 2 楼,咖喱饭,Curry Rice,,饭,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Z Canteen,Z Canteen,校内,Z 座 2 楼,汤粉面,Noodle Soup,,粉面,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+Z Canteen,Z Canteen,校内,Z 座 2 楼,西式快餐,Western Fast Food,,西式主菜,荤,官网只列出食物类型，具体菜名和价钱待补,理大 CFSO 官网餐饮页（2026-10）,2026-10
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台式香肠,Taiwanese Sausage,28,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,酥炸鸡柳条,Crispy Chicken Strips,28,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,邪恶炸豆腐,"""Evil"" Fried Tofu",22,小食,素,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,甘梅地瓜条,Plum-powder Sweet Potato Fries,22,小食,素,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,起司芝士波波球,Cheese Bobo Balls,23,小食,素,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,基隆甜不辣条,Keelung Tempura Fish Cake Strips,23,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,酥炸盐酥鸡扒,Crispy Salt & Pepper Chicken Chop,25,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,麻辣猪耳,Spicy Pig's Ear,22,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,麻辣鸭血,Spicy Duck Blood,28,小食,荤,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,凉拌青瓜,Smashed Cucumber Salad,22,小食,素,凉拌小食,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打柠檬四季春,Hand-pounded Lemon Four Seasons Tea,25,饮品咖啡,素,新产品,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打柠檬栀子茶,Hand-pounded Lemon Gardenia Tea,28,饮品咖啡,素,新产品,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,香橙绿茶,Orange Green Tea,25,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,凤梨绿茶,Pineapple Green Tea,25,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打柠檬红茶,Hand-pounded Lemon Black Tea,25,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打柠檬绿茶,Hand-pounded Lemon Green Tea,25,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打鸭屎香柠檬茶,Hand-pounded Duck Shit Aroma Lemon Tea,28,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,凤梨栀子茶,Pineapple Gardenia Tea,28,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,手打凤梨香橙柠檬茶,Hand-pounded Pineapple Orange Lemon Tea,35,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台冬瓜柠檬茶,Tai Tai Winter Melon Lemon Tea,26,饮品咖啡,素,清新果茶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,斑斓咖啡芝士盖盖,Pandan Coffee with Cheese Foam,38,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,海盐焦糖咖啡盖盖,Sea Salt Caramel Coffee with Foam,38,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,鸳鸯芝士盖盖,Yuenyeung with Cheese Foam,36,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,豆花黑糖珍珠奶茶盖盖,Tofu Pudding Brown Sugar Bubble Milk Tea with Foam,36,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,提拉米苏咖啡盖盖,Tiramisu Coffee with Foam,36,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,士多啤梨红茶芝士盖盖,Strawberry Black Tea with Cheese Foam,36,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,黑咖啡盖盖,Black Coffee with Foam,28,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,古早冬瓜风味芝士盖盖,Old-style Winter Melon Tea with Cheese Foam,28,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,豆花麻糬黑糖奶茶盖盖,Tofu Pudding Mochi Brown Sugar Milk Tea with Foam,30,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,抹上拿铁盖盖,Matcha Latte with Foam,32,饮品咖啡,素,芝士奶盖,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,奶茶兄弟（寒天及珍珠）,Milk Tea Brothers (agar jelly & bubbles),26,饮品咖啡,素,珍珠,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,红豆珍珠奶茶,Red Bean Bubble Milk Tea,26,饮品咖啡,素,珍珠,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,大甲香芋珍珠奶茶,Dajia Taro Bubble Milk Tea,28,饮品咖啡,素,珍珠,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,大甲香芋珍珠奶绿,Dajia Taro Bubble Green Milk Tea,32,饮品咖啡,素,珍珠,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,奶茶姊妹（豆花及红豆）,Milk Tea Sisters (tofu pudding & red bean),32,饮品咖啡,素,珍珠,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,大甲香芋仙草鲜奶,Dajia Taro Grass Jelly Fresh Milk,36,饮品咖啡,素,仙草鲜奶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,黑糖珍珠仙草鲜奶,Brown Sugar Bubble Grass Jelly Fresh Milk,36,饮品咖啡,素,仙草鲜奶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,豆花鲜草黑糖鲜奶,Tofu Pudding Grass Jelly Brown Sugar Milk,36,饮品咖啡,素,仙草鲜奶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,大甲香芋紫薯鲜奶,Dajia Taro Purple Sweet Potato Milk,34,饮品咖啡,素,仙草鲜奶,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,桂花绿妍,Osmanthus Green Tea,27,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,茉莉白兰,Jasmine Magnolia Tea,27,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,白桃飘香,White Peach Tea,27,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,凤凰单丛,Phoenix Dancong Oolong,27,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,四季奶白,Four Seasons Milk Tea,27,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,栀子生椰,Gardenia Coconut Milk Tea,28,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,黑糖爱玉珍珠冬瓜茶,Brown Sugar Aiyu Jelly Bubble Winter Melon Tea,32,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,黑糖珍珠冬瓜奶茶,Brown Sugar Bubble Winter Melon Milk Tea,32,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,凤梨鲜乳,Pineapple Fresh Milk,32,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,莓莓鲜乳,Berry Fresh Milk,32,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,牛油果甘露,Avocado Smoothie,36,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,豆花黑白配,Tofu Pudding Black & White,36,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,九份话梅爆柠绿,Jiufen Plum Lemon Green Tea,28,饮品咖啡,素,台台特饮,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台式卤肉饭配台湾肠,Taiwanese Braised Pork Rice with Sausage,38,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,卤水腩肉饭,Braised Pork Belly Rice,38,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,卤水鸡翼煎蛋饭,Braised Chicken Wings & Fried Egg Rice,38,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台式三杯鸡饭,Taiwanese Three-cup Chicken Rice,48,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台式卤肉饭配酸菜猪扒,Taiwanese Braised Pork Rice with Pork Chop & Pickles,48,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,卤水猪软骨豆腐饭,Braised Pork Cartilage & Tofu Rice,48,饭,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台总裁牛肉拌刀削面,Tai Tai Signature Beef Knife-cut Noodles,50,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,野菌双麻豆浆汤面,Mushroom Sesame Soy Milk Noodle Soup,38,粉面,素,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台芝麻酱肉丝拌面,Sesame Sauce Shredded Pork Noodles,42,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台饺子担担面,Dumpling Dan Dan Noodles,45,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,新竹贡丸肉燥拌刀削面,Hsinchu Pork Ball & Minced Pork Knife-cut Noodles,45,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,花枝丸拌刀削面,Cuttlefish Ball Knife-cut Noodles,38,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,酥炸鸡柳条拌刀削面,Crispy Chicken Strip Knife-cut Noodles,38,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台牛肉面,Tai Tai Beef Noodle Soup,49,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,台台牛肉担担面,Beef Dan Dan Noodles,48,粉面,荤,午餐,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,芋圆鲜奶麻糬配红豆汤,Taro Balls & Milk Mochi in Red Bean Soup,30,甜品,素,台式甜品,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,芋圆鲜奶麻糬配绿豆汤,Taro Balls & Milk Mochi in Mung Bean Soup,30,甜品,素,台式甜品,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,芋圆芋泥鲜奶麻糬配椰汁底,"Taro Balls, Taro Purée & Mochi in Coconut Milk",32,甜品,素,台式甜品,台台果腹网上点餐（截图）,2026-11-09
+台台果腹,Tai Tai Foodtopia,校内,Y 座 平台层（与 Grove 同一处）,芋圆鲜奶麻糬配杨枝金露,Taro Balls & Mochi with Mango Pomelo Sago,32,甜品,素,台式甜品,台台果腹网上点餐（截图）,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 A,Daily Set Lunch A,41,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 B,Daily Set Lunch B,41,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 C,Daily Set Lunch C,41,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 D,Daily Set Lunch D,39,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 E,Daily Set Lunch E,39,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 F,Daily Set Lunch F,39,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日午餐 G,Daily Set Lunch G,39,饭,荤,午市套餐，菜式每日不同,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,是日餐汤,Soup of the Day,5,小食,荤,追加,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,韩式泡菜,Kimchi,5,小食,素,追加,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,芒果布丁,Mango Pudding,5,甜品,素,追加,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,芝麻酱杂菜沙律,Veg Salad with Sesame Dressing,5,小食,素,追加,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,腐乳生菜,Lettuce with Fermented Bean Curd,13,小食,素,追加小菜,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,蚝油菜芯,Choy Sum in Oyster Sauce,13,小食,素,追加小菜,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,炸单骨鸡翼（5 件）,Fried Boneless Chicken Wings (5 pcs),16,小食,荤,追加,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G1 鲜茄大胃皇焗饭,G1 Big Eater's Baked Rice in Tomato,47,饭,荤,皇牌芝士焗饭，11:00 后供应,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G2 黑椒牛肉汉堡焗饭,G2 Baked Rice with Beef Patty in Black Pepper,46,饭,荤,皇牌芝士焗饭，11:00 后供应,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G3 肉酱鱼柳鸳鸯焗饭,G3 Baked Rice with Bolognese & Fish Fillet,46,饭,荤,皇牌芝士焗饭，11:00 后供应,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G4 鲜菌焗猪扒饭,G4 Baked Pork Chop Rice with Mushroom,46,饭,荤,皇牌芝士焗饭，11:00 后供应,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G5 黑椒猪扒白汁鸡皇饭,G5 Black Pepper Pork Chop & Chicken à la King Rice,46,饭,荤,皇牌芝士焗饭，11:00 后供应,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G6 芝士焗肉酱意粉,G6 Baked Bolognese Spaghetti with Cheese,44,薄饼意粉,荤,皇牌芝士焗饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,G7 鲜茄焗猪扒饭,G7 Baked Pork Chop Rice in Tomato,44,饭,荤,皇牌芝士焗饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,S1 酸菜肥牛汤米粉,S1 Pickled Mustard Beef Rice Noodle Soup,47,粉面,荤,家乡风味米粉,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,S2 酸菜鱼片汤米粉,S2 Pickled Mustard Fish Rice Noodle Soup,47,粉面,荤,家乡风味米粉,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,S3 红油抄手饺子汤米粉,S3 Chili Oil Wonton Rice Noodle Soup,46,粉面,荤,家乡风味米粉,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,P1 寿喜烧牛肉丼,P1 Sukiyaki Beef Bowl,41,饭,荤,丼饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,P2 温泉蛋牛肉丼,P2 Beef Bowl with Onsen Egg,44,饭,荤,丼饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,P3 盐烧薄切牛脷丼,P3 Salt-grilled Beef Tongue Bowl,44,饭,荤,丼饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,P4 蒲烧鳗鱼牛肉丼饭,P4 Kabayaki Eel & Beef Bowl,55,饭,荤,丼饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,L1 咖喱牛肉汉堡蛋包饭,L1 Curry Beef Patty Omurice,47,饭,荤,咖喱滑蛋包饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,L2 咖喱吉列猪扒蛋包饭,L2 Curry Pork Cutlet Omurice,47,饭,荤,咖喱滑蛋包饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,L3 咖喱单骨鸡翼蛋包饭,L3 Curry Boneless Wing Omurice,47,饭,荤,咖喱滑蛋包饭,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,J1 酱油猪软骨拉面,J1 Shoyu Pork Cartilage Ramen,46,粉面,荤,猪骨汤拉面,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,J2 吉列猪扒猪骨汤拉面,J2 Pork Cutlet Tonkotsu Ramen,46,粉面,荤,猪骨汤拉面,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,J3 日式叉烧猪骨汤拉面,J3 Chashu Tonkotsu Ramen,42,粉面,荤,猪骨汤拉面,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,J4 吉列炸蚝黑蒜油拉面,J4 Fried Oyster Black Garlic Ramen,48,粉面,荤,猪骨汤拉面,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,霸皇黑椒猪手仔,Black Pepper Pork Knuckle,46,饭,荤,粤式料理,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,菠萝咕噜虾仁鸡球,Sweet & Sour Shrimp and Chicken with Pineapple,46,饭,荤,粤式料理,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,Z1 芝士鲜菌汁焗素吉列猪扒饭,Z1 Baked Vegetarian Cutlet Rice with Mushroom Cheese Sauce,47,饭,素,素食之选,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,Z2 湘川辣素虾味花菜,Z2 Spicy Hunan Vegetarian Cauliflower,46,饭,素,素食之选,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,Z3 素麻婆豆腐,Z3 Vegetarian Mapo Tofu,46,饭,素,素食之选,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,R1 清真咖喱鸡腿饭,R1 Halal Curry Chicken Leg Rice,46,饭,荤,清真 Halal 咖喱,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,R2 清真咖喱牛腩饭,R2 Halal Curry Beef Brisket Rice,46,饭,荤,清真 Halal 咖喱,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,R3 清真咖喱雪鱼柳饭,R3 Halal Curry Cod Fillet Rice,46,饭,荤,清真 Halal 咖喱,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热奶茶,Hot Milk Tea,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热茶走,Hot Milk Tea (condensed milk),10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热咖啡,Hot Coffee,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热斋啡,Hot Black Coffee,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热啡走,Hot Coffee (condensed milk),10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热鸳鸯,Hot Yuenyeung (coffee + milk tea),10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热鸯走,Hot Yuenyeung (condensed milk),10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热柠茶,Hot Lemon Tea,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热柠水,Hot Lemon Water,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热阿华田,Hot Ovaltine,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热西洋菜蜜,Hot Watercress Honey Drink,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热普洱茶,Hot Pu'er Tea,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热蜂蜜,Hot Honey Water,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热杏仁霜,Hot Almond Drink,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热朱古力,Hot Chocolate,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热鲜奶,Hot Fresh Milk,10,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,热红枣杞子蜜,Hot Red Date & Goji Honey,14,饮品咖啡,素,热饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻奶茶,Iced Milk Tea,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻咖啡,Iced Coffee,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻斋啡,Iced Black Coffee,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻鸳鸯,Iced Yuenyeung (coffee + milk tea),13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻柠茶,Iced Lemon Tea,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻柠水,Iced Lemon Water,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻阿华田,Iced Ovaltine,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻西洋菜蜜,Iced Watercress Honey Drink,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻杏仁霜,Iced Almond Drink,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻朱古力,Iced Chocolate,13,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻鲜奶,Iced Fresh Milk,11,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,冻橙汁,Iced Orange Juice,11,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,百事可乐,Pepsi,9,饮品咖啡,素,汽水,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,七喜,7 Up,9,饮品咖啡,素,汽水,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,鲜柠西柚绿茶,Lemon Grapefruit Green Tea,16,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,百香果鲜柠绿茶,Passion Fruit Lemon Green Tea,16,饮品咖啡,素,冻饮,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,白饭,Steamed Rice,6,饭,素,,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+红磡宿舍 The Forest,Hung Hom Hall Canteen (The Forest),校内,红磡学生宿舍 1 楼,白粥,Plain Congee,6,小食,素,,红磡宿舍 The Forest 网上点餐系统,2026-11-09
+Bagel Gogo,Bagel Gogo,校外,崇志街 35 号 地下,厚蛋菠菜芝士 Bagel,"Thick Omelette, Spinach & Cheese Bagel",72起,汉堡三文治,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+Bagel Gogo,Bagel Gogo,校外,崇志街 35 号 地下,烟肉蛋 Bagel,Bacon & Egg Bagel,70起,汉堡三文治,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+Black Sugar,Black Sugar,校外,黄埔天地百宝坊 G17,All Day Breakfast,All Day Breakfast,,西式主菜,荤,有炒蛋、酸种面包、黑松露,HK01 红磡黄埔美食（2026-05）,2026-05
+Black Sugar,Black Sugar,校外,黄埔天地百宝坊 G17,Deluxe Egg Benedict,Deluxe Egg Benedict,,西式主菜,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+KOMEDA,KOMEDA,校外,黄埔花园 6 期 AEON Style G01,味噌炸猪扒方包,Miso Pork Cutlet Sandwich,79,汉堡三文治,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+KOMEDA,KOMEDA,校外,黄埔花园 6 期 AEON Style G01,蛋白汁焗虾仁,Baked Shrimp in Egg White Sauce,89,西式主菜,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+KOMEDA,KOMEDA,校外,黄埔花园 6 期 AEON Style G01,咖啡配厚多士,Coffee with Thick Toast,,饮品咖啡,素,点咖啡送厚多士（早餐时段）,HK01 红磡黄埔美食（2026-05）,2026-05
+Still,Still,校外,马头围道 63 号 启岸大厦 1 楼 06 铺,西班牙海鲜炒饭,Spanish Seafood Fried Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+Still,Still,校外,马头围道 63 号 启岸大厦 1 楼 06 铺,香煎慢煮八爪鱼,Pan-seared Sous-vide Octopus,,西式主菜,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+Still,Still,校外,马头围道 63 号 启岸大厦 1 楼 06 铺,慢煮北海道十胜猪腩片,Sous-vide Hokkaido Tokachi Pork Belly,,西式主菜,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+Still,Still,校外,马头围道 63 号 启岸大厦 1 楼 06 铺,特浓心太软,Molten Lava Cake,,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+Sweet Craft,Sweet Craft,校外,红磡（地址待补）,日式刨冰,Japanese Shaved Ice,,甜品,素,,YAM 红磡美食（2025-04）,
+三河屋 · 尾张屋,Mikawaya · Owariya,校外,明安街 7 号 地下,鳗鱼饭,Eel Rice,,饭,荤,报道称便宜、性价比高,HK01 红磡黄埔美食（2026-05）,2026-05
+三河屋 · 尾张屋,Mikawaya · Owariya,校外,明安街 7 号 地下,关东煮,Oden,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+三河屋 · 尾张屋,Mikawaya · Owariya,校外,明安街 7 号 地下,忌廉饭,Cream Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+串噹噹,Chuen Dong Dong (skewers),校外,芜湖街 78 号 地下 A 铺,麻辣烫,Malatang (spicy hot pot soup),,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+串噹噹,Chuen Dong Dong (skewers),校外,芜湖街 78 号 地下 A 铺,避风塘炒茄子,Typhoon Shelter Fried Eggplant,,烧烤串烧,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+串噹噹,Chuen Dong Dong (skewers),校外,芜湖街 78 号 地下 A 铺,卜卜蚬,Stir-fried Clams,,烧烤串烧,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+九份饱,Jiufen Bao,校外,黄埔新邨 启富楼 地下 4N,鸡排饭,Chicken Cutlet Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+九份饱,Jiufen Bao,校外,黄埔新邨 启富楼 地下 4N,炸鸡软骨,Fried Chicken Cartilage,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+九份饱,Jiufen Bao,校外,黄埔新邨 启富楼 地下 4N,双色薯球,Two-colour Potato Balls,,小食,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+勇记海南鸡,Yung Kee Hainan Chicken,校外,马头围道 23-35H 号 龙基大厦地下 29L,海南鸡饭,Hainanese Chicken Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+勇记海南鸡,Yung Kee Hainan Chicken,校外,马头围道 23-35H 号 龙基大厦地下 29L,椰子鸡汤,Coconut Chicken Soup,,小食,荤,配饭一起上,HK01 红磡黄埔美食（2026-05）,2026-05
+周记酱料,Chow Kee,校外,民裕街 23 号 地下,烧卖,Siu Mai,,小食,荤,越南鱼柳 + 红衫鱼肉，配自家豉油,HK01 红磡黄埔美食（2026-05）,2026-05
+拉面天王,Ramen King,校外,德民街 17-27 号 地下 B5B,黑天王（黑蒜油拉面）,Black King (black garlic ramen),,粉面,荤,配叉烧、溏心蛋,HK01 红磡黄埔美食（2026-05）,2026-05
+拉面天王,Ramen King,校外,德民街 17-27 号 地下 B5B,白天王拉面,White King Ramen,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+拉面天王,Ramen King,校外,德民街 17-27 号 地下 B5B,赤天王拉面,Red King Ramen,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+揉然地 Leisure Baker,Leisure Baker,校外,红磡（地址待补）,法式布丁包,French Pudding Bun,,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+揉然地 Leisure Baker,Leisure Baker,校外,红磡（地址待补）,Tiramisu 软包,Tiramisu Soft Bun,,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+波士顿快餐店,Boston Fast Food,校外,红磡湾道 436-450 号 富湾大厦地库,干炒牛河,Dry-fried Beef Ho Fun,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+波士顿快餐店,Boston Fast Food,校外,红磡湾道 436-450 号 富湾大厦地库,扬州炒饭,Yangzhou Fried Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+波士顿快餐店,Boston Fast Food,校外,红磡湾道 436-450 号 富湾大厦地库,西多士,HK French Toast,,小食,素,下午茶,HK01 红磡黄埔美食（2026-05）,2026-05
+火夫,Fofu,校外,黄埔天地百宝坊 G29,虎虾浓汤面,Tiger Prawn Rich Broth Noodles,,粉面,荤,2025 年报道 $128；加配葡提鸭卷 +$10、烧牛柳粒 +$2,HK01 红磡黄埔美食（2026-05）,2026-05
+火夫,Fofu,校外,黄埔天地百宝坊 G29,生啤任饮 2 小时,Free-flow Draft Beer (2 hrs),168,饮品咖啡,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+煎饼厨房,Jianbing Kitchen,校外,红磡（地址待补）,片皮鸭煎饼果子,Peking Duck Jianbing,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+米気,Kome Ki,校外,黄埔天地百宝坊 G32,葱烧牛舌,Scallion-grilled Beef Tongue,,饭,荤,日式家常定食店,HK01 红磡黄埔美食（2026-05）,2026-05
+米気,Kome Ki,校外,黄埔天地百宝坊 G32,月见博多地鸡团子,Hakata Chicken Meatballs with Egg Yolk,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+米気,Kome Ki,校外,黄埔天地百宝坊 G32,松叶蟹薯仔沙律,Snow Crab Potato Salad,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+米気,Kome Ki,校外,黄埔天地百宝坊 G32,酱油蛋,Soy-marinated Egg,,小食,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+米気,Kome Ki,校外,黄埔天地百宝坊 G32,米気雪糕,Komeki Ice Cream,,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+素年 Be With Years,Be With Years,校外,黄埔天地百宝坊 G27,日式精进料理,Japanese Shojin Set (vegan),,饭,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+素年 Be With Years,Be With Years,校外,黄埔天地百宝坊 G27,韩式冷素面,Korean Cold Noodles (vegan),,粉面,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+素年 Be With Years,Be With Years,校外,黄埔天地百宝坊 G27,天妇罗拼盘,Tempura Platter,,小食,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+素年 Be With Years,Be With Years,校外,黄埔天地百宝坊 G27,宇治金时燕麦碗,Uji Matcha & Red Bean Oat Bowl,,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+红磡鸡蛋仔,Hung Hom Egg Waffles,校外,大沽街 2 号 宝丽阁 地下 2 号铺,鸡蛋仔,Egg Waffle,16起,小食,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+红磡鸡蛋仔,Hung Hom Egg Waffles,校外,大沽街 2 号 宝丽阁 地下 2 号铺,格仔饼,Grid Waffle,19起,小食,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+红磡鸡蛋仔,Hung Hom Egg Waffles,校外,大沽街 2 号 宝丽阁 地下 2 号铺,芒果班戟,Mango Pancake,23,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+蒙面,Mong Min Cart Noodles,校外,Chai Kwan Lane 9-15 号 协辉大厦地下 1 号铺,车仔面,Cart Noodles,,粉面,荤,汤底有特浓番茄薯仔汤；配料有金钱肚、蚝油冬菇、溏心卤蛋等,HK01 红磡黄埔美食（2026-05）,2026-05
+赞好台湾,Zan Hao Taiwan,校外,Wong Kwong St 1-7 号 荣冠大厦地下 13-14 号铺,卤肉饭,Braised Pork Rice,,饭,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+赞好台湾,Zan Hao Taiwan,校外,Wong Kwong St 1-7 号 荣冠大厦地下 13-14 号铺,红烧牛肉面,Braised Beef Noodle Soup,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+赞好台湾,Zan Hao Taiwan,校外,Wong Kwong St 1-7 号 荣冠大厦地下 13-14 号铺,鱼酥皮蛋豆腐,Century Egg Tofu with Fish Crisps,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+赞好台湾,Zan Hao Taiwan,校外,Wong Kwong St 1-7 号 荣冠大厦地下 13-14 号铺,路边摊拼盘,Street Stall Platter,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+铭兴山西刀削面,Ming Hing Shanxi Noodles,校外,民泰街 2-32 号 地下,猪颈肉热拌刀削面,Knife-cut Noodles with Pork Neck,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+铭兴山西刀削面,Ming Hing Shanxi Noodles,校外,民泰街 2-32 号 地下,花雕醉鸡刀削面,Knife-cut Noodles with Drunken Chicken,,粉面,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+陈茶馆芋圆,Chan's Tea House (taro balls),校外,黄埔天地百宝坊 G12,开心果芋圆雪燕西米露,Pistachio Taro Balls with Snow Fungus Sago,52,甜品,素,,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,A+ 韩牛,A+ Hanwoo Beef,,烧烤串烧,荤,报道称价钱大众化,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,济州岛猪斧头扒,Jeju Pork Tomahawk,,烧烤串烧,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,烤鳗鱼,Grilled Eel,,烧烤串烧,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,酱油蟹,Soy-marinated Crab,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,韩式刺身,Korean Sashimi,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+韩兄弟烧烤,Korean Brothers BBQ,校外,崇洁街 27 号 / 63 号 地下,韩式炸鸡,Korean Fried Chicken,,小食,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+饺里,Gaau Lei Dumplings,校外,芜湖街 111 号 地下 C2,椰菜鲜肉饺,Pork & Cabbage Dumplings,,点心饺子,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+饺里,Gaau Lei Dumplings,校外,芜湖街 111 号 地下 C2,韭菜鲜肉饺,Pork & Chive Dumplings,,点心饺子,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+饺里,Gaau Lei Dumplings,校外,芜湖街 111 号 地下 C2,咖喱鲜肉饺,Curry Pork Dumplings,,点心饺子,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+饺里,Gaau Lei Dumplings,校外,芜湖街 111 号 地下 C2,泡菜鲜肉饺,Kimchi Pork Dumplings,,点心饺子,荤,,HK01 红磡黄埔美食（2026-05）,2026-05
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,巨无霸套餐,Big Mac Meal,44.5,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,安格斯系列套餐,Angus Burger Meal,46起,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,蜜糖 BBQ 麦炸鸡套餐,Honey BBQ McCrispy Meal,39,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,辣辣麦炸鸡套餐,Spicy McCrispy Meal,39,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,6 件麦乐鸡超值套餐,6-pc McNuggets Value Meal,29,小食,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,魚柳包,Filet-O-Fish,14,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,猪柳汉堡,Sausage Burger,15.5,汉堡三文治,荤,,HK01 麦当劳价目（2026-01-02 起）,2026-01
+麦当劳（红磡站）,McDonald's (Hung Hom Station),校外,港铁红磡站 HUH 层,麦芝蛋飽配热饮,Sausage McMuffin with Egg + Hot Drink,18,汉堡三文治,素,早餐,HK01 麦当劳价目（2026-01-02 起）,2026-01

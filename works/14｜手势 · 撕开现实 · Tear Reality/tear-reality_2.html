@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>撕开现实</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* 单一暗色世界：全屏 WebGL，左上角状态面板，底部操作提示 */
+  :root{
+    --void:#02040a; --wire:#3d8bff; --wire-hi:#9cc8ff;
+    --panel:rgba(6,12,26,.72); --line:rgba(120,170,255,.22);
+    --text:#dbe7ff; --muted:#7f93b8;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    color-scheme:dark;
+  }
+  html,body{margin:0;height:100%;background:var(--void);color:var(--text);font-family:var(--sans);overflow:hidden}
+  canvas{display:block}
+  #gl,#overlay{position:fixed;inset:0;width:100%;height:100%}
+  #overlay{pointer-events:none}
+  video{display:none}
+  .panel{position:fixed;top:16px;left:16px;display:flex;flex-direction:column;gap:10px;
+    padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    backdrop-filter:blur(8px);max-width:min(320px,calc(100vw - 32px))}
+  .panel h1{margin:0;font-size:18px;letter-spacing:.08em}
+  .status{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+  .dot.on{background:var(--wire);box-shadow:0 0 10px var(--wire)}
+  .dot.warn{background:#ffb347}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  button{font:600 12px var(--mono);color:var(--text);background:transparent;border:1px solid var(--line);
+    border-radius:6px;padding:7px 10px;cursor:pointer}
+  button:hover{border-color:var(--wire);color:var(--wire-hi)}
+  button:focus-visible{outline:2px solid var(--wire);outline-offset:2px}
+  button[aria-pressed="true"]{background:rgba(61,139,255,.18);border-color:var(--wire)}
+  .hint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);font-size:13px;color:var(--text);
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 16px;white-space:nowrap;
+    max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}
+  .hint b{color:var(--wire-hi);font-weight:600}
+  [hidden]{display:none!important}
+  video#cam{display:none}
+  video#cam.pip{display:block;position:fixed;right:16px;bottom:64px;width:min(220px,30vw);aspect-ratio:16/9;
+    object-fit:cover;transform:scaleX(-1);border:1px solid var(--line);border-radius:8px;opacity:.85;pointer-events:none}
+  .sub{font-size:11px;color:var(--muted);font-family:var(--mono);letter-spacing:.06em}
+  #drop{position:fixed;inset:12px;border:2px dashed var(--wire);border-radius:16px;background:rgba(2,4,10,.6);
+    display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--wire-hi);pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="overlay"></canvas>
+<video id="cam" playsinline muted></video>
+
+<div class="panel">
+  <h1>撕开现实</h1>
+  <div class="status"><span class="dot" id="dot"></span><span id="status">鼠标模式 · 点“开启手势”用手抓</span></div>
+  <span class="sub">画面来源</span>
+  <div class="row">
+    <button id="btnLive" aria-pressed="false">实时取景</button>
+    <button id="btnUpload" aria-pressed="false">上传图片 / 视频</button>
+    <button id="btnDemo" aria-pressed="true">示例画面</button>
+    <input type="file" id="file" accept="image/*,video/*" hidden>
+  </div>
+  <span class="sub">操作</span>
+  <div class="row">
+    <button id="btnCam">开启手势</button>
+    <button id="btnReset">修复画面 (R)</button>
+    <button id="btnHeal" aria-pressed="true">自动愈合</button>
+  </div>
+</div>
+<div id="drop" hidden>松手即可载入这张图片 / 视频</div>
+<div class="hint" id="hint"><b>捏住</b>拇指和食指抓住画面，<b>用力拉</b>就会撕开 · 鼠标按住拖拽也可以 · 图片/视频可直接拖进来</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous"></script>
+<script>
+(() => {
+'use strict';
+// ---------- Three.js 基础 ----------
+const glCanvas = document.getElementById('gl');
+const overlay = document.getElementById('overlay');
+const octx = overlay.getContext('2d');
+const renderer = new THREE.WebGLRenderer({canvas: glCanvas, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x02040a);
+const FOV = 50;
+const camera = new THREE.PerspectiveCamera(FOV, 1, 0.01, 50);
+const VIEW_H = 2;
+camera.position.z = (VIEW_H / 2) / Math.tan(THREE.MathUtils.degToRad(FOV / 2));
+let viewW = 2, planeW = 2, planeH = 2;
+
+// ---------- 备用画面（没有摄像头时） ----------
+function makeFallbackScene() {
+  const c = document.createElement('canvas'); c.width = 1280; c.height = 720;
+  const g = c.getContext('2d');
+  const sky = g.createLinearGradient(0, 0, 0, 720);
+  sky.addColorStop(0, '#8fb8e8'); sky.addColorStop(.6, '#f3d3b0'); sky.addColorStop(1, '#e6a77d');
+  g.fillStyle = sky; g.fillRect(0, 0, 1280, 720);
+  g.fillStyle = 'rgba(255,240,210,.95)'; g.beginPath(); g.arc(900, 360, 70, 0, Math.PI * 2); g.fill();
+  const hills = [['#9d8ba6', 430, 90], ['#6f6a8e', 500, 70], ['#3e4466', 580, 50], ['#22283f', 650, 35]];
+  hills.forEach(([col, base, amp], i) => {
+    g.fillStyle = col; g.beginPath(); g.moveTo(0, 720);
+    for (let x = 0; x <= 1280; x += 16) {
+      const y = base - amp * (Math.sin(x * .004 + i * 2) * .6 + Math.sin(x * .011 + i) * .3 + Math.sin(x * .031 + i * 5) * .1);
+      g.lineTo(x, y);
+    }
+    g.lineTo(1280, 720); g.fill();
+  });
+  // 窗框，让它像“房间里的现实”
+  g.strokeStyle = '#f4efe8'; g.lineWidth = 26;
+  g.strokeRect(120, 60, 1040, 600);
+  g.beginPath(); g.moveTo(640, 60); g.lineTo(640, 660); g.moveTo(120, 300); g.lineTo(1160, 300); g.stroke();
+  g.fillStyle = '#efe9e0'; g.fillRect(0, 0, 120, 720); g.fillRect(1160, 0, 120, 720); g.fillRect(0, 0, 1280, 60); g.fillRect(0, 660, 1280, 60);
+  return c;
+}
+const fallbackCanvas = makeFallbackScene();
+const fallbackTex = new THREE.CanvasTexture(fallbackCanvas);
+let sourceAspect = 16 / 9, mirrored = false;
+
+// ---------- 撕裂遮罩 ----------
+const mask = document.createElement('canvas'); mask.width = 640; mask.height = 360;
+const mctx = mask.getContext('2d');
+mctx.fillStyle = '#000'; mctx.fillRect(0, 0, mask.width, mask.height);
+const maskTex = new THREE.CanvasTexture(mask);
+
+// ---------- 现实平面 ----------
+const SEG_X = 128, SEG_Y = 72;
+let geo, restPos;
+const uniforms = {
+  uMap: {value: fallbackTex}, uMask: {value: maskTex}, uMirror: {value: 0}, uTime: {value: 0}
+};
+const sheetMat = new THREE.ShaderMaterial({
+  uniforms, side: THREE.DoubleSide,
+  vertexShader: `
+    varying vec2 vUv; varying vec3 vN; varying float vLift;
+    void main(){ vUv = uv; vN = normalize(normalMatrix * normal); vLift = position.z;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+  fragmentShader: `
+    uniform sampler2D uMap; uniform sampler2D uMask; uniform float uMirror; uniform float uTime;
+    varying vec2 vUv; varying vec3 vN; varying float vLift;
+    float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
+    float vn(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+      return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
+    void main(){
+      float m = texture2D(uMask, vUv).r;
+      // 方块噪声 + 平滑噪声，做出锯齿状、碎片化的撕裂边缘
+      float n = h(floor(vUv * vec2(96.,54.))) * .55 + vn(vUv * vec2(28.,16.)) * .45;
+      m += (n - .5) * .32;
+      if (m > .5) discard;
+      vec2 st = vec2(mix(vUv.x, 1. - vUv.x, uMirror), vUv.y);
+      vec3 col = texture2D(uMap, st).rgb;
+      float shade = .78 + .32 * max(dot(normalize(vN), normalize(vec3(-.3,.5,1.))), 0.);
+      col *= mix(1., shade, clamp(vLift * 3., 0., 1.));
+      float rim = smoothstep(.36, .5, m);
+      col = mix(col, vec3(.45,.75,1.), rim * .85) + vec3(.2,.45,1.) * rim * rim * .8;
+      gl_FragColor = vec4(col, 1.);
+    }`
+});
+let sheet;
+function buildSheet() {
+  if (sheet) { scene.remove(sheet); geo.dispose(); }
+  geo = new THREE.PlaneGeometry(planeW, planeH, SEG_X, SEG_Y);
+  restPos = Float32Array.from(geo.attributes.position.array);
+  sheet = new THREE.Mesh(geo, sheetMat);
+  scene.add(sheet);
+}
+
+// ---------- 背后的蓝色线框（Bowyer–Watson 三角剖分） ----------
+function delaunayEdges(pts) {
+  const BIG = 1e3;
+  const P = pts.concat([{x:-BIG,y:-BIG},{x:BIG*2,y:-BIG},{x:0,y:BIG*2}]);
+  const s = P.length - 3;
+  const circ = (a, b, c) => {
+    const A = P[a], B = P[b], C = P[c];
+    const d = 2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
+    const a2 = A.x*A.x + A.y*A.y, b2 = B.x*B.x + B.y*B.y, c2 = C.x*C.x + C.y*C.y;
+    const ux = (a2 * (B.y - C.y) + b2 * (C.y - A.y) + c2 * (A.y - B.y)) / d;
+    const uy = (a2 * (C.x - B.x) + b2 * (A.x - C.x) + c2 * (B.x - A.x)) / d;
+    return {a, b, c, x: ux, y: uy, r: (A.x-ux)**2 + (A.y-uy)**2};
+  };
+  let tris = [circ(s, s+1, s+2)];
+  for (let i = 0; i < s; i++) {
+    const p = P[i], bad = [], keep = [];
+    for (const t of tris) ((p.x-t.x)**2 + (p.y-t.y)**2 < t.r ? bad : keep).push(t);
+    const cnt = new Map();
+    for (const t of bad) for (const [u, v] of [[t.a,t.b],[t.b,t.c],[t.c,t.a]]) {
+      const k = u < v ? u + '_' + v : v + '_' + u;
+      cnt.set(k, (cnt.get(k) || 0) + 1);
+    }
+    for (const [k, c] of cnt) if (c === 1) { const [u, v] = k.split('_').map(Number); keep.push(circ(u, v, i)); }
+    tris = keep;
+  }
+  const edges = new Set();
+  for (const t of tris) {
+    if (t.a >= s || t.b >= s || t.c >= s) continue;
+    for (const [u, v] of [[t.a,t.b],[t.b,t.c],[t.c,t.a]]) edges.add(u < v ? u + '_' + v : v + '_' + u);
+  }
+  return [...edges].map(k => k.split('_').map(Number));
+}
+let wire;
+function buildWire() {
+  if (wire) { scene.remove(wire); wire.traverse(o => o.geometry && o.geometry.dispose()); }
+  const W = planeW * 1.6, H = planeH * 1.6, pts = [];
+  for (let i = 0; i < 1000; i++) {
+    // 越往下越密，像扫描出来的地面
+    pts.push({x: (Math.random() - .5) * W, y: -H / 2 + H * Math.pow(Math.random(), 1.9)});
+  }
+  for (let i = 0; i <= 10; i++) { pts.push({x:-W/2 + W*i/10, y:H/2}); pts.push({x:-W/2 + W*i/10, y:-H/2}); }
+  const edges = delaunayEdges(pts);
+  const z = pts.map(p => -0.35 - Math.random() * .25 + (p.y + H/2) / H * -.2);
+  const arr = new Float32Array(edges.length * 6);
+  edges.forEach(([a, b], i) => arr.set([pts[a].x, pts[a].y, z[a], pts[b].x, pts[b].y, z[b]], i * 6));
+  const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+  const lines = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({color: 0x3d8bff, transparent: true, opacity: .8, blending: THREE.AdditiveBlending}));
+  const pa = new Float32Array(pts.length * 3); pts.forEach((p, i) => pa.set([p.x, p.y, z[i]], i * 3));
+  const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pa, 3));
+  const dots = new THREE.Points(pg, new THREE.PointsMaterial({color: 0x9cc8ff, size: .012, transparent: true, opacity: .9, blending: THREE.AdditiveBlending}));
+  wire = new THREE.Group(); wire.add(lines, dots);
+  scene.add(wire);
+}
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  overlay.width = w * devicePixelRatio; overlay.height = h * devicePixelRatio;
+  octx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  viewW = VIEW_H * camera.aspect;
+  // cover 铺满
+  if (camera.aspect > sourceAspect) { planeW = viewW; planeH = viewW / sourceAspect; }
+  else { planeH = VIEW_H; planeW = VIEW_H * sourceAspect; }
+  planeW *= 1.04; planeH *= 1.04;
+  buildSheet(); buildWire();
+}
+addEventListener('resize', layout);
+
+// ---------- 抓取 / 弹簧 / 撕裂 ----------
+const grabs = new Map(); // id -> grab
+const RADIUS = 0.42, TEAR_AT = 0.28;
+function startGrab(id, x, y) {
+  grabs.set(id, {anchor: {x, y}, hand: {x, y}, amp: 1, vel: 0, held: true, seed: Math.random() * 1000});
+}
+function moveGrab(id, x, y) { const g = grabs.get(id); if (g && g.held) { g.hand.x = x; g.hand.y = y; } }
+function endGrab(id) { const g = grabs.get(id); if (g) g.held = false; }
+
+function paintTear(g, len) {
+  const r = Math.min(0.55, (len - TEAR_AT) * 0.75) + 0.03;
+  const dx = (g.hand.x - g.anchor.x) / len, dy = (g.hand.y - g.anchor.y) / len;
+  // 撕口沿拉扯方向偏移一点，形状随机多边形
+  const cx = g.anchor.x + dx * r * .35 + (Math.random() - .5) * r * .5;
+  const cy = g.anchor.y + dy * r * .35 + (Math.random() - .5) * r * .5;
+  const sx = mask.width / planeW, sy = mask.height / planeH;
+  const px = (cx / planeW + .5) * mask.width, py = (1 - (cy / planeH + .5)) * mask.height;
+  const n = 7 + (Math.random() * 7 | 0);
+  mctx.fillStyle = '#fff'; mctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const a = i / n * Math.PI * 2 + Math.random() * .4;
+    const rr = r * (.35 + Math.random() * .75);
+    const stretch = 1 + .6 * Math.abs(Math.cos(a) * dx + Math.sin(a) * dy);
+    const x = px + Math.cos(a) * rr * stretch * sx, y = py - Math.sin(a) * rr * stretch * sy;
+    i ? mctx.lineTo(x, y) : mctx.moveTo(x, y);
+  }
+  mctx.closePath(); mctx.fill();
+  maskTex.needsUpdate = true;
+}
+function resetMask() { mctx.fillStyle = '#000'; mctx.fillRect(0, 0, mask.width, mask.height); maskTex.needsUpdate = true; }
+
+let healing = true;
+function step(dt) {
+  // 弹簧回弹（松手后像果冻一样抖回去）
+  for (const [id, g] of grabs) {
+    if (!g.held) {
+      const k = 120, c = 9;
+      g.vel += (-k * g.amp - c * g.vel) * dt; g.amp += g.vel * dt;
+      if (Math.abs(g.amp) < .002 && Math.abs(g.vel) < .02) grabs.delete(id);
+    } else {
+      const len = Math.hypot(g.hand.x - g.anchor.x, g.hand.y - g.anchor.y);
+      if (len > TEAR_AT) paintTear(g, len);
+    }
+  }
+  const pos = geo.attributes.position.array;
+  const active = grabs.size > 0;
+  if (active || step.wasActive) {
+    for (let i = 0; i < pos.length; i += 3) {
+      const rx = restPos[i], ry = restPos[i + 1];
+      let ox = 0, oy = 0, oz = 0;
+      for (const g of grabs.values()) {
+        const dx = rx - g.anchor.x, dy = ry - g.anchor.y;
+        const w = Math.exp(-(dx * dx + dy * dy) / (RADIUS * RADIUS));
+        if (w < 1e-3) continue;
+        const px = (g.hand.x - g.anchor.x) * g.amp, py = (g.hand.y - g.anchor.y) * g.amp;
+        const len = Math.hypot(px, py);
+        ox += px * w; oy += py * w;
+        oz += w * (0.18 * g.amp + len * 0.7);   // 被拉起来，朝你卷过来
+      }
+      pos[i] = rx + ox; pos[i + 1] = ry + oy; pos[i + 2] = oz;
+    }
+    geo.attributes.position.needsUpdate = true;
+    geo.computeVertexNormals();
+  }
+  step.wasActive = active;
+  if (healing && (step.f = (step.f || 0) + 1) % 2 === 0) {
+    mctx.fillStyle = 'rgba(0,0,0,0.006)'; mctx.fillRect(0, 0, mask.width, mask.height); maskTex.needsUpdate = true;
+  }
+}
+
+// ---------- 鼠标 / 触摸 ----------
+function screenToPlane(cx, cy) {
+  return {x: (cx / innerWidth - .5) * viewW, y: -(cy / innerHeight - .5) * VIEW_H};
+}
+glCanvas.addEventListener('pointerdown', e => {
+  glCanvas.setPointerCapture(e.pointerId);
+  const p = screenToPlane(e.clientX, e.clientY); startGrab('p' + e.pointerId, p.x, p.y);
+});
+glCanvas.addEventListener('pointermove', e => { const p = screenToPlane(e.clientX, e.clientY); moveGrab('p' + e.pointerId, p.x, p.y); });
+['pointerup', 'pointercancel'].forEach(t => glCanvas.addEventListener(t, e => endGrab('p' + e.pointerId)));
+
+// ---------- 画面来源：示例 / 实时取景 / 上传 ----------
+const video = document.getElementById('cam');
+const statusEl = document.getElementById('status'), dot = document.getElementById('dot');
+const setStatus = (t, s) => { statusEl.textContent = t; dot.className = 'dot' + (s ? ' ' + s : ''); };
+const btnLive = document.getElementById('btnLive'), btnUpload = document.getElementById('btnUpload'),
+      btnDemo = document.getElementById('btnDemo'), btnCam = document.getElementById('btnCam'),
+      fileInput = document.getElementById('file'), dropEl = document.getElementById('drop');
+let mode = 'demo', camStream = null, camAspect = 16 / 9, mediaURL = null, mediaVideo = null, curTex = fallbackTex;
+
+function setSource(tex, aspect, mirror, newMode) {
+  if (curTex !== tex && curTex !== fallbackTex) curTex.dispose();
+  curTex = tex;
+  uniforms.uMap.value = tex; uniforms.uMirror.value = mirror ? 1 : 0; mirrored = mirror;
+  sourceAspect = aspect || 16 / 9;
+  if (mediaVideo && newMode !== 'upload') { mediaVideo.pause(); mediaVideo.removeAttribute('src'); mediaVideo.load(); mediaVideo = null; }
+  if (mediaURL && newMode !== 'upload') { URL.revokeObjectURL(mediaURL); mediaURL = null; }
+  mode = newMode; grabs.clear(); layout(); resetMask();
+  btnLive.setAttribute('aria-pressed', mode === 'live');
+  btnUpload.setAttribute('aria-pressed', mode === 'upload');
+  btnDemo.setAttribute('aria-pressed', mode === 'demo');
+  video.classList.toggle('pip', !!camStream && mode !== 'live');
+}
+
+async function openCamera() {
+  if (camStream) return true;
+  try {
+    setStatus('正在请求摄像头…', 'warn');
+    camStream = await navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720, facingMode: 'user'}, audio: false});
+    video.srcObject = camStream; await video.play();
+    camAspect = video.videoWidth / video.videoHeight || 16 / 9;
+    return true;
+  } catch (e) {
+    setStatus(e.name === 'NotAllowedError' ? '摄像头被拒绝了，可以继续用鼠标拖拽' : '打不开摄像头：' + e.message, 'warn');
+    return false;
+  }
+}
+
+async function useLive() {
+  if (!(await openCamera())) return;
+  const vt = new THREE.VideoTexture(video); vt.minFilter = THREE.LinearFilter;
+  setSource(vt, camAspect, true, 'live');
+  startHands();
+}
+
+function loadFile(file) {
+  if (!file) return;
+  const isVideo = file.type.startsWith('video/'), isImage = file.type.startsWith('image/');
+  if (!isVideo && !isImage) { setStatus('只支持图片或视频文件', 'warn'); return; }
+  if (mediaURL) URL.revokeObjectURL(mediaURL);
+  if (mediaVideo) { mediaVideo.pause(); mediaVideo = null; }
+  mediaURL = URL.createObjectURL(file);
+  if (isImage) {
+    const img = new Image();
+    img.onload = () => {
+      const tex = new THREE.Texture(img); tex.needsUpdate = true; tex.minFilter = THREE.LinearFilter;
+      setSource(tex, img.naturalWidth / img.naturalHeight, false, 'upload');
+      afterUpload(file.name);
+    };
+    img.onerror = () => setStatus('这张图片读不出来，换一张试试', 'warn');
+    img.src = mediaURL;
+  } else {
+    const v = document.createElement('video');
+    v.src = mediaURL; v.loop = true; v.muted = true; v.playsInline = true;
+    v.onloadeddata = () => {
+      v.play().catch(() => {});
+      const tex = new THREE.VideoTexture(v); tex.minFilter = THREE.LinearFilter;
+      mediaVideo = v;
+      setSource(tex, v.videoWidth / v.videoHeight, false, 'upload');
+      afterUpload(file.name);
+    };
+    v.onerror = () => setStatus('这个视频格式浏览器播放不了，试试 mp4', 'warn');
+  }
+}
+function afterUpload(name) {
+  setStatus(handsReady ? '已载入 ' + name + ' · 捏合抓取' : '已载入 ' + name + ' · 点“开启手势”用手抓', handsReady ? 'on' : '');
+}
+
+// ---------- MediaPipe 手势 ----------
+let hands = null, handResults = [], handsStarted = false, handsReady = false;
+const pinchState = {};
+
+// 手的位置 → 画面平面坐标
+function lmToPlane(lm) {
+  if (mode === 'live') return {x: (0.5 - lm.x) * planeW, y: (0.5 - lm.y) * planeH};
+  // 其他来源：把整个摄像头画面（镜像）铺满屏幕来映射，手在镜头里哪里，就抓屏幕哪里
+  const W = innerWidth, H = innerHeight, sa = W / H;
+  let dw, dh; if (sa > camAspect) { dw = W; dh = W / camAspect; } else { dh = H; dw = H * camAspect; }
+  return screenToPlane(W / 2 + (0.5 - lm.x) * dw, H / 2 + (lm.y - 0.5) * dh);
+}
+function onHands(res) {
+  handResults = [];
+  const seen = new Set();
+  (res.multiHandLandmarks || []).forEach((lms, i) => {
+    const label = (res.multiHandedness && res.multiHandedness[i] && res.multiHandedness[i].label) || ('h' + i);
+    const id = 'hand-' + label; seen.add(id);
+    const t = lms[4], f = lms[8], wr = lms[0], mc = lms[9];
+    const scale = Math.hypot(wr.x - mc.x, wr.y - mc.y) || 1;
+    const ratio = Math.hypot(t.x - f.x, t.y - f.y) / scale;
+    const was = pinchState[id];
+    const pinching = was ? ratio < 0.5 : ratio < 0.33;
+    const mid = lmToPlane({x: (t.x + f.x) / 2, y: (t.y + f.y) / 2});
+    const g = grabs.get(id);
+    if (pinching && !was) startGrab(id, mid.x, mid.y);
+    else if (pinching && g) { g.hand.x += (mid.x - g.hand.x) * .6; g.hand.y += (mid.y - g.hand.y) * .6; }
+    else if (!pinching && was) endGrab(id);
+    pinchState[id] = pinching;
+    handResults.push({lms, pinching, mid});
+  });
+  for (const id in pinchState) if (!seen.has(id) && pinchState[id]) { endGrab(id); pinchState[id] = false; }
+}
+
+async function startHands() {
+  if (handsStarted) return;
+  if (typeof Hands === 'undefined') { setStatus('手势模型没加载出来，请检查网络后刷新', 'warn'); return; }
+  if (!(await openCamera())) return;
+  video.classList.toggle('pip', mode !== 'live');
+  handsStarted = true;
+  setStatus('正在加载手势模型…', 'warn');
+  hands = new Hands({locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${f}`});
+  hands.setOptions({maxNumHands: 2, modelComplexity: 0, minDetectionConfidence: .6, minTrackingConfidence: .5});
+  hands.onResults(onHands);
+  let busy = false;
+  const loop = async () => {
+    if (!busy && video.readyState >= 2) {
+      busy = true;
+      try { await hands.send({image: video}); if (!handsReady) { handsReady = true; setStatus('手势已就绪 · 捏合抓取', 'on'); } }
+      catch (e) { setStatus('手势识别出错：' + e.message, 'warn'); }
+      busy = false;
+    }
+    requestAnimationFrame(loop);
+  };
+  loop();
+  btnCam.textContent = '手势已开启'; btnCam.setAttribute('aria-pressed', 'true');
+}
+
+// ---------- 手部叠加层 ----------
+const v3 = new THREE.Vector3();
+function toScreen(x, y) { v3.set(x, y, 0).project(camera); return [(v3.x + 1) / 2 * innerWidth, (1 - v3.y) / 2 * innerHeight]; }
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+function drawOverlay(t) {
+  octx.clearRect(0, 0, innerWidth, innerHeight);
+  for (const h of handResults) {
+    const s = h.lms.map(l => { const p = lmToPlane(l); return toScreen(p.x, p.y); });
+    octx.strokeStyle = 'rgba(156,200,255,.55)'; octx.lineWidth = 1.5; octx.beginPath();
+    for (const [a, b] of BONES) { octx.moveTo(...s[a]); octx.lineTo(...s[b]); }
+    octx.stroke();
+    octx.fillStyle = '#9cc8ff';
+    for (const i of [4, 8, 12, 16, 20]) { octx.beginPath(); octx.arc(s[i][0], s[i][1], 3.5, 0, 7); octx.fill(); }
+    const [mx, my] = toScreen(h.mid.x, h.mid.y);
+    octx.strokeStyle = h.pinching ? '#3d8bff' : 'rgba(156,200,255,.5)';
+    octx.lineWidth = h.pinching ? 3 : 1.5;
+    octx.beginPath(); octx.arc(mx, my, h.pinching ? 16 + Math.sin(t * 8) * 2 : 22, 0, 7); octx.stroke();
+  }
+}
+
+// ---------- UI ----------
+btnCam.onclick = startHands;
+btnLive.onclick = useLive;
+btnUpload.onclick = () => fileInput.click();
+btnDemo.onclick = () => { setSource(fallbackTex, 16 / 9, false, 'demo'); if (handsReady) setStatus('示例画面 · 捏合抓取', 'on'); };
+fileInput.onchange = () => { loadFile(fileInput.files[0]); fileInput.value = ''; };
+let dragDepth = 0;
+const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+addEventListener('dragenter', e => { if (!hasFiles(e)) return; e.preventDefault(); dragDepth++; dropEl.hidden = false; });
+addEventListener('dragleave', () => { if (--dragDepth <= 0) { dragDepth = 0; dropEl.hidden = true; } });
+addEventListener('dragover', e => e.preventDefault());
+// 拖到窗口外或按 Esc 时也收起提示
+document.addEventListener('mouseleave', () => { dragDepth = 0; dropEl.hidden = true; });
+addEventListener('keydown', e => { if (e.key === 'Escape') { dragDepth = 0; dropEl.hidden = true; } });
+addEventListener('drop', e => { e.preventDefault(); dragDepth = 0; dropEl.hidden = true; loadFile(e.dataTransfer.files[0]); });
+document.getElementById('btnReset').onclick = resetMask;
+const btnHeal = document.getElementById('btnHeal');
+btnHeal.onclick = () => { healing = !healing; btnHeal.setAttribute('aria-pressed', healing); };
+addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') resetMask(); });
+
+// ---------- 主循环 ----------
+layout();
+let last = performance.now();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame(now) {
+  const dt = Math.min(.033, (now - last) / 1000); last = now;
+  const t = now / 1000;
+  step(dt);
+  if (wire && !reduce) { wire.rotation.y = Math.sin(t * .25) * .05; wire.rotation.x = Math.sin(t * .18) * .03; }
+  uniforms.uTime.value = t;
+  renderer.render(scene, camera);
+  drawOverlay(t);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

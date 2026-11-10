@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body>
+<title>手势星云</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: full-bleed WebGL scene + 2D overlay for hands and warp streaks; textless scale dots on the right; collapsible gesture legend. Single deliberate dark look. */
+:root{
+  --bg:#05060a; --fg:#e8ecf5; --dim:#8a93a8; --accent:#7cf2d6; --warm:#ff8a5c;
+  --panel:rgba(12,15,24,.74); --line:rgba(232,236,245,.12);
+  --display:'Unbounded','PingFang SC','Noto Sans SC',system-ui,sans-serif;
+  --mono:'JetBrains Mono','PingFang SC','Noto Sans SC',ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--mono);overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+#gl,#ov{position:fixed;inset:0;width:100%;height:100%;display:block}
+#ov{pointer-events:none}
+#gl{touch-action:none;cursor:crosshair}
+#gl.drag{cursor:grabbing}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#intro{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:min(380px,calc(100% - 32px));padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;z-index:6}
+#intro h1{margin:0;font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.02em;line-height:1.1}
+#intro h1 span{color:var(--accent)}
+#intro p{margin:0;color:var(--dim);font-size:13px;line-height:1.7}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;border-radius:999px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--fg)}
+button.primary{background:var(--accent);color:#04120e;border-color:var(--accent);font-weight:600}
+button:hover{filter:brightness(1.15)}
+button:disabled{opacity:.6;cursor:default}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#msg{font-size:12px;line-height:1.6;color:var(--warm)}
+
+#status{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:calc(16px + env(safe-area-inset-top,0px));
+  font-size:11px;letter-spacing:.12em;color:var(--dim);z-index:4;display:flex;align-items:center;gap:8px}
+#status i{width:7px;height:7px;border-radius:50%;background:var(--dim);display:inline-block}
+#status.live i{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+
+#ruler{position:fixed;right:max(18px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);height:min(220px,34vh);width:24px;z-index:4}
+#ruler .track{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)}
+#ruler .stop{position:absolute;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+#ruler .stop::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:var(--dim);transform:translate(-50%,-50%);opacity:.6}
+#marker{position:absolute;left:50%;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);transform:translate(-50%,-50%);pointer-events:none}
+
+#nav{position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:calc(16px + env(safe-area-inset-top,0px));z-index:5;display:flex;gap:8px}
+#nav button{width:36px;height:36px;padding:0;font-size:15px;background:var(--panel)}
+
+#legend{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  padding:14px 16px 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12px;z-index:4;max-width:min(440px,calc(100% - 32px))}
+#legend b{font-weight:600;color:var(--accent);letter-spacing:.04em;white-space:nowrap}
+#legend .w{color:var(--warm)}
+#legend span{color:var(--dim);line-height:1.5}
+#legend .sep{grid-column:1/-1;height:1px;background:var(--line);margin:4px 0}
+#legend .x{position:absolute;right:6px;top:6px;width:24px;height:24px;padding:0;border:0;font-size:14px;color:var(--dim)}
+#help{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:4;
+  width:36px;height:36px;padding:0;background:var(--panel)}
+
+#cam{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:150px;aspect-ratio:4/3;max-width:40%;object-fit:cover;transform:scaleX(-1);border-radius:10px;border:1px solid var(--line);opacity:.45;z-index:4}
+@media (max-width:720px){ #legend{display:none} #help{display:none} }
+</style>
+
+<canvas id="gl" aria-label="可缩放的星云世界"></canvas>
+<canvas id="ov"></canvas>
+<div id="status"><i></i><em id="stxt" style="font-style:normal">鼠标模式</em></div>
+<div id="nav"><button id="up" aria-label="退回上一层（Esc）">↑</button><button id="down" aria-label="进入下一层（Enter）">↓</button></div>
+<div id="ruler" aria-label="尺度"><div class="track"></div><div id="marker"></div></div>
+<video id="cam" playsinline muted hidden></video>
+
+<section id="intro" class="panel">
+  <h1>手势<span>星云</span></h1>
+  <p>一个可以一层层钻进去的星空。对着摄像头抬起手，推开、搅动、引爆它，或者用双手把它拉近。画面只在你的浏览器里处理，不会上传。</p>
+  <div class="btns">
+    <button id="start" class="primary">打开摄像头</button>
+    <button id="mouse">先用鼠标玩</button>
+  </div>
+  <div id="msg" hidden></div>
+</section>
+
+<div id="legend" class="panel">
+  <button class="x" id="legendClose" aria-label="收起手势说明">×</button>
+  <b>单手张开</b><span>推开星尘</span>
+  <b>捏合手指</b><span>吸成漩涡</span>
+  <b class="w">握拳蓄力 → 张开</b><span>爆发；蓄满会冲进下一层</span>
+  <b>双手张开</b><span>拉出光束；拉开 / 合拢来缩放，转动两手连线来旋转</span>
+  <b class="w">双手同时握拳</b><span>退回上一层</span>
+  <div class="sep"></div>
+  <b style="color:var(--dim)">鼠标</b><span>移动推开 · 按住漩涡并蓄力 · 拖动旋转 · 滚轮缩放 · Esc 退回</span>
+</div>
+<button id="help" aria-label="显示手势说明" hidden>?</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script type="module">
+const THREE=window.THREE;
+const NLEV=4, K=14, MAXZ=NLEV-1;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- renderer ---------- */
+const glc=document.getElementById('gl'), ov=document.getElementById('ov'), octx=ov.getContext('2d');
+const renderer=new THREE.WebGLRenderer({canvas:glc,antialias:false,powerPreference:'high-performance'});
+renderer.setClearColor(0x05060a,1);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,1,0.05,4000); camera.position.set(0,0,28);
+const world=new THREE.Group(); scene.add(world);
+let W=1,H=1,DPR=1;
+const U={uTime:{value:0},uAspect:{value:1},uPR:{value:1},
+  uHand:{value:new THREE.Vector3()}, uVort:{value:new THREE.Vector4()}, uBeam:{value:new THREE.Vector4()},
+  uBeamS:{value:0}, uBurst:{value:new THREE.Vector4()}};
+function resize(){
+  W=innerWidth; H=innerHeight; DPR=Math.min(2,devicePixelRatio||1);
+  renderer.setPixelRatio(DPR); renderer.setSize(W,H,false);
+  ov.width=W*DPR; ov.height=H*DPR; octx.setTransform(DPR,0,0,DPR,0,0);
+  camera.aspect=W/H; camera.updateProjectionMatrix(); U.uAspect.value=W/H; U.uPR.value=DPR;
+}
+addEventListener('resize',resize); resize();
+
+const VS=`
+attribute vec3 aColor; attribute float aSize; attribute float aSeed;
+uniform float uScale,uOpacity,uTime,uSpin,uDiff,uJit,uAspect,uPR,uBeamS;
+uniform vec3 uHand; uniform vec4 uVort; uniform vec4 uBeam; uniform vec4 uBurst;
+varying vec3 vColor; varying float vA;
+void main(){
+  vec3 p=position;
+  float rr=length(p.xz);
+  float a=uTime*uSpin*mix(1.0,1.0/(0.3+0.12*rr),uDiff);
+  float c=cos(a), s=sin(a);
+  p.xz=vec2(c*p.x-s*p.z, s*p.x+c*p.z);
+  p+=uJit*vec3(sin(uTime*2.3+aSeed*17.0),sin(uTime*1.7+aSeed*31.0),sin(uTime*2.9+aSeed*7.0));
+  p*=uScale;
+  vec4 mv=modelViewMatrix*vec4(p,1.0);
+  vec4 clip=projectionMatrix*mv;
+  float depth=-mv.z, glow=0.0;
+  if(clip.w>0.0){
+    vec2 q=clip.xy/clip.w; q.x*=uAspect;
+    // push (open palm)
+    vec2 h=vec2(uHand.x*uAspect,uHand.y); vec2 d=q-h; float l=length(d)+1e-4;
+    float pf=uHand.z*smoothstep(0.36,0.0,l); q+=d/l*pf*0.18; glow+=pf*0.25;
+    // vortex (pinch)
+    if(uVort.z>0.001){ vec2 cc=vec2(uVort.x*uAspect,uVort.y); vec2 r=q-cc; float f=smoothstep(0.75,0.0,length(r));
+      float ang=f*uVort.z*(2.2+uVort.w*(0.6+aSeed*0.8)); float cs=cos(ang), sn=sin(ang);
+      r=vec2(cs*r.x-sn*r.y, sn*r.x+cs*r.y); r*=1.0-0.6*uVort.z*f; q=cc+r; glow+=f*uVort.z*0.7; }
+    // beam (two open hands)
+    if(uBeamS>0.001){ vec2 A=vec2(uBeam.x*uAspect,uBeam.y), B=vec2(uBeam.z*uAspect,uBeam.w), ab=B-A;
+      float L2=max(dot(ab,ab),1e-4); float u=clamp(dot(q-A,ab)/L2,0.0,1.0); vec2 off=A+ab*u-q;
+      float f=smoothstep(0.32,0.0,length(off))*uBeamS; vec2 nrm=normalize(vec2(-ab.y,ab.x)+1e-5);
+      q+=off*f*0.8+nrm*sin(u*18.0-uTime*6.0+aSeed)*0.04*f; glow+=f*1.1; }
+    // burst (fist released)
+    if(uBurst.w>0.001){ vec2 cc=vec2(uBurst.x*uAspect,uBurst.y); vec2 r=q-cc; float rl=length(r)+1e-4; float age=uBurst.z;
+      float env=(1.0-exp(-age*14.0))*exp(-age*1.5); float disp=uBurst.w*env*smoothstep(1.6,0.0,rl)*(0.5+aSeed*0.7);
+      q+=r/rl*disp; glow+=disp*2.2; }
+    q.x/=uAspect; clip.xy=q*clip.w;
+  }
+  gl_Position=clip;
+  gl_PointSize=clamp(aSize*uPR*40.0/max(depth,0.01),0.0,90.0)*(1.0+min(glow,1.5)*0.35);
+  float tw=0.78+0.22*sin(uTime*(1.5+aSeed*3.0)+aSeed*40.0);
+  float g=clamp(glow,0.0,1.0);
+  vColor=mix(aColor*tw, vec3(1.0,0.78,0.6), g*0.55)*(1.0+g*0.9);
+  vA=uOpacity*smoothstep(0.4,4.0,depth);
+}`;
+const FS=`
+varying vec3 vColor; varying float vA;
+void main(){ vec2 q=gl_PointCoord-0.5; float d=dot(q,q)*4.0; if(d>1.0) discard;
+  float a=exp(-d*3.2); gl_FragColor=vec4(vColor*a*vA,1.0); }`;
+
+function makeMat(o){
+  return new THREE.ShaderMaterial({vertexShader:VS,fragmentShader:FS,transparent:true,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending,
+    uniforms:Object.assign({uScale:{value:1},uOpacity:{value:0},uSpin:{value:o.spin||0},uDiff:{value:o.diff||0},uJit:{value:o.jit||0}},U)});
+}
+function makeGeo(build){
+  const P=[],C=[],S=[],R=[];
+  build((x,y,z,r,g,b,s)=>{P.push(x,y,z);C.push(r,g,b);S.push(s);R.push(Math.random());});
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(P,3));
+  geo.setAttribute('aColor',new THREE.Float32BufferAttribute(C,3));
+  geo.setAttribute('aSize',new THREE.Float32BufferAttribute(S,1));
+  geo.setAttribute('aSeed',new THREE.Float32BufferAttribute(R,1));
+  return geo;
+}
+const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v);};
+const rndDir=()=>{const z=Math.random()*2-1,t=Math.random()*6.2832,r=Math.sqrt(1-z*z);return [r*Math.cos(t),z,r*Math.sin(t)];};
+const Q=reduced?0.5:1;
+
+/* ---------- layers ---------- */
+const layers=[];
+function addLayer(build,o){
+  const g=new THREE.Group(); const mat=makeMat(o);
+  const pts=new THREE.Points(makeGeo(build),mat); pts.frustumCulled=false; g.add(pts);
+  if(o.tilt) g.rotation.x=o.tilt;
+  world.add(g); const L={g,mats:[mat],gain:o.gain||1,rot:o.rot||0}; layers.push(L); return L;
+}
+// 0 cosmic web
+addLayer(add=>{
+  const nodes=[[0,0,0]];
+  for(let i=0;i<34;i++){const d=rndDir(),r=13*Math.cbrt(Math.random());nodes.push([d[0]*r,d[1]*r,d[2]*r]);}
+  const seen=new Set();
+  nodes.forEach((a,i)=>{
+    const near=nodes.map((b,j)=>[j,(a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2]).filter(e=>e[0]!==i).sort((x,y)=>x[1]-y[1]).slice(0,3);
+    for(const [j] of near){ const key=i<j?i+'-'+j:j+'-'+i; if(seen.has(key))continue; seen.add(key);
+      const b=nodes[j], len=Math.sqrt((a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2), n=Math.round(len*55*Q);
+      for(let k=0;k<n;k++){ const t=Math.random(), w=0.22+0.25*Math.sin(t*Math.PI);
+        add(a[0]+(b[0]-a[0])*t+gauss()*w, a[1]+(b[1]-a[1])*t+gauss()*w, a[2]+(b[2]-a[2])*t+gauss()*w, .32,.38,.95, .8+Math.random()*1.2); } }
+  });
+  nodes.forEach((a,i)=>{ const n=Math.round((i?380:1400)*Q), s=i?.55:.38;
+    for(let k=0;k<n;k++) add(a[0]+gauss()*s,a[1]+gauss()*s,a[2]+gauss()*s, 1,.72+Math.random()*.2,.5, i?1+Math.random()*1.5:1.2+Math.random()*2); });
+  for(let k=0;k<3000*Q;k++){const d=rndDir(),r=18*Math.cbrt(Math.random());add(d[0]*r,d[1]*r,d[2]*r,.25,.28,.45,.7);}
+},{gain:.6,rot:.02});
+// 1 spiral galaxy
+addLayer(add=>{
+  const arms=3, N=46000*Q;
+  for(let i=0;i<N;i++){
+    if(Math.random()<.16){ const d=rndDir(), r=Math.abs(gauss())*1.3; add(d[0]*r,d[1]*r*.55,d[2]*r, 1,.82,.58, 1+Math.random()*1.4); continue; }
+    const r=Math.min(11.5,-Math.log(1-Math.random()*.985)*2.7)+.3, arm=i%arms;
+    const ang=arm*6.2832/arms + r*.62 + gauss()*(.18+.5/(r+1));
+    const x=Math.cos(ang)*r+gauss()*.25, z=Math.sin(ang)*r+gauss()*.25, y=gauss()*.22*Math.exp(-r/7);
+    const t=Math.min(1,r/8);
+    if(Math.random()<.03) add(x,y,z, 1,.38,.68, 2.5+Math.random()*2);
+    else add(x,y,z, 1-(1-.55)*t, .85-(.85-.72)*t, .58+(1-.58)*t, .7+Math.random()*1.3);
+  }
+},{gain:.5,spin:.06,diff:1,tilt:.95});
+// 2 star cluster interior
+addLayer(add=>{
+  const pal=[[.6,.72,1],[.85,.9,1],[1,.96,.86],[1,.8,.55],[1,.58,.4]];
+  for(let i=0;i<9000*Q;i++){ const d=rndDir(), r=14*Math.pow(Math.random(),.75), c=pal[(Math.random()*pal.length)|0];
+    const big=Math.random()<.02; add(d[0]*r,d[1]*r,d[2]*r, c[0],c[1],c[2], big?5+Math.random()*4:.8+Math.random()*2); }
+  const blobs=[[-6,2,-3,.85,.28,.5],[5,-3,2,.2,.7,.8],[2,5,-6,.85,.3,.45],[-4,-5,4,.25,.6,.85],[7,3,5,.8,.35,.6]];
+  for(const b of blobs) for(let k=0;k<3200*Q;k++) add(b[0]+gauss()*2.8,b[1]+gauss()*2.2,b[2]+gauss()*2.8, b[3]*.28,b[4]*.28,b[5]*.28, 4+Math.random()*5);
+  add(0,0,0, 1,.95,.85, 34);
+  for(let k=0;k<500*Q;k++){const d=rndDir(),r=Math.abs(gauss())*.35;add(d[0]*r,d[1]*r,d[2]*r,1,.85,.6,1.5);}
+},{gain:.95,rot:.015});
+// 3 atom: nucleus + orbital clouds
+const atom=addLayer(add=>{
+  for(let k=0;k<500*Q;k++){const d=rndDir(),r=Math.abs(gauss())*.32, p=Math.random()<.5; add(d[0]*r,d[1]*r,d[2]*r, p?1:.45, p?.42:.62, p?.36:1, 1.4+Math.random());}
+  for(let k=0;k<11000*Q;k++){const d=rndDir(),r=-Math.log(Math.random())*1.3+.2; add(d[0]*r,d[1]*r,d[2]*r, .3,.85,.75, .9+Math.random());}
+  const cols=[[.62,.5,1],[1,.5,.78],[.45,.78,1]];
+  for(let ax=0;ax<3;ax++) for(let k=0;k<6500*Q;k++){
+    const sgn=Math.random()<.5?-1:1, t=Math.max(.6,4.2+gauss()*1.6), sp=.55+t*.32;
+    const v=[gauss()*sp,gauss()*sp,gauss()*sp]; v[ax]=sgn*t; const c=cols[ax];
+    add(v[0],v[1],v[2], c[0]*.8,c[1]*.8,c[2]*.8, .8+Math.random()*1.1); }
+},{gain:.55,jit:.12,rot:.05});
+const EL=[{R:5.5,w:2.2,u:[1,0,0],v:[0,.8,.6]},{R:7.5,w:-1.6,u:[0,1,0],v:[.7,0,.7]},{R:9.5,w:1.2,u:[.6,.6,-.5],v:[-.7,.7,0]}];
+const TRAIL=140;
+const egeo=makeGeo(add=>{ for(const e of EL) for(let j=0;j<TRAIL;j++){ const f=1-j/TRAIL; add(0,0,0, .7*f+.3,.95*f,1*f, j===0?5:3.2*f+.4); } });
+const epts=new THREE.Points(egeo,atom.mats[0]); epts.frustumCulled=false; atom.g.add(epts);
+function updateElectrons(t){
+  const a=egeo.attributes.position.array; let o=0;
+  for(const e of EL){ for(let j=0;j<TRAIL;j++){ const th=t*e.w-j*.022*Math.sign(e.w), c=Math.cos(th)*e.R, s=Math.sin(th)*e.R;
+    a[o++]=e.u[0]*c+e.v[0]*s; a[o++]=e.u[1]*c+e.v[1]*s; a[o++]=e.u[2]*c+e.v[2]*s; } }
+  egeo.attributes.position.needsUpdate=true;
+}
+
+/* ---------- view state ---------- */
+const view={z:0,zt:0,yaw:0,pitch:.15,vyaw:0,vpitch:0};
+const sm=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
+const clampZ=z=>Math.max(0,Math.min(MAXZ,z));
+function enterLevel(){ view.zt=Math.min(MAXZ,Math.floor(view.zt+.25)+1); }
+function exitLevel(){ view.zt=Math.max(0,Math.ceil(view.zt-.25)-1); }
+
+/* ---------- effects state ---------- */
+const fx={vort:{x:0,y:0,s:0,phase:0,tx:0,ty:0,on:false}, beam:{s:0,on:false,ax:0,ay:0,bx:0,by:0}, burst:{x:0,y:0,t0:-99,s:0}, rings:[]};
+const toNdc=(x,y)=>[x/W*2-1, -(y/H*2-1)];
+function burst(x,y,c){
+  const [nx,ny]=toNdc(x,y); fx.burst={x:nx,y:ny,t0:performance.now()*.001,s:.25+.75*c};
+  fx.rings.push({x,y,r:10,max:(Math.max(W,H)*.4)*(.5+c),a:1});
+  if(c>=1){ fx.rings.push({x,y,r:4,max:Math.max(W,H),a:1,big:true}); setTimeout(enterLevel,180); }
+}
+
+/* ---------- HUD (textless scale dots) ---------- */
+const ruler=document.getElementById('ruler'), marker=document.getElementById('marker');
+for(let i=0;i<NLEV;i++){ const b=document.createElement('button'); b.className='stop'; b.style.top=(i/MAXZ*100)+'%';
+  b.setAttribute('aria-label','第 '+(i+1)+' 层'); b.addEventListener('click',()=>{view.zt=i;}); ruler.appendChild(b); }
+document.getElementById('down').addEventListener('click',enterLevel);
+document.getElementById('up').addEventListener('click',exitLevel);
+addEventListener('keydown',e=>{ if(e.target.tagName==='BUTTON'&&(e.key==='Enter'||e.key===' '))return;
+  if(e.key==='Escape'||e.key==='ArrowUp'){exitLevel();e.preventDefault();}
+  else if(e.key==='Enter'||e.key==='ArrowDown'){enterLevel();e.preventDefault();}
+  else if(e.key==='+'||e.key==='='){view.zt=clampZ(view.zt+.15);} else if(e.key==='-'){view.zt=clampZ(view.zt-.15);} });
+const legend=document.getElementById('legend'), help=document.getElementById('help');
+document.getElementById('legendClose').addEventListener('click',()=>{legend.hidden=true;help.hidden=false;help.focus();});
+help.addEventListener('click',()=>{legend.hidden=false;help.hidden=true;});
+
+/* ---------- pointer fallback ---------- */
+const ptr={x:0,y:0,in:false,down:false,drag:false,sx:0,sy:0,lx:0,ly:0,t0:0};
+const ptrCharge=now=>Math.min(1,Math.max(0,((now-ptr.t0)/1000-.5)/1.5));
+glc.addEventListener('pointermove',e=>{ ptr.in=true; ptr.x=e.clientX; ptr.y=e.clientY;
+  if(ptr.down&&!ptr.drag&&Math.hypot(ptr.x-ptr.sx,ptr.y-ptr.sy)>8){ ptr.drag=true; glc.classList.add('drag'); }
+  if(ptr.drag){ const dx=ptr.x-ptr.lx, dy=ptr.y-ptr.ly; view.vyaw=dx/W*4; view.vpitch=dy/H*3; view.yaw+=view.vyaw; view.pitch=Math.max(-1.3,Math.min(1.3,view.pitch+view.vpitch)); }
+  ptr.lx=ptr.x; ptr.ly=ptr.y; });
+glc.addEventListener('pointerdown',e=>{ ptr.down=true; ptr.drag=false; ptr.in=true; ptr.x=ptr.sx=ptr.lx=e.clientX; ptr.y=ptr.sy=ptr.ly=e.clientY; ptr.t0=performance.now(); glc.setPointerCapture(e.pointerId); });
+const pend=()=>{ if(!ptr.down) return; if(!ptr.drag){ const c=ptrCharge(performance.now()); if(c>.08) burst(ptr.x,ptr.y,c); }
+  ptr.down=false; ptr.drag=false; glc.classList.remove('drag'); };
+glc.addEventListener('pointerup',pend); glc.addEventListener('pointercancel',pend);
+glc.addEventListener('pointerleave',()=>{ if(!ptr.down) ptr.in=false; });
+glc.addEventListener('wheel',e=>{ e.preventDefault(); view.zt=clampZ(view.zt-e.deltaY*.0016); },{passive:false});
+let tDist=0;
+glc.addEventListener('touchstart',e=>{ if(e.touches.length===2){ const [a,b]=e.touches; tDist=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY); ptr.down=false; } },{passive:true});
+glc.addEventListener('touchmove',e=>{ if(e.touches.length===2){ const [a,b]=e.touches, d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY); view.zt=clampZ(view.zt+(d-tDist)/Math.min(W,H)*2.2); tDist=d; } },{passive:true});
+
+/* ---------- hand tracking ---------- */
+const video=document.getElementById('cam'), stxt=document.getElementById('stxt'), statusEl=document.getElementById('status');
+const intro=document.getElementById('intro'), msg=document.getElementById('msg');
+let landmarker=null, lastVT=-1;
+const hands=new Map();
+const CONN=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+function detect(){
+  if(!landmarker||video.readyState<2||video.currentTime===lastVT) return;
+  lastVT=video.currentTime;
+  const res=landmarker.detectForVideo(video,performance.now());
+  const vw=video.videoWidth, vh=video.videoHeight, s=Math.max(W/vw,H/vh), ox=(W-vw*s)/2, oy=(H-vh*s)/2;
+  const hd=res.handedness||res.handednesses||[]; const seen=new Set();
+  (res.landmarks||[]).forEach((lm,i)=>{
+    let key=(hd[i]&&hd[i][0]&&hd[i][0].categoryName)||('h'+i); if(seen.has(key)) key=key+'2';
+    const P=lm.map(p=>({x:(1-p.x)*vw*s+ox, y:p.y*vh*s+oy}));
+    const size=dist(P[0],P[9])||1;
+    const cx=(P[0].x+P[5].x+P[9].x+P[13].x+P[17].x)/5, cy=(P[0].y+P[5].y+P[9].y+P[13].y+P[17].y)/5;
+    const pinch=dist(P[4],P[8])/size;
+    const tips=(dist(P[8],P[0])+dist(P[12],P[0])+dist(P[16],P[0])+dist(P[20],P[0]))/4/size;
+    const qx=(P[4].x+P[8].x)/2, qy=(P[4].y+P[8].y)/2;
+    let h=hands.get(key);
+    if(!h){ h={x:cx,y:cy,qx,qy,charge:0,gesture:'open',miss:0,lock:false}; hands.set(key,h); }
+    let g=h.gesture;
+    if(tips<(g==='fist'?1.25:1.05)) g='fist'; else if(pinch<(g==='pinch'?.42:.3)) g='pinch'; else g='open';
+    h.x+=(cx-h.x)*.55; h.y+=(cy-h.y)*.55; h.qx+=(qx-h.qx)*.6; h.qy+=(qy-h.qy)*.6;
+    if(h.gesture==='fist'&&g!=='fist'){ if(!h.lock&&h.charge>.12) burst(h.x,h.y,h.charge); h.charge=0; h.lock=false; }
+    h.gesture=g; h.P=P; h.size=size; h.miss=0; seen.add(key);
+  });
+  for(const [k,h] of hands){ if(!seen.has(k)){ h.miss++; if(h.miss>8) hands.delete(k); } }
+}
+async function startCamera(){
+  const btn=document.getElementById('start'); btn.disabled=true; btn.textContent='正在打开…'; msg.hidden=true;
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia) throw new Error('这个环境不支持摄像头');
+    const stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},facingMode:'user'},audio:false});
+    video.srcObject=stream; await video.play();
+    btn.textContent='加载手势模型…'; stxt.textContent='加载模型';
+    const V='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+    const vision=await import(V+'/vision_bundle.mjs');
+    const fs=await vision.FilesetResolver.forVisionTasks(V+'/wasm');
+    const opts=d=>({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:d},runningMode:'VIDEO',numHands:2,minHandDetectionConfidence:.5,minTrackingConfidence:.5});
+    try{ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('GPU')); }
+    catch(_){ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('CPU')); }
+    statusEl.classList.add('live'); stxt.textContent='摄像头 · 抬起手'; intro.hidden=true; video.hidden=false;
+  }catch(err){
+    btn.disabled=false; btn.textContent='再试一次'; msg.hidden=false;
+    msg.textContent='摄像头没能打开（'+(err&&err.name==='NotAllowedError'?'权限被拒绝或被页面拦截':(err&&err.message||'未知原因'))+'）。在 Claude 的网页里摄像头会被拦截：下载这个 HTML，用 Chrome 直接打开就能用手势。现在可以先用鼠标或触屏玩。';
+  }
+}
+document.getElementById('start').addEventListener('click',startCamera);
+document.getElementById('mouse').addEventListener('click',()=>{intro.hidden=true;});
+
+/* ---------- warp streaks (shown while travelling between scales) ---------- */
+const STREAKS=Array.from({length:180},()=>({a:Math.random()*6.2832,r:Math.random(),w:.4+Math.random()*.6}));
+
+/* ---------- main loop ---------- */
+let last=performance.now(), prevPair=0, prevAng=null, exitCharge=0, exitLock=false, fcount=0;
+const handTarget=new THREE.Vector3();
+function frame(now){
+  requestAnimationFrame(frame);
+  const dt=Math.min(.05,(now-last)/1000); last=now; const t=now*.001;
+  U.uTime.value=t;
+  detect();
+
+  const live=[...hands.values()].filter(h=>h.miss<3);
+  const fists=live.filter(h=>h.gesture==='fist'), opens=live.filter(h=>h.gesture==='open'), pinches=live.filter(h=>h.gesture==='pinch');
+  handTarget.set(0,0,0); fx.vort.on=false; fx.beam.on=false;
+  let guiding=false;
+
+  // two fists → exit
+  if(fists.length===2){ for(const h of fists){ h.charge=0; h.lock=true; }
+    if(!exitLock){ exitCharge=Math.min(1,exitCharge+dt*1.3); if(exitCharge>=1){ exitLevel(); exitLock=true; } } }
+  else { exitCharge=0; if(fists.length===0) exitLock=false; }
+  if(fists.length===1&&!fists[0].lock) fists[0].charge=Math.min(1,fists[0].charge+dt*.8);
+
+  // two open hands → beam + zoom by spread + rotate by line angle
+  if(opens.length===2){
+    const [A,B]=opens[0].x<opens[1].x?opens:[opens[1],opens[0]];
+    const d=Math.hypot(A.x-B.x,A.y-B.y), ang=Math.atan2(B.y-A.y,B.x-A.x);
+    if(prevPair) view.zt=clampZ(view.zt+(d-prevPair)/Math.min(W,H)*2.4);
+    if(prevAng!==null){ let da=ang-prevAng; if(da>Math.PI)da-=6.2832; if(da<-Math.PI)da+=6.2832; view.vyaw=da*1.6; view.yaw+=view.vyaw; }
+    prevPair=d; prevAng=ang;
+    const [ax,ay]=toNdc(A.x,A.y), [bx,by]=toNdc(B.x,B.y); Object.assign(fx.beam,{ax,ay,bx,by,on:true}); guiding=true;
+  } else { prevPair=0; prevAng=null; }
+  if(opens.length===1){ const h=opens[0]; const [nx,ny]=toNdc(h.x,h.y); handTarget.set(nx,ny,1); guiding=true; }
+  if(pinches.length){ const h=pinches[0]; const [nx,ny]=toNdc(h.qx,h.qy); fx.vort.tx=nx; fx.vort.ty=ny; fx.vort.on=true; guiding=true; }
+
+  // mouse fallback
+  if(!live.length&&ptr.in){
+    if(ptr.down&&!ptr.drag){ const [nx,ny]=toNdc(ptr.x,ptr.y); fx.vort.tx=nx; fx.vort.ty=ny; fx.vort.on=true; }
+    else if(!ptr.drag){ const [nx,ny]=toNdc(ptr.x,ptr.y); handTarget.set(nx,ny,.6); }
+  }
+
+  // smooth effect uniforms
+  U.uHand.value.lerp(handTarget,.2);
+  const v=fx.vort;
+  if(v.on&&v.s<.02){ v.x=v.tx; v.y=v.ty; }
+  v.x+=(v.tx-v.x)*.3; v.y+=(v.ty-v.y)*.3;
+  v.s+=((v.on?1:0)-v.s)*Math.min(1,dt*(v.on?2.5:3.5));
+  v.phase = v.s>.01 ? v.phase+dt*2.2 : 0;
+  U.uVort.value.set(v.x,v.y,v.s,v.phase);
+  const b=fx.beam; b.s+=((b.on?1:0)-b.s)*Math.min(1,dt*4);
+  if(b.on) U.uBeam.value.set(b.ax,b.ay,b.bx,b.by);
+  U.uBeamS.value=b.s;
+  const age=t-fx.burst.t0; U.uBurst.value.set(fx.burst.x,fx.burst.y,age,age<5?fx.burst.s:0);
+
+  // camera motion
+  if(!ptr.drag){ view.yaw+=view.vyaw; view.pitch=Math.max(-1.3,Math.min(1.3,view.pitch+view.vpitch)); view.vyaw*=.94; view.vpitch*=.9; }
+  if(!guiding&&!ptr.drag) view.yaw+=dt*.025;
+  world.rotation.set(view.pitch,view.yaw,0,'XYZ');
+  const zPrev=view.z; view.z+=(view.zt-view.z)*Math.min(1,dt*2.4); const zVel=(view.z-zPrev)/Math.max(dt,1e-3);
+
+  layers.forEach((L,i)=>{ const d=view.z-i;
+    const op=d<0?sm(-1,-.3,d):1-sm(.35,1,d);
+    L.g.visible=op>.002; if(!L.g.visible) return;
+    L.g.rotation.y+=dt*L.rot;
+    for(const m of L.mats){ m.uniforms.uScale.value=Math.pow(K,d); m.uniforms.uOpacity.value=op*L.gain; }
+  });
+  if(layers[3].g.visible) updateElectrons(t);
+  renderer.render(scene,camera);
+
+  // overlay
+  octx.clearRect(0,0,W,H);
+  const warp=Math.min(1,Math.abs(zVel)*.9);
+  if(warp>.03&&!reduced){
+    const cx=W/2, cy=H/2, R=Math.hypot(W,H)*.55, dir=Math.sign(zVel);
+    octx.globalCompositeOperation='lighter'; octx.lineCap='round';
+    for(const s of STREAKS){ s.r+=dir*dt*warp*(s.r+.08)*2.6*s.w; if(s.r>1){s.r=.02;s.a=Math.random()*6.2832;} if(s.r<.02){s.r=1;s.a=Math.random()*6.2832;}
+      const r0=s.r*R, r1=r0+(18+s.r*120)*warp, ca=Math.cos(s.a), sa=Math.sin(s.a);
+      octx.strokeStyle=`rgba(190,235,255,${(.15+.55*s.r)*warp})`; octx.lineWidth=.6+s.r*1.4;
+      octx.beginPath(); octx.moveTo(cx+ca*r0,cy+sa*r0); octx.lineTo(cx+ca*r1,cy+sa*r1); octx.stroke(); }
+    octx.globalCompositeOperation='source-over';
+  }
+  for(let r=fx.rings.length-1;r>=0;r--){ const g=fx.rings[r]; g.r+=(g.max-g.r)*.08+4; g.a*=g.big?.95:.93;
+    octx.strokeStyle=g.big?`rgba(255,240,225,${g.a})`:`rgba(255,138,92,${g.a})`; octx.lineWidth=g.big?4:2;
+    octx.beginPath(); octx.arc(g.x,g.y,g.r,0,6.283); octx.stroke(); if(g.a<.03) fx.rings.splice(r,1); }
+  if(b.s>.05&&b.on){ const A=opens[0],B=opens[1];
+    const grd=octx.createLinearGradient(A.x,A.y,B.x,B.y); grd.addColorStop(0,`rgba(124,242,214,${.35*b.s})`); grd.addColorStop(.5,`rgba(255,220,200,${.5*b.s})`); grd.addColorStop(1,`rgba(124,242,214,${.35*b.s})`);
+    octx.strokeStyle=grd; octx.lineWidth=2; octx.beginPath();
+    const n=40; for(let i=0;i<=n;i++){ const u=i/n, x=A.x+(B.x-A.x)*u, y=A.y+(B.y-A.y)*u, L=Math.hypot(B.x-A.x,B.y-A.y)||1, w=Math.sin(u*18-t*6)*6*Math.sin(u*Math.PI);
+      const px=x-(B.y-A.y)/L*w, py=y+(B.x-A.x)/L*w; i?octx.lineTo(px,py):octx.moveTo(px,py); } octx.stroke(); }
+  for(const h of live){ if(!h.P) continue;
+    octx.strokeStyle='rgba(232,236,245,.28)'; octx.lineWidth=1.5; octx.beginPath();
+    for(const [a,c] of CONN){ octx.moveTo(h.P[a].x,h.P[a].y); octx.lineTo(h.P[c].x,h.P[c].y); } octx.stroke();
+    octx.fillStyle=h.gesture==='fist'?'rgba(255,138,92,.9)':'rgba(124,242,214,.9)';
+    for(const k of [4,8,12,16,20]){ octx.beginPath(); octx.arc(h.P[k].x,h.P[k].y,3,0,6.283); octx.fill(); }
+    if(h.gesture==='fist'&&fists.length===1&&!h.lock) chargeRing(h.x,h.y,h.size*1.3,h.charge,t);
+  }
+  if(fists.length===2&&exitCharge>0){ const mx=(fists[0].x+fists[1].x)/2, my=(fists[0].y+fists[1].y)/2;
+    octx.strokeStyle='rgba(160,180,255,.9)'; octx.lineWidth=3; octx.beginPath(); octx.arc(mx,my,46*(1-exitCharge*.5),0,6.283); octx.stroke(); }
+  if(!live.length&&ptr.down&&!ptr.drag) chargeRing(ptr.x,ptr.y,34,ptrCharge(now),t);
+
+  marker.style.top=(view.z/MAXZ*100)+'%';
+  if(landmarker&&(++fcount%15===0)) stxt.textContent= live.length?('摄像头 · '+live.length+' 只手'):'摄像头 · 抬起手';
+}
+function chargeRing(x,y,r,c,t){
+  if(c<=0) return;
+  const full=c>=1, pulse=full?1+Math.sin(t*14)*.08:1;
+  octx.strokeStyle=full?'rgba(255,240,225,.95)':'rgba(255,138,92,.9)'; octx.lineWidth=full?4:3;
+  octx.beginPath(); octx.arc(x,y,r*pulse,-Math.PI/2,-Math.PI/2+c*6.283); octx.stroke();
+}
+requestAnimationFrame(frame);
+</script>
+
+</body></html>

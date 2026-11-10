@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body>
+<title>手势星云</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: full-bleed particle canvas; a floating intro card bottom-left, gesture legend bottom-right, camera preview top-right. Single deliberate dark look. */
+:root{
+  --bg:#05060a; --fg:#e8ecf5; --dim:#8a93a8; --accent:#7cf2d6; --warm:#ff8a5c;
+  --panel:rgba(12,15,24,.74); --line:rgba(232,236,245,.12);
+  --display:'Unbounded','PingFang SC','Noto Sans SC',system-ui,sans-serif;
+  --mono:'JetBrains Mono','PingFang SC','Noto Sans SC',ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--mono);overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#intro{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:min(380px,calc(100% - 32px));padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;z-index:5}
+#intro h1{margin:0;font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.02em;line-height:1.1;text-wrap:balance}
+#intro h1 span{color:var(--accent)}
+#intro p{margin:0;color:var(--dim);font-size:13px;line-height:1.7}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;border-radius:999px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--fg)}
+button.primary{background:var(--accent);color:#04120e;border-color:var(--accent);font-weight:600}
+button:hover{filter:brightness(1.1)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#msg{font-size:12px;line-height:1.6;color:var(--warm)}
+#legend{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12px;z-index:4;max-width:calc(100% - 32px)}
+#legend b{font-weight:600;color:var(--accent);letter-spacing:.06em}
+#legend .w{color:var(--warm)}
+#legend span{color:var(--dim)}
+#status{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:calc(16px + env(safe-area-inset-top,0px));
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);z-index:4;display:flex;align-items:center;gap:8px}
+#status i{width:7px;height:7px;border-radius:50%;background:var(--dim);display:inline-block}
+#status.live i{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+#cam{position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:calc(16px + env(safe-area-inset-top,0px));
+  width:150px;aspect-ratio:4/3;max-width:40%;object-fit:cover;transform:scaleX(-1);border-radius:10px;border:1px solid var(--line);opacity:.55;z-index:4}
+@media (max-width:640px){ #legend{display:none} #intro h1{font-size:24px} }
+</style>
+
+<canvas id="c" aria-label="粒子星云画布"></canvas>
+<div id="status"><i></i><em id="stxt" style="font-style:normal">鼠标模式</em></div>
+<video id="cam" playsinline muted hidden></video>
+
+<section id="intro" class="panel">
+  <h1>手势<span>星云</span></h1>
+  <p>对着摄像头抬起手，用手势拨动上千颗粒子。画面只在你的浏览器里处理，不会上传到任何地方。</p>
+  <div class="btns">
+    <button id="start" class="primary">打开摄像头</button>
+    <button id="mouse">先用鼠标玩</button>
+  </div>
+  <div id="msg" hidden></div>
+</section>
+
+<div id="legend" class="panel">
+  <b>张开手掌</b><span>把粒子推开</span>
+  <b>捏合手指</b><span>吸成漩涡</span>
+  <b class="w">握拳蓄力</b><span>再张开 → 爆发</span>
+  <b>双手张开</b><span>拉出一道光束</span>
+  <b style="color:var(--dim)">鼠标</b><span>移动推开 · 按住吸入 · 按久松开爆发</span>
+</div>
+
+<script type="module">
+const cv=document.getElementById('c'), ctx=cv.getContext('2d');
+const video=document.getElementById('cam'), stxt=document.getElementById('stxt'), statusEl=document.getElementById('status');
+const intro=document.getElementById('intro'), msg=document.getElementById('msg');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let W=0,H=0,DPR=1,N=0,px,py,vx,vy,bk,bcount=[0,0,0,0];
+function resize(){
+  DPR=Math.min(2,devicePixelRatio||1); W=innerWidth; H=innerHeight;
+  cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  let n=Math.round(Math.min(9000,Math.max(2500,W*H/110))); if(reduced) n=n>>1;
+  if(n!==N){ N=n; px=new Float32Array(N); py=new Float32Array(N); vx=new Float32Array(N); vy=new Float32Array(N);
+    bk=[new Uint32Array(N),new Uint32Array(N),new Uint32Array(N),new Uint32Array(N)];
+    for(let i=0;i<N;i++){ px[i]=Math.random()*W; py[i]=Math.random()*H; } }
+  ctx.fillStyle='#05060a'; ctx.fillRect(0,0,W,H);
+}
+addEventListener('resize',resize); resize();
+
+/* ---------- pointer fallback ---------- */
+const pointer={x:W/2,y:H/2,active:false,down:false,downT:0};
+cv.addEventListener('pointermove',e=>{pointer.x=e.clientX;pointer.y=e.clientY;pointer.active=true;});
+cv.addEventListener('pointerdown',e=>{pointer.x=e.clientX;pointer.y=e.clientY;pointer.active=true;pointer.down=true;pointer.downT=performance.now();cv.setPointerCapture(e.pointerId);});
+const up=()=>{ if(!pointer.down) return; pointer.down=false;
+  const held=(performance.now()-pointer.downT)/1000; const c=Math.min(1,(held-0.8)/1.5); if(c>0) burst(pointer.x,pointer.y,c); };
+cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
+cv.addEventListener('pointerleave',()=>{ if(!pointer.down) pointer.active=false; });
+
+/* ---------- effects ---------- */
+const rings=[];
+function burst(x,y,c){
+  const R=320+520*c, P=8+28*c;
+  for(let i=0;i<N;i++){ const dx=px[i]-x, dy=py[i]-y, d=Math.sqrt(dx*dx+dy*dy)+.001;
+    if(d<R){ const f=P*(1-d/R); vx[i]+=dx/d*f; vy[i]+=dy/d*f; } }
+  rings.push({x,y,r:8,max:R*1.2,a:1});
+}
+
+/* ---------- hand tracking ---------- */
+let landmarker=null, lastVT=-1;
+const hands=new Map();
+const CONN=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+
+function detect(){
+  if(!landmarker||video.readyState<2||video.currentTime===lastVT) return;
+  lastVT=video.currentTime;
+  const res=landmarker.detectForVideo(video,performance.now());
+  const vw=video.videoWidth, vh=video.videoHeight, s=Math.max(W/vw,H/vh), ox=(W-vw*s)/2, oy=(H-vh*s)/2;
+  const hd=res.handedness||res.handednesses||[]; const seen=new Set();
+  (res.landmarks||[]).forEach((lm,i)=>{
+    const key=(hd[i]&&hd[i][0]&&hd[i][0].categoryName)||('h'+i);
+    const P=lm.map(p=>({x:(1-p.x)*vw*s+ox, y:p.y*vh*s+oy}));
+    const size=dist(P[0],P[9])||1;
+    const cx=(P[0].x+P[5].x+P[9].x+P[13].x+P[17].x)/5, cy=(P[0].y+P[5].y+P[9].y+P[13].y+P[17].y)/5;
+    const pinch=dist(P[4],P[8])/size;
+    const tips=(dist(P[8],P[0])+dist(P[12],P[0])+dist(P[16],P[0])+dist(P[20],P[0]))/4/size;
+    const g = tips<1.1 ? 'fist' : (pinch<0.32 ? 'pinch' : 'open');
+    let h=hands.get(key);
+    if(!h){ h={x:cx,y:cy,qx:(P[4].x+P[8].x)/2,qy:(P[4].y+P[8].y)/2,charge:0,gesture:g,miss:0}; hands.set(key,h); }
+    h.x+=(cx-h.x)*.55; h.y+=(cy-h.y)*.55;
+    h.qx+=((P[4].x+P[8].x)/2-h.qx)*.55; h.qy+=((P[4].y+P[8].y)/2-h.qy)*.55;
+    if(h.gesture==='fist'&&g!=='fist'&&h.charge>0.15) burst(h.x,h.y,h.charge);
+    if(g!=='fist') h.charge=0;
+    h.gesture=g; h.P=P; h.size=size; h.miss=0; seen.add(key);
+  });
+  for(const [k,h] of hands){ if(!seen.has(k)){ h.miss++; if(h.miss>8) hands.delete(k); } }
+}
+
+async function startCamera(){
+  const btn=document.getElementById('start'); btn.disabled=true; btn.textContent='正在打开…'; msg.hidden=true;
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia) throw new Error('这个环境不支持摄像头');
+    const stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},facingMode:'user'},audio:false});
+    video.srcObject=stream; await video.play(); video.hidden=false;
+    btn.textContent='加载手势模型…'; stxt.textContent='加载模型';
+    const V='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+    const vision=await import(V+'/vision_bundle.mjs');
+    const fs=await vision.FilesetResolver.forVisionTasks(V+'/wasm');
+    const opts=d=>({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:d},runningMode:'VIDEO',numHands:2,minHandDetectionConfidence:.5,minTrackingConfidence:.5});
+    try{ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('GPU')); }
+    catch(_){ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('CPU')); }
+    statusEl.classList.add('live'); stxt.textContent='摄像头 · 抬起手'; intro.hidden=true;
+  }catch(err){
+    btn.disabled=false; btn.textContent='再试一次';
+    msg.hidden=false;
+    msg.textContent='摄像头没能打开（'+(err&&err.name==='NotAllowedError'?'权限被拒绝或被页面拦截':(err&&err.message||'未知原因'))+'）。在 Claude 的网页里摄像头会被拦截：下载这个 HTML，用 Chrome 直接打开就能用手势。现在可以先用鼠标或手指玩。';
+  }
+}
+document.getElementById('start').addEventListener('click',startCamera);
+document.getElementById('mouse').addEventListener('click',()=>{intro.hidden=true;});
+
+/* ---------- main loop ---------- */
+const COLORS=['rgba(96,124,255,.55)','rgba(124,242,214,.72)','rgba(232,244,255,.85)','rgba(255,138,92,.9)'];
+let last=performance.now(), fcount=0;
+function frame(now){
+  requestAnimationFrame(frame);
+  const dt=Math.min(.05,(now-last)/1000); last=now; const t=now*.001;
+  detect();
+
+  const A=[]; const live=[...hands.values()].filter(h=>h.miss<3);
+  for(const h of live){
+    if(h.gesture==='open') A.push({k:0,x:h.x,y:h.y,r:h.size*2.8});
+    else if(h.gesture==='pinch') A.push({k:1,x:h.qx,y:h.qy});
+    else { h.charge=Math.min(1,h.charge+dt*.7); A.push({k:2,x:h.x,y:h.y,c:h.charge}); }
+  }
+  if(live.length===2&&live[0].gesture==='open'&&live[1].gesture==='open')
+    A.push({k:3,ax:live[0].x,ay:live[0].y,bx:live[1].x,by:live[1].y});
+  if(!live.length&&pointer.active){
+    if(pointer.down){ const held=(now-pointer.downT)/1000;
+      A.push(held>0.8?{k:2,x:pointer.x,y:pointer.y,c:Math.min(1,(held-.8)/1.5)}:{k:1,x:pointer.x,y:pointer.y}); }
+    else A.push({k:0,x:pointer.x,y:pointer.y,r:150});
+  }
+
+  // physics
+  const fs=.0025, flow=reduced?.015:.035; bcount[0]=bcount[1]=bcount[2]=bcount[3]=0;
+  for(let i=0;i<N;i++){
+    let x=px[i], y=py[i], ax=vx[i], ay=vy[i];
+    const a=Math.sin(x*fs+t*.3)*Math.cos(y*fs-t*.23)*6.283;
+    ax+=Math.cos(a)*flow; ay+=Math.sin(a)*flow;
+    for(let k=0;k<A.length;k++){ const g=A[k];
+      if(g.k===3){
+        const sx=g.bx-g.ax, sy=g.by-g.ay, L2=sx*sx+sy*sy||1;
+        let u=((x-g.ax)*sx+(y-g.ay)*sy)/L2; u=u<0?0:u>1?1:u;
+        const cx=g.ax+sx*u-x, cy=g.ay+sy*u-y, d2=cx*cx+cy*cy;
+        if(d2<90000){ const d=Math.sqrt(d2)+.001, f=(1-d/300)*.55, L=Math.sqrt(L2), w=Math.sin(u*14-t*5);
+          ax+=cx/d*f+sx/L*f*w; ay+=cy/d*f+sy/L*f*w; }
+        continue;
+      }
+      const dx=g.x-x, dy=g.y-y, d2=dx*dx+dy*dy;
+      if(g.k===0){ if(d2<g.r*g.r){ const d=Math.sqrt(d2)+.001, f=(1-d/g.r)*2.4; ax-=dx/d*f; ay-=dy/d*f; } }
+      else if(g.k===1){ if(d2<422500){ const d=Math.sqrt(d2)+.001, f=.9*(1-d/650); ax+=(dx*.55-dy*.9)/d*f; ay+=(dy*.55+dx*.9)/d*f; } }
+      else { if(d2<250000){ const d=Math.sqrt(d2)+.001, f=1.5*(1-d/500), j=g.c*.9; ax+=dx/d*f+(Math.random()-.5)*j; ay+=dy/d*f+(Math.random()-.5)*j; } }
+    }
+    ax*=.955; ay*=.955; x+=ax; y+=ay;
+    if(x<-10)x+=W+20; else if(x>W+10)x-=W+20;
+    if(y<-10)y+=H+20; else if(y>H+10)y-=H+20;
+    px[i]=x; py[i]=y; vx[i]=ax; vy[i]=ay;
+    const sp=ax*ax+ay*ay, b=sp<.8?0:sp<6?1:sp<22?2:3; bk[b][bcount[b]++]=i;
+  }
+
+  // draw
+  ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle=reduced?'rgba(5,6,10,.5)':'rgba(5,6,10,.2)'; ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='lighter';
+  for(let b=0;b<4;b++){ const L=bk[b], n=bcount[b], s=b===3?2.2:1.6; ctx.fillStyle=COLORS[b]; ctx.beginPath();
+    for(let j=0;j<n;j++){ const i=L[j]; ctx.rect(px[i],py[i],s,s); } ctx.fill(); }
+
+  for(let r=rings.length-1;r>=0;r--){ const g=rings[r]; g.r+=(g.max-g.r)*.08+4; g.a*=.93;
+    ctx.strokeStyle=`rgba(255,138,92,${g.a})`; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(g.x,g.y,g.r,0,6.283); ctx.stroke();
+    if(g.a<.03) rings.splice(r,1); }
+
+  ctx.globalCompositeOperation='source-over';
+  for(const h of live){ if(!h.P) continue;
+    ctx.strokeStyle='rgba(232,236,245,.28)'; ctx.lineWidth=1.5; ctx.beginPath();
+    for(const [a,b] of CONN){ ctx.moveTo(h.P[a].x,h.P[a].y); ctx.lineTo(h.P[b].x,h.P[b].y); } ctx.stroke();
+    ctx.fillStyle='rgba(124,242,214,.9)'; for(const k of [4,8,12,16,20]){ ctx.beginPath(); ctx.arc(h.P[k].x,h.P[k].y,3,0,6.283); ctx.fill(); }
+    let label= h.gesture==='open'?'推开':h.gesture==='pinch'?'漩涡':'蓄力 '+Math.round(h.charge*100)+'%';
+    if(h.gesture==='fist'){ ctx.strokeStyle='rgba(255,138,92,.9)'; ctx.lineWidth=3; ctx.beginPath();
+      ctx.arc(h.x,h.y,h.size*1.3,-Math.PI/2,-Math.PI/2+h.charge*6.283); ctx.stroke(); }
+    ctx.font='600 12px "JetBrains Mono", monospace'; ctx.fillStyle=h.gesture==='fist'?'#ff8a5c':'#7cf2d6';
+    ctx.textAlign='center'; ctx.fillText(label,h.x,h.y+h.size*1.3+20);
+  }
+  if(!live.length&&pointer.active&&pointer.down){ const held=(now-pointer.downT)/1000; if(held>.8){ const c=Math.min(1,(held-.8)/1.5);
+    ctx.strokeStyle='rgba(255,138,92,.9)'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(pointer.x,pointer.y,34,-Math.PI/2,-Math.PI/2+c*6.283); ctx.stroke(); } }
+
+  if(landmarker&&(++fcount%15===0)) stxt.textContent= live.length?('摄像头 · '+live.length+' 只手'):'摄像头 · 抬起手';
+}
+requestAnimationFrame(frame);
+</script>
+
+</body></html>

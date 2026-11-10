@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>手势取景框</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;600&display=swap">
+<style>
+  /* 全屏摄像头画面 + 底部浮动控制条 */
+  :root{
+    --ink:#f6f3ec; --muted:#a8a29a; --bg:#0d0d0f; --panel:rgba(20,20,22,.72);
+    --red:#e0322b; --blue:#1d4fa0;
+    --display:"Space Grotesk","Noto Sans SC",system-ui,sans-serif;
+    --body:"Noto Sans SC",system-ui,-apple-system,sans-serif;
+    color-scheme:dark;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden}
+  canvas#view{position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;display:block}
+  #start{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5;padding:16px}
+  #start .box{max-width:440px;display:grid;gap:18px}
+  #start h1{font-family:var(--display);font-size:clamp(28px,5vw,40px);margin:0;letter-spacing:.01em}
+  #start h1 span{color:var(--red)}
+  #start p{margin:0;color:var(--muted);line-height:1.7}
+  .stripe{display:flex;height:10px;border-radius:2px;overflow:hidden}
+  .stripe i{flex:1}
+  button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid rgba(246,243,236,.3);border-radius:999px;padding:9px 16px;cursor:pointer}
+  button:hover{border-color:var(--ink)}
+  button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);padding:12px 22px;font-size:15px;justify-self:start}
+  button:focus-visible,input:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+  #bar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+       background:var(--panel);backdrop-filter:blur(10px);padding:10px 14px;border-radius:16px;z-index:3;max-width:calc(100vw - 32px)}
+  #bar label{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+  #status{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--panel);padding:8px 14px;border-radius:999px;font-size:13px;z-index:3;white-space:nowrap}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="start">
+  <div class="box">
+    <div class="stripe"><i style="background:var(--red)"></i><i style="background:var(--blue)"></i><i style="background:#c9d43c"></i></div>
+    <h1>手势<span>取景框</span></h1>
+    <p>伸出双手，用两只手的<b>拇指和食指</b>比出一个框。框里的人物会变成三段滤镜：红色网点、蓝色抖动、热感噪点，背景被填成白纸。捏合手指，框就关上。</p>
+    <p style="font-size:13px">需要联网加载 MediaPipe 模型，并允许浏览器使用摄像头。画面只在本机处理，不会上传。</p>
+    <button class="primary" id="go">开启摄像头</button>
+  </div>
+</div>
+
+<div id="status" hidden>正在加载模型…</div>
+
+<div id="bar" hidden>
+  <label for="cell">网点大小 <input type="range" id="cell" min="3" max="9" value="5"></label>
+  <button id="skel">显示骨架</button>
+  <button id="shot">拍照保存</button>
+</div>
+
+<video id="cam" playsinline muted hidden></video>
+
+<script type="module">
+import { FilesetResolver, HandLandmarker, ImageSegmenter } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+
+const $ = s => document.querySelector(s);
+const video = $("#cam"), view = $("#view"), ctx = view.getContext("2d");
+const status = $("#status");
+let hands, seg, showSkel = false;
+
+// 小尺寸处理画布（像素风也来自这里）
+const EW = 320; let EH = 180;
+const small = document.createElement("canvas"), sctx = small.getContext("2d", { willReadFrequently: true });
+const fx = document.createElement("canvas"), fctx = fx.getContext("2d");
+let fxImg, lum, maskS;
+let maskBuf = null, maskW = 0, maskH = 0;
+
+const PAPER = [246, 243, 236], RED = [224, 50, 43], PINK = [240, 150, 160];
+const BLUE_D = [29, 79, 160], BLUE_M = [111, 155, 224];
+const THERMAL = [[0, [244, 241, 208]], [.3, [233, 216, 74]], [.55, [90, 168, 60]], [.8, [30, 90, 168]], [1, [18, 40, 110]]];
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map(v => v / 16);
+
+function say(t) { status.textContent = t; status.hidden = !t; }
+
+$("#go").onclick = async () => {
+  $("#go").disabled = true;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }, audio: false });
+    video.srcObject = stream; await video.play();
+  } catch (e) {
+    $("#go").disabled = false;
+    alert("无法打开摄像头：" + e.message + "\n请在 Chrome 里打开本文件，并允许摄像头权限。");
+    return;
+  }
+  $("#start").hidden = true; say("正在加载模型…");
+  const files = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+  const mk = async delegate => {
+    hands = await HandLandmarker.createFromOptions(files, {
+      baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task", delegate },
+      runningMode: "VIDEO", numHands: 2 });
+    seg = await ImageSegmenter.createFromOptions(files, {
+      baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite", delegate },
+      runningMode: "VIDEO", outputConfidenceMasks: true, outputCategoryMask: false });
+  };
+  try { await mk("GPU"); } catch { await mk("CPU"); }
+  setup(); say("伸出双手，用拇指和食指比个框"); $("#bar").hidden = false;
+  requestAnimationFrame(loop);
+};
+
+function setup() {
+  view.width = video.videoWidth; view.height = video.videoHeight;
+  EH = Math.round(EW * video.videoHeight / video.videoWidth);
+  small.width = fx.width = EW; small.height = fx.height = EH;
+  fxImg = fctx.createImageData(EW, EH);
+  lum = new Float32Array(EW * EH); maskS = new Float32Array(EW * EH);
+}
+
+$("#skel").onclick = () => { showSkel = !showSkel; $("#skel").textContent = showSkel ? "隐藏骨架" : "显示骨架"; };
+$("#shot").onclick = () => { const a = document.createElement("a"); a.download = "gesture-" + Date.now() + ".png"; a.href = view.toDataURL("image/png"); a.click(); };
+
+// 平滑后的四个角：左食指、右食指、右拇指、左拇指（屏幕坐标 0..1）
+let quad = null, lost = 99, lastTs = 0, hintDone = false;
+const lerp = (a, b, t) => a + (b - a) * t;
+
+function loop() {
+  requestAnimationFrame(loop);
+  if (video.readyState < 2) return;
+  let ts = performance.now(); if (ts <= lastTs) ts = lastTs + 1; lastTs = ts;
+
+  const hr = hands.detectForVideo(video, ts);
+  seg.segmentForVideo(video, ts, r => {
+    const m = r.confidenceMasks && r.confidenceMasks[0]; if (!m) return;
+    const arr = m.getAsFloat32Array();
+    if (!maskBuf || maskBuf.length !== arr.length) maskBuf = new Float32Array(arr.length);
+    maskBuf.set(arr); maskW = m.width; maskH = m.height;
+  });
+
+  const W = view.width, H = view.height;
+  ctx.save(); ctx.translate(W, 0); ctx.scale(-1, 1); ctx.drawImage(video, 0, 0, W, H); ctx.restore();
+
+  // 手 → 镜像坐标
+  const hs = (hr.landmarks || []).map(l => l.map(p => ({ x: 1 - p.x, y: p.y })));
+  if (hs.length === 2) {
+    hs.sort((a, b) => a[0].x - b[0].x);
+    const [L, R] = hs;
+    const P = [L[8], R[8], R[4], L[4]];
+    if (!quad || lost > 6) quad = P.map(p => ({ ...p }));
+    else quad.forEach((q, i) => { q.x = lerp(q.x, P[i].x, .55); q.y = lerp(q.y, P[i].y, .55); });
+    lost = 0;
+    if (!hintDone) { hintDone = true; setTimeout(() => say(""), 1500); }
+  } else lost++;
+
+  if (quad && lost <= 6 && maskBuf) renderWindow(W, H);
+  if (showSkel) hs.forEach(h => drawSkel(h, W, H));
+}
+
+function renderWindow(W, H) {
+  // 1. 缩小画面并计算亮度、人物遮罩
+  sctx.save(); sctx.translate(EW, 0); sctx.scale(-1, 1); sctx.drawImage(video, 0, 0, EW, EH); sctx.restore();
+  const src = sctx.getImageData(0, 0, EW, EH).data;
+  for (let y = 0; y < EH; y++) {
+    const my = Math.min(maskH - 1, ((y + .5) / EH * maskH) | 0);
+    for (let x = 0; x < EW; x++) {
+      const i = y * EW + x, k = i * 4;
+      let l = (.299 * src[k] + .587 * src[k + 1] + .114 * src[k + 2]) / 255;
+      lum[i] = Math.min(1, Math.max(0, (l - .5) * 1.45 + .52));
+      const mx = Math.min(maskW - 1, ((1 - (x + .5) / EW) * maskW) | 0);
+      maskS[i] = maskBuf[my * maskW + mx];
+    }
+  }
+
+  // 2. 三段滤镜沿“左手 → 右手”方向排列
+  const q = quad.map(p => ({ x: p.x * EW, y: p.y * EH }));
+  const a = { x: (q[0].x + q[3].x) / 2, y: (q[0].y + q[3].y) / 2 };
+  const b = { x: (q[1].x + q[2].x) / 2, y: (q[1].y + q[2].y) / 2 };
+  const dx = b.x - a.x, dy = b.y - a.y, len2 = dx * dx + dy * dy || 1;
+  const x0 = Math.max(0, Math.floor(Math.min(...q.map(p => p.x)))), x1 = Math.min(EW - 1, Math.ceil(Math.max(...q.map(p => p.x))));
+  const y0 = Math.max(0, Math.floor(Math.min(...q.map(p => p.y)))), y1 = Math.min(EH - 1, Math.ceil(Math.max(...q.map(p => p.y))));
+  const CS = +$("#cell").value, half = CS >> 1;
+  const out = fxImg.data;
+
+  for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+    const i = y * EW + x, k = i * 4;
+    const t = ((x - a.x) * dx + (y - a.y) * dy) / len2;
+    const band = t < 1 / 3 ? 0 : t < 2 / 3 ? 1 : 2;
+    let c = PAPER;
+    if (band === 0) {
+      // 红色半调网点
+      const cx = Math.min(EW - 1, Math.floor(x / CS) * CS + half), cy = Math.min(EH - 1, Math.floor(y / CS) * CS + half);
+      const ci = cy * EW + cx;
+      if (maskS[ci] > .5) {
+        const d = 1 - lum[ci], r = d * CS * .72;
+        const ddx = x - cx, ddy = y - cy;
+        if (ddx * ddx + ddy * ddy <= r * r) c = d > .45 ? RED : PINK;
+      }
+    } else if (maskS[i] > .5) {
+      if (band === 1) {
+        // 蓝色有序抖动
+        const v = lum[i] + (BAYER[(y & 3) * 4 + (x & 3)] - .5) * .4;
+        c = v < .38 ? BLUE_D : v < .66 ? BLUE_M : PAPER;
+      } else {
+        // 热感噪点
+        const v = Math.min(1, Math.max(0, 1 - lum[i] + (Math.random() - .5) * .3));
+        c = grad(v);
+      }
+    }
+    out[k] = c[0]; out[k + 1] = c[1]; out[k + 2] = c[2]; out[k + 3] = 255;
+  }
+  fctx.putImageData(fxImg, 0, 0);
+
+  // 3. 按取景框裁剪，放大贴回
+  ctx.save();
+  ctx.beginPath();
+  quad.forEach((p, i) => i ? ctx.lineTo(p.x * W, p.y * H) : ctx.moveTo(p.x * W, p.y * H));
+  ctx.closePath(); ctx.clip();
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(fx, 0, 0, W, H);
+  ctx.restore();
+}
+
+function grad(v) {
+  for (let i = 1; i < THERMAL.length; i++) {
+    const [p1, c1] = THERMAL[i], [p0, c0] = THERMAL[i - 1];
+    if (v <= p1) { const t = (v - p0) / (p1 - p0); return [lerp(c0[0], c1[0], t), lerp(c0[1], c1[1], t), lerp(c0[2], c1[2], t)]; }
+  }
+  return THERMAL[THERMAL.length - 1][1];
+}
+
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+function drawSkel(h, W, H) {
+  ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 2; ctx.beginPath();
+  BONES.forEach(([i, j]) => { ctx.moveTo(h[i].x * W, h[i].y * H); ctx.lineTo(h[j].x * W, h[j].y * H); });
+  ctx.stroke();
+  ctx.fillStyle = "#e0322b";
+  [4, 8].forEach(i => { ctx.beginPath(); ctx.arc(h[i].x * W, h[i].y * H, 6, 0, 7); ctx.fill(); });
+}
+</script>
+</body>
+</html>

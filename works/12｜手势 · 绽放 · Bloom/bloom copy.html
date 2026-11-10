@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nocturne Bloom 夜花</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed night stage, flower centred on canvas; editorial type pinned left, instrument readouts along the bottom edge */
+:root{
+  --ink:#08070b;
+  --ink-2:#14111a;
+  --text:#f1ebf0;
+  --muted:#958d9b;
+  --line:rgba(241,235,240,.14);
+  --petal:#ff9ab5;              /* per-flower accent, updated by script */
+  --display:"Instrument Serif","Times New Roman",serif;
+  --cn:"Noto Serif SC","Songti SC","STSong",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0;background:var(--ink);color:var(--text);overflow:hidden;font-family:var(--cn)}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:ns-resize;touch-action:none}
+.ui{position:fixed;inset:0;pointer-events:none;display:grid;grid-template-rows:auto 1fr auto;
+  padding-block:clamp(16px,3vw,32px);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.brand{font:500 11px/1.6 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.brand b{color:var(--text);font-weight:500}
+.actions{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto}
+button,.btn{font:500 12px/1 var(--mono);letter-spacing:.05em;color:var(--text);background:rgba(20,17,26,.55);
+  border:1px solid var(--line);border-radius:999px;padding:10px 14px;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:border-color .2s,background .2s}
+button:hover,.btn:hover{border-color:var(--petal)}
+button:focus-visible,.btn:focus-visible{outline:2px solid var(--petal);outline-offset:2px}
+button.on{background:var(--petal);color:var(--ink);border-color:var(--petal)}
+.title{align-self:center;max-width:44ch}
+.title .latin{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(48px,8vw,112px);line-height:.92;margin:0;text-wrap:balance;transition:opacity .5s}
+.title .cn{font-size:clamp(13px,1.3vw,16px);letter-spacing:.35em;margin-top:16px;color:var(--muted)}
+.list{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px;pointer-events:auto}
+.list button{padding:7px 11px;font-size:11px}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.meter{font:400 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.14em;min-width:200px}
+.meter .num{display:block;font-size:44px;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1;margin-top:6px}
+.bar{height:2px;background:var(--line);margin-top:12px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--petal);width:0}
+.status{margin-top:10px;display:flex;align-items:center;gap:8px}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.status.live::before{background:var(--petal);box-shadow:0 0 10px var(--petal)}
+.hints{font:400 11px/1.9 var(--mono);color:var(--muted);letter-spacing:.03em}
+.hints b{color:var(--text);font-weight:500}
+.cam{position:relative;width:184px;aspect-ratio:4/3;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--ink-2)}
+.cam video,.cam canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.cam video{opacity:.55;filter:grayscale(1) contrast(1.1)}
+.cam span{position:absolute;left:8px;top:6px;font:10px var(--mono);color:var(--muted);letter-spacing:.12em}
+#toast{position:fixed;left:50%;top:max(72px,10vh);transform:translateX(-50%);max-width:min(520px,calc(100% - 32px));
+  font:12px/1.6 var(--mono);color:var(--text);background:rgba(20,17,26,.85);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .3s;opacity:0;pointer-events:none;z-index:5}
+#toast.show{opacity:1}
+#panel{position:fixed;inset:0;display:grid;place-items:center;background:rgba(8,7,11,.7);z-index:6;padding:16px}
+#panel .card{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:24px;font-size:14px;line-height:1.75}
+#panel h2{font-family:var(--display);font-style:italic;font-weight:400;font-size:34px;margin:0 0 4px}
+#panel h3{font:500 11px var(--mono);letter-spacing:.16em;color:var(--muted);margin:22px 0 8px;text-transform:uppercase}
+#panel pre{white-space:pre-wrap;font:12px/1.7 var(--mono);background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0}
+#panel .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+#panel ol{padding-left:20px;margin:0;color:var(--muted)}
+#panel ol b{color:var(--text);font-weight:600}
+#drop{position:fixed;inset:12px;border:1.5px dashed var(--petal);border-radius:20px;display:grid;place-items:center;font:14px var(--mono);color:var(--text);background:rgba(8,7,11,.6);z-index:7;pointer-events:none}
+@media (max-width:640px){.hints{display:none}.cam{width:120px}.title .latin{font-size:56px}}
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="花朵舞台：上下拖动或滚轮控制开合"></canvas>
+
+<div class="ui">
+  <div class="top">
+    <div class="brand"><b>Nocturne Bloom</b> · 夜花<br>手势花开实验</div>
+    <div class="actions">
+      <button id="camBtn" type="button">开启手势</button>
+      <label class="btn" for="fileIn">导入花朵视频</label>
+      <input id="fileIn" type="file" accept="video/*" multiple hidden>
+      <button id="promptBtn" type="button">视频提示词</button>
+    </div>
+  </div>
+
+  <div class="title">
+    <h1 class="latin" id="latin">Paeonia</h1>
+    <div class="cn" id="cn">牡丹 · 花开富贵</div>
+    <div class="list" id="list"></div>
+  </div>
+
+  <div class="bottom">
+    <div class="meter">
+      开放度 BLOOM
+      <span class="num" id="num">0%</span>
+      <div class="bar"><i id="barI"></i></div>
+      <div class="status" id="status">鼠标模式</div>
+    </div>
+    <div class="hints" id="hints">
+      <b>张开手掌</b> 花开 · <b>握拳</b> 花合<br>
+      <b>左右挥手</b> 换花 · <b>捏合食指拇指</b> 撒花瓣<br>
+      没有摄像头：<b>滚轮 / 上下拖动</b> 开合 · <b>← →</b> 换花 · <b>空格</b> 撒花
+    </div>
+    <div class="cam" id="cam" hidden>
+      <video id="camVideo" playsinline muted></video>
+      <canvas id="camCanvas"></canvas>
+      <span>HAND</span>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<div id="drop" hidden>松开鼠标，导入花朵视频</div>
+
+<div id="panel" hidden>
+  <div class="card">
+    <h2>Make it real</h2>
+    <div style="color:var(--muted)">用 AI 视频工具（即梦、可灵、Veo、Sora 等）生成一段花朵绽放视频，再导入这里。手势会控制视频播到哪一帧。</div>
+    <h3>拍摄要求</h3>
+    <ol>
+      <li><b>纯黑背景</b>：页面会自动把黑色抠掉，花就像悬浮在夜色里</li>
+      <li><b>镜头固定</b>：不推不摇，只有花在动</li>
+      <li><b>从花苞到盛开</b>：第一帧是合拢的花苞，最后一帧完全盛开</li>
+      <li><b>4–8 秒</b>就够，正方形或竖版都可以</li>
+    </ol>
+    <h3>中文提示词</h3>
+    <pre id="pCn">一朵粉色牡丹在纯黑背景前缓慢绽放，从紧闭的花苞到完全盛开。花朵居中，略带俯视的正面视角。镜头完全固定，没有任何运镜。柔和的棚拍侧光，花瓣边缘有细腻的透光感，超写实微距摄影，8K 质感，干净的黑色背景，没有叶子以外的杂物。</pre>
+    <div class="row"><button type="button" data-copy="pCn">复制中文</button></div>
+    <h3>English prompt</h3>
+    <pre id="pEn">A single pink peony slowly blooming from a tight closed bud to full bloom, centered, front view from slightly above, pure black background, locked-off static camera with no camera movement, soft studio side light with translucent petal edges, photorealistic macro photography, ultra detailed, clean black backdrop.</pre>
+    <div class="row"><button type="button" data-copy="pEn">Copy English</button><button type="button" id="closePanel">关闭</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const stage = $('stage'), ctx = stage.getContext('2d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W = 0, H = 0, DPR = 1;
+function resize(){
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  W = innerWidth; H = innerHeight;
+  stage.width = Math.round(W*DPR); stage.height = Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b, v));
+const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const hash = n => { const s = Math.sin(n*127.1)*43758.5453; return s - Math.floor(s); };
+const hexA = (hex,a) => { const n=parseInt(hex.slice(1),16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; };
+
+/* ---------- flowers ---------- */
+const flowers = [
+  {latin:'Paeonia',  cn:'牡丹 · 花开富贵', kind:'proc', layers:6, base:8,  shape:1.0,
+   pal:{base:'#7a1f3d', mid:'#e47595', tip:'#ffd6e0', core:'#ffcf6b', glow:'#ff9ab5'}},
+  {latin:'Iris',     cn:'鸢尾 · 夜色来信', kind:'proc', layers:4, base:6,  shape:.72,
+   pal:{base:'#241052', mid:'#6a4be0', tip:'#d9ccff', core:'#ffe08a', glow:'#9d86ff'}},
+  {latin:'Magnolia', cn:'玉兰 · 清白如初', kind:'proc', layers:4, base:6,  shape:.62,
+   pal:{base:'#8c5a63', mid:'#f0d6d0', tip:'#fffaf3', core:'#f3d9a0', glow:'#ffe9d6'}},
+];
+let cur = 0, prev = -1, fade = 1;
+
+const listEl = $('list');
+function renderList(){
+  listEl.innerHTML = '';
+  flowers.forEach((f,i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = f.latin; b.className = i===cur ? 'on' : '';
+    b.addEventListener('click', () => select(i));
+    listEl.appendChild(b);
+  });
+}
+function select(i){
+  if (i === cur) return;
+  prev = cur; cur = (i + flowers.length) % flowers.length; fade = 0;
+  prevOpen = open; open = Math.min(open, .05);   // new flower re-blooms to the current target
+  const f = flowers[cur];
+  $('latin').textContent = f.latin; $('cn').textContent = f.cn;
+  document.documentElement.style.setProperty('--petal', f.pal.glow);
+  renderList();
+}
+renderList();
+
+/* ---------- procedural flower ---------- */
+function petal(len, wid, shape){
+  // petal pointing along -y, base at origin, softly ruffled tip
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  ctx.bezierCurveTo(wid*.95,-len*.18, wid*1.05,-len*(.72*shape+.1), wid*.38,-len*.97);
+  ctx.quadraticCurveTo(wid*.16,-len*1.04, 0,-len*.95);
+  ctx.quadraticCurveTo(-wid*.16,-len*1.04, -wid*.38,-len*.97);
+  ctx.bezierCurveTo(-wid*1.05,-len*(.72*shape+.1), -wid*.95,-len*.18, 0,0);
+  ctx.closePath();
+}
+function drawProc(f, o, t, cx, cy, R, alpha){
+  const P = f.pal, L = f.layers;
+  ctx.save(); ctx.globalAlpha = alpha;
+  // halo
+  const halo = ctx.createRadialGradient(cx,cy,0,cx,cy,R*1.6);
+  halo.addColorStop(0, hexA(P.glow,.22*o+.04)); halo.addColorStop(1, hexA(P.glow,0));
+  ctx.fillStyle = halo; ctx.fillRect(cx-R*1.6,cy-R*1.6,R*3.2,R*3.2);
+
+  for (let l = L-1; l >= 0; l--){
+    const fr = L>1 ? l/(L-1) : 1;            // 0 inner … 1 outer
+    const start = (1-fr)*.5;                 // outer layers open first
+    const lo = ease(clamp((o-start)/(1-start*.85)));
+    const n = f.base + Math.round(fr*f.base*.5);
+    const len = R*(.26+.74*fr)*(.34+.66*lo);
+    const wid = len*(.62-.1*fr)*(.55+.45*lo)*(f.shape<.8?.8:1);
+    const twist = (1-lo)*1.5 + l*.61;
+    for (let i = 0; i < n; i++){
+      const j = hash(l*37+i*3.1);
+      const a = i/n*Math.PI*2 + twist + Math.sin(t*.5+i+l)*.012*(1+lo);
+      ctx.save(); ctx.translate(cx,cy); ctx.rotate(a);
+      const pl = len*(.88+.24*j);
+      const g = ctx.createLinearGradient(0,0,0,-pl);
+      g.addColorStop(0, P.base);
+      g.addColorStop(.35+.2*fr, P.mid);
+      g.addColorStop(1, P.tip);
+      ctx.fillStyle = g;
+      ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 14*(1-fr*.5);
+      petal(pl, wid*(.9+.2*j), f.shape);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      // inner shading toward the cup
+      const s = ctx.createLinearGradient(0,0,0,-pl);
+      s.addColorStop(0,'rgba(0,0,0,.35)'); s.addColorStop(.5,'rgba(0,0,0,0)');
+      ctx.fillStyle = s; ctx.fill();
+      // rim light + vein
+      ctx.strokeStyle = hexA(P.tip,.35); ctx.lineWidth = .8; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,-pl*.08); ctx.quadraticCurveTo(wid*.06,-pl*.5,0,-pl*.85);
+      ctx.strokeStyle = hexA(P.base,.25); ctx.lineWidth = 1; ctx.stroke();
+      ctx.restore();
+    }
+  }
+  // stamens appear late
+  const so = ease(clamp((o-.55)/.45));
+  if (so > 0){
+    ctx.globalCompositeOperation = 'lighter';
+    const cnt = 46;
+    for (let i = 0; i < cnt; i++){
+      const a = i*2.39996 + t*.05;
+      const r = R*.16*so*Math.sqrt((i+1)/cnt);
+      const x = cx + Math.cos(a)*r, y = cy + Math.sin(a)*r;
+      ctx.fillStyle = hexA(P.core,.85*so);
+      ctx.beginPath(); ctx.arc(x,y,1.2+1.6*hash(i),0,Math.PI*2); ctx.fill();
+    }
+    const cg = ctx.createRadialGradient(cx,cy,0,cx,cy,R*.22);
+    cg.addColorStop(0, hexA(P.core,.55*so)); cg.addColorStop(1, hexA(P.core,0));
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx,cy,R*.22,0,Math.PI*2); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  ctx.restore();
+}
+
+/* ---------- video flower ---------- */
+const oc = document.createElement('canvas'), octx = oc.getContext('2d');
+function drawVideo(f, o, cx, cy, R, alpha){
+  const fr = f.frames; if (!fr.length) return;
+  const idx = o*(fr.length-1), i = Math.floor(idx), k = idx - i;
+  const a = fr[i], b = fr[Math.min(fr.length-1, i+1)];
+  const s = Math.min((R*2.6)/a.width, (R*2.6)/a.height);
+  const w = a.width*s, h = a.height*s;
+  if (oc.width !== Math.round(w) || oc.height !== Math.round(h)){ oc.width = Math.round(w); oc.height = Math.round(h); }
+  octx.globalCompositeOperation = 'source-over';
+  octx.clearRect(0,0,oc.width,oc.height);
+  octx.globalAlpha = 1; octx.drawImage(a,0,0,oc.width,oc.height);
+  if (k > .01 && b !== a){ octx.globalAlpha = k; octx.drawImage(b,0,0,oc.width,oc.height); octx.globalAlpha = 1; }
+  if (!f.screen){ // feather edges so a non-black background melts into the night
+    octx.globalCompositeOperation = 'destination-in';
+    const g = octx.createRadialGradient(oc.width/2,oc.height/2,Math.min(oc.width,oc.height)*.28,oc.width/2,oc.height/2,Math.max(oc.width,oc.height)*.55);
+    g.addColorStop(0,'rgba(0,0,0,1)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    octx.fillStyle = g; octx.fillRect(0,0,oc.width,oc.height);
+  }
+  ctx.save(); ctx.globalAlpha = alpha;
+  ctx.globalCompositeOperation = f.screen ? 'screen' : 'source-over';
+  if (!reduce){ // bloom glow
+    ctx.filter = 'blur(38px)'; ctx.globalAlpha = alpha*(.25+.35*o);
+    ctx.drawImage(oc, cx-w/2, cy-h/2, w, h);
+    ctx.filter = 'none'; ctx.globalAlpha = alpha;
+  }
+  ctx.drawImage(oc, cx-w/2, cy-h/2, w, h);
+  ctx.restore();
+}
+
+async function importVideo(file){
+  const url = URL.createObjectURL(file);
+  const v = document.createElement('video');
+  v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url;
+  const once = ev => new Promise((res, rej) => { v.addEventListener(ev, res, {once:true}); v.addEventListener('error', () => rej(new Error('video')), {once:true}); });
+  try { await once('loadeddata'); } catch { toast(`「${file.name}」打不开。换成 MP4（H.264）格式再试试。`, 5000); return; }
+  const dur = v.duration;
+  if (!isFinite(dur) || dur <= 0){ toast('读不出这个视频的时长，换一个文件试试。', 5000); return; }
+  const N = Math.round(clamp(dur*24, 30, 120));
+  const sc = Math.min(1, 720/Math.max(v.videoWidth, v.videoHeight));
+  const rw = Math.round(v.videoWidth*sc), rh = Math.round(v.videoHeight*sc);
+  const frames = [];
+  for (let i = 0; i < N; i++){
+    v.currentTime = Math.min(dur-0.04, dur*i/(N-1));
+    await once('seeked');
+    frames.push(await createImageBitmap(v, {resizeWidth:rw, resizeHeight:rh, resizeQuality:'high'}));
+    if (i % 6 === 0) toast(`正在解析「${file.name}」 ${Math.round(i/N*100)}%`, 60000);
+  }
+  URL.revokeObjectURL(url);
+  // detect black background from the corners of the last frame; sample a glow colour from the centre
+  const t = document.createElement('canvas'); t.width = rw; t.height = rh;
+  const tc = t.getContext('2d', {willReadFrequently:true}); tc.drawImage(frames[frames.length-1],0,0);
+  let lum = 0; const pts = [[4,4],[rw-5,4],[4,rh-5],[rw-5,rh-5],[rw/2|0,4],[rw/2|0,rh-5]];
+  for (const [x,y] of pts){ const d = tc.getImageData(x,y,1,1).data; lum += (d[0]+d[1]+d[2])/3; }
+  lum /= pts.length;
+  const c = tc.getImageData(rw/2-20|0, rh/2-20|0, 40, 40).data; let r=0,g=0,b=0;
+  for (let i = 0; i < c.length; i += 4){ r += c[i]; g += c[i+1]; b += c[i+2]; }
+  const n = c.length/4, boost = x => Math.min(255, Math.round(x/n*1.25 + 30));
+  const glow = '#' + [r,g,b].map(x => boost(x).toString(16).padStart(2,'0')).join('');
+  const name = file.name.replace(/\.[^.]+$/, '').slice(0, 24) || 'My Bloom';
+  flowers.push({latin:name, cn:'你的花 · ' + (lum < 35 ? '黑底已抠除' : '边缘羽化'), kind:'video', frames, screen: lum < 35,
+    pal:{glow, core:glow}});
+  select(flowers.length-1);
+  toast(`导入完成：${N} 帧。张开手，看它开花。`, 3500);
+}
+$('fileIn').addEventListener('change', async e => { for (const f of e.target.files) await importVideo(f); e.target.value = ''; });
+let dragDepth = 0;
+addEventListener('dragenter', e => { e.preventDefault(); dragDepth++; $('drop').hidden = false; });
+addEventListener('dragleave', () => { if (--dragDepth <= 0){ dragDepth = 0; $('drop').hidden = true; } });
+addEventListener('dragover', e => e.preventDefault());
+addEventListener('drop', async e => {
+  e.preventDefault(); dragDepth = 0; $('drop').hidden = true;
+  for (const f of e.dataTransfer.files) if (f.type.startsWith('video/')) await importVideo(f);
+});
+
+/* ---------- particles ---------- */
+const parts = [];
+const MAXP = reduce ? 120 : 700;
+function emit(x, y, n, col, type='dot', speed=1){
+  for (let i = 0; i < n && parts.length < MAXP; i++){
+    const a = Math.random()*Math.PI*2, v = (type==='petal' ? 3 + Math.random()*6 : .2 + Math.random()*.8)*speed;
+    parts.push({x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v - (type==='dot'? .4 : 1.5), life:0,
+      max: type==='petal' ? 140+Math.random()*120 : 80+Math.random()*120,
+      size: type==='petal' ? 6+Math.random()*9 : .8+Math.random()*2.2,
+      rot: Math.random()*6.28, vr:(Math.random()-.5)*.2, col, type, seed:Math.random()*100});
+  }
+}
+function burst(x, y){
+  const P = flowers[cur].pal;
+  emit(x, y, reduce ? 12 : 48, P.glow, 'petal', 1.1);
+  emit(x, y, reduce ? 20 : 90, P.core || P.glow, 'dot', 4);
+}
+function stepParticles(dt, t){
+  for (let i = parts.length-1; i >= 0; i--){
+    const p = parts[i]; p.life += dt;
+    if (p.life > p.max || p.y < -40 || p.y > H+40){ parts.splice(i,1); continue; }
+    if (p.type === 'petal'){
+      p.vy += .05*dt; p.vx *= .985; p.vy *= .985;
+      p.vx += Math.sin(t*1.7 + p.seed)*.04*dt;
+    } else {
+      p.vx += Math.sin(t + p.seed)*.01*dt; p.vy -= .006*dt; p.vx *= .99; p.vy *= .99;
+    }
+    p.x += p.vx*dt; p.y += p.vy*dt; p.rot += p.vr*dt;
+  }
+}
+function drawParticles(){
+  for (const p of parts){
+    const k = 1 - p.life/p.max, fadeIn = Math.min(1, p.life/8);
+    if (p.type === 'petal'){
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.scale(1, .55+.45*Math.sin(p.rot*2));
+      ctx.globalAlpha = k*fadeIn*.9; ctx.fillStyle = p.col;
+      ctx.beginPath(); ctx.ellipse(0,0,p.size*.55,p.size,0,0,Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+  }
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (const p of parts){
+    if (p.type !== 'dot') continue;
+    const k = 1 - p.life/p.max;
+    ctx.globalAlpha = k*.9; ctx.fillStyle = p.col;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.size*(.6+.4*k),0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* ---------- input state ---------- */
+let open = 0, prevOpen = 0, target = .82, lastInput = 0;
+let px = .5, py = .5, tpx = .5, tpy = .5;      // parallax
+let handOn = false, tip = null;
+let lastBloomBurst = 0, wasFull = false;
+
+// mouse / touch fallback
+stage.addEventListener('wheel', e => { e.preventDefault(); target = clamp(target - e.deltaY*.0012); lastInput = performance.now(); }, {passive:false});
+let drag = null;
+stage.addEventListener('pointerdown', e => { drag = {y:e.clientY, t:target, moved:false}; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', e => {
+  if (!handOn){ tpx = e.clientX/W; tpy = e.clientY/H; }
+  if (!drag) return;
+  if (Math.abs(e.clientY-drag.y) > 4) drag.moved = true;
+  target = clamp(drag.t + (drag.y - e.clientY)/(H*.55)); lastInput = performance.now();
+});
+stage.addEventListener('pointerup', e => { if (drag && !drag.moved) burst(e.clientX, e.clientY); drag = null; });
+addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('#panel')) return;
+  if (e.key === 'ArrowUp'){ target = clamp(target+.1); lastInput = performance.now(); }
+  else if (e.key === 'ArrowDown'){ target = clamp(target-.1); lastInput = performance.now(); }
+  else if (e.key === 'ArrowRight') select(cur+1);
+  else if (e.key === 'ArrowLeft') select(cur-1);
+  else if (e.key === ' '){ e.preventDefault(); burst(W/2, H/2); }
+  else if (e.key === 'Escape') $('panel').hidden = true;
+});
+
+/* ---------- hand tracking (MediaPipe) ---------- */
+const camVideo = $('camVideo'), camCanvas = $('camCanvas'), cc = camCanvas.getContext('2d');
+let landmarker = null, camOn = false, lastVT = -1, swipe = [], lastSwipe = 0, lastPinch = 0;
+const status = s => { $('status').textContent = s; $('status').classList.toggle('live', handOn); };
+const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+$('camBtn').addEventListener('click', async () => {
+  if (camOn){ stopCam(); return; }
+  try {
+    status('正在请求摄像头…');
+    const stream = await navigator.mediaDevices.getUserMedia({video:{width:640, height:480, facingMode:'user'}, audio:false});
+    camVideo.srcObject = stream; await camVideo.play();
+    $('cam').hidden = false; camOn = true; $('camBtn').classList.add('on'); $('camBtn').textContent = '关闭手势';
+    if (!landmarker){
+      status('正在加载手势模型…（首次约几秒）');
+      const vision = await import(MP + '/vision_bundle.mjs');
+      const files = await vision.FilesetResolver.forVisionTasks(MP + '/wasm');
+      const opts = d => ({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task', delegate:d},
+        runningMode:'VIDEO', numHands:1, minHandDetectionConfidence:.6, minTrackingConfidence:.5});
+      try { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('GPU')); }
+      catch { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('CPU')); }
+    }
+    status('手势已开启 · 把手举到镜头前');
+  } catch (err){
+    console.error(err); stopCam();
+    if (err && (err.name === 'NotAllowedError' || err.name === 'SecurityError'))
+      toast('没拿到摄像头权限。点地址栏左边的图标允许摄像头，再点一次「开启手势」。', 6000);
+    else if (err && err.name === 'NotFoundError') toast('没找到摄像头。可以先用滚轮或上下拖动来控制花朵。', 5000);
+    else toast('手势模型没加载成功，检查一下网络后再试。现在先用鼠标控制。', 6000);
+  }
+});
+function stopCam(){
+  const s = camVideo.srcObject; if (s) s.getTracks().forEach(t => t.stop());
+  camVideo.srcObject = null; camOn = false; handOn = false; tip = null;
+  $('cam').hidden = true; $('camBtn').classList.remove('on'); $('camBtn').textContent = '开启手势';
+  status('鼠标模式');
+}
+const D = (a,b) => Math.hypot((a.x-b.x)*4/3, a.y-b.y);   // correct for 4:3 frame
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+function track(now){
+  if (!camOn || !landmarker || camVideo.readyState < 2 || camVideo.currentTime === lastVT) return;
+  lastVT = camVideo.currentTime;
+  let res; try { res = landmarker.detectForVideo(camVideo, now); } catch { return; }
+  const cw = camCanvas.width = camCanvas.clientWidth*DPR, ch = camCanvas.height = camCanvas.clientHeight*DPR;
+  cc.clearRect(0,0,cw,ch);
+  const lm = res.landmarks && res.landmarks[0];
+  const was = handOn; handOn = !!lm;
+  if (!lm){ tip = null; if (was) status('手势已开启 · 把手举到镜头前'); return; }
+  if (!was) status('手势已开启 · 已识别');
+  // skeleton preview
+  cc.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--petal').trim() || '#ff9ab5';
+  cc.lineWidth = 2*DPR; cc.beginPath();
+  for (const [a,b] of BONES){ cc.moveTo(lm[a].x*cw, lm[a].y*ch); cc.lineTo(lm[b].x*cw, lm[b].y*ch); }
+  cc.stroke();
+  // openness: fingertip spread relative to palm length
+  const palm = D(lm[0], lm[9]) || 1e-3;
+  const spread = ([8,12,16,20].reduce((s,i) => s + D(lm[0], lm[i]), 0)/4)/palm;
+  target = clamp((spread - 1.0)/0.72); lastInput = now;
+  // position → parallax + fingertip trail (mirrored)
+  tpx = 1 - lm[9].x; tpy = lm[9].y;
+  tip = {x:(1-lm[8].x)*W, y:lm[8].y*H};
+  // pinch with other fingers open → petal burst
+  const pinch = D(lm[4], lm[8])/palm, midOut = D(lm[0], lm[12])/palm;
+  if (pinch < .32 && midOut > 1.45 && now - lastPinch > 900){ lastPinch = now; burst(tip.x, tip.y); }
+  // swipe → change flower
+  swipe.push({x:tpx, t:now}); while (swipe.length && now - swipe[0].t > 320) swipe.shift();
+  if (swipe.length > 3 && now - lastSwipe > 1100){
+    const dx = swipe[swipe.length-1].x - swipe[0].x;
+    if (Math.abs(dx) > .3){ lastSwipe = now; swipe = []; select(cur + (dx > 0 ? 1 : -1)); }
+  }
+}
+
+/* ---------- prompts panel ---------- */
+$('promptBtn').addEventListener('click', () => { $('panel').hidden = false; });
+$('closePanel').addEventListener('click', () => { $('panel').hidden = true; });
+$('panel').addEventListener('click', e => { if (e.target.id === 'panel') $('panel').hidden = true; });
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const el = $(b.dataset.copy);
+  try { await navigator.clipboard.writeText(el.textContent); toast('已复制'); }
+  catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('已选中，按 ⌘C 复制'); }
+}));
+
+let toastT = 0;
+function toast(msg, ms=2200){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), ms); }
+
+/* ---------- main loop ---------- */
+let last = performance.now();
+const start = last;
+function frame(now){
+  const dt = Math.min(3, (now - last)/16.67); last = now;
+  const t = (now - start)/1000;
+  track(now);
+
+  // idle breathing when nobody touches anything
+  if (!handOn && now - lastInput > 6000) target = .72 + Math.sin(t*.45)*.18;
+  const k = 1 - Math.pow(1 - (handOn ? .16 : .08), dt);
+  open += (target - open)*k;
+  px += (tpx - px)*.06*dt; py += (tpy - py)*.06*dt;
+  if (fade < 1) fade = Math.min(1, fade + .03*dt);
+
+  // full-bloom celebration
+  if (open > .965 && !wasFull && now - lastBloomBurst > 2500){ lastBloomBurst = now; burst(W/2, H/2); }
+  wasFull = open > .95;
+
+  // background
+  ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+  ctx.fillStyle = '#08070b'; ctx.fillRect(0,0,W,H);
+  const f = flowers[cur];
+  const bg = ctx.createRadialGradient(W/2, H*.55, 0, W/2, H*.55, Math.max(W,H)*.7);
+  bg.addColorStop(0, hexA(f.pal.glow, .07 + .1*open)); bg.addColorStop(1, 'rgba(8,7,11,0)');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  const R = Math.min(W, H)*.3;
+  const cx = W/2 + (px-.5)*-46 + (W > 900 ? W*.08 : 0), cy = H*.52 + (py-.5)*-30;
+  ctx.save();
+  ctx.translate(cx, cy); ctx.rotate((px-.5)*.12); ctx.scale(1, 1 - Math.abs(py-.5)*.12); ctx.translate(-cx, -cy);
+  if (prev >= 0 && fade < 1){
+    const pf = flowers[prev];
+    pf.kind === 'proc' ? drawProc(pf, prevOpen, t, cx, cy, R, 1-fade) : drawVideo(pf, prevOpen, cx, cy, R, 1-fade);
+  }
+  f.kind === 'proc' ? drawProc(f, open, t, cx, cy, R, fade) : drawVideo(f, open, cx, cy, R, fade);
+  ctx.restore();
+
+  // ambient pollen rising from the heart of the flower, fingertip trail
+  if (Math.random() < open*.6*dt) emit(cx + (Math.random()-.5)*R*.4, cy + (Math.random()-.5)*R*.4, 1, f.pal.core || f.pal.glow);
+  if (tip && Math.random() < .8) emit(tip.x, tip.y, 2, f.pal.glow);
+  stepParticles(dt, t); drawParticles();
+
+  // readout
+  const pct = Math.round(open*100);
+  $('num').textContent = pct + '%'; $('barI').style.width = pct + '%';
+  requestAnimationFrame(frame);
+}
+lastInput = performance.now();   // let the opening bloom play before idling
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

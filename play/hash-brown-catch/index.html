@@ -1,0 +1,367 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hash Brown Catch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="css/style.css">
+
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#play"><canvas id="brand-icon" width="26" height="30"></canvas><span>HASH BROWN <b>CATCH</b></span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#play">PLAY</a>
+      <a href="#crispy">CRISPY</a>
+      <a href="#menu">MENU</a>
+      <a href="#shop">SHOP</a>
+      <a href="#dog">???</a>
+      <a href="#levels">LEVELS</a>
+      <a href="#reel">REEL</a>
+    </nav>
+    <a class="coin-pill" href="#shop" aria-label="Coins in your wallet"><svg class="coin" viewBox="0 0 8 8" aria-hidden="true"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h1v1H6zM0 2h1v4H0zM7 2h1v4H7zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2z" fill="#8A5A00"/><path d="M2 1h4v1H2zM1 2h6v4H1zM2 6h4v1H2z" fill="#FFC93C"/><path d="M3 2h2v1H3zM3 5h2v1H3zM3 3h1v2H3z" fill="#FFF1A6"/></svg><span id="coin-pill">0</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= GAME ================= -->
+  <section id="play" class="play-section">
+    <div class="wrap">
+      <div class="stage" id="stage">
+        <div id="game-canvas-wrap"></div>
+
+        <div class="hud-btns" id="hud-btns" hidden>
+          <button class="icon-btn" id="btn-pause" type="button" aria-label="Pause (P)">
+            <svg viewBox="0 0 8 8" aria-hidden="true"><rect x="1" y="1" width="2" height="6" fill="currentColor"/><rect x="5" y="1" width="2" height="6" fill="currentColor"/></svg>
+          </button>
+          <button class="icon-btn" id="btn-mute" type="button" aria-label="Mute sound (M)" aria-pressed="false">
+            <svg viewBox="0 0 10 8" aria-hidden="true" id="mute-icon"><path d="M0 3h2v2H0zM2 2h1v4H2zM3 1h1v6H3zM4 0h1v8H4z" fill="currentColor"/><path class="waves" d="M6 3h1v2H6zM8 1h1v1H8zM8 6h1v1H8zM9 2h1v4H9z" fill="currentColor"/><path class="cross" d="M6 2h1v1H6zM7 3h1v1H7zM8 2h1v1H8zM6 5h1v1H6zM8 5h1v1H8zM7 4h1v1H7z" fill="#E63B2E" opacity="0"/></svg>
+          </button>
+        </div>
+
+        <!-- start screen -->
+        <div class="overlay" id="screen-title">
+          <h1 class="logo"><span class="l1">HASH BROWN</span><span class="l2"><i></i>CATCH<i></i></span></h1>
+          <p class="tagline">A LITTLE CRUNCH. A LOT OF JOY.</p>
+          <div class="title-grid">
+            <canvas class="mascot pix" id="title-mascot" width="26" height="30" aria-label="Crispy the hash brown waving"></canvas>
+            <div class="panel">
+              <span class="label" id="diff-label">Pick your breakfast rush</span>
+              <div class="chips" role="radiogroup" aria-labelledby="diff-label">
+                <button class="chip" type="button" role="radio" data-d="easy" aria-checked="false">EASY</button>
+                <button class="chip" type="button" role="radio" data-d="normal" aria-checked="true">NORMAL</button>
+                <button class="chip" type="button" role="radio" data-d="hard" aria-checked="false">HARD</button>
+                <button class="chip" type="button" role="radio" data-d="hell" aria-checked="false">HELL</button>
+                <button class="chip" type="button" role="radio" data-d="custom" aria-checked="false">CUSTOM</button>
+              </div>
+              <p class="diff-desc" id="diff-desc"></p>
+              <div class="custom" id="custom-panel" hidden>
+                <label class="row" for="c-speed">Fall speed <input type="range" id="c-speed" min="1" max="10" value="4"> <output for="c-speed" id="o-speed">4</output></label>
+                <label class="row" for="c-rate">Drop rate <input type="range" id="c-rate" min="1" max="10" value="4"> <output for="c-rate" id="o-rate">4</output></label>
+                <label class="row" for="c-hazards">Hazards <input type="range" id="c-hazards" min="0" max="10" value="4"> <output for="c-hazards" id="o-hazards">4</output></label>
+                <div class="row"><span>Basket</span><div class="seg" id="c-basket"><button type="button" data-v="S" aria-pressed="false">S</button><button type="button" data-v="M" aria-pressed="true">M</button><button type="button" data-v="L" aria-pressed="false">L</button></div><span></span></div>
+                <div class="row"><span>Round</span><div class="seg" id="c-time"><button type="button" data-v="30" aria-pressed="false">30s</button><button type="button" data-v="60" aria-pressed="true">60s</button><button type="button" data-v="90" aria-pressed="false">90s</button></div><span></span></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn" id="btn-start" type="button">
+            <svg viewBox="0 0 6 8" aria-hidden="true"><path d="M0 0h2v8H0zM2 1h2v6H2zM4 2h1v4H4zM5 3h1v2H5z" fill="currentColor"/></svg>
+            START
+          </button>
+          <div class="title-foot">
+            <p class="best-line" id="best-line">BEST 000</p>
+            <a class="wallet-chip" href="#shop"><svg class="coin" viewBox="0 0 8 8" aria-hidden="true"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h1v1H6zM0 2h1v4H0zM7 2h1v4H7zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2z" fill="#8A5A00"/><path d="M2 1h4v1H2zM1 2h6v4H1zM2 6h4v1H2z" fill="#FFC93C"/><path d="M3 2h2v1H3zM3 5h2v1H3zM3 3h1v2H3z" fill="#FFF1A6"/></svg><span id="title-coins">0</span> · SHOP</a>
+          </div>
+        </div>
+
+        <!-- pause -->
+        <div class="overlay dim" id="screen-pause" hidden>
+          <p class="over-title" style="color:var(--butter)">PAUSED</p>
+          <p class="tagline">CRISPY IS HOLDING HIS BREATH.</p>
+          <div class="btn-row">
+            <button class="btn" id="btn-resume" type="button">RESUME</button>
+            <button class="btn ghost" id="btn-restart" type="button">RESTART</button>
+            <button class="btn ghost" id="btn-quit" type="button">MENU</button>
+          </div>
+        </div>
+
+        <!-- results -->
+        <div class="overlay" id="screen-over" hidden>
+          <p class="over-title" id="over-title">TIME'S UP!</p>
+          <div class="over-body">
+            <canvas class="mascot pix" id="over-mascot" width="26" height="30" aria-hidden="true"></canvas>
+            <div class="scorecard">
+              <span class="label">SCORE · <span id="over-diff">NORMAL</span></span>
+              <span class="big" id="over-score">000</span>
+              <span class="newbest" id="over-newbest" hidden>NEW BEST!</span>
+              <span class="rank" id="over-rank">HASH BROWN HERO</span>
+              <div class="stats">
+                <span>Caught <b id="st-caught">0</b></span>
+                <span>Mashed <b id="st-missed">0</b></span>
+                <span>Best combo <b id="st-combo">0</b></span>
+                <span>Hazards hit <b id="st-haz">0</b></span>
+                <span>Golden <b id="st-gold">0</b></span>
+                <span>Best <b id="st-best">0</b></span>
+              </div>
+              <div class="payout" id="over-payout"><svg class="coin" viewBox="0 0 8 8" aria-hidden="true"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h1v1H6zM0 2h1v4H0zM7 2h1v4H7zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2z" fill="#8A5A00"/><path d="M2 1h4v1H2zM1 2h6v4H1zM2 6h4v1H2z" fill="#FFC93C"/><path d="M3 2h2v1H3zM3 5h2v1H3zM3 3h1v2H3z" fill="#FFF1A6"/></svg><span>+<b id="over-coins">0</b> COINS</span><small>WALLET <b id="over-wallet">0</b></small></div>
+              <p class="dog-note" id="over-dog" hidden></p>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btn-again" type="button">
+              <svg viewBox="0 0 8 8" aria-hidden="true"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h2v3H6zM0 2h1v4H0zM5 3h3v1H5zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2zM7 5h1v1H7z" fill="currentColor"/></svg>
+              PLAY AGAIN
+            </button>
+            <button class="btn ghost" id="btn-change" type="button">CHANGE LEVEL</button>
+            <a class="btn ghost" id="btn-shop" href="#shop">SHOP</a>
+          </div>
+          <p class="signoff">STAY GOLDEN, LITTLE POTATO.</p>
+        </div>
+      </div>
+      <p class="controls-hint">Drag left / right (or move the mouse) to slide the basket · <kbd>←</kbd> <kbd>→</kbd> also work · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </section>
+
+  <!-- ================= IP: MEET CRISPY ================= -->
+  <section id="crispy" class="block">
+    <div class="wrap">
+      <p class="eyebrow">THE MASCOT</p>
+      <h2>Meet Crispy</h2>
+      <p class="lede">The house hash brown at the Crunch Club diner. Shredded, pressed and fried until golden, with a soft heart and a habit of falling off the pass.</p>
+
+      <div class="sheet">
+        <div class="portrait">
+          <canvas class="pix bob" id="portrait" width="26" height="30" aria-label="Crispy, a golden pixel hash brown with rosy cheeks"></canvas>
+          <span class="slogan">SMALL POTATO. BIG FEELINGS.</span>
+        </div>
+        <div class="profile">
+          <p class="bio">A golden little daydreamer. Catch him before he hits the counter and turns into a dramatic little mash.</p>
+          <dl class="facts">
+            <dt>SPECIES</dt><dd>Hash brown, 100% shredded potato</dd>
+            <dt>SIZE</dt><dd>17 × 24 pixels, roughly one palm</dd>
+            <dt>HOME</dt><dd>Crunch Club diner, the fry station by the coffee pot</dd>
+            <dt>LIKES</dt><dd>Warm fry baskets, ketchup sunsets, being picked first</dd>
+            <dt>FEARS</dt><dd>The floor. Burnt cousins. Hot sauce with a fuse.</dd>
+            <dt>CATCHPHRASE</dt><dd>"Stay golden!"</dd>
+          </dl>
+          <div>
+            <h3>THREE LITTLE MOODS</h3>
+            <div class="moods">
+              <div class="tile"><canvas class="pix" data-spr="fall" width="26" height="30"></canvas><strong>FALLING</strong><span>Here I come!</span></div>
+              <div class="tile"><canvas class="pix" data-spr="caught" width="26" height="30"></canvas><strong>CAUGHT!</strong><span>Feeling crispy.</span></div>
+              <div class="tile"><canvas class="pix" data-spr="mash" width="30" height="13"></canvas><strong>OH, MASH…</strong><span>I've been mashed.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-foot">
+          <div>
+            <h3>EXPRESSIONS</h3>
+            <div class="exprs">
+              <div class="tile"><canvas class="pix" data-expr="happy" width="26" height="30"></canvas><strong>HAPPY</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="joy" width="26" height="30"></canvas><strong>JOY</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="wink" width="26" height="30"></canvas><strong>WINK</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="smug" width="26" height="30"></canvas><strong>SMUG</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="worried" width="26" height="30"></canvas><strong>WORRIED</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="sad" width="26" height="30"></canvas><strong>SAD</strong></div>
+              <div class="tile"><canvas class="pix" data-expr="dizzy" width="26" height="30"></canvas><strong>DIZZY</strong></div>
+            </div>
+          </div>
+          <div style="display:grid;gap:22px">
+            <div>
+              <h3>PALETTE</h3>
+              <div class="swatches">
+                <div class="sw"><i style="background:#FFF6E3"></i><b>CREAM</b><code>#FFF6E3</code></div>
+                <div class="sw"><i style="background:#FFD978"></i><b>BUTTER</b><code>#FFD978</code></div>
+                <div class="sw"><i style="background:#F5A623"></i><b>GOLD</b><code>#F5A623</code></div>
+                <div class="sw"><i style="background:#E63B2E"></i><b>TOMATO</b><code>#E63B2E</code></div>
+                <div class="sw"><i style="background:#4A2412"></i><b>COCOA</b><code>#4A2412</code></div>
+                <div class="sw"><i style="background:#2F7D6D"></i><b>TEAL</b><code>#2F7D6D</code></div>
+              </div>
+            </div>
+            <div>
+              <h3>UI ICONS</h3>
+              <div class="icons">
+                <figure><span class="icon-btn"><svg viewBox="0 0 10 8"><path d="M0 3h2v2H0zM2 2h1v4H2zM3 1h1v6H3zM4 0h1v8H4zM6 3h1v2H6zM8 1h1v1H8zM8 6h1v1H8zM9 2h1v4H9z" fill="currentColor"/></svg></span>SOUND</figure>
+                <figure><span class="icon-btn"><svg viewBox="0 0 8 8"><rect x="1" y="1" width="2" height="6" fill="currentColor"/><rect x="5" y="1" width="2" height="6" fill="currentColor"/></svg></span>PAUSE</figure>
+                <figure><span class="icon-btn"><svg viewBox="0 0 8 8"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h2v3H6zM0 2h1v4H0zM5 3h3v1H5zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2zM7 5h1v1H7z" fill="currentColor"/></svg></span>REPLAY</figure>
+                <figure><span class="icon-btn"><svg viewBox="0 0 6 8"><path d="M0 0h2v8H0zM2 1h2v6H2zM4 2h1v4H4zM5 3h1v2H5z" fill="currentColor"/></svg></span>START</figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENU BOARD ================= -->
+  <section id="menu" class="block">
+    <div class="wrap">
+      <p class="eyebrow">HOW TO PLAY</p>
+      <h2>Today's menu</h2>
+      <p class="lede">Slide the fry basket under anything golden. Dodge anything dark or on fire. Every round is 60 seconds and things fall faster as the clock runs down.</p>
+      <div class="board">
+        <div class="checker thin"></div>
+        <div class="board-inner">
+          <div>
+            <h3>CATCH</h3>
+            <ul class="menu-list">
+              <li><canvas class="pix" data-item="hash" width="26" height="30"></canvas><span><span class="name">HASH BROWN</span><span class="desc">Golden flash and a crunch.</span></span><span class="price up">+10</span></li>
+              <li><canvas class="pix" data-item="golden" width="26" height="30"></canvas><span><span class="name">GOLDEN HASH BROWN</span><span class="desc">Rare, shiny, falls fast.</span></span><span class="price up">+30</span></li>
+              <li><canvas class="pix" data-item="dog" width="30" height="28"></canvas><span><span class="name">EVIL POTATO DOG</span><span class="desc">Rare. A hash brown that changed its mind.</span></span><span class="price up">+20</span></li>
+              <li><canvas class="pix" data-item="combo" width="26" height="30"></canvas><span><span class="name">COMBO</span><span class="desc">Every 10 catches in a row.</span></span><span class="price up">+20</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>DODGE</h3>
+            <ul class="menu-list">
+              <li><canvas class="pix" data-item="burnt" width="26" height="30"></canvas><span><span class="name">BURNT HASH BROWN</span><span class="desc">Looks like Crispy. Isn't. Breaks your combo.</span></span><span class="price down">−5</span></li>
+              <li><canvas class="pix" data-item="bomb" width="22" height="24"></canvas><span><span class="name">HOT SAUCE BOMB</span><span class="desc">Explodes in the basket and stuns it for a second.</span></span><span class="price down">−15</span></li>
+              <li><canvas class="pix" data-item="mash" width="30" height="13"></canvas><span><span class="name">MISSED ONE</span><span class="desc">Becomes a sad mash with a tiny ghost.</span></span><span class="price down">−2</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>POWER-UPS</h3>
+            <ul class="menu-list">
+              <li><canvas class="pix" data-item="coffee" width="16" height="15"></canvas><span><span class="name">BOTTOMLESS COFFEE</span><span class="desc">Everything falls at half speed for 4 seconds.</span></span><span class="price fx">SLOW</span></li>
+              <li><canvas class="pix" data-item="clock" width="13" height="13"></canvas><span><span class="name">ALARM CLOCK</span><span class="desc">Adds time to the round.</span></span><span class="price fx">+5s</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="board-note">Score never drops below zero. Your best score for each level is saved on this device.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= SHOP ================= -->
+  <section id="shop" class="block">
+    <div class="wrap">
+      <p class="eyebrow">THE COUNTER SHOP</p>
+      <h2>Spend your crunch</h2>
+      <p class="lede">Every point you score is banked as a coin when the round ends, and coins never reset. Save up for new scenes, flavours, sauces, ghosts and bombs.</p>
+
+      <div class="shopfront">
+        <div class="wallet-bar">
+          <div class="wallet-main"><svg class="coin" viewBox="0 0 8 8" aria-hidden="true"><path d="M2 0h4v1H2zM1 1h1v1H1zM6 1h1v1H6zM0 2h1v4H0zM7 2h1v4H7zM1 6h1v1H1zM6 6h1v1H6zM2 7h4v1H2z" fill="#8A5A00"/><path d="M2 1h4v1H2zM1 2h6v4H1zM2 6h4v1H2z" fill="#FFC93C"/><path d="M3 2h2v1H3zM3 5h2v1H3zM3 3h1v2H3z" fill="#FFF1A6"/></svg><span class="wallet-num" id="wallet-num">0</span><span class="wallet-lbl">COINS</span></div>
+          <p class="wallet-sub">Lifetime earned <b id="wallet-earned">0</b> · Price tiers <b>300 · 800 · 1,500 · 3,000</b></p>
+          <a class="btn" href="#play" id="shop-play">PLAY TO EARN</a>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Shop categories" id="shop-tabs">
+          <button role="tab" type="button" data-cat="scene" aria-selected="true">SCENES</button>
+          <button role="tab" type="button" data-cat="flavor" aria-selected="false">FLAVOURS</button>
+          <button role="tab" type="button" data-cat="sauce" aria-selected="false">SAUCES</button>
+          <button role="tab" type="button" data-cat="ghost" aria-selected="false">GHOSTS</button>
+          <button role="tab" type="button" data-cat="bomb" aria-selected="false">BOMBS</button>
+        </div>
+        <div class="shop-grid" id="shop-grid" role="tabpanel"></div>
+        <div class="shop-foot">
+          <p id="shop-msg" role="status" aria-live="polite">Pick something to equip. Equipped items show up in your next round.</p>
+          <button class="linkish" type="button" id="test-coins">Presentation mode: add 1,000 test coins</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EASTER EGG ================= -->
+  <section id="dog" class="block">
+    <div class="wrap">
+      <p class="eyebrow">LOST &amp; FOUND · CLASSIFIED</p>
+      <h2>The Evil Potato Dog</h2>
+      <p class="lede">Roughly one hash brown in forty is not a hash brown. Halfway down it goes <em>poof</em> and turns into a small, unimpressed potato dog. Catch it for double points. Miss it and it trots off the counter, smirking.</p>
+
+      <div class="morph" aria-label="A hash brown turning into the Evil Potato Dog">
+        <figure><canvas class="pix" id="morph-a"></canvas><figcaption>Hash brown, falling</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure><canvas class="pix" id="morph-b"></canvas><figcaption>Poof</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure><canvas class="pix" id="morph-c"></canvas><figcaption>Absolutely not a hash brown</figcaption></figure>
+      </div>
+
+      <div class="dog-rules">
+        <div><b>CHANCE</b><span>About 1 in 40 hash browns</span></div>
+        <div><b>CATCH</b><span>Double a hash brown: +20</span></div>
+        <div><b>MISS</b><span>No penalty. It just leaves.</span></div>
+        <div><b>COLLECT</b><span>5 styles, caught counts saved</span></div>
+      </div>
+
+      <h3>DOG-DEX</h3>
+      <div class="dogdex" id="dogdex"></div>
+    </div>
+  </section>
+
+  <!-- ================= LEVELS ================= -->
+  <section id="levels" class="block">
+    <div class="wrap">
+      <p class="eyebrow">DIFFICULTY</p>
+      <h2>Five ways to rush breakfast</h2>
+      <p class="lede">Higher levels drop faster, send more hazards and give you a smaller basket. Hard and Hell add a side-to-side wobble. Custom lets you set each dial yourself.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>LEVEL</th><th>FALL SPEED</th><th>DROP RATE</th><th>HAZARDS</th><th>BASKET</th><th>EXTRA</th></tr></thead>
+          <tbody id="levels-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEMO REEL ================= -->
+  <section id="reel" class="block">
+    <div class="wrap">
+      <p class="eyebrow">DEMO REEL</p>
+      <h2>43 seconds at the fry station</h2>
+      <div class="reel">
+        <div class="screen">
+          <video id="reel-video" src="assets/demo-reel.mp4" poster="assets/reel-poster.jpg" controls playsinline preload="metadata" muted></video>
+        </div>
+        <div class="reel-notes">
+          <ol class="shotlist">
+            <li><time>00:00</time><span>Title card and Crispy's entrance</span></li>
+            <li><time>00:03</time><span>Character sheet: moods and expressions</span></li>
+            <li><time>00:07</time><span>Catches stack up in the basket, mash stays, ghosts float away</span></li>
+            <li><time>00:15</time><span>A hash brown turns into the Evil Potato Dog: caught for ×2</span></li>
+            <li><time>00:20</time><span>Hell mode: burnt decoys, bombs, golden and power-ups</span></li>
+            <li><time>00:25</time><span>The Counter Shop: buying a scene, flavour, ghosts and bomb</span></li>
+            <li><time>00:30</time><span>Same game in Sunday Picnic with ube hash browns</span></li>
+            <li><time>00:35</time><span>Dog-Dex, difficulty levels, results and coins</span></li>
+          </ol>
+          <div class="gif-card">
+            <div class="screen"><img src="assets/demo-reel.gif" alt="Looping GIF of Hash Brown Catch gameplay" loading="lazy"></div>
+            <p>Loop version for slides and docs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="checker"></div>
+  <div class="wrap">
+    <div>
+      <h4>HASH BROWN CATCH</h4>
+      <p>An 8-bit breakfast mini-game about one very anxious hash brown. Built with p5.js and p5.sound.</p>
+    </div>
+    <div>
+      <h4>COURSE MAPPING</h4>
+      <ul>
+        <li>Week 4 · input: mouse, touch and keyboard drive the basket</li>
+        <li>Week 5 · images: sprite frames for falling, caught and mashed</li>
+        <li>Week 6 · sound: crunch, squelch and start chime</li>
+      </ul>
+    </div>
+    <div>
+      <h4>ASSETS</h4>
+      <p>Characters, items and sound effects are generated in code. Diner background is Crystal's own illustration.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/sketch.js"></script>
+<script src="js/ui.js"></script>
+
+</body></html>

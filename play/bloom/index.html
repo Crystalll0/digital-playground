@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nocturne Bloom 夜花</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed night stage, flower centred on canvas; editorial type + flower library pinned left, instrument readouts along the bottom edge */
+:root{
+  --ink:#000000;
+  --ink-2:#14111a;
+  --text:#f1ebf0;
+  --muted:#958d9b;
+  --line:rgba(241,235,240,.14);
+  --danger:#ff7a7a;
+  --petal:#ff9ab5;              /* per-flower accent, updated by script */
+  --display:"Instrument Serif","Times New Roman",serif;
+  --cn:"Noto Serif SC","Songti SC","STSong",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0;background:var(--ink);color:var(--text);overflow:hidden;font-family:var(--cn)}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:ns-resize;touch-action:none}
+.ui{position:fixed;inset:0;pointer-events:none;display:grid;grid-template-rows:auto 1fr auto;
+  padding-block:clamp(16px,3vw,32px);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.brand{font:500 11px/1.6 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.brand b{color:var(--text);font-weight:500}
+.actions{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto}
+button,.btn{font:500 12px/1 var(--mono);letter-spacing:.05em;color:var(--text);background:rgba(20,17,26,.55);
+  border:1px solid var(--line);border-radius:999px;padding:10px 14px;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:border-color .2s,background .2s,color .2s}
+button:hover,.btn:hover{border-color:var(--petal)}
+button:focus-visible,.btn:focus-visible{outline:2px solid var(--petal);outline-offset:2px}
+button.on{background:var(--petal);color:var(--ink);border-color:var(--petal)}
+.title{align-self:center;max-width:min(40ch,30vw);min-width:0}
+.title .latin{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(28px,3.2vw,48px);line-height:1.05;margin:0;text-wrap:balance;overflow-wrap:anywhere}
+.title .cn{font-size:13px;letter-spacing:.3em;margin-top:10px;color:var(--muted)}
+
+/* flower library */
+.lib-head{display:flex;align-items:baseline;gap:10px;margin-top:26px;font:500 10px var(--mono);letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.lib-head span{font-variant-numeric:tabular-nums}
+.list{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;pointer-events:auto;max-height:32vh;overflow-y:auto;padding:2px}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:rgba(20,17,26,.55);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .2s,border-color .2s}
+.chip:hover{border-color:var(--petal)}
+.chip button{border:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-size:11px;border-radius:999px;color:inherit}
+.chip .name{padding:7px 4px 7px 12px;max-width:28ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip .tag{font-size:9px;letter-spacing:.08em;opacity:.6;padding-right:2px;font-variant-numeric:tabular-nums}
+.chip .del{padding:7px 10px 7px 6px;color:var(--muted);font-size:13px;line-height:11px}
+.chip .del:hover{color:var(--text)}
+.chip.on{background:var(--petal);border-color:var(--petal);color:var(--ink)}
+.chip.on .del{color:var(--ink)}
+.chip.confirm{border-color:var(--danger)}
+.chip.confirm .del{color:var(--danger);font-size:11px}
+.chip.on.confirm .del{color:var(--ink);font-weight:600}
+.add{border-style:dashed}
+.restore{font-size:11px;padding:7px 11px;color:var(--muted)}
+
+.bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.meter{font:400 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.14em;min-width:200px}
+.meter .num{display:block;font-size:44px;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1;margin-top:6px}
+.bar{height:2px;background:var(--line);margin-top:12px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--petal);width:0}
+.status{margin-top:10px;display:flex;align-items:center;gap:8px}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.status.live::before{background:var(--petal);box-shadow:0 0 10px var(--petal)}
+.hints{font:400 11px/1.9 var(--mono);color:var(--muted);letter-spacing:.03em}
+.hints b{color:var(--text);font-weight:500}
+.cam{position:relative;width:184px;aspect-ratio:4/3;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--ink-2)}
+.cam video,.cam canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.cam video{opacity:.55;filter:grayscale(1) contrast(1.1)}
+.cam span{position:absolute;left:8px;top:6px;font:10px var(--mono);color:var(--muted);letter-spacing:.12em}
+#toast{position:fixed;left:50%;top:max(72px,10vh);transform:translateX(-50%);max-width:min(520px,calc(100% - 32px));
+  font:12px/1.6 var(--mono);color:var(--text);background:rgba(20,17,26,.88);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .3s;opacity:0;pointer-events:none;z-index:5}
+#toast.show{opacity:1}
+#panel{position:fixed;inset:0;display:grid;place-items:center;background:rgba(8,7,11,.7);z-index:6;padding:16px}
+#panel .card{width:min(640px,100%);max-height:90vh;overflow:auto;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:24px;font-size:14px;line-height:1.75}
+#panel h2{font-family:var(--display);font-style:italic;font-weight:400;font-size:34px;margin:0 0 4px}
+#panel h3{font:500 11px var(--mono);letter-spacing:.16em;color:var(--muted);margin:22px 0 8px;text-transform:uppercase}
+#panel pre{white-space:pre-wrap;font:12px/1.7 var(--mono);background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0}
+#panel .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+#panel ol{padding-left:20px;margin:0;color:var(--muted)}
+#panel ol b{color:var(--text);font-weight:600}
+.spec{width:100%;border-collapse:collapse;font-size:13px}
+.spec th,.spec td{text-align:left;padding:7px 10px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.spec th{font:500 11px var(--mono);color:var(--muted);letter-spacing:.06em;white-space:nowrap;width:6.5em}
+.spec td{color:var(--text)}
+.spec small{color:var(--muted);font-size:12px}
+#drop{position:fixed;inset:12px;border:1.5px dashed var(--petal);border-radius:20px;display:grid;place-items:center;font:14px var(--mono);color:var(--text);background:rgba(8,7,11,.6);z-index:7;pointer-events:none}
+/* phone: controls on top, flower in the middle, name + swipeable flower strip + slim meter at the bottom */
+@media (max-width:700px){
+  .ui{grid-template-rows:auto 1fr auto auto;row-gap:14px}
+  .top{flex-direction:column;gap:12px}
+  .brand{font-size:10px}
+  .actions{flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% + 32px);margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  .actions::-webkit-scrollbar{display:none}
+  .actions button,.actions .btn{flex:none;padding:8px 12px;font-size:11px}
+  .title{grid-row:3;align-self:end;max-width:100%;width:100%}
+  .title .latin{font-size:24px;line-height:1.15}
+  .title .cn,.lib-head{display:none}
+  .list{flex-wrap:nowrap;overflow-x:auto;max-height:none;margin:10px -16px 0;padding:2px 16px;scrollbar-width:none;scroll-snap-type:x proximity;scroll-padding-inline:16px}
+  .list::-webkit-scrollbar{display:none}
+  .list > *{flex:none;scroll-snap-align:start}
+  .chip .del{display:none}
+  .chip.on .del{display:inline-block}
+  .bottom{grid-row:4;flex-wrap:nowrap;align-items:center;gap:12px}
+  .meter{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:10px;font-size:10px}
+  .meter .num{grid-column:3;grid-row:1;font-size:15px;margin:0;letter-spacing:0}
+  .bar{grid-column:2;grid-row:1;margin:0}
+  .status{grid-column:1 / -1;margin-top:8px}
+  .hints{display:none}
+  .cam{width:88px}
+  #toast{top:auto;bottom:170px;font-size:11px;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="花朵舞台：上下拖动或滚轮控制开合"></canvas>
+
+<div class="ui">
+  <div class="top">
+    <div class="brand"><b>Nocturne Bloom</b> · 夜花<br>手势花开实验</div>
+    <div class="actions">
+      <button id="camBtn" type="button">开启手势</button>
+      <label class="btn" for="fileIn">导入花朵视频</label>
+      <input id="fileIn" type="file" accept="video/*,.mov,.mp4,.webm,.m4v" multiple hidden>
+      <button id="promptBtn" type="button">视频规格与提示词</button>
+    </div>
+  </div>
+
+  <div class="title">
+    <h1 class="latin" id="latin">Paeonia</h1>
+    <div class="cn" id="cn">牡丹 · 花开富贵</div>
+    <div class="lib-head">花园 <span id="count"></span></div>
+    <div class="list" id="list"></div>
+  </div>
+
+  <div class="bottom">
+    <div class="meter">
+      开放度 BLOOM
+      <span class="num" id="num">0%</span>
+      <div class="bar"><i id="barI"></i></div>
+      <div class="status" id="status">鼠标模式</div>
+    </div>
+    <div class="hints">
+      <b>张开手掌</b> 花开 · <b>握拳</b> 花合<br>
+      <b>左右挥手</b> 换花 · <b>捏合食指拇指</b> 撒花瓣<br>
+      没有摄像头：<b>滚轮 / 上下拖动</b> 开合 · <b>← →</b> 换花 · <b>空格</b> 撒花
+    </div>
+    <div class="cam" id="cam" hidden>
+      <video id="camVideo" playsinline muted></video>
+      <canvas id="camCanvas"></canvas>
+      <span>HAND</span>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<div id="drop" hidden>松开鼠标，把视频种进花园（可以一次拖多个）</div>
+
+<div id="panel" hidden>
+  <div class="card">
+    <h2>Make it real</h2>
+    <div style="color:var(--muted)">用 AI 视频工具（即梦、可灵、Veo、Sora 等）生成花朵绽放视频，再导入这里。手势控制视频播到哪一帧：握拳是第一帧，张开手是最后一帧。</div>
+    <h3>视频规格</h3>
+    <table class="spec">
+      <tr><th>格式</th><td>MP4（H.264）最稳。WebM、MOV 一般也行<br><small>iPhone 拍的 HEVC 视频如果打不开，转成 H.264 MP4 再导入</small></td></tr>
+      <tr><th>时长</th><td>3–8 秒最好<br><small>页面最多取 96 帧，视频越长，帧和帧之间跳得越大，开合就没那么顺</small></td></tr>
+      <tr><th>分辨率</th><td>720p 或 1080p 就够<br><small>页面会缩到长边 720px 处理，4K 不会更清晰，只会解析得更慢</small></td></tr>
+      <tr><th>比例</th><td>正方形、竖版、横版都行，花要在画面正中</td></tr>
+      <tr><th>背景</th><td>纯黑最好，会自动抠掉黑色<br><small>其他背景会把四周羽化成暗色，花周围会带一点原背景</small></td></tr>
+      <tr><th>内容</th><td>第一帧花苞，最后一帧盛开；镜头固定不动</td></tr>
+      <tr><th>大小 / 数量</th><td>单个建议 50MB 以内；数量不限<br><small>同时只有 3 段留在内存里，切到更早的花会重新解析几秒</small></td></tr>
+    </table>
+    <h3>中文提示词</h3>
+    <pre id="pCn">一朵粉色牡丹在纯黑背景前缓慢绽放，从紧闭的花苞到完全盛开。花朵居中，略带俯视的正面视角。镜头完全固定，没有任何运镜。柔和的棚拍侧光，花瓣边缘有细腻的透光感，超写实微距摄影，干净的纯黑背景，画面中只有这一朵花。</pre>
+    <div class="row"><button type="button" data-copy="pCn">复制中文</button></div>
+    <h3>English prompt</h3>
+    <pre id="pEn">A single pink peony slowly blooming from a tight closed bud to full bloom, centered, front view from slightly above, pure black background, locked-off static camera with no camera movement, soft studio side light with translucent petal edges, photorealistic macro photography, ultra detailed, nothing else in frame.</pre>
+    <div class="row"><button type="button" data-copy="pEn">Copy English</button><button type="button" id="closePanel">关闭</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const stage = $('stage'), ctx = stage.getContext('2d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W = 0, H = 0, DPR = 1;
+function resize(){
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  W = innerWidth; H = innerHeight;
+  stage.width = Math.round(W*DPR); stage.height = Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+// where the flower sits: beside the text on wide screens, in the gap between controls and name on phones
+const FB = {cx:0, cy:0, w:0, h:0};
+function layoutStage(){
+  if (W <= 700){
+    const top = document.querySelector('.top').getBoundingClientRect().bottom + 6;
+    const bot = document.querySelector('.title').getBoundingClientRect().top - 6;
+    const h = Math.max(140, bot - top);
+    FB.cx = W/2; FB.cy = top + h/2; FB.w = W*.98; FB.h = h;
+  } else {
+    FB.cx = W/2 + (W > 900 ? W*.08 : 0); FB.cy = H*.5; FB.w = W > 900 ? W*.66 : W*.96; FB.h = H*.92;
+  }
+}
+const COARSE = matchMedia('(pointer: coarse)').matches;
+const MODE_TXT = COARSE ? '触屏模式' : '鼠标模式';
+
+const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b, v));
+const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const hash = n => { const s = Math.sin(n*127.1)*43758.5453; return s - Math.floor(s); };
+const hexA = (hex,a) => { const n=parseInt(hex.slice(1),16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; };
+let toastT = 0;
+function toast(msg, ms=2400){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), ms); }
+
+/* ---------- storage: imported videos live in IndexedDB, hidden sample flowers in localStorage ---------- */
+const store = (() => {
+  let p = null;
+  const open = () => p || (p = new Promise((res, rej) => {
+    const r = indexedDB.open('nocturne-bloom', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('videos', {keyPath:'id'});
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+  }));
+  const run = async (mode, fn) => {
+    const db = await open();
+    return new Promise((res, rej) => {
+      const tx = db.transaction('videos', mode), req = fn(tx.objectStore('videos'));
+      tx.oncomplete = () => res(req && req.result); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error);
+    });
+  };
+  return {
+    all: () => run('readonly', s => s.getAll()),
+    put: rec => run('readwrite', s => s.put(rec)),
+    del: id => run('readwrite', s => s.delete(id)),
+  };
+})();
+const HIDE_KEY = 'nocturne-bloom-hidden-v2';
+let hidden = new Set();
+try { hidden = new Set(JSON.parse(localStorage.getItem(HIDE_KEY) || '[]')); } catch {}
+const saveHidden = () => { try { localStorage.setItem(HIDE_KEY, JSON.stringify([...hidden])); } catch {} };
+
+/* ---------- flowers ---------- */
+// built-in flowers: each one is a sequence of pre-keyed WebP frames embedded in this file
+// (the <script type="text/plain" id="f-..."> blocks), so nothing has to be parsed from video at runtime
+const vid = (id, latin, glow) => ({id, latin, cn:'', kind:'video', seq:true, data:'f-' + id.slice(2),
+  blobs:[], bm:[], pend:[], pal:{glow, core:glow}});
+const SAMPLES = [
+  vid('b-peony',    '牡丹 · Tree Peony',       '#ffb3c8'),
+  vid('b-lily',     '睡莲 · Blue Water Lily',  '#9db2ff'),
+  vid('b-camellia', '山茶 · Camellia',         '#f3eee6'),
+  vid('b-lycoris',  '彼岸花 · Red Spider Lily', '#ff7466'),
+  vid('b-iris',     '鸢尾 · Iris',             '#b9a3ff'),
+  vid('b-chrys',    '菊花 · Chrysanthemum',    '#ffd45a'),
+];
+// frames live in frames/<id>.txt next to this page (comma-separated WebP base64), fetched on load
+const framesReady = Promise.all(SAMPLES.map(f => fetch('frames/' + f.data + '.txt').then(r => r.text()).then(txt => {
+  const parts = txt.trim().split(',');
+  f.blobs = parts.map(p => b64Blob(p, 'image/webp'));
+  f.bm = new Array(parts.length).fill(null); f.pend = new Array(parts.length).fill(false);
+  if (!hidden.has(f.id)) posters(f);
+  if (typeof flowers !== 'undefined' && flowers[cur] === f) focusSeq(f);
+}).catch(() => {})));
+const flowers = SAMPLES.filter(s => !hidden.has(s.id));
+if (!flowers.length){ hidden.clear(); saveHidden(); flowers.push(...SAMPLES); }
+let cur = 0, prev = -1, fade = 1;
+let open = 0, prevOpen = 0;
+
+/* ---------- built-in frame sequences: every flower stays loaded ----------
+   All frames live in memory as compressed WebP. Every 6th frame of every flower is kept decoded
+   (so switching shows the new flower instantly), and the flower on stage is decoded in full. */
+const POSTER = 6;
+const isPoster = i => i % POSTER === 0;
+const dq = []; let active = 0;
+function want(f, i, pri){
+  if (f.bm[i] || f.pend[i]) return;
+  f.pend[i] = true; dq.push({f, i, pri});
+}
+const keepIt = (f, i) => !f.dead && (isPoster(i) || f === flowers[cur]);
+function pump(){
+  while (active < 4 && dq.length){
+    let bi = 0;
+    for (let j = 1; j < dq.length; j++) if (dq[j].pri > dq[bi].pri) bi = j;
+    const {f, i} = dq.splice(bi, 1)[0];
+    if (!keepIt(f, i)){ f.pend[i] = false; continue; }
+    active++;
+    createImageBitmap(f.blobs[i])
+      .then(b => { if (keepIt(f, i) && !f.bm[i]) f.bm[i] = b; else b.close(); })
+      .catch(() => {})
+      .finally(() => { f.pend[i] = false; active--; pump(); });
+  }
+}
+function posters(f){ for (let i = 0; i < f.blobs.length; i += POSTER) want(f, i, 200); pump(); }
+function focusSeq(f){
+  for (const g of flowers) if (g.seq && g !== f)
+    g.bm.forEach((b, i) => { if (b && !isPoster(i)){ b.close(); g.bm[i] = null; } });
+  const n = f.blobs.length, c = Math.round(open*(n-1));
+  for (let i = 0; i < n; i++) want(f, i, 100 - Math.abs(i - c));
+  pump();
+}
+const sc = document.createElement('canvas'), sctx = sc.getContext('2d');
+function drawSeq(f, o, cx, cy, alpha){
+  const n = f.bm.length, x = o*(n-1);
+  let i0 = Math.floor(x), i1 = Math.ceil(x);
+  while (i0 >= 0 && !f.bm[i0]) i0--;
+  while (i1 < n && !f.bm[i1]) i1++;
+  if (i0 < 0 && i1 >= n) return;
+  if (i0 < 0) i0 = i1; if (i1 >= n) i1 = i0;
+  const a = f.bm[i0], b = f.bm[i1], k = i1 === i0 ? 0 : (x - i0)/(i1 - i0);
+  const boxW = FB.w, boxH = FB.h;
+  const s = Math.min(boxW/a.width, boxH/a.height);
+  const w = Math.round(a.width*s), h = Math.round(a.height*s);
+  const dw = Math.round(w*DPR), dh = Math.round(h*DPR);
+  if (sc.width !== dw || sc.height !== dh){ sc.width = dw; sc.height = dh; }
+  sctx.clearRect(0, 0, dw, dh);
+  sctx.imageSmoothingEnabled = true; sctx.imageSmoothingQuality = 'high';
+  sctx.globalAlpha = 1; sctx.drawImage(a, 0, 0, dw, dh);
+  if (k > .01){ sctx.globalAlpha = k; sctx.drawImage(b, 0, 0, dw, dh); sctx.globalAlpha = 1; }
+  // soft vignette on the frame edges: stems and petal tips cut by the original video border melt into black
+  sctx.globalCompositeOperation = 'destination-in';
+  const gv = sctx.createLinearGradient(0, 0, 0, dh);
+  gv.addColorStop(0, 'rgba(0,0,0,0)'); gv.addColorStop(.09, 'rgba(0,0,0,1)');
+  gv.addColorStop(.80, 'rgba(0,0,0,1)'); gv.addColorStop(.92, 'rgba(0,0,0,.35)'); gv.addColorStop(1, 'rgba(0,0,0,0)');
+  sctx.fillStyle = gv; sctx.fillRect(0, 0, dw, dh);
+  const gh = sctx.createLinearGradient(0, 0, dw, 0);
+  gh.addColorStop(0, 'rgba(0,0,0,0)'); gh.addColorStop(.06, 'rgba(0,0,0,1)');
+  gh.addColorStop(.94, 'rgba(0,0,0,1)'); gh.addColorStop(1, 'rgba(0,0,0,0)');
+  sctx.fillStyle = gh; sctx.fillRect(0, 0, dw, dh);
+  sctx.globalCompositeOperation = 'source-over';
+  ctx.save(); ctx.globalAlpha = alpha;
+  ctx.drawImage(sc, Math.round(cx - w/2), Math.round(cy - h/2), w, h);
+  ctx.restore();
+}
+
+
+function applyTitle(){
+  const f = flowers[cur];
+  $('latin').textContent = f.latin; $('cn').textContent = f.cn || ''; $('cn').hidden = !f.cn;
+  document.documentElement.style.setProperty('--petal', f.pal.glow);
+  if (f.seq) focusSeq(f); else if (f.kind === 'video') ensureFrames(f);
+}
+function select(i){
+  i = (i + flowers.length) % flowers.length;
+  if (i === cur) return;
+  prev = cur; cur = i; fade = 0;
+  prevOpen = open; open = Math.min(open, .05);   // the new flower re-blooms to the current target
+  applyTitle(); renderList();
+}
+
+/* library chips */
+const listEl = $('list');
+let confirmId = null, confirmT = 0;
+function renderList(){
+  listEl.innerHTML = '';
+  const vids = flowers.filter(f => f.kind === 'video').length;
+  $('count').textContent = `${flowers.length} 朵 · ${vids} 段视频`;
+  flowers.forEach((f, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'chip' + (i === cur ? ' on' : '') + (confirmId === f.id ? ' confirm' : '');
+    const name = document.createElement('button');
+    name.type = 'button'; name.className = 'name'; name.textContent = f.latin;
+    name.title = f.kind === 'video' ? `${f.latin}（双击改名）` : f.latin;
+    name.addEventListener('click', () => select(i));
+    if (f.kind === 'video') name.addEventListener('dblclick', () => rename(f));
+    chip.appendChild(name);
+    if (f.kind === 'video'){
+      const tag = document.createElement('span'); tag.className = 'tag'; tag.dataset.id = f.id;
+      tag.textContent = tagText(f);
+      chip.appendChild(tag);
+    }
+    const del = document.createElement('button');
+    del.type = 'button'; del.className = 'del';
+    del.textContent = confirmId === f.id ? '删除?' : '×';
+    del.setAttribute('aria-label', confirmId === f.id ? `确认删除 ${f.latin}` : `删除 ${f.latin}`);
+    del.addEventListener('click', e => { e.stopPropagation(); askDelete(f); });
+    chip.appendChild(del);
+    listEl.appendChild(chip);
+  });
+  const add = document.createElement('label');
+  add.className = 'btn add'; add.htmlFor = 'fileIn'; add.textContent = '+ 添加视频'; add.style.fontSize = '11px'; add.style.padding = '7px 12px';
+  listEl.appendChild(add);
+  const missing = SAMPLES.filter(s => !flowers.includes(s));
+  if (missing.length){
+    const r = document.createElement('button');
+    r.type = 'button'; r.className = 'restore'; r.textContent = `恢复内置花（${missing.length}）`;
+    r.addEventListener('click', () => {
+      const keep = flowers[cur];
+      missing.forEach(s => { hidden.delete(s.id); s.dead = false; s.bm.fill(null); s.pend.fill(false); posters(s); }); saveHidden();
+      flowers.unshift(...SAMPLES.filter(s => missing.includes(s)));
+      cur = flowers.indexOf(keep); prev = -1; renderList();
+    });
+    listEl.appendChild(r);
+  }
+  if (W <= 700){ const on = listEl.querySelector('.chip.on'); if (on) listEl.scrollTo({left: on.offsetLeft - 16, behavior:'smooth'}); }
+}
+const tagText = f => f.error ? '无法播放' : f.loading ? `${Math.round((f.progress||0)*100)}%` : '';
+function updateTag(f){   // progress updates touch only the tag, so clicks on the chips are never interrupted
+  const el = listEl.querySelector(`.tag[data-id="${f.id}"]`);
+  if (el) el.textContent = tagText(f);
+}
+function askDelete(f){
+  if (confirmId !== f.id){
+    confirmId = f.id; renderList();
+    clearTimeout(confirmT); confirmT = setTimeout(() => { confirmId = null; renderList(); }, 3000);
+    return;
+  }
+  clearTimeout(confirmT); confirmId = null;
+  if (flowers.length === 1){ toast('花园里至少要留一朵花。先添加新的，再删这一朵。'); renderList(); return; }
+  const i = flowers.indexOf(f); if (i < 0) return;
+  const wasCur = i === cur;
+  if (f.kind === 'video'){
+    f.dead = true; freeFrames(f);
+    store.del(f.id).catch(() => {});
+  } else { hidden.add(f.id); saveHidden(); }
+  flowers.splice(i, 1);
+  prev = -1; fade = 1;
+  if (i < cur) cur--;
+  if (wasCur){ cur = Math.min(cur, flowers.length-1); open = Math.min(open, .05); applyTitle(); }
+  renderList();
+  toast(`已删除「${f.latin}」`);
+}
+function rename(f){
+  const n = prompt('给这朵花起个名字', f.latin);
+  if (!n || !n.trim()) return;
+  f.latin = n.trim().slice(0, 32);
+  if (f.rec){ f.rec.name = f.latin; store.put(f.rec).catch(() => {}); }
+  if (flowers[cur] === f) applyTitle();
+  renderList();
+}
+
+/* ---------- video frames: decode on demand, keep at most 3 decoded ---------- */
+const KEEP = 2, MAXF = 72, EDGE = 800;
+const decoded = [];               // LRU of video flowers holding frames
+let chain = Promise.resolve();
+function freeFrames(f){
+  if (f.bm) f.bm.forEach((b, i) => { if (b){ b.close(); f.bm[i] = null; } });
+  if (f.frames) f.frames.forEach(b => b.close && b.close());
+  f.frames = null;
+  const k = decoded.indexOf(f); if (k >= 0) decoded.splice(k, 1);
+}
+function touch(f){
+  const k = decoded.indexOf(f); if (k >= 0) decoded.splice(k, 1);
+  decoded.push(f);
+  while (decoded.length > KEEP){
+    const victim = decoded.find(v => v !== flowers[cur] && v !== flowers[prev] && v !== f);
+    if (!victim) break;
+    freeFrames(victim);
+  }
+}
+function ensureFrames(f){
+  if (f.seq) return;
+  if (f.frames){ touch(f); return; }
+  if (f.loading || f.error || f.dead) return;
+  f.loading = true; f.progress = 0; updateTag(f);
+  chain = chain.then(() => decode(f)).catch(err => { console.error(err); });
+}
+async function decode(f){
+  if (f.dead){ f.loading = false; return; }
+  if (!f.blob && f.data) f.blob = b64Blob($(f.data).textContent.trim(), 'video/webm');
+  const url = URL.createObjectURL(f.blob);
+  const v = document.createElement('video');
+  v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url;
+  const once = ev => new Promise((res, rej) => {
+    const ok = () => { v.removeEventListener('error', bad); res(); };
+    const bad = () => { v.removeEventListener(ev, ok); rej(new Error('video')); };
+    v.addEventListener(ev, ok, {once:true}); v.addEventListener('error', bad, {once:true});
+  });
+  const seek = async t => { v.currentTime = t; await once('seeked'); };
+  const frames = [];
+  try {
+    await once('loadeddata');
+    const dur = v.duration;
+    if (!isFinite(dur) || dur <= 0) throw new Error('duration');
+    const N = Math.round(clamp(dur*24, 24, MAXF));
+    const VW = v.videoWidth, VH = v.videoHeight;
+    // 1. analyse a small copy: background level from the bud frame, bounds + colour from the bloom frames
+    const as = Math.min(1, 480/Math.max(VW, VH)), aw = Math.round(VW*as), ah = Math.round(VH*as);
+    const ac = document.createElement('canvas'); ac.width = aw; ac.height = ah;
+    const ax = ac.getContext('2d', {willReadFrequently:true});
+    const snap = () => { ax.clearRect(0,0,aw,ah); ax.drawImage(v, 0, 0, aw, ah); return ax.getImageData(0,0,aw,ah).data; };
+    await seek(Math.min(.02, dur/2));
+    let d = snap();
+    const border = [];
+    for (let x = 0; x < aw; x += 3){ border.push(luma(d, x*4), luma(d, ((ah-1)*aw + x)*4)); }
+    for (let y = 0; y < ah; y += 3){ border.push(luma(d, y*aw*4), luma(d, (y*aw + aw-1)*4)); }
+    border.sort((a, b) => a - b);
+    const bg = border[Math.floor(border.length*.9)];
+    const thr = bg + 26;
+    let x0 = aw, y0 = ah, x1 = 0, y1 = 0, r = 0, g = 0, b = 0, n = 0;
+    for (const t of [dur-0.04, dur*.8, dur*.6]){
+      await seek(t); d = snap();
+      for (let y = 0; y < ah; y++) for (let x = 0; x < aw; x++){
+        const i = (y*aw + x)*4;
+        if (luma(d, i) > thr){
+          if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+          r += d[i]; g += d[i+1]; b += d[i+2]; n++;
+        }
+      }
+    }
+    f.keyed = bg < 75 && n > 200;
+    if (!f.presetGlow){ const glow = n ? liftColour(r/n, g/n, b/n) : '#e8dcff'; f.pal = {glow, core:glow}; }
+    if (f.rec){ Object.assign(f.rec, {glow:f.pal.glow, keyed:f.keyed}); store.put(f.rec).catch(() => {}); }
+    if (flowers[cur] === f) applyTitle();
+    f.progress = .08; updateTag(f);
+
+    // 2. crop region in source pixels (whole frame when the background is not dark)
+    let sx = 0, sy = 0, sw = VW, sh = VH;
+    if (f.keyed && !f.pre){
+      const m = Math.max(x1-x0, y1-y0)*.08;
+      sx = Math.max(0, (x0-m)/as); sy = Math.max(0, (y0-m)/as);
+      sw = Math.min(VW, (x1+m+1)/as) - sx; sh = Math.min(VH, (y1+m+1)/as) - sy;
+    }
+    const cs = Math.min(1, (f.pre ? 1280 : EDGE)/Math.max(sw, sh));
+    const cw = Math.max(2, Math.round(sw*cs)), ch = Math.max(2, Math.round(sh*cs));
+    const wc = document.createElement('canvas'); wc.width = cw; wc.height = ch;
+    const wx = wc.getContext('2d', {willReadFrequently:true});
+    const lo = bg + 8, span = 30;
+    const ex = new Float32Array(cw), ey = new Float32Array(ch);   // soft fade at the crop edge
+    for (let x = 0; x < cw; x++) ex[x] = Math.min(1, Math.min(x, cw-1-x)/(f.pre ? 3 : cw*.05));
+    for (let y = 0; y < ch; y++) ey[y] = Math.min(1, Math.min(y, ch-1-y)/(f.pre ? 3 : ch*.05));
+
+    // 3. extract, key and crop every frame
+    let lastTag = 0;
+    for (let k = 0; k < N; k++){
+      if (f.dead) throw new Error('deleted');
+      await seek(Math.min(dur-0.04, Math.max(.02, dur*k/(N-1))));
+      wx.clearRect(0, 0, cw, ch);
+      wx.drawImage(v, sx, sy, sw, sh, 0, 0, cw, ch);
+      if (f.keyed){
+        const img = wx.getImageData(0, 0, cw, ch), p = img.data;
+        for (let y = 0; y < ch; y++){
+          const fy = ey[y]; let i = y*cw*4;
+          for (let x = 0; x < cw; x++, i += 4){
+            let a = (luma(p, i) - lo)/span;
+            a = a <= 0 ? 0 : a >= 1 ? 1 : a*a*(3-2*a);
+            p[i+3] = 255*a*fy*ex[x];
+          }
+        }
+        wx.putImageData(img, 0, 0);
+      }
+      frames.push(await createImageBitmap(wc));
+      f.progress = .08 + .92*(k+1)/N;
+      if (performance.now() - lastTag > 200){ lastTag = performance.now(); updateTag(f); }
+    }
+    f.frames = frames; touch(f);
+    if (flowers[cur] === f) applyTitle();
+  } catch (err){
+    frames.forEach(bm => bm.close());
+    if (err.message !== 'deleted'){
+      f.error = true;
+      toast(`「${f.latin}」打不开。转成 MP4（H.264）格式再导入试试。`, 6000);
+    }
+  } finally {
+    URL.revokeObjectURL(url); v.removeAttribute('src'); v.load();
+    f.loading = false; updateTag(f);
+  }
+}
+const luma = (d, i) => .299*d[i] + .587*d[i+1] + .114*d[i+2];
+function liftColour(r, g, b){
+  let rgb = [r, g, b]; const mx = Math.max(...rgb, 1);
+  rgb = rgb.map(x => Math.round(x/mx*235*.75 + 255*.25));
+  return '#' + rgb.map(x => Math.min(255, x).toString(16).padStart(2,'0')).join('');
+}
+function b64Blob(b64, type){
+  const bin = atob(b64), u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return new Blob([u], {type});
+}
+function videoFlower(rec){
+  const known = typeof rec.keyed === 'boolean';
+  return {id:rec.id, rec, blob:rec.blob, latin:rec.name, kind:'video', frames:null,
+    cn: '',
+    keyed: !!rec.keyed, pal:{glow:rec.glow || '#d8c8ff', core:rec.glow || '#d8c8ff'}};
+}
+async function importFiles(list){
+  const files = [...list].filter(f => f.type.startsWith('video/') || /\.(mp4|mov|m4v|webm)$/i.test(f.name));
+  if (!files.length){ toast('没找到视频文件。支持 MP4、MOV、WebM。'); return; }
+  let first = -1, saved = true;
+  for (const file of files){
+    const rec = {id:'v-' + Date.now().toString(36) + Math.random().toString(36).slice(2,7),
+      name:(file.name.replace(/\.[^.]+$/, '') || 'My Bloom').slice(0, 32), blob:file, added:Date.now()};
+    try { await store.put(rec); } catch { saved = false; }
+    const f = videoFlower(rec);
+    flowers.push(f);
+    if (first < 0) first = flowers.length - 1;
+    ensureFrames(f);
+  }
+  select(first); renderList();
+  toast(saved ? `已添加 ${files.length} 段视频，正在解析。下次打开这个页面它们还在。`
+              : `已添加 ${files.length} 段视频。浏览器没允许保存，刷新后需要重新导入。`, 4500);
+}
+$('fileIn').addEventListener('change', e => { importFiles(e.target.files); e.target.value = ''; });
+let dragDepth = 0;
+const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+addEventListener('dragenter', e => { if (!hasFiles(e)) return; e.preventDefault(); dragDepth++; $('drop').hidden = false; });
+addEventListener('dragleave', () => { if (--dragDepth <= 0){ dragDepth = 0; $('drop').hidden = true; } });
+addEventListener('dragover', e => { if (hasFiles(e)) e.preventDefault(); });
+addEventListener('drop', e => { e.preventDefault(); dragDepth = 0; $('drop').hidden = true; if (e.dataTransfer.files.length) importFiles(e.dataTransfer.files); });
+
+// restore saved videos
+store.all().then(recs => {
+  if (!recs || !recs.length) return;
+  // videos imported earlier that are now built in are dropped, so the garden has no duplicates
+  const norm = s => String(s || '').replace(/\s+/g, '').toLowerCase();
+  const builtIn = new Set(SAMPLES.map(s => norm(s.latin)));
+  const keep = [];
+  for (const r of recs){
+    if (builtIn.has(norm(r.name))) store.del(r.id).catch(() => {});
+    else keep.push(r);
+  }
+  if (!keep.length) return;
+  keep.sort((a,b) => a.added - b.added).forEach(r => flowers.push(videoFlower(r)));
+  renderList();
+}).catch(() => {});
+renderList(); applyTitle();
+$('status').textContent = MODE_TXT;
+if (COARSE) setTimeout(() => toast('上下滑动让花开合 · 左右滑动换花', 4000), 800);
+setTimeout(() => flowers.slice(0, KEEP).forEach(f => f.kind === 'video' && ensureFrames(f)), 300);
+
+/* ---------- procedural flower ---------- */
+function petal(len, wid, shape){
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  ctx.bezierCurveTo(wid*.95,-len*.18, wid*1.05,-len*(.72*shape+.1), wid*.38,-len*.97);
+  ctx.quadraticCurveTo(wid*.16,-len*1.04, 0,-len*.95);
+  ctx.quadraticCurveTo(-wid*.16,-len*1.04, -wid*.38,-len*.97);
+  ctx.bezierCurveTo(-wid*1.05,-len*(.72*shape+.1), -wid*.95,-len*.18, 0,0);
+  ctx.closePath();
+}
+function drawProc(f, o, t, cx, cy, R, alpha){
+  const P = f.pal, L = f.layers;
+  ctx.save(); ctx.globalAlpha = alpha;
+  const halo = ctx.createRadialGradient(cx,cy,0,cx,cy,R*1.6);
+  halo.addColorStop(0, hexA(P.glow,.22*o+.04)); halo.addColorStop(1, hexA(P.glow,0));
+  ctx.fillStyle = halo; ctx.fillRect(cx-R*1.6,cy-R*1.6,R*3.2,R*3.2);
+  for (let l = L-1; l >= 0; l--){
+    const fr = L>1 ? l/(L-1) : 1;
+    const start = (1-fr)*.5;
+    const lo = ease(clamp((o-start)/(1-start*.85)));
+    const n = f.base + Math.round(fr*f.base*.5);
+    const len = R*(.26+.74*fr)*(.34+.66*lo);
+    const wid = len*(.62-.1*fr)*(.55+.45*lo)*(f.shape<.8?.8:1);
+    const twist = (1-lo)*1.5 + l*.61;
+    for (let i = 0; i < n; i++){
+      const j = hash(l*37+i*3.1);
+      const a = i/n*Math.PI*2 + twist + Math.sin(t*.5+i+l)*.012*(1+lo);
+      ctx.save(); ctx.translate(cx,cy); ctx.rotate(a);
+      const pl = len*(.88+.24*j);
+      const g = ctx.createLinearGradient(0,0,0,-pl);
+      g.addColorStop(0, P.base); g.addColorStop(.35+.2*fr, P.mid); g.addColorStop(1, P.tip);
+      ctx.fillStyle = g;
+      ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 14*(1-fr*.5);
+      petal(pl, wid*(.9+.2*j), f.shape); ctx.fill();
+      ctx.shadowBlur = 0;
+      const s = ctx.createLinearGradient(0,0,0,-pl);
+      s.addColorStop(0,'rgba(0,0,0,.35)'); s.addColorStop(.5,'rgba(0,0,0,0)');
+      ctx.fillStyle = s; ctx.fill();
+      ctx.strokeStyle = hexA(P.tip,.35); ctx.lineWidth = .8; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,-pl*.08); ctx.quadraticCurveTo(wid*.06,-pl*.5,0,-pl*.85);
+      ctx.strokeStyle = hexA(P.base,.25); ctx.lineWidth = 1; ctx.stroke();
+      ctx.restore();
+    }
+  }
+  const so = ease(clamp((o-.55)/.45));
+  if (so > 0){
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 46; i++){
+      const a = i*2.39996 + t*.05, r = R*.16*so*Math.sqrt((i+1)/46);
+      ctx.fillStyle = hexA(P.core,.85*so);
+      ctx.beginPath(); ctx.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 1.2+1.6*hash(i), 0, Math.PI*2); ctx.fill();
+    }
+    const cg = ctx.createRadialGradient(cx,cy,0,cx,cy,R*.22);
+    cg.addColorStop(0, hexA(P.core,.55*so)); cg.addColorStop(1, hexA(P.core,0));
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx,cy,R*.22,0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* ---------- video flower ---------- */
+const oc = document.createElement('canvas'), octx = oc.getContext('2d');
+function drawVideo(f, o, t, cx, cy, R, alpha){
+  if (f.seq){ drawSeq(f, o, cx, cy, alpha); return; }
+  const fr = f.frames;
+  if (!fr || !fr.length){ drawPending(f, t, cx, cy, R, alpha); return; }
+  const idx = o*(fr.length-1), i = Math.floor(idx), k = idx - i;
+  const a = fr[i], b = fr[Math.min(fr.length-1, i+1)];
+  // keyed frames are cropped to the flower, so they can fill most of the stage
+  const wide = W > 900;
+  const boxW = FB.w, boxH = FB.h;
+  const s = Math.min(boxW/a.width, boxH/a.height);
+  const w = a.width*s, h = a.height*s;
+  if (oc.width !== Math.round(w) || oc.height !== Math.round(h)){ oc.width = Math.round(w); oc.height = Math.round(h); }
+  octx.globalCompositeOperation = 'source-over';
+  octx.clearRect(0,0,oc.width,oc.height);
+  octx.imageSmoothingQuality = 'high';
+  octx.globalAlpha = 1; octx.drawImage(a,0,0,oc.width,oc.height);
+  if (k > .01 && b !== a){ octx.globalAlpha = k; octx.drawImage(b,0,0,oc.width,oc.height); octx.globalAlpha = 1; }
+  if (!f.keyed){
+    octx.globalCompositeOperation = 'destination-in';
+    const g = octx.createRadialGradient(oc.width/2,oc.height/2,Math.min(oc.width,oc.height)*.28,oc.width/2,oc.height/2,Math.max(oc.width,oc.height)*.55);
+    g.addColorStop(0,'rgba(0,0,0,1)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    octx.fillStyle = g; octx.fillRect(0,0,oc.width,oc.height);
+  }
+  ctx.save();
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = alpha; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(oc, Math.round(cx-w/2), Math.round(cy-h/2), Math.round(w), Math.round(h));
+  ctx.restore();
+}
+function drawPending(f, t, cx, cy, R, alpha){
+  const r = R*.32, p = f.progress || 0;
+  ctx.save(); ctx.globalAlpha = alpha;
+  ctx.strokeStyle = f.pal.glow; ctx.lineWidth = 1.5;
+  ctx.globalAlpha = alpha*.2; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
+  ctx.globalAlpha = alpha; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2 + Math.PI*2*(f.loading ? Math.max(.02,p) : 0)); ctx.stroke();
+  ctx.fillStyle = '#f1ebf0'; ctx.textAlign = 'center';
+  ctx.font = '12px "JetBrains Mono", ui-monospace, monospace';
+  const msg = f.error ? '这个视频打不开' : f.loading ? `解析视频 ${Math.round(p*100)}%` : '排队中…';
+  ctx.fillText(msg, cx, cy+4);
+  ctx.restore();
+}
+
+/* ---------- particles ---------- */
+const parts = [];
+const MAXP = reduce ? 120 : 700;
+function emit(x, y, n, col, type='dot', speed=1){
+  for (let i = 0; i < n && parts.length < MAXP; i++){
+    const a = Math.random()*Math.PI*2, v = (type==='petal' ? 3 + Math.random()*6 : .2 + Math.random()*.8)*speed;
+    parts.push({x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v - (type==='dot'? .4 : 1.5), life:0,
+      max: type==='petal' ? 140+Math.random()*120 : 80+Math.random()*120,
+      size: type==='petal' ? 6+Math.random()*9 : .8+Math.random()*2.2,
+      rot: Math.random()*6.28, vr:(Math.random()-.5)*.2, col, type, seed:Math.random()*100});
+  }
+}
+function burst(x, y){
+  const P = flowers[cur].pal;
+  emit(x, y, reduce ? 12 : 48, P.glow, 'petal', 1.1);
+  emit(x, y, reduce ? 20 : 90, P.core || P.glow, 'dot', 4);
+}
+function stepParticles(dt, t){
+  for (let i = parts.length-1; i >= 0; i--){
+    const p = parts[i]; p.life += dt;
+    if (p.life > p.max || p.y < -40 || p.y > H+40){ parts.splice(i,1); continue; }
+    if (p.type === 'petal'){ p.vy += .05*dt; p.vx *= .985; p.vy *= .985; p.vx += Math.sin(t*1.7 + p.seed)*.04*dt; }
+    else { p.vx += Math.sin(t + p.seed)*.01*dt; p.vy -= .006*dt; p.vx *= .99; p.vy *= .99; }
+    p.x += p.vx*dt; p.y += p.vy*dt; p.rot += p.vr*dt;
+  }
+}
+function drawParticles(){
+  for (const p of parts){
+    if (p.type !== 'petal') continue;
+    const k = 1 - p.life/p.max, fadeIn = Math.min(1, p.life/8);
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.scale(1, .55+.45*Math.sin(p.rot*2));
+    ctx.globalAlpha = k*fadeIn*.9; ctx.fillStyle = p.col;
+    ctx.beginPath(); ctx.ellipse(0,0,p.size*.55,p.size,0,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (const p of parts){
+    if (p.type !== 'dot') continue;
+    const k = 1 - p.life/p.max;
+    ctx.globalAlpha = k*.9; ctx.fillStyle = p.col;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.size*(.6+.4*k),0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* ---------- input ---------- */
+let target = .82, lastInput = 0, handT = .82;
+let px = .5, py = .5, tpx = .5, tpy = .5;
+let handOn = false, tip = null;
+let lastBloomBurst = 0, wasFull = false;
+
+stage.addEventListener('wheel', e => { e.preventDefault(); target = clamp(target - e.deltaY*.0012); lastInput = performance.now(); }, {passive:false});
+let drag = null;
+// drag up/down = bloom; swipe left/right = next/previous flower
+stage.addEventListener('pointerdown', e => { drag = {x:e.clientX, y:e.clientY, t:target, moved:false, mode:null, swiped:false}; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', e => {
+  if (!handOn){ tpx = e.clientX/W; tpy = e.clientY/H; }
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!drag.mode && Math.hypot(dx, dy) > 8) drag.mode = Math.abs(dx) > Math.abs(dy)*1.3 ? 'h' : 'v';
+  if (!drag.mode) return;
+  drag.moved = true;
+  if (drag.mode === 'v'){ target = clamp(drag.t - dy/(H*.5)); lastInput = performance.now(); }
+  else if (!drag.swiped && Math.abs(dx) > 60){ drag.swiped = true; select(cur + (dx < 0 ? 1 : -1)); }
+});
+stage.addEventListener('pointerup', e => { if (drag && !drag.moved) burst(e.clientX, e.clientY); drag = null; });
+addEventListener('keydown', e => {
+  if (!$('panel').hidden){ if (e.key === 'Escape') $('panel').hidden = true; return; }
+  if (e.target.closest && e.target.closest('button,input,label')) { if (e.key === ' ' || e.key === 'Enter') return; }
+  if (e.key === 'ArrowUp'){ target = clamp(target+.1); lastInput = performance.now(); }
+  else if (e.key === 'ArrowDown'){ target = clamp(target-.1); lastInput = performance.now(); }
+  else if (e.key === 'ArrowRight') select(cur+1);
+  else if (e.key === 'ArrowLeft') select(cur-1);
+  else if (e.key === ' '){ e.preventDefault(); burst(W/2, H/2); }
+});
+
+/* ---------- hand tracking (MediaPipe) ---------- */
+const camVideo = $('camVideo'), camCanvas = $('camCanvas'), cc = camCanvas.getContext('2d');
+let landmarker = null, camOn = false, lastVT = -1, swipe = [], lastSwipe = 0, lastPinch = 0;
+const status = s => { $('status').textContent = s; $('status').classList.toggle('live', handOn); };
+const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+$('camBtn').addEventListener('click', async () => {
+  if (camOn){ stopCam(); return; }
+  try {
+    status('正在请求摄像头…');
+    const stream = await navigator.mediaDevices.getUserMedia({video:{width:640, height:480, facingMode:'user'}, audio:false});
+    camVideo.srcObject = stream; await camVideo.play();
+    $('cam').hidden = false; camOn = true; $('camBtn').classList.add('on'); $('camBtn').textContent = '关闭手势';
+    if (!landmarker){
+      status('正在加载手势模型…（首次约几秒）');
+      const vision = await import(MP + '/vision_bundle.mjs');
+      const files = await vision.FilesetResolver.forVisionTasks(MP + '/wasm');
+      const opts = d => ({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task', delegate:d},
+        runningMode:'VIDEO', numHands:1, minHandDetectionConfidence:.6, minTrackingConfidence:.5});
+      try { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('GPU')); }
+      catch { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('CPU')); }
+    }
+    status('手势已开启 · 把手举到镜头前');
+  } catch (err){
+    console.error(err); stopCam();
+    if (err && (err.name === 'NotAllowedError' || err.name === 'SecurityError'))
+      toast('没拿到摄像头权限。点地址栏左边的图标允许摄像头，再点一次「开启手势」。', 6000);
+    else if (err && err.name === 'NotFoundError') toast('没找到摄像头。可以先用滚轮或上下拖动来控制花朵。', 5000);
+    else toast('手势模型没加载成功，检查一下网络后再试。现在先用鼠标控制。', 6000);
+  }
+});
+function stopCam(){
+  const s = camVideo.srcObject; if (s) s.getTracks().forEach(t => t.stop());
+  camVideo.srcObject = null; camOn = false; handOn = false; tip = null;
+  $('cam').hidden = true; $('camBtn').classList.remove('on'); $('camBtn').textContent = '开启手势';
+  status(MODE_TXT);
+}
+const D = (a,b) => Math.hypot((a.x-b.x)*4/3, a.y-b.y);
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+function track(now){
+  if (!camOn || !landmarker || camVideo.readyState < 2 || camVideo.currentTime === lastVT) return;
+  lastVT = camVideo.currentTime;
+  let res; try { res = landmarker.detectForVideo(camVideo, now); } catch { return; }
+  const cw = camCanvas.width = camCanvas.clientWidth*DPR, ch = camCanvas.height = camCanvas.clientHeight*DPR;
+  cc.clearRect(0,0,cw,ch);
+  const lm = res.landmarks && res.landmarks[0];
+  const was = handOn; handOn = !!lm;
+  if (!lm){ tip = null; if (was) status('手势已开启 · 把手举到镜头前'); return; }
+  if (!was) status('手势已开启 · 已识别');
+  cc.strokeStyle = flowers[cur].pal.glow; cc.lineWidth = 2*DPR; cc.beginPath();
+  for (const [a,b] of BONES){ cc.moveTo(lm[a].x*cw, lm[a].y*ch); cc.lineTo(lm[b].x*cw, lm[b].y*ch); }
+  cc.stroke();
+  const palm = D(lm[0], lm[9]) || 1e-3;
+  const spread = ([8,12,16,20].reduce((s,i) => s + D(lm[0], lm[i]), 0)/4)/palm;
+  { // smooth + dead zone so tracking noise never shakes the flower
+    const raw = clamp((spread - 1.0)/0.72);
+    handT += (raw - handT)*.3;
+    if (Math.abs(handT - target) > .02 || handT < .02 || handT > .98) target = handT;
+    lastInput = now;
+  }
+  tpx = 1 - lm[9].x; tpy = lm[9].y;
+  tip = {x:(1-lm[8].x)*W, y:lm[8].y*H};
+  const pinch = D(lm[4], lm[8])/palm, midOut = D(lm[0], lm[12])/palm;
+  if (pinch < .32 && midOut > 1.45 && now - lastPinch > 900){ lastPinch = now; burst(tip.x, tip.y); }
+  swipe.push({x:tpx, t:now}); while (swipe.length && now - swipe[0].t > 320) swipe.shift();
+  if (swipe.length > 3 && now - lastSwipe > 1100){
+    const dx = swipe[swipe.length-1].x - swipe[0].x;
+    if (Math.abs(dx) > .3){ lastSwipe = now; swipe = []; select(cur + (dx > 0 ? 1 : -1)); }
+  }
+}
+
+/* ---------- prompts panel ---------- */
+$('promptBtn').addEventListener('click', () => { $('panel').hidden = false; });
+$('closePanel').addEventListener('click', () => { $('panel').hidden = true; });
+$('panel').addEventListener('click', e => { if (e.target.id === 'panel') $('panel').hidden = true; });
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const el = $(b.dataset.copy);
+  try { await navigator.clipboard.writeText(el.textContent); toast('已复制'); }
+  catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('已选中，按 ⌘C 复制'); }
+}));
+
+/* ---------- main loop ---------- */
+let last = performance.now();
+const start = last;
+lastInput = last;
+function frame(now){
+  const dt = Math.min(3, (now - last)/16.67); last = now;
+  const t = (now - start)/1000;
+  track(now);
+  const k = 1 - Math.pow(1 - (handOn ? .1 : .08), dt);
+  open += (target - open)*k;
+  if (Math.abs(target - open) < .002) open = target;   // settle completely, no residual drift
+  px += (tpx - px)*.06*dt; py += (tpy - py)*.06*dt;
+  if (fade < 1) fade = Math.min(1, fade + .03*dt);
+  if (open > .965 && !wasFull && now - lastBloomBurst > 2500){ lastBloomBurst = now; burst(W/2, H/2); }
+  wasFull = open > .95;
+
+  ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+  ctx.fillStyle = '#000'; ctx.fillRect(0,0,W,H);   // pure black stage
+  const f = flowers[cur];
+
+  const R = Math.min(W, H)*.3;
+  layoutStage();
+  const cx = Math.round(FB.cx), cy = Math.round(FB.cy);
+  ctx.save();
+  const pf = prev >= 0 ? flowers[prev] : null;
+  if (pf && fade < 1) (pf.kind === 'proc' ? drawProc : drawVideo)(pf, prevOpen, t, cx, cy, R, 1-fade);
+  (f.kind === 'proc' ? drawProc : drawVideo)(f, open, t, cx, cy, R, fade);
+  ctx.restore();
+
+  if (Math.random() < open*.6*dt) emit(cx + (Math.random()-.5)*R*.4, cy + (Math.random()-.5)*R*.4, 1, f.pal.core || f.pal.glow);
+  if (tip && Math.random() < .8) emit(tip.x, tip.y, 2, f.pal.glow);
+  stepParticles(dt, t); drawParticles();
+
+  const pct = Math.round(open*100);
+  $('num').textContent = pct + '%'; $('barI').style.width = pct + '%';
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Digital Playground · Crystal</title>
+<meta name="description" content="Crystal 的数字游乐场：手势交互、生成艺术、小游戏和小工具。每个作品都可以直接试玩，也能看到一步步的迭代过程。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316140f'/%3E%3Ccircle cx='22' cy='24' r='5' fill='%23ff4d2e'/%3E%3Ccircle cx='42' cy='24' r='5' fill='%23f3f0e8'/%3E%3Ccircle cx='22' cy='42' r='5' fill='%23f3f0e8'/%3E%3Ccircle cx='42' cy='42' r='5' fill='%23f3f0e8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* Layout: particle-text hero → filterable work grid (featured first) → iteration timeline → footer. Paper light theme with a dark-mode twin. */
+:root{
+  --bg:#f3f0e8; --surface:#fbf9f4; --ink:#16140f; --muted:#6f695e; --line:rgba(22,20,15,.12);
+  --accent:#ff4d2e; --accent-ink:#fff; --chip:#e9e4d8;
+  --serif:"Instrument Serif","Songti SC",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:18px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f0e0c;--surface:#181613;--ink:#f1ede4;--muted:#9c958a;--line:rgba(241,237,228,.13);--chip:#24211c;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0f0e0c;--surface:#181613;--ink:#f1ede4;--muted:#9c958a;--line:rgba(241,237,228,.13);--chip:#24211c;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1180px,100%);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 13px var(--mono);letter-spacing:.06em;white-space:nowrap}
+.logo i{display:grid;grid-template-columns:repeat(2,6px);gap:3px}
+.logo i b{width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.logo i b:first-child{background:var(--accent)}
+.top nav{display:flex;gap:4px;align-items:center}
+.top nav a,.icon-btn{font:500 13px var(--mono);white-space:nowrap;text-decoration:none;padding:7px 12px;border-radius:999px;color:var(--muted);border:0;background:none;cursor:pointer}
+.top nav a:hover,.icon-btn:hover{color:var(--ink);background:var(--chip)}
+@media (max-width:560px){.top nav a.hide-sm{display:none}.top nav a,.icon-btn{padding:7px 8px}.logo{font-size:11px;letter-spacing:.03em}}
+@media (max-width:370px){.logo span{display:none}}
+
+/* hero */
+.hero{position:relative;height:min(72vh,640px);min-height:440px;display:grid;align-content:end;padding-bottom:40px}
+#field{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;cursor:crosshair}
+.hero .wrap{position:relative;pointer-events:none;display:grid;gap:18px}
+.hero .wrap > *{pointer-events:auto}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.intro{max-width:34em;font-size:clamp(16px,1.6vw,19px);margin:0}
+.intro b{font-weight:500;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 30%,transparent) 0)}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;font:13px var(--mono);color:var(--muted)}
+.stats b{color:var(--ink);font-weight:500;font-size:15px}
+.hint{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:76px;font:12px var(--mono);color:var(--muted);pointer-events:none;transition:opacity .6s}
+@media (max-width:700px){.hint{display:none}}
+
+/* section heads */
+section.block{padding:56px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.head h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,56px);line-height:1;letter-spacing:-.01em}
+.head h2 em{color:var(--accent)}
+.head p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{font:500 13px var(--sans);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.filters button span{font:11px var(--mono);color:var(--muted);margin-left:4px}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button[aria-pressed="true"] span{color:inherit;opacity:.6}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 4;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-width:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.card.big{grid-column:span 6}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(0,0,0,.35)}
+.card[hidden]{display:none}
+@media (max-width:980px){.card,.card.big{grid-column:span 6}}
+@media (max-width:640px){.card,.card.big{grid-column:span 12}}
+.poster{position:relative;aspect-ratio:4/3;overflow:hidden;background:#111;display:block}
+.card.big .poster{aspect-ratio:16/10}
+.poster img,.poster canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.card:hover .poster img,.card:hover .poster canvas{transform:scale(1.04)}
+.poster .num{position:absolute;left:12px;top:10px;font:500 11px var(--mono);letter-spacing:.08em;color:#fff;mix-blend-mode:difference}
+.poster .badge{position:absolute;right:10px;top:10px;font:500 11px var(--sans);padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.title h3{margin:0;font-size:20px;font-weight:700;line-height:1.25}
+.title small{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--muted)}
+.desc{margin:0;color:var(--muted);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.tags span{font:11px var(--mono);padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;font:500 13px var(--sans);text-decoration:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:not(.primary):hover{border-color:var(--ink)}
+.btn .v{font:11px var(--mono);color:var(--muted)}
+
+/* timeline */
+.tl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 12px;overflow-x:auto}
+.tl svg{display:block;min-width:720px;width:100%;height:auto}
+.tl text{font-family:var(--sans);fill:var(--muted);font-size:11px}
+.tl .axis text{font-family:var(--mono);font-size:10px}
+.tl .row-label{fill:var(--ink);font-size:12px;cursor:pointer}
+.tl .row-label:hover{fill:var(--accent)}
+.tl .grid-line{stroke:var(--line)}
+.tl circle{cursor:pointer;transition:r .15s}
+.tl circle:hover{r:7}
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:var(--bg);font:12px/1.5 var(--sans);padding:8px 11px;border-radius:10px;max-width:280px;opacity:0;transition:opacity .15s}
+.tip b{display:block;font:500 11px var(--mono);opacity:.7}
+.tl-note{font-size:13px;color:var(--muted);margin:10px 2px 0}
+
+footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);margin-top:24px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:13px var(--mono);color:var(--muted)}
+footer a{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#"><i><b></b><b></b><b></b><b></b></i><span>DIGITAL PLAYGROUND</span></a>
+    <nav>
+      <a href="#works">作品</a>
+      <a href="#timeline" class="hide-sm">迭代</a>
+      <a href="https://github.com/Crystalll0/digital-playground" target="_blank" rel="noopener">GitHub ↗</a>
+      <button class="icon-btn" id="theme" type="button" aria-label="切换深浅色">◐</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="介绍">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
+  <div class="wrap">
+    <div class="kicker">Crystal · 数字游乐场</div>
+    <p class="intro">我用代码做<b>可以玩的东西</b>：对着镜头比手势控制的视觉实验、一碰就会生长的生成艺术、几个小游戏，还有一些解决生活小问题的网站。每个作品都能直接打开试玩，也能看到它是怎么<b>一版一版改出来的</b>。</p>
+    <div class="stats"><span><b id="sWorks">0</b> 个作品</span><span><b id="sCommits">0</b> 次迭代</span><span><b id="sRange"></b></span></div>
+  </div>
+</section>
+
+<section class="block" id="works">
+  <div class="wrap">
+    <div class="head">
+      <div><h2>作品 <em>Works</em></h2><p>手势类作品需要摄像头，第一次打开时浏览器会问你要权限；画面只在你的设备上处理。</p></div>
+      <div class="filters" id="filters" role="group" aria-label="筛选作品"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="block" id="timeline">
+  <div class="wrap">
+    <div class="head">
+      <div><h2>迭代 <em>Process</em></h2><p>每个点是一次提交，按文件当时的修改时间排在时间线上。点作品名，可以到 GitHub 看它的完整历史。</p></div>
+    </div>
+    <div class="tl" id="tl"></div>
+    <p class="tl-note" id="tlNote"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© Crystal · Digital Playground</span>
+    <span><a href="https://github.com/Crystalll0/digital-playground" target="_blank" rel="noopener">github.com/Crystalll0/digital-playground</a></span>
+  </div>
+</footer>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(() => {
+'use strict';
+const GH = 'https://github.com/Crystalll0/digital-playground';
+const COMMITS = [[1789615989, "月隐 Moonveil · Moonveil-Experience.html"], [1789741705, "月隐 Moonveil · Moonveil-Experience-v3.html"], [1790217303, "安可工作室 Encore Studio · Encore_Local.html"], [1790219332, "安可工作室 Encore Studio · Encore_Local-v2.html"], [1790219758, "安可工作室 Encore Studio · Encore_Local-v3.html"], [1790220229, "安可工作室 Encore Studio · Encore_Studio_v4.html"], [1790220505, "安可工作室 Encore Studio · Encore_Studio_v5_Signed.html"], [1790221228, "月隐 Moonveil · Moonveil-Experience-v4.html"], [1790221630, "月隐 Moonveil · Moonveil-Experience-v4.1.html"], [1790221865, "安可工作室 Encore Studio · Encore_Studio_v5_1.html"], [1791186051, "序章 Index · 使用说明.md"], [1791186934, "序章 Index · index.html"], [1792032570, "纸间 Paper Room · paper-room"], [1792032964, "纸间 Paper Room · paper-room 2"], [1792680438, "爪爪衣橱 Pawmoire · meadow-pets.png"], [1792680477, "爪爪衣橱 Pawmoire · illustration-notes.txt"], [1792723523, "爪爪衣橱 Pawmoire · pet-wardrobe"], [1792737144, "爪爪衣橱 Pawmoire · 打开-爪爪衣橱 Pawmoire"], [1793362144, "纸间 Paper Room · PAPER-ROOM 3"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/00-Guides-and-Project-Board"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/06-Design-and-Original-References"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/07-Final-Submission-Checklist"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Launch-All-Stages.py"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/START_HERE_CN.md"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/START_HERE_EN.md"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Stage-01-2026-11-05-Core-Interaction"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Stage-02-2026-11-12-Complete-Round"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Stage-03-2026-11-19-Wallet-and-Playtest"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Stage-04-2026-11-26-Delivery-Candidate"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/Stage-05-2026-12-03-Final-Review"], [1793585672, "薯饼接接乐 Hash Brown Catch · gpt-Hash-Brown-Catch-Tutor-Delivery-Pack/index.html"], [1793586006, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/00-README-EN.md"], [1793586006, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/00-先看我-中文.md"], [1793586006, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/final-2026-12-06"], [1793586016, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/preview-builds"], [1793586110, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/week1-2026-11-05"], [1793586110, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/week2-2026-11-12"], [1793586110, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/week4-2026-11-26"], [1793586110, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/week5-2026-12-03"], [1793586128, "薯饼接接乐 Hash Brown Catch · Claude-Hash-Brown-Catch-Milestones/week3-2026-11-19"], [1794207922, "行迹 The Personal Atlas · 行迹.html"], [1794208036, "行迹 The Personal Atlas · 行迹旅行手札"], [1794208058, "理大食乜机 PolyU Lunch · 在线版链接.url"], [1794208058, "理大食乜机 PolyU Lunch · 在线版链接.webloc"], [1794208058, "理大食乜机 PolyU Lunch · 打开在线版.html"], [1794208058, "理大食乜机 PolyU Lunch · 理大食乜机-离线版.html"], [1794208059, "理大食乜机 PolyU Lunch · 使用说明.txt"], [1794208059, "理大食乜机 PolyU Lunch · 在线版二维码.png"], [1794208059, "理大食乜机 PolyU Lunch · 资源"], [1794213782, "行迹 The Personal Atlas · 行迹旅行手札 2"], [1794214076, "行迹 The Personal Atlas · 行迹旅行手札 3"], [1794215218, "流场花园 Flow Garden · flow-garden"], [1794215578, "理大食乜机 PolyU Lunch · fav.png"], [1794215754, "流场花园 Flow Garden · flow-garden.html"], [1794274177, "毛孩子日历 Pet Calendar · 毛孩子日历.html"], [1794275328, "手势星云 Nebula · gesture-nebula.html"], [1794276349, "手势绽放 Bloom · bloom copy.html"], [1794276487, "撕开现实 Tear Reality · tear-reality.html"], [1794276570, "手势星云 Nebula · gesture-nebula 3.html"], [1794276727, "撕开现实 Tear Reality · tear-reality_1.html"], [1794276791, "手势取景框 Window · gesture-window.html"], [1794276967, "手势星云 Nebula · gesture-nebula_1.html"], [1794278500, "手势绽放 Bloom · bloom_手势绽放.html"], [1794278592, "手势绽放 Bloom · 生成花朵-视频"], [1794279097, "手势绽放 Bloom · bloom_1.html"], [1794279201, "手势绽放 Bloom · 生成花朵-图片"], [1794279261, "手势取景框 Window · gesture-window_1.html"], [1794279271, "手势星云 Nebula · gesture-nebula_2.html"], [1794279401, "手势绽放 Bloom · bloom_2.html"], [1794279657, "手势绽放 Bloom · bloom.html"], [1794280118, "手势星云 Nebula · gesture-nebula_4.html"], [1794280425, "手势绽放 Bloom · Final/bloom.html"], [1794280701, "手势绽放 Bloom · Final/bloom_1.html"], [1794284970, "撕开现实 Tear Reality · tear-reality_2.html"], [1794290460, "撕开现实 Tear Reality · tear-reality_3.html"], [1794290776, "撕开现实 Tear Reality · tear-reality_4.html"], [1794291802, "手势绽放 Bloom · Final/bloom_2.html"], [1794375226, "手势取景框 Window · gesture-window_2.html"], [1794375628, "手势取景框 Window · gesture-window_3.html"]];   // [unix seconds, "作品 · 版本"] written by the build script
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const enc = p => p.split('/').map(encodeURIComponent).join('/');
+
+/* ---------------- works ---------------- */
+// key = the name used in commit messages; dir = folder under works/
+const W = [
+  {key:'手势绽放 Bloom', zh:'手势 · 绽放', en:'Nocturne Bloom', big:true, cat:['gesture','art'], dir:'12｜手势 · 绽放 · Bloom', play:'play/bloom/', img:'assets/covers/bloom.jpg', color:'#ff9ab5',
+   desc:'张开手掌，花就开；握拳，花慢慢合上。六种花都来自 AI 生成的绽放视频，被拆成逐帧画面跟着你的手走。', tags:['MediaPipe','Canvas','AI 视频']},
+  {key:'手势取景框 Window', zh:'手势 · 取景框', en:'Gesture Window', big:true, cat:['gesture'], dir:'13｜手势 · 取景框 · Window', play:'play/window/', poster:'window', color:'#e0322b',
+   desc:'用两只手的拇指和食指比一个框，框里的你就换了画风：像素、漫画、波普、霓虹、代码雨、热成像……', tags:['MediaPipe','人像分割','8 种风格']},
+  {key:'手势星云 Nebula', zh:'手势 · 星云', en:'Gesture Nebula', cat:['gesture','art'], dir:'11｜手势 · 星云 · Nebula', play:'play/nebula/', poster:'nebula', color:'#7cf2d6',
+   desc:'把手掌推向镜头，就一层层潜进去：宇宙网、星系、星团、恒星、原子，然后又回到宇宙。', tags:['手势','粒子','音景']},
+  {key:'撕开现实 Tear Reality', zh:'撕开现实', en:'Tear Reality', cat:['gesture','art'], dir:'14｜手势 · 撕开现实 · Tear Reality', play:'play/tear-reality/', poster:'tear', color:'#3d8bff',
+   desc:'按住画面用力拉，它会像纸一样被扯弯、撕开，露出后面的蓝色线框世界。可以换成自己的照片或视频。', tags:['Three.js','WebGL','Shader']},
+  {key:'流场花园 Flow Garden', zh:'流场花园', en:'Flow Garden', cat:['art'], dir:'09｜流场花园· Flow', play:'play/flow-garden/', poster:'flow', color:'#a99bff',
+   desc:'点一下、拖一下，画面沿着看不见的气流生长几秒，然后消散。六种画风，从星云到水墨。', tags:['生成艺术','Perlin 噪声','录屏']},
+  {key:'薯饼接接乐 Hash Brown Catch', zh:'薯饼接接乐', en:'Hash Brown Catch', big:true, cat:['game'], dir:'06｜薯饼接接乐 · Hash Brown Catch', play:'play/hash-brown-catch/', img:'assets/covers/hash-brown.jpg', color:'#f5a623',
+   desc:'8-bit 早餐小游戏：滑动炸篮接住掉下来的薯饼，躲开烤焦的和辣酱炸弹，攒金币买新场景。附带角色设定和演示短片。', tags:['p5.js','游戏','IP 设计']},
+  {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', color:'#ffd25a',
+   desc:'不知道吃什么？拉一下拉霸机：校内还是校外 → 吃哪类 → 哪家 → 哪道菜。还能按菜式搜全校和红磡一带一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
+  {key:'月隐 Moonveil', zh:'月隐', en:'Moonveil', big:true, cat:['web'], dir:'01｜月隐 · MOONVEIL ｜占卜', play:'works/01｜月隐 · MOONVEIL ｜占卜/Moonveil-Experience-v4.1.html', img:'assets/covers/moonveil.jpg', color:'#9b7cff',
+   desc:'一间夜色里的灵感占卜室：水晶球、月光和一点点仪式感。', tags:['网站','交互叙事']},
+  {key:'安可工作室 Encore Studio', zh:'安可工作室', en:'Encore Studio', big:true, cat:['web'], dir:'02｜安可工作室 · Encore Studio｜ 启德 · 手链', play:'works/02｜安可工作室 · Encore Studio｜ 启德 · 手链/Encore_Studio_v5_1.html', img:'assets/covers/encore.jpg', color:'#c9b6ff',
+   desc:'Your live memories：把在启德的现场回忆，串成一条水晶手链。', tags:['网站','定制工具']},
+  {key:'纸间 Paper Room', zh:'纸间', en:'Paper Room', cat:['tool'], dir:'04｜纸间 · Paper Room｜折纸&剪纸', play:'works/04｜纸间 · Paper Room｜折纸&剪纸/PAPER-ROOM 3/dist/index.html', img:'assets/covers/paper.jpg', color:'#2f6b55',
+   desc:'在一张纸上练习折和剪：先折几下，再剪一刀，展开看看会得到什么图案。有引导教程和练习模式。', tags:['几何','教程','中 / EN']},
+  {key:'行迹 The Personal Atlas', zh:'行迹', en:'The Personal Atlas', cat:['tool','web'], dir:'07｜行迹 · The Personal Atlas', play:'works/07｜行迹 · The Personal Atlas/行迹旅行手札 3/本地版/行迹-本地版.html', poster:'atlas', color:'#c8553d',
+   desc:'旅行手札：把照片、文字和路线放在一张世界地图上，可以离线浏览，也能导出成一份可分享的手札。', tags:['Leaflet','离线','照片 EXIF']},
+  {key:'爪爪衣橱 Pawmoire', zh:'爪爪衣橱', en:'Pawmoire', cat:['web'], dir:'05｜爪爪衣橱· Pawmoire｜宠物换装', play:'https://pawmoire-pet-atelier.wry-toast-5992.chatgpt.site/', external:true, img:'assets/covers/pawmoire.jpg', color:'#8aa37a',
+   desc:'给毛孩子试穿新衣服的小衣橱：上传宠物照片，选一件，看它穿上的样子。', tags:['Next.js','AI 换装','线上站']},
+  {key:'序章 Index', zh:'序章', en:'Index', big:true, cat:['tool'], dir:'03｜序章 · Index ｜日程&计划', play:'works/03｜序章 · Index ｜日程&计划/index.html', poster:'index', color:'#ff4d2e',
+   desc:'把每一步，写成成就：一个把日程和计划变成「解锁成就」的小工具。', tags:['计划','日程']},
+  {key:'毛孩子日历 Pet Calendar', zh:'毛孩子日历', en:'Pet Calendar', big:true, cat:['tool'], dir:'10｜毛孩子日历', play:'play/pet-calendar/', poster:'pet', color:'#e8a23a',
+   desc:'记录家里毛孩子的日常：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你。', tags:['日历','本地保存']},
+];
+const CATS = [['all','全部'],['gesture','手势交互'],['art','生成艺术'],['game','游戏'],['tool','工具'],['web','网站']];
+const count = k => COMMITS.filter(c => c[1].split(' · ')[0] === k).length;
+W.forEach((w, i) => { w.n = count(w.key); w.idx = i; });
+
+const grid = document.getElementById('grid');
+W.forEach((w, i) => {
+  const el = document.createElement('article');
+  el.className = 'card' + (w.big ? ' big' : '');
+  el.dataset.cat = w.cat.join(' ');
+  const href = w.external ? w.play : enc(w.play);
+  const hist = `${GH}/commits/main/${enc('works/' + w.dir)}`;
+  el.innerHTML = `
+    <a class="poster" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''} aria-label="打开 ${w.zh}">
+      ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
+      <span class="num">№${String(i + 1).padStart(2, '0')}</span>
+      ${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}
+    </a>
+    <div class="body">
+      <div class="title"><h3>${w.zh}</h3><small>${w.en}</small></div>
+      <p class="desc">${w.desc}</p>
+      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="links">
+        <a class="btn primary" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''}>${w.external ? '打开线上版 ↗' : '打开试玩 →'}</a>
+        <a class="btn" href="${hist}" target="_blank" rel="noopener">迭代过程 <span class="v">${w.n} 次</span></a>
+      </div>
+    </div>`;
+  grid.appendChild(el);
+});
+
+const fbox = document.getElementById('filters');
+CATS.forEach(([k, label]) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.dataset.k = k;
+  b.innerHTML = `${label}<span>${k === 'all' ? W.length : W.filter(w => w.cat.includes(k)).length}</span>`;
+  b.setAttribute('aria-pressed', k === 'all');
+  b.onclick = () => {
+    fbox.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    grid.querySelectorAll('.card').forEach(c => c.hidden = k !== 'all' && !c.dataset.cat.split(' ').includes(k));
+  };
+  fbox.appendChild(b);
+});
+
+/* stats */
+const days = d => new Date(d * 1000);
+const fmt = d => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+document.getElementById('sWorks').textContent = W.length;
+document.getElementById('sCommits').textContent = COMMITS.length;
+document.getElementById('sRange').textContent = `${fmt(days(COMMITS[0][0]))} — ${fmt(days(COMMITS[COMMITS.length - 1][0]))}`;
+
+/* ---------------- generated posters for works without a picture ---------------- */
+function rng(seed){ let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+const POSTERS = {
+  nebula(g, w, h, r){
+    g.fillStyle = '#05060a'; g.fillRect(0, 0, w, h);
+    const cx = w * .52, cy = h * .52;
+    for (let i = 0; i < 2600; i++){
+      const arm = i % 3, d = Math.pow(r(), .7) * w * .42, a = arm * 2.094 + d / w * 7 + (r() - .5) * .5;
+      const x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d * .55;
+      g.fillStyle = d < w * .12 ? 'rgba(255,215,160,.85)' : r() < .5 ? 'rgba(124,242,214,.75)' : 'rgba(150,180,255,.6)';
+      const s = r() * 1.6 + .4; g.fillRect(x, y, s, s);
+    }
+    const gr = g.createRadialGradient(cx, cy, 0, cx, cy, w * .18);
+    gr.addColorStop(0, 'rgba(255,220,170,.7)'); gr.addColorStop(1, 'rgba(255,220,170,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 160; i++){ g.fillStyle = 'rgba(255,255,255,.6)'; g.fillRect(r() * w, r() * h, 1, 1); }
+  },
+  window(g, w, h, r){
+    g.fillStyle = '#16161a'; g.fillRect(0, 0, w, h);
+    const q = [[w * .22, h * .24], [w * .8, h * .18], [w * .76, h * .8], [w * .2, h * .74]];
+    g.save(); g.beginPath(); q.forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.closePath(); g.clip();
+    g.fillStyle = '#f6f3ec'; g.fillRect(0, 0, w, h);
+    const cs = w / 46;
+    for (let y = 0; y < h; y += cs) for (let x = 0; x < w; x += cs){
+      const t = x / w, dx = (x - w * .5) / w, dy = (y - h * .55) / h;
+      const v = Math.max(0, 1 - Math.hypot(dx * 1.6, dy * 1.1) * 2.1);
+      if (t < .4){ g.fillStyle = '#e0322b'; g.beginPath(); g.arc(x + cs / 2, y + cs / 2, cs * .48 * (v * .9 + .1), 0, 7); g.fill(); }
+      else if (t < .66){ if (v + (r() - .5) * .5 > .35){ g.fillStyle = v > .6 ? '#1d4fa0' : '#6f9be0'; g.fillRect(x, y, cs, cs); } }
+      else { const c = ['#f4f1d0', '#e9d84a', '#5aa83c', '#1e5aa8', '#12286e'][Math.min(4, (v * 4.6 + r() * .6) | 0)]; g.fillStyle = c; g.fillRect(x, y, cs, cs); }
+    }
+    g.restore();
+    g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = w / 160; g.lineCap = 'round';
+    const L = w * .07;
+    q.forEach((p, i) => {
+      const a = q[(i + 1) % 4], b = q[(i + 3) % 4];
+      [a, b].forEach(o => { const dx = o[0] - p[0], dy = o[1] - p[1], d = Math.hypot(dx, dy); g.beginPath(); g.moveTo(p[0], p[1]); g.lineTo(p[0] + dx / d * L, p[1] + dy / d * L); g.stroke(); });
+      g.fillStyle = '#e0322b'; g.beginPath(); g.arc(p[0], p[1], w / 90, 0, 7); g.fill();
+    });
+  },
+  tear(g, w, h, r){
+    g.fillStyle = '#02040a'; g.fillRect(0, 0, w, h);
+    const pts = []; for (let i = 0; i < 140; i++) pts.push([r() * w, h * Math.pow(r(), .6)]);
+    g.strokeStyle = 'rgba(61,139,255,.55)'; g.lineWidth = 1;
+    pts.forEach(p => { pts.map(q => [q, Math.hypot(q[0] - p[0], q[1] - p[1])]).sort((a, b) => a[1] - b[1]).slice(1, 4).forEach(([q]) => { g.beginPath(); g.moveTo(...p); g.lineTo(...q); g.stroke(); }); });
+    g.fillStyle = '#9cc8ff'; pts.forEach(p => g.fillRect(p[0] - 1, p[1] - 1, 2, 2));
+    // the "paper" sheet with a torn hole
+    g.save(); g.beginPath(); g.rect(0, 0, w, h);
+    g.moveTo(w * .5, h * .14);
+    for (let i = 1; i <= 26; i++){ const a = i / 26 * Math.PI * 2, rr = (w * .2) * (.7 + r() * .45) * (1 + .5 * Math.abs(Math.cos(a))); g.lineTo(w * .52 + Math.sin(a) * rr, h * .5 - Math.cos(a) * rr * .8); }
+    g.closePath();
+    const sky = g.createLinearGradient(0, 0, 0, h); sky.addColorStop(0, '#8fb8e8'); sky.addColorStop(.6, '#f3d3b0'); sky.addColorStop(1, '#e6a77d');
+    g.fillStyle = sky; g.fill('evenodd'); g.restore();
+  },
+  flow(g, w, h, r){
+    g.fillStyle = '#0b0a1f'; g.fillRect(0, 0, w, h);
+    const cols = ['#7f6bff', '#4fb8ff', '#ff6fd2', '#ffc96b', '#8affc8'];
+    g.globalCompositeOperation = 'lighter'; g.lineWidth = 1.1;
+    for (let k = 0; k < 520; k++){
+      let x = w * .5 + (r() - .5) * w * .5, y = h * .5 + (r() - .5) * h * .5;
+      g.strokeStyle = cols[k % 5]; g.globalAlpha = .35; g.beginPath(); g.moveTo(x, y);
+      for (let s = 0; s < 46; s++){ const a = Math.sin(x * .011) * 2.2 + Math.cos(y * .013) * 2.2 + Math.sin((x + y) * .004); x += Math.cos(a) * 3; y += Math.sin(a) * 3; g.lineTo(x, y); }
+      g.stroke();
+    }
+    g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+  },
+  polyu(g, w, h){
+    g.fillStyle = '#2b1410'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = '#211009'; g.lineWidth = 2;
+    for (let y = 0; y < h; y += 16){ g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); for (let x = (y / 16) % 2 ? 0 : 32; x < w; x += 64){ g.beginPath(); g.moveTo(x, y); g.lineTo(x, y + 16); g.stroke(); } }
+    const mx = w * .14, my = h * .2, mw = w * .72, mh = h * .62;
+    const gr = g.createLinearGradient(0, my, 0, my + mh); gr.addColorStop(0, '#bb4a33'); gr.addColorStop(1, '#6e2519');
+    g.fillStyle = gr; g.beginPath(); g.roundRect(mx, my, mw, mh, 22); g.fill();
+    for (let i = 0; i < 14; i++){ g.fillStyle = i % 2 ? '#ffd25a' : '#7a4a1c'; g.beginPath(); g.arc(mx + 24 + i * (mw - 48) / 13, my + 16, 5, 0, 7); g.fill(); }
+    const words = ['校内', '饭堂', '烧味饭'], rw = (mw - 56) / 3;
+    g.fillStyle = '#24110d'; g.fillRect(mx + 18, my + 40, mw - 36, mh - 66);
+    words.forEach((t, i) => {
+      const x = mx + 24 + i * (rw + 4);
+      g.fillStyle = '#fbf6ee'; g.fillRect(x, my + 46, rw, mh - 78);
+      g.fillStyle = '#24110d'; g.font = `700 ${Math.round(w / 17)}px "Noto Sans SC",sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.fillText(t, x + rw / 2, my + 46 + (mh - 78) / 2);
+      g.fillStyle = 'rgba(36,17,13,.25)'; g.font = `${Math.round(w / 26)}px "Noto Sans SC",sans-serif`;
+      g.fillText(['校外', '咖啡', '叉烧'][i], x + rw / 2, my + 64); g.fillText(['校外', '面', '饺子'][i], x + rw / 2, my + mh - 50);
+    });
+    g.fillStyle = '#e8322a'; g.fillRect(mx + 18, my + 46 + (mh - 78) / 2 - 1, mw - 36, 2);
+    g.fillStyle = '#e8322a'; g.beginPath(); g.arc(mx + mw + 22, my + 10, 14, 0, 7); g.fill();
+    g.fillStyle = '#ccc'; g.fillRect(mx + mw + 19, my + 22, 6, mh * .55);
+  },
+  atlas(g, w, h, r){
+    g.fillStyle = '#efe6d4'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(120,90,60,.12)'; g.lineWidth = 1;
+    for (let x = 0; x < w; x += w / 12){ g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); }
+    for (let y = 0; y < h; y += h / 9){ g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
+    g.fillStyle = '#dccdb0';
+    for (let k = 0; k < 5; k++){
+      const cx = r() * w, cy = r() * h, rr = w * (.08 + r() * .14);
+      g.beginPath(); for (let i = 0; i <= 20; i++){ const a = i / 20 * 7, d = rr * (.7 + r() * .4); g.lineTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d * .7); } g.fill();
+    }
+    const route = [[.16, .7], [.3, .5], [.46, .58], [.6, .34], [.78, .42], [.86, .22]].map(([x, y]) => [x * w, y * h]);
+    g.strokeStyle = '#c8553d'; g.lineWidth = w / 220; g.setLineDash([w / 70, w / 90]);
+    g.beginPath(); route.forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.stroke(); g.setLineDash([]);
+    route.forEach((p, i) => {
+      g.fillStyle = i === route.length - 1 ? '#c8553d' : '#fff'; g.strokeStyle = '#c8553d'; g.lineWidth = 2;
+      g.beginPath(); g.arc(p[0], p[1], w / 70, 0, 7); g.fill(); g.stroke();
+    });
+    g.fillStyle = '#fffaf0'; g.save(); g.translate(w * .62, h * .62); g.rotate(-.06);
+    g.fillRect(0, 0, w * .26, h * .3); g.fillStyle = '#b9c7a5'; g.fillRect(w * .015, h * .02, w * .23, h * .2); g.restore();
+  },
+  index(g, w, h){
+    g.fillStyle = '#f4efe3'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#16140f'; g.font = `italic ${Math.round(w / 7)}px "Instrument Serif",serif`; g.textBaseline = 'top';
+    g.fillText('Prologue', w * .08, h * .1);
+    const rows = [1, 1, 1, .6, 0, 0];
+    rows.forEach((v, i) => {
+      const y = h * .44 + i * h * .085;
+      g.strokeStyle = '#16140f'; g.lineWidth = 2; g.strokeRect(w * .08, y, h * .05, h * .05);
+      if (v === 1){ g.strokeStyle = '#ff4d2e'; g.lineWidth = 3; g.beginPath(); g.moveTo(w * .08 + 4, y + h * .025); g.lineTo(w * .08 + h * .02, y + h * .045); g.lineTo(w * .08 + h * .055, y - 2); g.stroke(); }
+      g.fillStyle = 'rgba(22,20,15,.12)'; g.fillRect(w * .17, y + h * .015, w * .55, h * .022);
+      g.fillStyle = v === 1 ? '#16140f' : '#ff4d2e'; g.fillRect(w * .17, y + h * .015, w * .55 * v, h * .022);
+    });
+    g.fillStyle = '#ff4d2e'; g.beginPath(); g.arc(w * .84, h * .62, w * .07, 0, 7); g.fill();
+    g.fillStyle = '#fff'; g.font = `700 ${Math.round(w / 20)}px "Noto Sans SC",sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('★', w * .84, h * .62);
+  },
+  pet(g, w, h){
+    g.fillStyle = '#fbf3e4'; g.fillRect(0, 0, w, h);
+    const x0 = w * .1, y0 = h * .2, cw = w * .8 / 7, ch = h * .68 / 5;
+    g.fillStyle = '#e8a23a'; g.fillRect(x0, h * .08, w * .8, h * .09);
+    g.fillStyle = '#fff'; g.font = `700 ${Math.round(h / 16)}px "Noto Sans SC",sans-serif`; g.textBaseline = 'middle'; g.fillText('十一月 · 毛孩子日历', x0 + 12, h * .125);
+    for (let r2 = 0; r2 < 5; r2++) for (let c = 0; c < 7; c++){
+      const x = x0 + c * cw, y = y0 + r2 * ch;
+      g.strokeStyle = 'rgba(80,50,20,.15)'; g.strokeRect(x, y, cw, ch);
+      g.fillStyle = 'rgba(80,50,20,.5)'; g.font = `${Math.round(h / 34)}px "JetBrains Mono",monospace`; g.textBaseline = 'top'; g.fillText(r2 * 7 + c + 1, x + 4, y + 4);
+    }
+    const paw = (x, y, s, col) => { g.fillStyle = col; g.beginPath(); g.ellipse(x, y, s, s * .8, 0, 0, 7); g.fill(); [[-1, -1.3], [-.35, -1.75], [.35, -1.75], [1, -1.3]].forEach(([dx, dy]) => { g.beginPath(); g.arc(x + dx * s, y + dy * s, s * .38, 0, 7); g.fill(); }); };
+    [[2, 1, '#e8a23a'], [5, 1, '#c8553d'], [1, 3, '#8aa37a'], [4, 2, '#e8a23a'], [6, 4, '#c8553d']].forEach(([c, r2, col]) => paw(x0 + c * cw + cw / 2, y0 + r2 * ch + ch * .62, Math.min(cw, ch) * .17, col));
+  },
+};
+function paintPosters(){
+  document.querySelectorAll('canvas[data-poster]').forEach(c => {
+    const b = c.getBoundingClientRect(); if (!b.width) return;
+    const d = Math.min(2, devicePixelRatio || 1);
+    c.width = Math.round(b.width * d); c.height = Math.round(b.height * d);
+    const g = c.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
+    POSTERS[c.dataset.poster](g, b.width, b.height, rng(c.dataset.poster.length * 977 + 13));
+  });
+}
+let pt; addEventListener('resize', () => { clearTimeout(pt); pt = setTimeout(paintPosters, 150); });
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(paintPosters);
+paintPosters();
+
+/* ---------------- timeline ---------------- */
+function timeline(){
+  const box = document.getElementById('tl'), tip = document.getElementById('tip');
+  const rowsW = W.slice().sort((a, b) => (COMMITS.find(c => c[1].startsWith(a.key)) || [0])[0] - (COMMITS.find(c => c[1].startsWith(b.key)) || [0])[0]);
+  const t0 = COMMITS[0][0] - 86400 * 2, t1 = COMMITS[COMMITS.length - 1][0] + 86400 * 2;
+  const VW = 1100, L = 150, R = 20, RH = 26, T = 30, H = T + rowsW.length * RH + 10;
+  const X = t => L + (t - t0) / (t1 - t0) * (VW - L - R);
+  let s = `<svg viewBox="0 0 ${VW} ${H}" role="img" aria-label="作品迭代时间线">`;
+  s += '<g class="axis">';
+  for (let d = new Date(t0 * 1000); d.getTime() / 1000 < t1; d.setDate(d.getDate() + 1)){
+    if (d.getDate() !== 1 && d.getDate() !== 15) continue;
+    const x = X(d.getTime() / 1000);
+    s += `<line class="grid-line" x1="${x}" x2="${x}" y1="${T - 8}" y2="${H}"/><text x="${x + 4}" y="${T - 12}">${d.getMonth() + 1}/${d.getDate()}</text>`;
+  }
+  s += '</g>';
+  rowsW.forEach((w, i) => {
+    const y = T + i * RH + RH / 2;
+    const cs = COMMITS.filter(c => c[1].split(' · ')[0] === w.key);
+    const hist = `${GH}/commits/main/${enc('works/' + w.dir)}`;
+    s += `<a href="${hist}" target="_blank" rel="noopener"><text class="row-label" x="0" y="${y + 4}">${w.zh}</text></a>`;
+    if (cs.length > 1) s += `<line x1="${X(cs[0][0])}" x2="${X(cs[cs.length - 1][0])}" y1="${y}" y2="${y}" stroke="${w.color}" stroke-width="2" opacity=".45"/>`;
+    cs.forEach(c => { s += `<circle cx="${X(c[0])}" cy="${y}" r="5" fill="${w.color}" stroke="var(--surface)" stroke-width="1.5" data-t="${c[0]}" data-m="${c[1].replace(/"/g, '&quot;')}"/>`; });
+  });
+  s += '</svg>';
+  box.innerHTML = s;
+  box.addEventListener('pointermove', e => {
+    const c = e.target.closest('circle');
+    if (!c){ tip.style.opacity = 0; return; }
+    const d = new Date(+c.dataset.t * 1000);
+    tip.innerHTML = `<b>${fmt(d)} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}</b>${c.dataset.m.split(' · ').slice(1).join(' · ')}`;
+    tip.style.opacity = 1;
+    tip.style.left = Math.min(innerWidth - 300, e.clientX + 14) + 'px'; tip.style.top = (e.clientY + 14) + 'px';
+  });
+  box.addEventListener('pointerleave', () => tip.style.opacity = 0);
+  document.getElementById('tlNote').textContent = `从 ${fmt(days(COMMITS[0][0]))} 到 ${fmt(days(COMMITS[COMMITS.length - 1][0]))}，一共 ${COMMITS.length} 次提交。时间按香港时间显示。`;
+}
+timeline();
+
+/* ---------------- hero: words made of dots that you can push around ---------------- */
+const cv = document.getElementById('field'), ctx = cv.getContext('2d');
+let P = [], Wd = 0, Hd = 0, DPR = 1, mx = -9999, my = -9999, active = false;
+function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+function build(){
+  DPR = Math.min(2, devicePixelRatio || 1);
+  const b = cv.getBoundingClientRect(); Wd = b.width; Hd = b.height;
+  cv.width = Math.round(Wd * DPR); cv.height = Math.round(Hd * DPR);
+  const off = document.createElement('canvas'); off.width = Math.round(Wd); off.height = Math.round(Hd);
+  const o = off.getContext('2d');
+  const narrow = Wd < 700;
+  const lines = narrow ? ['Digital', 'Playground'] : ['Digital Playground'];
+  let fs = narrow ? Wd * .21 : Math.min(Wd * .118, 150);
+  o.font = `italic 400 ${fs}px "Instrument Serif", serif`;
+  const maxW = Math.max(...lines.map(l => o.measureText(l).width));
+  if (maxW > Wd * .92){ fs *= Wd * .92 / maxW; o.font = `italic 400 ${fs}px "Instrument Serif", serif`; }
+  o.textBaseline = 'alphabetic'; o.fillStyle = '#000';
+  const pad = Math.max(16, (Wd - 1180) / 2 + 16);
+  const top = narrow ? Hd * .06 : Hd * .1;
+  lines.forEach((l, i) => o.fillText(l, pad, top + fs * (i + .85) * (narrow ? .92 : 1)));
+  const data = o.getImageData(0, 0, off.width, off.height).data;
+  const step = Math.max(3, Math.round(fs / 30));
+  const old = P; P = [];
+  for (let y = 0; y < off.height; y += step) for (let x = 0; x < off.width; x += step){
+    if (data[(y * off.width + x) * 4 + 3] > 128){
+      const p = old[P.length];
+      P.push({hx: x, hy: y, x: p ? p.x : x + (Math.random() - .5) * 200, y: p ? p.y : y + (Math.random() - .5) * 200, vx: 0, vy: 0, hot: Math.random() < .045, s: step * .42});
+    }
+  }
+}
+function draw(){
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, Wd, Hd);
+  const ink = css('--ink'), acc = css('--accent');
+  const R = 110, R2 = R * R;
+  for (const p of P){
+    const dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
+    if (d2 < R2){ const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 3.2; p.vx += dx / d * f; p.vy += dy / d * f; }
+    p.vx += (p.hx - p.x) * .045; p.vy += (p.hy - p.y) * .045;
+    p.vx *= .84; p.vy *= .84; p.x += p.vx; p.y += p.vy;
+  }
+  ctx.fillStyle = ink; ctx.beginPath();
+  for (const p of P) if (!p.hot){ ctx.moveTo(p.x + p.s, p.y); ctx.arc(p.x, p.y, p.s, 0, 6.283); }
+  ctx.fill();
+  ctx.fillStyle = acc; ctx.beginPath();
+  for (const p of P) if (p.hot){ ctx.moveTo(p.x + p.s * 1.25, p.y); ctx.arc(p.x, p.y, p.s * 1.25, 0, 6.283); }
+  ctx.fill();
+}
+let raf = 0, idle = 0;
+function loop(){
+  draw();
+  const moving = P.some(p => Math.abs(p.vx) + Math.abs(p.vy) > .05);
+  idle = moving || active ? 0 : idle + 1;
+  raf = idle > 30 ? 0 : requestAnimationFrame(loop);
+}
+const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
+const hint = document.getElementById('hint');
+function setPtr(e){ const b = cv.getBoundingClientRect(); mx = e.clientX - b.left; my = e.clientY - b.top; active = true; hint.style.opacity = 0; kick(); }
+cv.addEventListener('pointermove', setPtr);
+cv.addEventListener('pointerdown', setPtr);
+cv.addEventListener('pointerleave', () => { mx = my = -9999; active = false; });
+cv.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse'){ mx = my = -9999; active = false; } });
+function start(){ build(); if (reduce){ P.forEach(p => { p.x = p.hx; p.y = p.hy; }); draw(); } else kick(); }
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(start, 120); });
+(document.fonts ? document.fonts.load('italic 100px "Instrument Serif"').catch(() => {}) : Promise.resolve()).then(start);
+
+/* theme + header */
+const root = document.documentElement;
+try { const t = localStorage.getItem('dp-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+document.getElementById('theme').onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('dp-theme', root.dataset.theme); } catch (e) {}
+  if (reduce) draw(); else kick();
+};
+const top = document.getElementById('top');
+addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 10), {passive: true});
+})();
+</script>
+</body>
+</html>

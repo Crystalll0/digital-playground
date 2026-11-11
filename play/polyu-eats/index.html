@@ -1,0 +1,1027 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>理大食乜机</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='12' width='46' height='46' rx='9' fill='%23a8402c'/%3E%3Crect x='4' y='12' width='46' height='9' rx='4' fill='%23ffd25a'/%3E%3Crect x='10' y='26' width='34' height='20' rx='4' fill='%2324110d'/%3E%3Crect x='13' y='29' width='8.5' height='14' rx='2' fill='%23fbf6ee'/%3E%3Crect x='22.75' y='29' width='8.5' height='14' rx='2' fill='%23fbf6ee'/%3E%3Crect x='32.5' y='29' width='8.5' height='14' rx='2' fill='%23fbf6ee'/%3E%3Cpath d='M14.5 37.5q2.75 3 5.5 0z' fill='%23e8322a'/%3E%3Cpath d='M24.25 37.5q2.75 3 5.5 0z' fill='%23e8322a'/%3E%3Cpath d='M34 37.5q2.75 3 5.5 0z' fill='%23e8322a'/%3E%3Crect x='11' y='36' width='32' height='1.6' fill='%23e8322a'/%3E%3Crect x='53' y='22' width='3.5' height='24' rx='1.75' fill='%23d9d2c8'/%3E%3Ccircle cx='54.75' cy='20' r='5.5' fill='%23e8322a'/%3E%3Crect x='50' y='42' width='9' height='9' rx='2.5' fill='%236e2519'/%3E%3C/svg%3E">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: two views on one brick wall — the slot machine (default) and a dish search (#search) with chip filters over a card grid. Single dark theme on purpose (arcade machine). */
+:root{
+  --wall:#2b1410;
+  --brick:#a8402c;
+  --brick-deep:#6e2519;
+  --bulb:#ffd25a;
+  --reel:#fbf6ee;
+  --ink:#24110d;
+  --muted:#c9a99a;
+  --panel:#3a1c16;
+  --panel2:#45231c;
+  --line:#5a2c22;
+  --pay:#e8322a;
+  --veg:#8fd18a;
+  --fg:#f6e9e2;
+  --display:"ZCOOL QingKe HuangYou","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background-color:var(--wall);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.6;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32'%3E%3Cpath d='M0 15.5H64M0 31.5H64M16 0V16M48 16V32' stroke='%23211009' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:20px 48px;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.wrap.wide{max-width:980px}
+nav.tabs{display:flex;gap:6px;justify-content:center}
+nav.tabs a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel)}
+nav.tabs a[aria-current="page"]{background:var(--bulb);color:var(--ink);border-color:var(--bulb);font-weight:700}
+header{text-align:center;display:flex;flex-direction:column;gap:2px}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,8vw,52px);line-height:1.05;margin:0;color:var(--bulb);
+  text-shadow:0 0 18px rgba(255,210,90,.35),0 3px 0 var(--brick-deep);text-wrap:balance}
+header p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+/* machine */
+.stage{position:relative;display:flex;align-items:center;gap:10px}
+.machine{flex:1;min-width:0;border-radius:26px 26px 18px 18px;padding:14px 16px 18px;
+  background:linear-gradient(180deg,#bb4a33 0%,var(--brick) 35%,var(--brick-deep) 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.18),inset 0 -6px 0 rgba(0,0,0,.25),0 18px 40px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;gap:14px}
+.marquee{display:flex;justify-content:space-between;gap:4px;padding:0 6px}
+.bulb{width:10px;height:10px;border-radius:50%;background:#7a4a1c;box-shadow:inset 0 -1px 0 rgba(0,0,0,.3)}
+.bulb.on{background:var(--bulb);box-shadow:0 0 8px var(--bulb),0 0 2px #fff inset}
+.sign{text-align:center;font-family:var(--display);font-size:clamp(20px,5vw,28px);color:#fff4d6;letter-spacing:.06em;
+  background:var(--ink);border-radius:10px;padding:4px 10px;border:2px solid #e3b04b;box-shadow:0 0 0 3px var(--brick-deep)}
+.sign small{font-family:var(--body);font-size:11px;color:var(--bulb);letter-spacing:.2em;display:block;margin-top:-2px}
+.reels{display:grid;grid-template-columns:.7fr .95fr 1.3fr 1.5fr;gap:8px;background:var(--ink);padding:8px;border-radius:12px;position:relative}
+.reels::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:2px;background:var(--pay);opacity:.85;transform:translateY(-1px);pointer-events:none;box-shadow:0 0 6px var(--pay)}
+.col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.label{font-size:11px;color:var(--muted);text-align:center;letter-spacing:.12em}
+.win{--h:68px;height:calc(var(--h)*3);overflow:hidden;border-radius:8px;background:var(--reel);position:relative}
+.win::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(36,17,13,.55) 0%,rgba(36,17,13,0) 30%,rgba(36,17,13,0) 70%,rgba(36,17,13,.55) 100%)}
+.track{will-change:transform}
+.cell{height:var(--h);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;color:var(--ink);
+  font-weight:700;line-height:1.2;border-bottom:1px dashed rgba(36,17,13,.12);overflow:hidden;word-break:break-word}
+.r0 .cell,.r1 .cell{font-family:var(--display);font-weight:400;font-size:clamp(18px,4.6vw,26px)}
+.r2 .cell,.r3 .cell{font-size:clamp(12px,2.9vw,16px)}
+.dishpick{font-weight:900;color:var(--pay)}
+@media (max-width:560px){.reels{gap:5px;padding:6px}.r0 .cell,.r1 .cell{font-size:15px}.r2 .cell,.r3 .cell{font-size:11.5px;padding:0 3px}.win{--h:62px}.label{font-size:10px;letter-spacing:.04em}.lock{font-size:11px}}
+.cell.hit{color:var(--pay);animation:flash .5s 3}
+@keyframes flash{50%{opacity:.25}}
+.lock{font:inherit;font-size:12px;border:1px solid var(--line);background:#2f1712;color:var(--muted);border-radius:999px;padding:3px 0;cursor:pointer}
+.lock[aria-pressed="true"]{background:var(--bulb);color:var(--ink);border-color:var(--bulb);font-weight:700}
+.lock:disabled{visibility:hidden}
+.go{font-family:var(--display);font-size:26px;letter-spacing:.2em;color:var(--ink);background:linear-gradient(180deg,#ffe58a,var(--bulb) 60%,#d99a1e);
+  border:0;border-radius:14px;padding:10px 0 8px;cursor:pointer;box-shadow:0 5px 0 #8a5a10,0 8px 18px rgba(0,0,0,.35)}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 #8a5a10}
+.go:disabled{filter:saturate(.4) brightness(.8);cursor:wait}
+.lever{width:46px;height:220px;position:relative;flex:none;border:0;background:none;cursor:pointer;padding:0}
+.lever .base{position:absolute;left:4px;bottom:60px;width:38px;height:44px;border-radius:10px;background:linear-gradient(90deg,#5a1f15,#8a3322,#5a1f15)}
+.lever .arm{position:absolute;left:19px;bottom:82px;width:8px;height:120px;border-radius:4px;background:linear-gradient(90deg,#999,#eee,#999);transform-origin:50% 100%}
+.lever .ball{position:absolute;left:50%;top:-18px;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a7a,var(--pay) 55%,#8c1410)}
+.lever.pull .arm{animation:pull .6s ease-in-out}
+@keyframes pull{40%{transform:scaleY(-.55)}100%{transform:scaleY(1)}}
+@media (max-width:620px){.lever{display:none}}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--bulb)}
+.btn2{font:inherit;font-size:14px;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.btn2:hover{border-color:var(--bulb)}
+.btn2.primary{background:var(--bulb);color:var(--ink);border-color:var(--bulb);font-weight:700}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid var(--bulb);outline-offset:2px}
+
+.ticket{background:var(--reel);color:var(--ink);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--wall);transform:translateY(-50%)}
+.ticket::before{left:-9px}.ticket::after{right:-9px}
+.ticket .tag{font-size:12px;letter-spacing:.14em;color:#8a5a4c}
+.ticket h2{margin:0;font-size:clamp(22px,5vw,28px);font-weight:900;line-height:1.2;text-wrap:balance}
+.ticket dl{margin:4px 0 0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:14px}
+.ticket dt{color:#8a5a4c}.ticket dd{margin:0;min-width:0}
+.ticket .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:4px}
+.ticket a{color:var(--brick-deep);font-weight:700;font-size:14px}
+.ticket.idle h2{color:#8a5a4c;font-weight:700;font-size:20px}
+
+details.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px}
+details.box>summary{cursor:pointer;padding:12px 0;font-weight:700;list-style-position:inside}
+summary span{font-weight:400;color:var(--muted);font-size:13px;margin-left:6px}
+.inner{padding:0 0 14px;display:flex;flex-direction:column;gap:14px}
+.group h3{margin:0 0 6px;font-size:13px;color:var(--bulb);letter-spacing:.1em;font-weight:500}
+.group h4{margin:8px 0 4px;font-size:12px;color:var(--muted);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:#2a1410;cursor:pointer;user-select:none;color:var(--fg)}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip:has(input:checked){background:#4a2219;border-color:#8a4a36}
+.chip:has(input:not(:checked)){opacity:.45;text-decoration:line-through}
+.chip:has(input:focus-visible){outline:2px solid var(--bulb)}
+.hist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.hist li{display:flex;justify-content:space-between;gap:10px;font-size:14px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.hist time{color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
+.empty{color:var(--muted);font-size:14px;margin:0}
+footer{font-size:12px;color:var(--muted);line-height:1.7}
+footer a{color:var(--muted)}
+
+/* search view */
+.searchbar{display:flex;gap:8px}
+.searchbar input{flex:1;min-width:0;font:inherit;font-size:17px;padding:12px 16px;border-radius:14px;border:2px solid #e3b04b;background:var(--reel);color:var(--ink)}
+.searchbar input::placeholder{color:#8a5a4c}
+.searchbar .go{font-size:18px;letter-spacing:.08em;padding:0 16px;flex:none}
+.quick{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:var(--muted);align-items:center}
+.quick button{font:inherit;font-size:13px;color:var(--bulb);background:none;border:1px dashed var(--line);border-radius:999px;padding:2px 10px;cursor:pointer}
+.filters{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.frow{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:start}
+.frow>span{font-size:12px;color:var(--muted);letter-spacing:.08em;padding-top:5px}
+.opts{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.opt{font:inherit;font-size:13px;color:var(--fg);background:#2a1410;border:1px solid var(--line);border-radius:999px;padding:3px 11px;cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--bulb);color:var(--ink);border-color:var(--bulb);font-weight:700}
+.selects{display:flex;flex-wrap:wrap;gap:8px}
+select,.field input,.field textarea{font:inherit;font-size:14px;color:var(--fg);background:#2a1410;border:1px solid var(--line);border-radius:10px;padding:6px 10px;max-width:100%}
+.summary{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--muted)}
+.summary b{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.dish{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.dish.flash{border-color:var(--bulb);box-shadow:0 0 0 2px var(--bulb),0 0 24px rgba(255,210,90,.3)}
+.dtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dtop h3{margin:0;font-size:17px;line-height:1.3;font-weight:700;min-width:0}
+.price{font-family:var(--display);font-size:24px;color:var(--bulb);line-height:1;flex:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price small{font-family:var(--body);font-size:12px;color:var(--muted);margin-left:2px}
+.price.none{font-family:var(--body);font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:2px 8px}
+.shopline{font-size:14px;color:var(--fg)}
+.shopline .where{color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:1px 8px;border-radius:999px;background:var(--panel2);color:var(--muted)}
+.tag.area{background:#5a2a1e;color:#ffd9c4}
+.tag.veg{background:#203a24;color:var(--veg)}
+.dnote{font-size:13px;color:var(--muted);margin:0}
+.dfoot{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;color:#9a7a6c;flex-wrap:wrap}
+.linkbtn{font:inherit;font-size:12px;color:var(--bulb);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.pform{display:flex;gap:6px;align-items:center}
+.pform input{width:90px;font:inherit;font-size:14px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:#2a1410;color:var(--fg)}
+.state{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);text-align:center}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);min-width:0}
+.field.full{grid-column:1/-1}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--bulb);color:var(--ink);font-weight:700;padding:8px 16px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:20;max-width:calc(100% - 32px)}
+@media (max-width:520px){.frow{grid-template-columns:1fr}.frow>span{padding-top:0}}
+@media (prefers-reduced-motion:reduce){.bulb.on{box-shadow:none}.cell.hit{animation:none}.lever.pull .arm{animation:none}}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.langsw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel)}
+.langsw button{font:inherit;font-size:13px;color:var(--muted);background:none;border:0;padding:6px 12px;cursor:pointer;min-width:42px}
+.langsw button[aria-pressed="true"]{background:var(--bulb);color:var(--ink);font-weight:700}
+summary .st{font-weight:700;color:var(--fg);font-size:inherit;margin:0}
+.histbar{display:flex;justify-content:flex-end}
+#clearHist.sure{background:var(--pay);border-color:var(--pay);color:#fff;font-weight:700}
+.sign span{display:block}
+@media (max-width:420px){.topbar{justify-content:center}}
+</style>
+
+<div class="wrap" id="app">
+  <div class="topbar">
+    <nav class="tabs" aria-label="Pages">
+      <a href="#" id="tabSlot" data-i18n="tabSlot">帮我拣</a>
+      <a href="#search" id="tabSearch" data-i18n="tabSearch">搜菜式</a>
+    </nav>
+    <div class="langsw" role="group" aria-label="Language">
+      <button type="button" data-lang="sc" aria-pressed="true">简</button>
+      <button type="button" data-lang="tc" aria-pressed="false">繁</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <!-- ============ SLOT VIEW ============ -->
+  <div id="viewSlot" class="wrap" style="max-width:none">
+    <header>
+      <div class="eyebrow" data-i18n="slotEyebrow">PolyU · 红磡 · 黄埔</div>
+      <h1 data-i18n="slotH1">理大今日食乜</h1>
+      <p data-i18n="slotSub">三个转轮：校内还是校外 → 吃哪一类 → 去哪家</p>
+    </header>
+    <div class="stage">
+      <div class="machine">
+        <div class="marquee" id="marquee" aria-hidden="true"></div>
+        <div class="sign"><span data-i18n="sign">今 日 食 乜</span><small>LUNCH · DINNER · SUPPER</small></div>
+        <div class="reels">
+          <div class="col"><div class="label" data-i18n="lbl0">去边</div><div class="win r0"><div class="track"></div></div><button class="lock" id="lock0" aria-pressed="false">锁定</button></div>
+          <div class="col"><div class="label" data-i18n="lbl1">食咩</div><div class="win r1"><div class="track"></div></div><button class="lock" id="lock1" aria-pressed="false">锁定</button></div>
+          <div class="col"><div class="label" data-i18n="lbl2">边间</div><div class="win r2"><div class="track"></div></div><button class="lock" id="lock2" aria-pressed="false">锁定</button></div>
+          <div class="col"><div class="label" data-i18n="lbl3">食乜菜</div><div class="win r3"><div class="track"></div></div><button class="lock" disabled aria-hidden="true">锁定</button></div>
+        </div>
+        <button class="go" id="go" data-i18n="go">拉！</button>
+      </div>
+      <button class="lever" id="lever" aria-label="Lever"><span class="base"></span><span class="arm"><span class="ball"></span></span></button>
+    </div>
+    <div class="bar">
+      <label class="toggle"><input type="checkbox" id="avoid" checked> <span data-i18n="avoid">避开最近吃过的 3 家</span></label>
+      <button class="btn2" id="again" data-i18n="again">同类换一家</button>
+    </div>
+    <section class="ticket idle" id="ticket" aria-live="polite"></section>
+    <details class="box" id="listBox">
+      <summary><span class="st" data-i18n="listT">选店名单</span><span id="count"></span></summary>
+      <div class="inner" id="list"></div>
+    </details>
+    <details class="box" open>
+      <summary><span class="st" data-i18n="histT">最近吃过</span></summary>
+      <div class="inner"><ul class="hist" id="hist"></ul><p class="empty" id="histEmpty" data-i18n="histEmpty">还没有记录。</p><div class="histbar"><button type="button" class="btn2" id="clearHist" data-i18n="clearHist">清空记录</button></div></div>
+    </details>
+  </div>
+
+  <!-- ============ SEARCH VIEW ============ -->
+  <div id="viewSearch" class="wrap" style="max-width:none" hidden>
+    <header>
+      <div class="eyebrow" data-i18n="sEyebrow">校内 + 红磡黄埔一带</div>
+      <h1 data-i18n="sH1">想食乜，搜一搜</h1>
+      <p data-i18n="sSub">按菜式找：在哪里吃得到、多少钱、在哪栋楼。</p>
+    </header>
+    <div class="searchbar">
+      <label for="q" hidden>Search</label>
+      <input id="q" type="search" autocomplete="off">
+      <button class="go" id="pick" data-i18n="pick">抽一道</button>
+    </div>
+    <div class="quick" id="quick"></div>
+    <div class="filters" id="filters"></div>
+    <div class="summary"><span id="sumText"></span>
+      <span class="selects">
+        <label for="shopSel" hidden>Place</label><select id="shopSel"></select>
+        <label for="sortSel" hidden>Sort</label><select id="sortSel"></select>
+      </span>
+    </div>
+    <div id="results"></div>
+    <details class="box" id="addBox">
+      <summary><span class="st" data-i18n="addT">加一道菜</span><span data-i18n="addSub">看到餐牌就顺手补上，所有人都能看到</span></summary>
+      <form class="inner" id="addForm">
+        <div class="formgrid">
+          <label class="field"><span data-i18n="fName">菜名</span><input id="fName" required maxlength="40"></label>
+          <label class="field"><span data-i18n="fPrice">价钱（HK$，可留空）</span><input id="fPrice" type="number" min="0" step="0.5" inputmode="decimal" placeholder="38"></label>
+          <label class="field"><span data-i18n="fShop">餐厅</span><select id="fShop"></select></label>
+          <label class="field"><span data-i18n="fCat">类别</span><select id="fCat"></select></label>
+          <label class="field"><span data-i18n="fDiet">荤 / 素</span><select id="fDiet"></select></label>
+          <label class="field" id="nsName" hidden><span data-i18n="fNewName">新店名字</span><input id="fNewName" maxlength="40"></label>
+          <label class="field" id="nsArea" hidden><span data-i18n="fNewArea">校内还是校外</span><select id="fNewArea"></select></label>
+          <label class="field" id="nsWhere" hidden><span data-i18n="fNewWhere">位置 / 地址</span><input id="fNewWhere" maxlength="60"></label>
+          <label class="field" id="nsCuisine" hidden><span data-i18n="fNewCuisine">菜系</span><select id="fNewCuisine"></select></label>
+          <label class="field full"><span data-i18n="fNote">备注（可选）</span><input id="fNote" maxlength="80"></label>
+        </div>
+        <div class="bar"><span class="empty" id="addMsg" data-i18n="addMsg">提交后马上出现在搜索结果里。</span><button class="btn2 primary" type="submit" id="addBtn" data-i18n="addBtn">加进去</button></div>
+      </form>
+    </details>
+  </div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+/* ================= helpers ================= */
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const rand = a => a[Math.floor(Math.random() * a.length)];
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let toastT;
+function toast(msg){
+  let t = document.querySelector(".toast");
+  if (!t) { t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+  t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600);
+}
+
+/* ================= i18n ================= */
+let LANG = LS.get("polyu-lang", "sc");
+if (!["sc","tc","en"].includes(LANG)) LANG = "sc";
+const I = {
+  tabSlot:["帮我拣","幫我揀","Pick for me"], tabSearch:["搜菜式","搜菜式","Find dishes"],
+  slotEyebrow:["PolyU · 红磡 · 黄埔","PolyU · 紅磡 · 黃埔","PolyU · Hung Hom · Whampoa"],
+  slotH1:["理大今日食乜","理大今日食乜","What's for lunch at PolyU?"],
+  slotSub:["四个转轮：校内还是校外 → 吃哪一类 → 去哪家 → 吃哪道菜","四個轉輪：校內還是校外 → 食哪一類 → 去邊間 → 食邊道餸","Four reels: on or off campus → what kind → which place → which dish"],
+  sign:["今 日 食 乜","今 日 食 乜","WHAT TO EAT"],
+  lbl0:["去边","去邊","Where"], lbl1:["食咩","食咩","What"], lbl2:["边间","邊間","Which"], lbl3:["食乜菜","食乜餸","Dish"], clearHist:["清空记录","清空記錄","Clear history"], clearSure:["再点一次确认清空","再按一次確認清空","Tap again to clear"], tCleared:["已清空记录","已清空記錄","History cleared"], dishL:["抽到的菜","抽到嘅餸","Dish"], noDish:["看餐牌","睇餐牌","See menu"],
+  lock:["锁定","鎖定","Lock"], locked:["已锁","已鎖","Locked"], go:["拉！","拉！","PULL!"],
+  avoid:["避开最近吃过的 3 家","避開最近食過的 3 間","Skip my last 3 places"], again:["同类换一家","同類換一間","Another place, same type"],
+  ticketTag:["今日饭票","今日飯票","Today's meal ticket"], ticketIdle:["拉一下，让机器替你决定。","拉一下，讓機器幫你決定。","Pull the lever and let the machine decide."],
+  tipT:["小技巧","小技巧","Tip"],
+  tipD:["锁定「边间」再拉，就只换菜。先锁定「校内」，就只在校园里转；不想吃的店可以在下面的名单里关掉。想按菜式找，去「搜菜式」。","鎖定「邊間」再拉，就只換餸。先鎖定「校內」，就只在校園裡轉；不想食的店可以在下面的名單裡關掉。想按菜式找，去「搜菜式」。","Lock \"Which\" and pull again to change only the dish. Lock \"Campus\" to spin only campus places. Turn off places you don't want in the list below. To look up dishes, go to Find dishes."],
+  whereL:["位置","位置","Where"], whatL:["吃什么","食乜","Food"], mapL:["在地图上看 ↗","在地圖上看 ↗","View on map ↗"], menuL:["看这家的菜式 →","看這間的菜式 →","See this place's dishes →"],
+  emptyH:["名单里的店都被关掉了。","名單裡的店都被關掉了。","Every place in the list is turned off."], emptyD:["打开「选店名单」，至少勾回一家。","打開「選店名單」，至少勾回一間。","Open \"Places in the draw\" and turn at least one back on."], fixL:["怎么办","點算","What to do"],
+  listT:["选店名单","選店名單","Places in the draw"], listCount:["已选 {on} / {all} 家，点店名可以关掉","已選 {on} / {all} 間，點店名可以關掉","{on} of {all} on — tap a name to turn it off"],
+  histT:["最近吃过","最近食過","Recently eaten"], histEmpty:["还没有记录。转出结果后会自动记在这里（只存在你这台设备上）。","還沒有記錄。轉出結果後會自動記在這裡（只存在你這部裝置上）。","Nothing yet. Results are saved here automatically (on this device only)."],
+  sEyebrow:["校内 + 红磡黄埔一带","校內 + 紅磡黃埔一帶","Campus + Hung Hom & Whampoa"], sH1:["想食乜，搜一搜","想食乜，搜一搜","Find a dish"],
+  sSub:["按菜式找：在哪里吃得到、多少钱、在哪栋楼。大家可以一起补菜和改价。","按菜式找：喺邊度食得到、幾多錢、喺邊座樓。大家可以一齊補菜同改價。","Search by dish: where to get it, how much, which building. Anyone can add dishes and fix prices."],
+  qPh:["例如：饭、粉/面、烧卖、咖啡、清真","例如：飯、粉/麵、燒賣、咖啡、清真","e.g. rice, noodles, siu mai, coffee, halal"],
+  pick:["抽一道","抽一道","Pick one"], tryL:["试试：","試試：","Try:"],
+  fZone:["地点","地點","Where"], fCatL:["类别","類別","Type"], fCuis:["菜系","菜系","Cuisine"], fDietL:["荤素","葷素","Diet"], fPriceL:["价钱","價錢","Price"], all:["全部","全部","All"],
+  zMain:["校内主校园","校內主校園","Main campus"], zHall:["红磡宿舍","紅磡宿舍","Hung Hom halls"], zOut:["校外 2km 内","校外 2km 內","Off campus (2 km)"],
+  tCampus:["校内","校內","Campus"], tHall:["红磡宿舍","紅磡宿舍","HH halls"], tOut:["校外","校外","Off campus"],
+  meat:["荤","葷","Meat"], veg:["素","素","Veg"],
+  pHas:["只看有价钱","只看有價錢","Has a price"], p30:["$30 以内","$30 以內","Under $30"], p60:["$60 以内","$60 以內","Under $60"], p100:["$100 以内","$100 以內","Under $100"],
+  allShops:["全部餐厅","全部餐廳","All places"], sortDef:["默认排序","預設排序","Default order"], sortAsc:["价钱 低→高","價錢 低→高","Price: low → high"], sortDesc:["价钱 高→低","價錢 高→低","Price: high → low"],
+  sum:["找到 <b>{n}</b> 道菜 · <b>{p}</b> 道有价钱 · 共 {s} 家店","找到 <b>{n}</b> 道菜 · <b>{p}</b> 道有價錢 · 共 {s} 間店","<b>{n}</b> dishes · <b>{p}</b> with prices · {s} places"],
+  loading:["正在载入菜式…","正在載入菜式…","Loading dishes…"],
+  noRes:["没有找到。换个关键词，或者清掉一些筛选。也可以在下面「加一道菜」把它补上。","搵唔到。換個關鍵字，或者清走一啲篩選。都可以喺下面「加一道菜」補上。","Nothing found. Try another word or clear some filters, or add it below with \"Add a dish\"."],
+  priceNone:["价钱待补","價錢待補","Price TBC"], src:["来源","來源","Source"], hours:["营业","營業","Hours"],
+  editP:["改价钱","改價錢","Edit price"], addP:["补价钱","補價錢","Add price"], save:["保存","儲存","Save"],
+  addT:["加一道菜","加一道菜","Add a dish"], addSub:["看到餐牌就顺手补上，所有人都能看到","見到餐牌就順手補上，所有人都睇到","Saw a menu? Add it — everyone will see it"],
+  fName:["菜名","菜名","Dish name"], fPrice:["价钱（HK$，可留空）","價錢（HK$，可留空）","Price (HK$, optional)"], fShop:["餐厅","餐廳","Place"], fCat:["类别","類別","Type"], fDiet:["荤 / 素","葷 / 素","Meat / veg"],
+  fNewName:["新店名字","新店名","New place name"], fNewArea:["校内还是校外","校內還是校外","On or off campus"], fNewWhere:["位置 / 地址","位置 / 地址","Location / address"], fNewCuisine:["菜系","菜系","Cuisine"], fNote:["备注（可选）","備註（可選）","Note (optional)"],
+  newShop:["＋ 新的店（名单里没有）","＋ 新的店（名單裡沒有）","+ A new place (not listed)"], namePh:["例如：叉烧饭","例如：叉燒飯","e.g. BBQ pork rice"], wherePh:["例如：黄埔天地百宝坊 G10","例如：黃埔天地百寶坊 G10","e.g. G10, Whampoa Garden Site 3"], notePh:["例如：午市套餐配饮品","例如：午市套餐配飲品","e.g. lunch set with drink"],
+  addMsg:["提交后马上出现在搜索结果里。","提交後馬上出現在搜尋結果裡。","It shows up in the results right away."], addBtn:["加进去","加進去","Add"], added:["已加入「{n}」。","已加入「{n}」。","Added \"{n}\"."],
+  tAdded:["加好了","加好了","Added"], tPrice:["价钱已更新","價錢已更新","Price updated"], tNeedPrice:["请输入一个价钱，例如 38","請輸入一個價錢，例如 38","Enter a price, e.g. 38"], tNeedShop:["请填新店的名字","請填新店的名字","Enter the new place's name"],
+  tView:["你只有查看权限，不能修改","你只有查看權限，不能修改","You can view but not edit"], tFull:["数据库满了，加不进去","資料庫滿了，加不進去","The database is full"], tFail:["没保存成功，请再试一次","未能儲存，請再試一次","Couldn't save — try again"],
+  tEmpty:["结果是空的，先放宽筛选","結果是空的，先放寬篩選","No results — loosen the filters first"], tPick:["就吃：{d} @ {s}","就食：{d} @ {s}","Go eat: {d} @ {s}"],
+  dbNo:["这里看不到菜式数据：需要登录 claude.ai，并且这页已经分享给你。","這裡看不到菜式資料：需要登入 claude.ai，並且這頁已經分享給你。","Dish data isn't available here: sign in to claude.ai and make sure this page is shared with you."],
+  dbSlow:["暂时连不上菜式数据。请确认已登录 claude.ai，稍后再打开这一页。","暫時連不上菜式資料。請確認已登入 claude.ai，稍後再打開這一頁。","Can't reach the dish data yet. Check you're signed in to claude.ai and try again later."],
+  dbFail:["菜式数据载入失败，请稍后刷新。","菜式資料載入失敗，請稍後重新整理。","Couldn't load dishes — refresh later."], dbRevoked:["这一页的访问已变更。","這一頁的存取已變更。","Access to this page has changed."], dbOut:["菜式数据只能在 claude.ai 里打开这页时看到。","菜式資料只能在 claude.ai 裡打開這頁時看到。","Dish data only loads when this page is opened on claude.ai."],
+  dbEmpty:["菜式库还是空的。用下面「加一道菜」加第一道。","菜式庫還是空的。用下面「加一道菜」加第一道。","No dishes yet. Add the first one below."], none:["还没有菜式","還沒有菜式","No dishes yet"],
+  usersAdd:["大家补充","大家補充","Added by users"], addrTbc:["位置待补","位置待補","Location TBC"],
+  footer:[
+    '校内名单、营业时间来自 <a href="https://www.polyu.edu.hk/en/cfso/campus-environment-and-facilities/catering-facilities/catering-outlets" target="_blank" rel="noopener">理大 CFSO 餐饮设施页</a>（营业时间 2026-10-12 起），包括教职员餐厅；校内菜单主要来自各餐厅的网上点餐系统。校外来自 <a href="https://www.hk01.com/%E9%A3%9F%E7%8E%A9%E8%B2%B7/795342" target="_blank" rel="noopener">HK01 红磡黄埔美食（2026-05）</a>。每道菜都标了来源和日期，价钱以店家为准。',
+    '校內名單、營業時間來自 <a href="https://www.polyu.edu.hk/en/cfso/campus-environment-and-facilities/catering-facilities/catering-outlets" target="_blank" rel="noopener">理大 CFSO 餐飲設施頁</a>（營業時間 2026-10-12 起），包括教職員餐廳；校內餐牌主要來自各餐廳的網上點餐系統。校外來自 <a href="https://www.hk01.com/%E9%A3%9F%E7%8E%A9%E8%B2%B7/795342" target="_blank" rel="noopener">HK01 紅磡黃埔美食（2026-05）</a>。每道菜都標了來源和日期，價錢以店家為準。',
+    'Campus outlets and hours are from the <a href="https://www.polyu.edu.hk/en/cfso/campus-environment-and-facilities/catering-facilities/catering-outlets" target="_blank" rel="noopener">PolyU CFSO catering page</a> (hours from 12 Oct 2026), staff restaurants included; campus menus mostly come from each outlet\'s online ordering system. Off-campus places are from <a href="https://www.hk01.com/%E9%A3%9F%E7%8E%A9%E8%B2%B7/795342" target="_blank" rel="noopener">HK01\'s Hung Hom guide (May 2026)</a>. Every dish shows its source and date; check prices with the shop.'
+  ]
+};
+const LI = () => ({sc:0, tc:1, en:2})[LANG];
+function t(k, vars){ let s = (I[k] || [k,k,k])[LI()]; if (vars) for (const v in vars) s = s.split("{" + v + "}").join(vars[v]); return s; }
+
+/* labels for data values (stored in Simplified Chinese) */
+const LBL = {
+  "校内":["校内","校內","Campus"], "校外":["校外","校外","Off campus"],
+  "饭堂":["饭堂","飯堂","Canteens"], "中菜点心":["中菜点心","中菜點心","Chinese & dim sum"], "西式异国":["西式异国","西式異國","Western & intl"], "咖啡轻食":["咖啡轻食","咖啡輕食","Cafés"],
+  "饭":["饭","飯","Rice"], "面和饺子":["面和饺子","麵和餃子","Noodles"], "烧烤串串":["烧烤串串","燒烤串串","BBQ & skewers"], "早午餐咖啡":["早午餐咖啡","早午餐咖啡","Brunch & coffee"], "甜品小食":["甜品小食","甜品小食","Desserts & snacks"],
+  "粉面":["粉 / 面","粉 / 麵","Noodles"], "点心饺子":["点心 / 饺子","點心 / 餃子","Dim sum & dumplings"], "汉堡三文治":["汉堡 / 三文治","漢堡 / 三文治","Burgers & sandwiches"], "薄饼意粉":["薄饼 / 意粉","薄餅 / 意粉","Pizza & pasta"], "西式主菜":["西式主菜","西式主菜","Western mains"], "小食":["小食","小食","Snacks"], "甜品":["甜品","甜品","Desserts"], "饮品咖啡":["饮品 / 咖啡","飲品 / 咖啡","Drinks & coffee"],
+  "港式中式":["港式中式","港式中式","Chinese / HK"], "西式":["西式","西式","Western"], "日韩":["日韩","日韓","Japanese / Korean"], "台式":["台式","台式","Taiwanese"], "东南亚":["东南亚","東南亞","Southeast Asian"], "清真 / 南亚":["清真 / 南亚","清真 / 南亞","Halal / South Asian"], "快餐连锁":["快餐连锁","快餐連鎖","Fast-food chain"],
+  "餐厅":["餐厅","餐廳","Restaurant"], "连锁":["连锁","連鎖","Chain"], "小店":["小店","小店","Small shop"], "甜品店":["甜品店","甜品店","Dessert shop"], "面包店":["面包店","麵包店","Bakery"], "大家补充":["大家补充","大家補充","User-added"],
+  "荤":["荤","葷","Meat"], "素":["素","素","Veg"]
+};
+const L = v => (LBL[v] ? LBL[v][LI()] : cc(v));
+
+/* Simplified → Traditional (HK) for data text: OpenCC from jsDelivr, with a small built-in fallback */
+let occ = null, occLoading = null;
+const ccCache = new Map();
+const S2T_FALLBACK = (() => { const m = {}; const p = "业業丛叢东東丝絲两兩个個为為丽麗乌烏乐樂乡鄉书書亚亞产產仑崙仓倉们們众眾会會兰蘭关關兴興内內冲沖决決冻凍凉涼凤鳳凯凱刚剛创創别別办辦动動劳勞区區华華协協单單卖賣卤滷厅廳厦廈厨廚参參双雙发發变變叶葉号號启啟员員噜嚕团團园園围圍国國图圖圆圓块塊处處备備头頭妇婦学學宝寶实實宽寬对對寿壽层層岛島师師带帶广廣库庫应應开開张張当當录錄态態总總恶惡扬揚报報担擔择擇换換摇搖摊攤数數斋齋斓斕无無时時暂暫术術杂雜权權条條来來杨楊枣棗柠檸栀梔标標栋棟样樣梦夢梿槤楼樓榄欖樱櫻欢歡欧歐汉漢汤湯没沒泽澤浆漿济濟浓濃温溫湾灣满滿潜潛炉爐点點炼煉烟煙烧燒烩燴烫燙热熱爱愛狮獅猪豬玛瑪现現畅暢盐鹽盖蓋盘盤称稱笋筍筛篩简簡类類粤粵粮糧红紅约約级級纯純纷紛线線经經结結给給统統绳繩绵綿综綜绿綠缤繽缩縮罗羅职職肠腸胶膠脑腦脱脫芜蕪芦蘆苏蘇荞蕎荤葷莲蓮萝蘿营營萨薩葱蔥蓝藍虾蝦蚬蜆蛎蠣补補装裝见見认認让讓记記设設访訪证證识識词詞试試话話该該说說请請贝貝贡貢败敗质質赛賽赞讚车車转轉轮輪软軟轻輕载載辉輝输輸边邊过過还還这這进進连連选選酱醬钟鐘钱錢铁鐵铭銘铺鋪销銷锁鎖锅鍋锦錦键鍵长長门門问問间間阁閣队隊陈陳韩韓页頁顺順顿頓预預颈頸风風飘飄饭飯饮飲饱飽饺餃饼餅馆館马馬鱼魚鱿魷鲈鱸鲍鮑鲔鮪鲜鮮鲳鯧鳕鱈鳗鰻鸟鳥鸡雞鸭鴨鸯鴦鸳鴛鹅鵝麦麥黄黃龙龍面麵干乾咸鹹姜薑只隻制製云雲";
+  for (let i = 0; i < p.length; i += 2) m[p[i]] = p[i+1]; return m; })();
+function cc(s){
+  if (LANG !== "tc" || !s) return s ?? "";
+  s = String(s);
+  if (ccCache.has(s)) return ccCache.get(s);
+  let r;
+  if (occ) r = occ(s);
+  else r = [...s].map(c => S2T_FALLBACK[c] || c).join("");
+  if (occ) ccCache.set(s, r);
+  return r;
+}
+function loadOpenCC(){
+  if (occ || occLoading) return occLoading;
+  occLoading = new Promise(res => {
+    const tryLoad = (src, next) => {
+      const sc = document.createElement("script"); sc.src = src; sc.async = true;
+      sc.onload = () => { try { occ = window.OpenCC.Converter({from: "cn", to: "hk"}); ccCache.clear(); } catch(e) { occ = null; } res(); };
+      sc.onerror = () => next ? next() : res();
+      document.head.appendChild(sc);
+    };
+    tryLoad("https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/cn2t.js", () => tryLoad("https://unpkg.com/opencc-js@1.0.5/dist/umd/cn2t.js"));
+  });
+  return occLoading;
+}
+
+/* English for the slot machine's static list */
+const SLOT_EN = {
+  "U Garden 学生饭堂":["U Garden Student Canteen","Podium, CD & DE Wings","HK-style, roast meats, noodle soup, pizza"],
+  "VA The Forest 学生饭堂":["VA Student Canteen (The Forest)","G/F, Shaw Amenities Building","Cantonese, baked rice, curry, noodle soup"],
+  "Z Canteen":["Z Canteen","2/F, Block Z","HK-style, curry, noodle soup"],
+  "Communal 学生饭堂":["Communal Student Canteen","3/F, Communal Building","HK-style, Northwest Chinese, baked rice"],
+  "红磡宿舍 The Forest":["Hung Hom Hall Canteen (The Forest)","1/F, Hung Hom Student Halls","Cantonese, baked rice, curry, noodle soup"],
+  "U Garden 花园理（职员饭堂）":["U Garden Staff Canteen","Podium, CD & DE Wings","Vietnamese chops, Thai, baked rice, rice noodles, $38–52"],
+  "VA The Forest 职员饭堂":["VA Staff Canteen (The Forest)","G/F, Shaw Amenities Building","HK-style, curry, noodle soup"],
+  "Ju Yin Court":["Ju Yin Court","4/F, Communal Building","Dim sum, roast meats, noodle soup"],
+  "Ju Yin House 职员酒楼":["Ju Yin House (staff)","4/F, Communal Building","Cantonese, dim sum, roast meats"],
+  "Theatre Lounge":["Theatre Lounge","G/F, Chung Sze Yuen Building","Korean, baked rice & pasta, desserts"],
+  "H Café 美式餐车":["H Café American Diner","Podium courtyard, Block FGHJ","Burgers, hot dogs"],
+  "PizzaExpress":["PizzaExpress","Podium, Block W","Pizza, pasta, salad"],
+  "Grove & 台台食堂":["Grove & Tai Tai Foodtopia","Podium, Block Y","Western, Taiwanese, noodle soup, bubble tea"],
+  "Z Café 清真":["Z Café (Halal)","2/F, Block Z","Halal certified, curry, noodle soup"],
+  "U. Green 教职员会所餐厅":["U. Green Staff Club Restaurant","5/F, Communal Building","Mediterranean / Macanese, curry, salad"],
+  "Subway":["Subway","Podium, Shaw Amenities Building","Sandwiches, salad"],
+  "Starbucks":["Starbucks","Podium, Shaw Amenities Building","Coffee, cake, sandwiches"],
+  "Gourmet Shop":["Gourmet Shop","Podium, Shaw Amenities Building","Baked rice & pasta, salad, cake"],
+  "LibCafé":["LibCafé","Podium, Pao Yue-kong Library","Coffee, sandwiches, cake"],
+  "Pacific Coffee":["Pacific Coffee","Podium, Block X","Coffee, sandwiches, salad"],
+  "Chill Cup":["Chill Cup","Podium, Jockey Club Innovation Tower","Baked rice & pasta, Taiwanese drinks"],
+  "勇记海南鸡":["Yung Kee Hainan Chicken","29L, G/F, 23-35H Ma Tau Wai Rd","Hainanese chicken rice"],
+  "三河屋 · 尾张屋":["Mikawaya · Owariya","G/F, 7 Ming On St","Japanese eel rice, good value"],
+  "米気":["Kome Ki","G32, Whampoa Garden Site 3","Japanese home-style set meals"],
+  "九份饱":["Jiufen Bao","4N, G/F, Kai Fu Building, Whampoa Estate","Taiwanese chicken cutlet rice"],
+  "波士顿快餐店":["Boston Fast Food","Basement, 436-450 Hung Hom Bay Rd","HK cha chaan teng"],
+  "铭兴山西刀削面":["Ming Hing Shanxi Noodles","G/F, 2-32 Man Tai St","Shanxi knife-cut noodles"],
+  "蒙面":["Mong Min Cart Noodles","G/F, 9-15 Chai Kwan Lane","Cart noodles"],
+  "拉面天王":["Ramen King","B5B, G/F, 17-27 Tak Man St","Ramen"],
+  "火夫":["Fofu","G29, Whampoa Garden Site 3","Tiger prawn noodles, skewers"],
+  "饺里":["Gaau Lei Dumplings","C2, G/F, 111 Wuhu St","Handmade dumplings"],
+  "煎饼厨房":["Jianbing Kitchen","Hung Hom","Northeastern jianbing"],
+  "韩兄弟烧烤":["Korean Brothers BBQ","G/F, 27 & 63 Shung Kit St","Korean BBQ & seafood, affordable"],
+  "串噹噹":["Chuen Dong Dong","Shop A, G/F, 78 Wuhu St","Skewers, grills, malatang"],
+  "Black Sugar":["Black Sugar","G17, Whampoa Garden Site 3","All-day breakfast, coffee"],
+  "Bagel Gogo":["Bagel Gogo","G/F, 35 Shung Chi St","Bagels from about $70"],
+  "KOMEDA":["KOMEDA","G01, AEON Style, Whampoa Garden Site 6","Japanese coffee, pork cutlet sandwiches"],
+  "素年 Be With Years":["Be With Years","G27, Whampoa Garden Site 3","Vegan Japanese & Western"],
+  "Still":["Still","Shop 06, 1/F, 63 Ma Tau Wai Rd","Spanish × Japanese fusion"],
+  "陈茶馆芋圆":["Chan's Tea House","G12, Whampoa Garden Site 3","Taro balls, shaved ice"],
+  "红磡鸡蛋仔":["Hung Hom Egg Waffles","Shop 2, G/F, 2 Tai Ku St","Egg waffles from $16, grid waffles"],
+  "赞好台湾":["Zan Hao Taiwan","G/F, 1-7 Wong Kwong St","Taiwanese street food"],
+  "周记酱料":["Chow Kee","G/F, 23 Man Yue St","Siu mai, house sauces"],
+  "揉然地 Leisure Baker":["Leisure Baker","Hung Hom","French pudding buns, tiramisu buns"],
+  "Sweet Craft":["Sweet Craft","Hung Hom","Japanese shaved ice, ice cream"]
+};
+const slotName = n => LANG === "en" ? (SLOT_EN[n]?.[0] || n) : cc(n);
+const slotWhere = s => LANG === "en" ? (SLOT_EN[s.n]?.[1] || s.w) : cc(s.w);
+const slotFood = s => LANG === "en" ? (SLOT_EN[s.n]?.[2] || s.f) : cc(s.f);
+
+/* slot shop → menu documents in the shared dish database */
+const MAPID = {"U Garden 学生饭堂":["ugarden"],"VA The Forest 学生饭堂":["vaforest"],"Z Canteen":["zcanteen"],"Communal 学生饭堂":["communal"],"红磡宿舍 The Forest":["hhforest"],"U Garden 花园理（职员饭堂）":["ugstaff"],"VA The Forest 职员饭堂":["vastaff"],"Ju Yin Court":["juyin"],"Ju Yin House 职员酒楼":["juyinhouse"],"Theatre Lounge":["theatre"],"H Café 美式餐车":["hcafe"],"PizzaExpress":["pizzaexpress"],"Grove & 台台食堂":["grove","taitai"],"Z Café 清真":["zhalal"],"U. Green 教职员会所餐厅":["ugreen"],"Subway":["subway"],"Starbucks":["starbucks"],"Gourmet Shop":["gourmet"],"LibCafé":["libcafe"],"Pacific Coffee":["pacificx"],"Chill Cup":["chillcup"],"勇记海南鸡":["yungkee"],"三河屋 · 尾张屋":["mikawaya"],"米気":["komeki"],"九份饱":["jiufen"],"波士顿快餐店":["boston"],"铭兴山西刀削面":["mingxing"],"蒙面":["mongmin"],"拉面天王":["ramenking"],"火夫":["fofu"],"饺里":["gaauli"],"煎饼厨房":["jianbing"],"韩兄弟烧烤":["hanbbq"],"串噹噹":["chuandd"],"Black Sugar":["blacksugar"],"Bagel Gogo":["bagelgogo"],"KOMEDA":["komeda"],"素年 Be With Years":["beyears"],"Still":["still"],"陈茶馆芋圆":["chenteahouse"],"红磡鸡蛋仔":["hhegg"],"赞好台湾":["zanhao"],"周记酱料":["chowkee"],"揉然地 Leisure Baker":["leisure"],"Sweet Craft":["sweetcraft"]};
+function getDish(k){
+  if (!k || k === "__q" || k === "__none") return null;
+  const [mid, iid] = k.split("::");
+  const m = MENUS.find(x => x.id === mid); const it = m && (m.items || []).find(i => i.id === iid);
+  return it ? {...it, shop: m, shopId: mid} : null;
+}
+function dishPool(shop){
+  const ids = MAPID[shop.n] || [];
+  const all = [];
+  MENUS.filter(m => ids.includes(m.id)).forEach(m => (m.items || []).forEach(it => { if (it && it.n) all.push({k: m.id + "::" + it.id, it}); }));
+  let main = all.filter(x => x.it.cat !== "饮品咖啡" && !(typeof x.it.p === "number" && x.it.p < 12));
+  if (!main.length) main = all;
+  return main.map(x => x.k);
+}
+function dishLabel(v){
+  if (v === "__q") return "？";
+  if (v === "__none") return t("noDish");
+  const d = getDish(v);
+  return d ? dName(d) : "？";
+}
+
+/* ================= routing ================= */
+function route(){
+  const s = location.hash === "#search";
+  document.getElementById("viewSlot").hidden = s;
+  document.getElementById("viewSearch").hidden = !s;
+  document.getElementById("app").classList.toggle("wide", s);
+  document.getElementById(s ? "tabSlot" : "tabSearch").removeAttribute("aria-current");
+  document.getElementById(s ? "tabSearch" : "tabSlot").setAttribute("aria-current", "page");
+  if (s) startDb();
+  setTimeout(() => reels.forEach(r => place(r, r.m, 0)), 0);
+}
+addEventListener("hashchange", route);
+document.getElementById("tabSlot").addEventListener("click", e => { e.preventDefault(); history.replaceState(null, "", location.pathname + location.search); route(); });
+
+/* ================= SLOT MACHINE ================= */
+const DATA = {
+  "校内": {
+    "饭堂": [
+      {n:"U Garden 学生饭堂", w:"CD 翼 / DE 翼 平台层", f:"港式、烧味、汤粉、薄饼"},
+      {n:"VA The Forest 学生饭堂", w:"邵逸夫综合大楼 地下", f:"粤式、焗饭、咖喱、汤粉"},
+      {n:"Z Canteen", w:"Z 座 2 楼", f:"港式、咖喱、汤粉"},
+      {n:"Communal 学生饭堂", w:"公共大楼 3 楼", f:"港式、西北菜、焗饭"},
+      {n:"红磡宿舍 The Forest", w:"红磡学生宿舍 1 楼", f:"粤式、焗饭、咖喱、汤粉"},
+      {n:"U Garden 花园理（职员饭堂）", w:"CD 及 DE 平台", f:"越式扒饭、泰式、焗饭、汤米线，$38–52"},
+      {n:"VA The Forest 职员饭堂", w:"邵逸夫综合大楼 地下", f:"港式、咖喱、汤粉"}
+    ],
+    "中菜点心": [
+      {n:"Ju Yin Court", w:"公共大楼 4 楼", f:"点心、烧味、汤粉"},
+      {n:"Ju Yin House 职员酒楼", w:"公共大楼 4 楼", f:"粤菜、点心、烧味"}
+    ],
+    "西式异国": [
+      {n:"Theatre Lounge", w:"钟士元楼 地下", f:"韩式、焗饭意粉、甜品"},
+      {n:"H Café 美式餐车", w:"FGHJ 座 平台中庭", f:"汉堡、热狗"},
+      {n:"PizzaExpress", w:"W 座 平台层", f:"薄饼、意粉、沙律"},
+      {n:"Grove & 台台食堂", w:"Y 座 平台层", f:"台式、汤面、台式饮品"},
+      {n:"Z Café 清真", w:"Z 座 2 楼", f:"清真认证、咖喱、汤面"},
+      {n:"U. Green 教职员会所餐厅", w:"公共大楼 5 楼", f:"地中海 / 澳门风味、咖喱、沙律"}
+    ],
+    "咖啡轻食": [
+      {n:"Subway", w:"邵逸夫综合大楼 平台层", f:"三文治、沙律"},
+      {n:"Starbucks", w:"邵逸夫综合大楼 平台层", f:"咖啡、蛋糕、三文治"},
+      {n:"Gourmet Shop", w:"邵逸夫综合大楼 平台层", f:"焗饭意粉、沙律、蛋糕"},
+      {n:"LibCafé", w:"包玉刚图书馆 平台层", f:"咖啡、三文治、蛋糕"},
+      {n:"Pacific Coffee", w:"X 座 平台层", f:"咖啡、三文治、沙律"},
+      {n:"Chill Cup", w:"赛马会创新楼 平台层", f:"焗饭意粉、台式饮品"}
+    ]
+  },
+  "校外": {
+    "饭": [
+      {n:"勇记海南鸡", w:"马头围道 23-35H 号 龙基大厦地下", f:"海南鸡饭"},
+      {n:"三河屋 · 尾张屋", w:"明安街 7 号 地下", f:"日式鳗鱼饭，性价比高"},
+      {n:"米気", w:"黄埔天地百宝坊 G32", f:"日式家常定食"},
+      {n:"九份饱", w:"黄埔新邨 启富楼 地下 4N", f:"台式鸡扒饭"},
+      {n:"波士顿快餐店", w:"红磡湾道 436-450 号 富湾大厦地库", f:"港式茶餐厅"}
+    ],
+    "面和饺子": [
+      {n:"铭兴山西刀削面", w:"民泰街 2-32 号 地下", f:"山西刀削面"},
+      {n:"蒙面", w:"Chai Kwan Lane 9-15 号 协辉大厦地下", f:"车仔面"},
+      {n:"拉面天王", w:"德民街 17-27 号 地下 B5B", f:"拉面"},
+      {n:"火夫", w:"黄埔天地百宝坊 G29", f:"虎虾汤面、串烧"},
+      {n:"饺里", w:"芜湖街 111 号 地下 C2", f:"手工饺子"},
+      {n:"煎饼厨房", w:"红磡", f:"东北煎饼"}
+    ],
+    "烧烤串串": [
+      {n:"韩兄弟烧烤", w:"崇洁街 27 号 / 63 号 地下", f:"韩式烤肉、海鲜，价钱大众化"},
+      {n:"串噹噹", w:"芜湖街 78 号 地下 A 铺", f:"串烧、烤物、麻辣烫"}
+    ],
+    "早午餐咖啡": [
+      {n:"Black Sugar", w:"黄埔天地百宝坊 G17", f:"全日早餐、咖啡"},
+      {n:"Bagel Gogo", w:"崇志街 35 号 地下", f:"贝果，约 $70 起"},
+      {n:"KOMEDA", w:"黄埔花园 6 期 AEON Style G01", f:"日式咖啡、炸猪扒包"},
+      {n:"素年 Be With Years", w:"黄埔天地百宝坊 G27", f:"纯素日式和西式"},
+      {n:"Still", w:"马头围道 63 号 启岸大厦 1 楼 06 铺", f:"西班牙 × 日本融合菜"}
+    ],
+    "甜品小食": [
+      {n:"陈茶馆芋圆", w:"黄埔天地百宝坊 G12", f:"芋圆、雪冰"},
+      {n:"红磡鸡蛋仔", w:"大沽街 2 号 宝丽阁 地下 2 号铺", f:"鸡蛋仔 $16 起、格仔饼"},
+      {n:"赞好台湾", w:"Wong Kwong St 1-7 号 地下", f:"台湾街头小食"},
+      {n:"周记酱料", w:"民裕街 23 号 地下", f:"烧卖、自家酱料"},
+      {n:"揉然地 Leisure Baker", w:"红磡", f:"法式布甸包、提拉米苏包"},
+      {n:"Sweet Craft", w:"红磡", f:"日式刨冰、雪糕"}
+    ]
+  }
+};
+const key = (loc, s) => loc + "|" + s.n;
+let disabled = new Set(LS.get("polyu-off", []));
+let history_ = LS.get("polyu-hist", []);
+
+const mq = document.getElementById("marquee");
+for (let i = 0; i < 18; i++) { const b = document.createElement("span"); b.className = "bulb"; mq.appendChild(b); }
+let tick = 0, fast = false;
+function blink(){
+  [...mq.children].forEach((b, i) => b.classList.toggle("on", fast ? (i + tick) % 3 === 0 : (i + tick) % 2 === 0));
+  tick++; setTimeout(blink, fast ? 90 : 600);
+}
+if (!reduce) blink(); else [...mq.children].forEach(b => b.classList.add("on"));
+
+const reels = [...document.querySelectorAll(".win")].map((win, i) => ({win, track: win.querySelector(".track"), items: [], m: 1, kind: i}));
+const H = r => r.win.clientHeight / 3;
+const reelLabel = (r, v) => r.kind === 3 ? dishLabel(v) : r.kind === 2 ? slotName(v) : L(v);
+function setStrip(r, items){ r.items = items; r.track.innerHTML = items.map(v => `<div class="cell">${esc(reelLabel(r, v))}</div>`).join(""); }
+function relabelReels(){ reels.forEach(r => { const hit = r.track.querySelector(".hit") ? r.m : -1; setStrip(r, r.items); place(r, r.m, 0); if (hit >= 0) r.track.children[hit]?.classList.add("hit"); }); }
+function place(r, m, dur){
+  r.m = m;
+  r.track.style.transition = dur ? `transform ${dur}ms cubic-bezier(.12,.72,.22,1.04)` : "none";
+  r.track.style.transform = `translateY(${-(m - 1) * H(r)}px)`;
+}
+setStrip(reels[0], ["校外", "校内", "校外"]);
+setStrip(reels[1], ["咖啡轻食", "饭堂", "中菜点心"]);
+setStrip(reels[2], ["Subway", "U Garden 学生饭堂", "Ju Yin Court"]);
+setStrip(reels[3], ["__q", "__q", "__q"]);
+reels.forEach(r => place(r, 1, 0));
+addEventListener("resize", () => reels.forEach(r => place(r, r.m, 0)));
+
+const locks = [false, false, false];
+const lockBtn = [document.getElementById("lock0"), document.getElementById("lock1"), document.getElementById("lock2")];
+function syncLocks(){ lockBtn.forEach((b, i) => { b.setAttribute("aria-pressed", locks[i]); b.textContent = locks[i] ? t("locked") : t("lock"); }); }
+lockBtn[0].onclick = () => { locks[0] = !locks[0]; if (!locks[0]) { locks[1] = false; locks[2] = false; } syncLocks(); };
+lockBtn[1].onclick = () => { locks[1] = !locks[1]; if (locks[1]) locks[0] = true; else locks[2] = false; syncLocks(); };
+lockBtn[2].onclick = () => { locks[2] = !locks[2]; if (locks[2]) { locks[0] = true; locks[1] = true; } syncLocks(); };
+
+let cur = {loc: "校内", cat: "饭堂", shop: DATA["校内"]["饭堂"][0], dish: null};
+let ticketState = "idle";
+function pool(loc, cat, avoidRecent){
+  const recent = new Set(history_.slice(0, 3).map(h => h.k));
+  let list = DATA[loc][cat].filter(s => !disabled.has(key(loc, s)));
+  if (avoidRecent) { const f = list.filter(s => !recent.has(key(loc, s))); if (f.length) list = f; }
+  return list;
+}
+const catsOf = (loc, av) => Object.keys(DATA[loc]).filter(c => pool(loc, c, av).length);
+const locsOf = av => Object.keys(DATA).filter(l => catsOf(l, av).length);
+let spinning = false;
+const goBtn = document.getElementById("go"), lever = document.getElementById("lever");
+
+function spin(keep){
+  if (spinning) return;
+  const k0 = keep ? true : locks[0], k1 = keep ? true : locks[1], k2 = !keep && locks[2];
+  const av = document.getElementById("avoid").checked;
+  if (!locsOf(av).length) { ticketState = "empty"; renderTicket(); document.getElementById("listBox").open = true; return; }
+  let loc = k0 && catsOf(cur.loc, av).length ? cur.loc : rand(locsOf(av));
+  let cat = k1 && loc === cur.loc && pool(loc, cur.cat, av).length ? cur.cat : rand(catsOf(loc, av));
+  let p = pool(loc, cat, av);
+  if (keep && p.length > 1) p = p.filter(s => s.n !== cur.shop.n);
+  const shop = k2 && loc === cur.loc && cat === cur.cat && DATA[loc][cat].includes(cur.shop) && !disabled.has(key(loc, cur.shop)) ? cur.shop : rand(p);
+  const dp = dishPool(shop);
+  let dpp = dp; if (shop === cur.shop && dp.length > 1 && cur.dish) dpp = dp.filter(k => k !== cur.dish);
+  const dish = dpp.length ? rand(dpp) : "__none";
+  spinning = true; goBtn.disabled = true; fast = true;
+  lever.classList.remove("pull"); void lever.offsetWidth; lever.classList.add("pull");
+  document.querySelectorAll(".cell.hit").forEach(c => c.classList.remove("hit"));
+  const allShops = Object.values(DATA[loc]).flat().map(s => s.n);
+  const plan = [
+    {spin: !(k0 && loc === cur.loc), fill: () => rand(Object.keys(DATA)), n: 14, fin: loc, d: 1500},
+    {spin: !(k1 && cat === cur.cat && loc === cur.loc), fill: () => rand(Object.keys(DATA[loc])), n: 20, fin: cat, d: 2200},
+    {spin: !(k2 && shop === cur.shop), fill: () => rand(allShops), n: 26, fin: shop.n, d: 2900},
+    {spin: true, fill: () => dp.length ? rand(dp) : "__none", n: 30, fin: dish, d: 3500}
+  ];
+  const sp = reduce ? 0.25 : 1;
+  let longest = 0;
+  plan.forEach((pl, i) => {
+    const r = reels[i];
+    if (!pl.spin) return;
+    const items = [r.items[r.m - 1], r.items[r.m]];
+    for (let j = 0; j < pl.n; j++) items.push(pl.fill());
+    items.push(pl.fin, pl.fill());
+    setStrip(r, items); place(r, 1, 0); void r.track.offsetHeight;
+    place(r, items.length - 2, pl.d * sp);
+    longest = Math.max(longest, pl.d * sp);
+  });
+  setTimeout(() => finish(loc, cat, shop, dish), longest + 80);
+}
+function finish(loc, cat, shop, dish){
+  cur = {loc, cat, shop, dish};
+  [reels[2], reels[3]].forEach(r => r.track.children[r.m]?.classList.add("hit"));
+  spinning = false; goBtn.disabled = false; fast = false;
+  ticketState = "result"; renderTicket();
+  history_.unshift({k: key(loc, shop), n: shop.n, loc, d: dish, t: Date.now()});
+  history_ = history_.slice(0, 12); LS.set("polyu-hist", history_); renderHist();
+}
+function renderTicket(){
+  const tk = document.getElementById("ticket");
+  tk.classList.toggle("idle", ticketState !== "result");
+  if (ticketState === "idle") {
+    tk.innerHTML = `<div class="tag">${esc(t("ticketTag"))}</div><h2>${esc(t("ticketIdle"))}</h2><dl><dt>${esc(t("tipT"))}</dt><dd>${esc(t("tipD"))}</dd></dl>`;
+  } else if (ticketState === "empty") {
+    tk.innerHTML = `<div class="tag">${esc(t("ticketTag"))}</div><h2>${esc(t("emptyH"))}</h2><dl><dt>${esc(t("fixL"))}</dt><dd>${esc(t("emptyD"))}</dd></dl>`;
+  } else {
+    const {loc, cat, shop} = cur;
+    const dd = getDish(cur.dish);
+    const dishRow = dd ? `<dt>${esc(t("dishL"))}</dt><dd class="dishpick">${esc(dName(dd))}${typeof dd.p === "number" ? ` · $${dd.p % 1 ? dd.p.toFixed(1) : dd.p}${dd.pn ? (LANG === "en" ? "+" : cc(dd.pn)) : ""}` : ""}</dd>` : "";
+    const q = loc === "校内" ? `PolyU ${shop.w.split(" ")[0]}` : `${shop.n} 红磡 ${shop.w}`;
+    tk.innerHTML = `<div class="tag">${esc(t("ticketTag"))} · ${esc(L(loc))} · ${esc(L(cat))}</div>
+      <h2>${esc(slotName(shop.n))}</h2>
+      <dl>${dishRow}<dt>${esc(t("whereL"))}</dt><dd>${esc(slotWhere(shop))}</dd><dt>${esc(t("whatL"))}</dt><dd>${esc(slotFood(shop))}</dd></dl>
+      <div class="links"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener">${esc(t("mapL"))}</a>
+      <a href="#search" data-shop="${esc(shop.n)}" id="seeMenu">${esc(t("menuL"))}</a></div>`;
+  }
+}
+document.getElementById("ticket").addEventListener("click", e => {
+  const a = e.target.closest("#seeMenu"); if (!a) return;
+  pendingShopName = a.dataset.shop;
+});
+goBtn.onclick = () => spin(false);
+lever.onclick = () => spin(false);
+document.getElementById("again").onclick = () => spin(true);
+addEventListener("keydown", e => {
+  if (location.hash === "#search") return;
+  if (e.code === "Space" && !/INPUT|BUTTON|SUMMARY|A|SELECT|TEXTAREA/.test(e.target.tagName)) { e.preventDefault(); spin(false); }
+});
+function renderList(){
+  let on = 0, all = 0;
+  document.getElementById("list").innerHTML = Object.entries(DATA).map(([loc, cats]) =>
+    `<div class="group"><h3>${esc(L(loc))}</h3>` + Object.entries(cats).map(([cat, shops]) =>
+      `<h4>${esc(L(cat))}</h4><div class="chips">` + shops.map(s => {
+        const k = key(loc, s), ok = !disabled.has(k); all++; if (ok) on++;
+        return `<label class="chip"><input type="checkbox" data-k="${esc(k)}" ${ok ? "checked" : ""}>${esc(slotName(s.n))}</label>`;
+      }).join("") + `</div>`).join("") + `</div>`).join("");
+  document.getElementById("count").textContent = t("listCount", {on, all});
+}
+document.getElementById("list").addEventListener("change", e => {
+  const k = e.target.dataset.k; if (!k) return;
+  e.target.checked ? disabled.delete(k) : disabled.add(k);
+  LS.set("polyu-off", [...disabled]); renderList();
+});
+function renderHist(){
+  const ul = document.getElementById("hist");
+  document.getElementById("histEmpty").hidden = history_.length > 0;
+  document.getElementById("clearHist").hidden = !history_.length;
+  ul.innerHTML = history_.map(h => {
+    const d = new Date(h.t);
+    const ts = `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    return `<li><span>${esc(slotName(h.n))}${getDish(h.d) ? " · " + esc(dName(getDish(h.d))) : ""} <span style="color:var(--muted)">· ${esc(L(h.loc))}</span></span><time>${ts}</time></li>`;
+  }).join("");
+}
+
+let clearT;
+document.getElementById("clearHist").addEventListener("click", e => {
+  const b = e.currentTarget;
+  if (!b.classList.contains("sure")) {
+    b.classList.add("sure"); b.textContent = t("clearSure");
+    clearTimeout(clearT); clearT = setTimeout(() => { b.classList.remove("sure"); b.textContent = t("clearHist"); }, 3000);
+    return;
+  }
+  clearTimeout(clearT); b.classList.remove("sure"); b.textContent = t("clearHist");
+  history_ = []; LS.set("polyu-hist", history_); renderHist(); toast(t("tCleared"));
+});
+
+/* ================= DISH SEARCH ================= */
+const CATS = ["饭","粉面","点心饺子","汉堡三文治","薄饼意粉","西式主菜","烧烤串烧","小食","甜品","饮品咖啡"];
+LBL["烧烤串烧"] = ["烧烤 / 串烧","燒烤 / 串燒","BBQ & skewers"];
+const CUISINES = ["港式中式","西式","日韩","台式","东南亚","清真 / 南亚","快餐连锁"];
+const ZONES = ["主校园","红磡学生宿舍","校外"];
+const F = {zone:"", cat:"", cuisine:"", diet:"", price:"", shop:"", sort:"", q:""};
+let MENUS = [], DISHES = [], dbRef = null, uid = null, canWrite = null, dbStarted = false, loaded = false, pendingShopName = null, lastPick = null, dbState = "loading";
+
+const T2S = {"飯":"饭","麵":"面","燒":"烧","臘":"腊","雞":"鸡","豬":"猪","魚":"鱼","蝦":"虾","餃":"饺","腸":"肠","鍋":"锅","湯":"汤","飲":"饮","點":"点","滷":"卤","鰻":"鳗","頸":"颈","醬":"酱","麥":"麦","漢":"汉","凍":"冻","檸":"柠","雜":"杂","燉":"炖","賣":"卖","蘿":"萝","蔔":"卜","韓":"韩","臺":"台","灣":"湾","魷":"鱿","蠔":"蚝","餅":"饼","鹹":"咸","鴨":"鸭","鵝":"鹅","蔥":"葱","薑":"姜","飽":"饱","團":"团","軟":"软","蓮":"莲","雲":"云","兩":"两","廣":"广","東":"东","與":"与","黃":"黄","紅":"红","綠":"绿","雙":"双","選":"选","塊":"块","條":"条","鮮":"鲜","濃":"浓","熱":"热","烏":"乌","龍":"龙","鳳":"凤","風":"风","裡":"里","絲":"丝","蘋":"苹","鹽":"盐","壽":"寿","溫":"温","蓋":"盖","蕎":"荞","類":"类","價":"价","錢":"钱","擔":"担","總":"总","貢":"贡","燴":"烩","廳":"厅","華":"华","鱸":"鲈","鯧":"鲳","鱈":"鳕","沖":"冲","繩":"绳","乾":"干","涼":"凉","愛":"爱","話":"话"};
+const norm = s => [...String(s).toLowerCase()].map(c => T2S[c] || c).join("");
+const SYN = {"饭":["饭","丼"],"粉":["粉","面","乌冬"],"面":["面","粉","乌冬"],"饮料":["饮品咖啡"],"饮品":["饮品咖啡"],"喝":["饮品咖啡"],"点心":["点心饺子"],"饺子":["饺"],"素食":["素"],"西餐":["西式"],"中餐":["港式中式"],"日本":["日韩"],"韩国":["日韩"],"快餐":["快餐连锁","饭堂"],"食堂":["饭堂"],"halal":["清真"],"烧腊":["烧味"],"烧腊饭":["烧味"],"noodle":["粉面"],"noodles":["粉面"],"drink":["饮品咖啡"],"drinks":["饮品咖啡"],"vegetarian":["素"],"veg":["素"]};
+
+function flatten(){
+  DISHES = [];
+  MENUS.forEach(m => (Array.isArray(m.items) ? m.items : []).forEach(it => { if (it && it.n) DISHES.push({...it, shopId: m.id, shop: m}); }));
+}
+function hay(d){
+  const s = d.shop;
+  return norm([d.n, d.en, d.cat, LBL[d.cat]?.[2], d.note, d.noteEn, d.diet === "素" ? "素 素食 vegetarian" : "", s.name, s.nameEn, s.cuisine, LBL[s.cuisine]?.[2], s.type, s.where, s.whereEn, s.zone, s.area].join(" "));
+}
+function matches(d, tokens){
+  if (!tokens.length) return true;
+  const h = d._h || (d._h = hay(d));
+  return tokens.some(tk => h.includes(tk) || (SYN[tk] || []).some(x => h.includes(norm(x))) || (tk === "饭" && d.cat === "饭") || ((tk === "粉" || tk === "面") && d.cat === "粉面"));
+}
+function filtered(){
+  const tokens = norm(F.q).split(/[\s\/／,，、|]+/).filter(Boolean);
+  let list = DISHES.filter(d => {
+    const s = d.shop;
+    const zone = s.area === "校外" ? "校外" : (s.zone || "主校园");
+    if (F.zone && zone !== F.zone) return false;
+    if (F.cat && d.cat !== F.cat) return false;
+    if (F.cuisine && s.cuisine !== F.cuisine) return false;
+    if (F.diet && d.diet !== F.diet) return false;
+    if (F.shop && d.shopId !== F.shop) return false;
+    if (F.price === "has" && typeof d.p !== "number") return false;
+    if (F.price && F.price !== "has" && !(typeof d.p === "number" && d.p <= +F.price)) return false;
+    return matches(d, tokens);
+  });
+  if (F.sort) {
+    const dir = F.sort === "asc" ? 1 : -1;
+    list = list.slice().sort((a, b) => {
+      const pa = typeof a.p === "number", pb = typeof b.p === "number";
+      if (pa !== pb) return pa ? -1 : 1;
+      return pa ? (a.p - b.p) * dir : 0;
+    });
+  } else {
+    list = list.slice().sort((a, b) => (a.shop.area === b.shop.area ? 0 : a.shop.area === "校内" ? -1 : 1) || (typeof b.p === "number") - (typeof a.p === "number"));
+  }
+  return list;
+}
+function optRow(label, k, opts){
+  return `<div class="frow"><span>${esc(label)}</span><div class="opts">` +
+    [["", t("all")], ...opts].map(([v, tx]) => `<button type="button" class="opt" data-k="${k}" data-v="${esc(v)}" aria-pressed="${F[k] === v}">${esc(tx)}</button>`).join("") + `</div></div>`;
+}
+function renderFilters(){
+  document.getElementById("filters").innerHTML =
+    optRow(t("fZone"), "zone", [["主校园", t("zMain")], ["红磡学生宿舍", t("zHall")], ["校外", t("zOut")]]) +
+    optRow(t("fCatL"), "cat", CATS.map(c => [c, L(c)])) +
+    optRow(t("fCuis"), "cuisine", CUISINES.map(c => [c, L(c)])) +
+    optRow(t("fDietL"), "diet", [["荤", t("meat")], ["素", t("veg")]]) +
+    optRow(t("fPriceL"), "price", [["has", t("pHas")], ["30", t("p30")], ["60", t("p60")], ["100", t("p100")]]);
+}
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest(".opt"); if (!b) return;
+  F[b.dataset.k] = b.dataset.v; renderFilters(); renderResults();
+});
+document.getElementById("shopSel").addEventListener("change", e => { F.shop = e.target.value; renderResults(); });
+document.getElementById("sortSel").addEventListener("change", e => { F.sort = e.target.value; renderResults(); });
+let qT;
+document.getElementById("q").addEventListener("input", e => { clearTimeout(qT); qT = setTimeout(() => { F.q = e.target.value.trim(); renderResults(); }, 120); });
+const QUICK = [["饭",["饭","飯","Rice"]],["粉/面",["粉/面","粉/麵","Noodles"]],["点心",["点心","點心","Dim sum"]],["汉堡",["汉堡","漢堡","Burgers"]],["咖啡",["咖啡","咖啡","Coffee"]],["甜品",["甜品","甜品","Desserts"]],["鸡",["鸡","雞","Chicken"]]];
+function renderQuick(){
+  document.getElementById("quick").innerHTML = esc(t("tryL")) + QUICK.map(([q, l]) => `<button data-q="${esc(q)}">${esc(l[LI()])}</button>`).join("");
+}
+document.getElementById("quick").addEventListener("click", e => {
+  const b = e.target.closest("button[data-q]"); if (!b) return;
+  const q = b.dataset.q; document.getElementById("q").value = LANG === "en" ? b.textContent : (LANG === "tc" ? b.textContent : q); F.q = q; renderResults();
+});
+
+/* display helpers for menu data */
+const dName = d => LANG === "en" ? (d.en || d.n) : (LANG === "tc" && d.tc ? d.tc : cc(d.n));
+const dNote = d => LANG === "en" ? (d.noteEn ?? "") : cc(d.note);
+const sName = s => LANG === "en" ? (s.nameEn || s.name) : cc(s.name);
+const sWhere = s => LANG === "en" ? (s.whereEn || s.where || "") : cc(s.where);
+const sHours = s => LANG === "en" ? (s.hoursEn || "") : cc(s.hours);
+const dSrc = d => LANG === "en" ? (d.srcEn || d.src || t("usersAdd")) : cc(d.src || t("usersAdd"));
+
+function priceHtml(d){
+  if (typeof d.p === "number") {
+    const v = d.p % 1 ? d.p.toFixed(1) : d.p;
+    return `<span class="price">$${v}${d.pn ? `<small>${LANG === "en" ? "+" : esc(cc(d.pn))}</small>` : ""}</span>`;
+  }
+  return `<span class="price none">${esc(t("priceNone"))}</span>`;
+}
+function cardHtml(d){
+  const s = d.shop;
+  const zone = s.area === "校外" ? t("tOut") : (s.zone === "红磡学生宿舍" ? t("tHall") : t("tCampus"));
+  const editable = canWrite !== false && dbRef;
+  const note = dNote(d);
+  return `<article class="dish" data-id="${esc(d.id)}" data-shop="${esc(d.shopId)}">
+    <div class="dtop"><h3>${esc(dName(d))}</h3>${priceHtml(d)}</div>
+    <div class="shopline">${esc(sName(s))} <span class="where">· ${esc(sWhere(s))}</span></div>
+    <div class="tags"><span class="tag area">${esc(zone)}</span><span class="tag">${esc(L(d.cat || "其他"))}</span>${s.cuisine ? `<span class="tag">${esc(L(s.cuisine))}</span>` : ""}<span class="tag ${d.diet === "素" ? "veg" : ""}">${esc(L(d.diet || "荤"))}</span>${s.type ? `<span class="tag">${esc(L(s.type))}</span>` : ""}</div>
+    ${note ? `<p class="dnote">${esc(note)}</p>` : ""}
+    ${s.hours ? `<p class="dnote">${esc(t("hours"))}: ${esc(sHours(s))}</p>` : ""}
+    <div class="dfoot"><span>${esc(t("src"))}: ${esc(dSrc(d))}${d.sd ? " · " + esc(d.sd) : ""}</span>
+      ${editable ? `<button class="linkbtn" data-act="price">${esc(typeof d.p === "number" ? t("editP") : t("addP"))}</button>` : ""}</div>
+  </article>`;
+}
+function renderResults(){
+  const box = document.getElementById("results");
+  const sum = document.getElementById("sumText");
+  if (!loaded) {
+    sum.textContent = dbState === "empty" ? t("none") : "";
+    const msg = {loading: t("loading"), no: t("dbNo"), slow: t("dbSlow"), fail: t("dbFail"), revoked: t("dbRevoked"), out: t("dbOut"), empty: t("dbEmpty")}[dbState] || t("loading");
+    box.innerHTML = `<div class="state">${esc(msg)}</div>`;
+    return;
+  }
+  const list = filtered();
+  const priced = list.filter(d => typeof d.p === "number").length;
+  sum.innerHTML = t("sum", {n: list.length, p: priced, s: MENUS.length});
+  if (!list.length) { box.innerHTML = `<div class="state">${esc(t("noRes"))}</div>`; return; }
+  box.innerHTML = `<div class="grid">${list.map(cardHtml).join("")}</div>`;
+}
+function fillSelects(){
+  const sorted = MENUS.slice().sort((a, b) => (a.area === b.area ? sName(a).localeCompare(sName(b), LANG === "en" ? "en" : "zh") : a.area === "校内" ? -1 : 1));
+  const opts = sorted.map(m => `<option value="${esc(m.id)}">${esc(L(m.area))} · ${esc(sName(m))}</option>`).join("");
+  const sel = document.getElementById("shopSel");
+  sel.innerHTML = `<option value="">${esc(t("allShops"))}</option>` + opts; sel.value = F.shop;
+  const so = document.getElementById("sortSel");
+  so.innerHTML = `<option value="">${esc(t("sortDef"))}</option><option value="asc">${esc(t("sortAsc"))}</option><option value="desc">${esc(t("sortDesc"))}</option>`; so.value = F.sort;
+  const f = document.getElementById("fShop"); const prev = f.value;
+  f.innerHTML = opts + `<option value="__new">${esc(t("newShop"))}</option>`;
+  if (prev) f.value = prev;
+  const fc = document.getElementById("fCat"), pc = fc.value; fc.innerHTML = CATS.map(c => `<option value="${c}">${esc(L(c))}</option>`).join(""); if (pc) fc.value = pc;
+  const fd = document.getElementById("fDiet"), pd = fd.value; fd.innerHTML = `<option value="荤">${esc(t("meat"))}</option><option value="素">${esc(t("veg"))}</option>`; if (pd) fd.value = pd;
+  const fa = document.getElementById("fNewArea"), pa = fa.value; fa.innerHTML = `<option value="校外">${esc(L("校外"))}</option><option value="校内">${esc(L("校内"))}</option>`; if (pa) fa.value = pa;
+  const fn = document.getElementById("fNewCuisine"), pn = fn.value; fn.innerHTML = CUISINES.map(c => `<option value="${esc(c)}">${esc(L(c))}</option>`).join(""); if (pn) fn.value = pn;
+  toggleNewShop();
+}
+function toggleNewShop(){
+  const on = document.getElementById("fShop").value === "__new";
+  ["nsName","nsArea","nsWhere","nsCuisine"].forEach(id => document.getElementById(id).hidden = !on);
+  document.getElementById("fNewName").required = on;
+}
+document.getElementById("fShop").addEventListener("change", toggleNewShop);
+
+function applyPendingShop(){
+  if (!pendingShopName || !MENUS.length) return;
+  const pid = MAPID[pendingShopName];
+  if (pid && MENUS.some(x => x.id === pid[0])) { F.shop = pid[0]; document.getElementById("shopSel").value = pid[0]; pendingShopName = null; return; }
+  const n = norm(pendingShopName);
+  const m = MENUS.find(x => norm(x.name).includes(n.split(" ")[0]) || n.includes(norm(x.name).split(/[ （(]/)[0]));
+  pendingShopName = null;
+  if (m) { F.shop = m.id; document.getElementById("shopSel").value = m.id; }
+}
+
+async function startDb(){
+  if (dbStarted) { applyPendingShop(); renderResults(); return; }
+  dbStarted = true; dbState = "loading"; renderResults();
+  const timer = setTimeout(() => { if (!loaded) { dbState = "slow"; renderResults(); } }, 10000);
+  try {
+    if (!window.claude?.use) {
+      // GitHub Pages: read the snapshot of the dish database bundled next to this page (read-only)
+      const r = await fetch("menus.json"); if (!r.ok) throw new Error("no snapshot");
+      MENUS = await r.json(); flatten(); clearTimeout(timer);
+      canWrite = false; document.getElementById("addBox").hidden = true;
+      loaded = true; fillSelects(); applyPendingShop(); renderResults(); relabelReels();
+      return;
+    }
+    const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    if (user) {
+      try { uid = await user.id(); } catch(e) {}
+      try { canWrite = await user.can("data.write"); } catch(e) { canWrite = null; }
+    }
+    if (!db) { clearTimeout(timer); dbState = "no"; renderResults(); document.getElementById("addBox").hidden = true; return; }
+    dbRef = db;
+    if (canWrite === false) document.getElementById("addBox").hidden = true;
+    db.collection("menus").onSnapshot(snap => {
+      MENUS = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      flatten();
+      if (!snap.metadata.fromCache || MENUS.length) { clearTimeout(timer); }
+      if (!MENUS.length) { if (!snap.metadata.fromCache) { dbState = "empty"; loaded = false; renderResults(); fillSelects(); } return; }
+      loaded = true;
+      fillSelects(); applyPendingShop(); renderResults();
+    }, err => {
+      clearTimeout(timer); dbState = err?.code === "revoked" ? "revoked" : "fail"; loaded = false; renderResults();
+    });
+  } catch (e) {
+    clearTimeout(timer); dbState = "out"; renderResults();
+  }
+}
+
+/* edit price inline */
+document.getElementById("results").addEventListener("click", e => {
+  const b = e.target.closest('[data-act="price"]'); if (!b) return;
+  const card = b.closest(".dish");
+  const foot = b.parentElement;
+  if (foot.querySelector(".pform")) return;
+  const d = DISHES.find(x => x.id === card.dataset.id && x.shopId === card.dataset.shop);
+  const f = document.createElement("form"); f.className = "pform";
+  f.innerHTML = `<label hidden for="p-${esc(d.id)}">price</label><input id="p-${esc(d.id)}" type="number" min="0" step="0.5" inputmode="decimal" placeholder="HK$" value="${typeof d.p === "number" ? d.p : ""}"><button class="btn2 primary" type="submit">${esc(t("save"))}</button>`;
+  b.replaceWith(f); f.querySelector("input").focus();
+  f.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const v = f.querySelector("input").value;
+    if (v === "" || isNaN(+v) || +v < 0) { toast(t("tNeedPrice")); return; }
+    f.querySelector("button").disabled = true;
+    try {
+      await editShop(card.dataset.shop, items => {
+        const it = items.find(x => x.id === card.dataset.id); if (!it) throw new Error("gone");
+        it.p = Math.round(+v * 10) / 10; it.pn = ""; it.sd = today(); it.src = "大家补充"; it.srcEn = "Added by users"; it.by = uid || "";
+        return items;
+      });
+      toast(t("tPrice"));
+    } catch (err) { failToast(err); f.querySelector("button").disabled = false; }
+  });
+});
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+let writing = Promise.resolve();
+function editShop(shopId, fn){
+  const job = writing.then(async () => {
+    const ref = dbRef.doc("menus/" + shopId);
+    const snap = await ref.get();
+    if (!snap.exists) throw new Error("gone");
+    const items = JSON.parse(JSON.stringify(snap.data().items || []));
+    await ref.update({items: fn(items)});
+  });
+  writing = job.catch(() => {});
+  return job;
+}
+function failToast(err){
+  if (err?.code === "invalid_argument") { canWrite = false; document.getElementById("addBox").hidden = true; renderResults(); toast(t("tView")); }
+  else if (err?.code === "quota_exceeded") toast(t("tFull"));
+  else toast(t("tFail"));
+}
+
+/* add dish */
+document.getElementById("addForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!dbRef) return;
+  const name = document.getElementById("fName").value.trim();
+  if (!name) return;
+  const pv = document.getElementById("fPrice").value;
+  const note = document.getElementById("fNote").value.trim();
+  const item = {
+    id: "", n: name, en: name, p: pv === "" ? null : Math.round(+pv * 10) / 10, pn: "",
+    cat: document.getElementById("fCat").value, diet: document.getElementById("fDiet").value,
+    note, noteEn: note, src: "大家补充", srcEn: "Added by users", sd: today(), by: uid || ""
+  };
+  const shopSel = document.getElementById("fShop").value;
+  const btn = document.getElementById("addBtn"); btn.disabled = true;
+  const sid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  try {
+    if (shopSel === "__new") {
+      const nn = document.getElementById("fNewName").value.trim();
+      if (!nn) { toast(t("tNeedShop")); btn.disabled = false; return; }
+      const area = document.getElementById("fNewArea").value;
+      const where = document.getElementById("fNewWhere").value.trim();
+      item.id = "u" + sid + "-1";
+      await dbRef.doc("menus/u" + sid).set({
+        name: nn, nameEn: nn, area, zone: area === "校内" ? "主校园" : "红磡 / 黄埔", type: "大家补充",
+        cuisine: document.getElementById("fNewCuisine").value, where: where || "位置待补", whereEn: where || "Location TBC",
+        hours: "", hoursEn: "", items: [item]
+      });
+    } else {
+      item.id = shopSel + "-u" + sid;
+      await editShop(shopSel, items => { items.push(item); return items; });
+    }
+    document.getElementById("addForm").reset(); toggleNewShop();
+    document.getElementById("addMsg").textContent = t("added", {n: name});
+    toast(t("tAdded"));
+  } catch (err) { failToast(err); }
+  btn.disabled = false;
+});
+
+/* random pick from current results */
+document.getElementById("pick").addEventListener("click", () => {
+  if (!loaded) return;
+  let list = filtered(); if (!list.length) { toast(t("tEmpty")); return; }
+  if (list.length > 1 && lastPick) list = list.filter(d => d.id !== lastPick);
+  const d = rand(list); lastPick = d.id;
+  renderResults();
+  const el = [...document.querySelectorAll(".dish")].find(x => x.dataset.id === d.id);
+  if (el) { el.classList.add("flash"); el.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "center"}); }
+  toast(t("tPick", {d: dName(d), s: sName(d.shop)}));
+});
+
+/* ================= language switching ================= */
+function applyLang(){
+  document.documentElement.lang = ({sc: "zh-Hans", tc: "zh-Hant-HK", en: "en"})[LANG];
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll(".langsw button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANG));
+  document.getElementById("q").placeholder = t("qPh");
+  document.getElementById("fName").placeholder = t("namePh");
+  document.getElementById("fNewWhere").placeholder = t("wherePh");
+  document.getElementById("fNote").placeholder = t("notePh");
+  document.getElementById("footer").innerHTML = t("footer");
+  document.title = LANG === "en" ? "PolyU Eats" : (LANG === "tc" ? "理大食乜機" : "理大食乜机");
+  syncLocks(); renderTicket(); renderList(); renderHist(); relabelReels();
+  renderQuick(); renderFilters(); if (MENUS.length) fillSelects(); else fillSelects(); renderResults();
+}
+document.querySelector(".langsw").addEventListener("click", e => {
+  const b = e.target.closest("button[data-lang]"); if (!b || b.dataset.lang === LANG) return;
+  LANG = b.dataset.lang; LS.set("polyu-lang", LANG);
+  applyLang();
+  if (LANG === "tc" && !occ) loadOpenCC().then(() => { if (LANG === "tc") applyLang(); });
+});
+
+applyLang();
+if (LANG === "tc") loadOpenCC().then(() => { if (LANG === "tc") applyLang(); });
+route();
+startDb();
+</script>
+
+</body></html>

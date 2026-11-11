@@ -136,8 +136,8 @@ footer a{color:var(--ink)}
   <canvas id="field" aria-hidden="true"></canvas>
   <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
   <div class="wrap">
-    <div class="kicker">Crystal · 数字游乐场</div>
-    <p class="intro">我用代码做<b>可以玩的东西</b>：对着镜头比手势控制的视觉实验、一碰就会生长的生成艺术、几个小游戏，还有一些解决生活小问题的网站。每个作品都能直接打开试玩，也能看到它是怎么<b>一版一版改出来的</b>。</p>
+    <div class="kicker">欢迎来到 Crystal · 数字游乐场</div>
+    <p class="intro">近期我在尝试使用Ai和代码做一些<b>有意思的东西</b>，比如：一组可以通过手势控制的视觉实验、几个小游戏，还有一些解决生活小问题或者满足好奇心的网站。您可以点击以下的任何作品打开试玩，以及他们的<b>迭代过程～</b>。</p>
     <div class="stats"><span><b id="sWorks">0</b> 个作品</span><span><b id="sCommits">0</b> 次迭代</span><span><b id="sRange"></b></span></div>
   </div>
 </section>
@@ -145,7 +145,7 @@ footer a{color:var(--ink)}
 <section class="block" id="works">
   <div class="wrap">
     <div class="head">
-      <div><h2>作品 <em>Works</em></h2><p>手势类作品需要摄像头，第一次打开时浏览器会问你要权限；画面只在你的设备上处理。</p></div>
+      <div><h2>作品 <em>Works</em></h2><p>温馨提示：体验手势类作品将需要摄像头权限，画面只会在您的设备上处理，敬请放心。</p></div>
       <div class="filters" id="filters" role="group" aria-label="筛选作品"></div>
     </div>
     <div class="grid" id="grid"></div>
@@ -182,33 +182,33 @@ const enc = p => p.split('/').map(encodeURIComponent).join('/');
 // key = the name used in commit messages; dir = folder under works/
 const W = [
   {key:'手势绽放 Bloom', zh:'手势 · 绽放', en:'Nocturne Bloom', big:true, cat:['gesture','art'], dir:'12｜手势 · 绽放 · Bloom', play:'play/bloom/', img:'assets/covers/bloom.jpg', color:'#ff9ab5',
-   desc:'张开手掌，花就开；握拳，花慢慢合上。六种花都来自 AI 生成的绽放视频，被拆成逐帧画面跟着你的手走。', tags:['MediaPipe','Canvas','AI 视频']},
+   desc:'张开手掌，花卉绽放；握拳，花变回花苞。您也可以上传自己喜欢的花卉绽放视频，进行互动体验！程序会自动将其拆成逐帧画面，跟着你的手势走～', tags:['MediaPipe','Canvas','AI 视频']},
   {key:'手势取景框 Window', zh:'手势 · 取景框', en:'Gesture Window', big:true, cat:['gesture'], dir:'13｜手势 · 取景框 · Window', play:'play/window/', poster:'window', color:'#e0322b',
-   desc:'用两只手的拇指和食指比一个框，框里的你就换了画风：像素、漫画、波普、霓虹、代码雨、热成像……', tags:['MediaPipe','人像分割','8 种风格']},
+   desc:'伸出双手，比出拍照的姿势，即为现实解锁不同的画风！', tags:['MediaPipe','人像分割','8 种风格']},
   {key:'手势星云 Nebula', zh:'手势 · 星云', en:'Gesture Nebula', cat:['gesture','art'], dir:'11｜手势 · 星云 · Nebula', play:'play/nebula/', poster:'nebula', color:'#7cf2d6',
-   desc:'把手掌推向镜头，就一层层潜进去：宇宙网、星系、星团、恒星、原子，然后又回到宇宙。', tags:['手势','粒子','音景']},
+   desc:'用手势互动，尽情探索这片星系吧……', tags:['手势','粒子','音景']},
   {key:'撕开现实 Tear Reality', zh:'撕开现实', en:'Tear Reality', cat:['gesture','art'], dir:'14｜手势 · 撕开现实 · Tear Reality', play:'play/tear-reality/', poster:'tear', color:'#3d8bff',
-   desc:'按住画面用力拉，它会像纸一样被扯弯、撕开，露出后面的蓝色线框世界。可以换成自己的照片或视频。', tags:['Three.js','WebGL','Shader']},
+   desc:'想解压或与环境互动？本程序先已支持与实时画面互动，使用手机后置摄像头打开体验更佳～ 你也可以上传想互动的图片或视频进行体验', tags:['Three.js','WebGL','Shader']},
   {key:'流场花园 Flow Garden', zh:'流场花园', en:'Flow Garden', cat:['art'], dir:'09｜流场花园· Flow', play:'play/flow-garden/', poster:'flow', color:'#a99bff',
-   desc:'点一下、拖一下，画面沿着看不见的气流生长几秒，然后消散。六种画风，从星云到水墨。', tags:['生成艺术','Perlin 噪声','录屏']},
+   desc:'试试随心点一下、拖一下，看看线条会如何流动…… ', tags:['生成艺术','Perlin 噪声','录屏']},
   {key:'薯饼接接乐 Hash Brown Catch', zh:'薯饼接接乐', en:'Hash Brown Catch', big:true, cat:['game'], dir:'06｜薯饼接接乐 · Hash Brown Catch', play:'play/hash-brown-catch/', img:'assets/covers/hash-brown.jpg', color:'#f5a623',
-   desc:'8-bit 早餐小游戏：滑动炸篮接住掉下来的薯饼，躲开烤焦的和辣酱炸弹，攒金币买新场景。附带角色设定和演示短片。', tags:['p5.js','游戏','IP 设计']},
+   desc:'8-bit 早餐小游戏！尝试滑动炸篮接住掉下来的薯饼，这可没有很简单哦。更多彩蛋惊喜，等你来解锁……', tags:['p5.js','游戏','IP 设计']},
   {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', color:'#ffd25a',
-   desc:'不知道吃什么？拉一下拉霸机：校内还是校外 → 吃哪类 → 哪家 → 哪道菜。还能按菜式搜全校和红磡一带一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
+   desc:'不知道吃什么？拉一下拉杆，亦可使用快速筛选工具！想要了解食物选择，价格、地点、营业时间？打开立即查看理大校内和周边的一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
   {key:'月隐 Moonveil', zh:'月隐', en:'Moonveil', big:true, cat:['web'], dir:'01｜月隐 · MOONVEIL ｜占卜', play:'works/01｜月隐 · MOONVEIL ｜占卜/Moonveil-Experience-v4.1.html', img:'assets/covers/moonveil.jpg', color:'#9b7cff',
    desc:'一间夜色里的灵感占卜室：水晶球、月光和一点点仪式感。', tags:['网站','交互叙事']},
   {key:'安可工作室 Encore Studio', zh:'安可工作室', en:'Encore Studio', big:true, cat:['web'], dir:'02｜安可工作室 · Encore Studio｜ 启德 · 手链', play:'works/02｜安可工作室 · Encore Studio｜ 启德 · 手链/Encore_Studio_v5_1.html', img:'assets/covers/encore.jpg', color:'#c9b6ff',
-   desc:'Your live memories：把在启德的现场回忆，串成一条水晶手链。', tags:['网站','定制工具']},
+   desc:'Your live memories：把在演唱会的现场回忆，串成一条水晶手链。', tags:['网站','定制工具']},
   {key:'纸间 Paper Room', zh:'纸间', en:'Paper Room', cat:['tool'], dir:'04｜纸间 · Paper Room｜折纸&剪纸', play:'works/04｜纸间 · Paper Room｜折纸&剪纸/PAPER-ROOM 3/dist/index.html', img:'assets/covers/paper.jpg', color:'#2f6b55',
-   desc:'在一张纸上练习折和剪：先折几下，再剪一刀，展开看看会得到什么图案。有引导教程和练习模式。', tags:['几何','教程','中 / EN']},
+   desc:'欢迎体验线上纸艺工作室！折纸、剪纸、粘贴，自由搭配纸张颜色和选择纸张尺寸，建立你的电子作品库～', tags:['几何','教程','中 / EN']},
   {key:'行迹 The Personal Atlas', zh:'行迹', en:'The Personal Atlas', cat:['tool','web'], dir:'07｜行迹 · The Personal Atlas', play:'works/07｜行迹 · The Personal Atlas/行迹旅行手札 3/本地版/行迹-本地版.html', poster:'atlas', color:'#c8553d',
-   desc:'旅行手札：把照片、文字和路线放在一张世界地图上，可以离线浏览，也能导出成一份可分享的手札。', tags:['Leaflet','离线','照片 EXIF']},
+   desc:'旅行手札：您的专属旅行记忆收集册！不管是文字、照片、印章或是邮戳，上传即可记录你的过往旅行路线，亦可导出成一份可分享的手札～', tags:['Leaflet','离线','照片 EXIF']},
   {key:'爪爪衣橱 Pawmoire', zh:'爪爪衣橱', en:'Pawmoire', cat:['web'], dir:'05｜爪爪衣橱· Pawmoire｜宠物换装', play:'https://pawmoire-pet-atelier.wry-toast-5992.chatgpt.site/', external:true, img:'assets/covers/pawmoire.jpg', color:'#8aa37a',
-   desc:'给毛孩子试穿新衣服的小衣橱：上传宠物照片，选一件，看它穿上的样子。', tags:['Next.js','AI 换装','线上站']},
+   desc:'超便利给自家毛孩子换装的网站！只需要一张宝贝的图片&一张参考图即可立即体验', tags:['Next.js','AI 换装','线上站']},
   {key:'序章 Index', zh:'序章', en:'Index', big:true, cat:['tool'], dir:'03｜序章 · Index ｜日程&计划', play:'works/03｜序章 · Index ｜日程&计划/index.html', poster:'index', color:'#ff4d2e',
-   desc:'把每一步，写成成就：一个把日程和计划变成「解锁成就」的小工具。', tags:['计划','日程']},
+   desc:'把每一步，写成成就！一个把日程和计划变成「解锁成就」的工具，依旧是很好用的日程规划表。', tags:['计划','日程']},
   {key:'毛孩子日历 Pet Calendar', zh:'毛孩子日历', en:'Pet Calendar', big:true, cat:['tool'], dir:'10｜毛孩子日历', play:'play/pet-calendar/', poster:'pet', color:'#e8a23a',
-   desc:'记录家里毛孩子的日常：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你。', tags:['日历','本地保存']},
+   desc:'记录家里毛孩子的专属日历：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你～', tags:['日历','本地保存']},
 ];
 const CATS = [['all','全部'],['gesture','手势交互'],['art','生成艺术'],['game','游戏'],['tool','工具'],['web','网站']];
 const count = k => COMMITS.filter(c => c[1].split(' · ')[0] === k).length;

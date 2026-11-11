@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>手势取景框</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;600;900&display=swap">
+<style>
+  /* 全屏摄像头画面 + 顶部风格条 + 底部控制条 */
+  :root{
+    --ink:#f6f3ec; --muted:#a8a29a; --bg:#0d0d0f; --panel:rgba(20,20,22,.72);
+    --red:#e0322b; --blue:#1d4fa0;
+    --display:"Space Grotesk","Noto Sans SC",system-ui,sans-serif;
+    --body:"Noto Sans SC",system-ui,-apple-system,sans-serif;
+    color-scheme:dark;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden}
+  canvas#view{position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;display:block}
+  #start{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5;padding:16px}
+  #start .box{max-width:460px;display:grid;gap:18px}
+  #start h1{font-family:var(--display);font-size:clamp(28px,5vw,40px);margin:0}
+  #start h1 span{color:var(--red)}
+  #start p{margin:0;color:var(--muted);line-height:1.7}
+  #start ul{margin:0;padding-left:1.2em;color:var(--muted);line-height:1.8;font-size:14px}
+  #start b{color:var(--ink)}
+  .stripe{display:flex;height:10px;border-radius:2px;overflow:hidden}
+  .stripe i{flex:1}
+  button{font:600 13px var(--body);color:var(--ink);background:transparent;border:1px solid rgba(246,243,236,.3);border-radius:999px;padding:8px 14px;cursor:pointer}
+  button:hover{border-color:var(--ink)}
+  button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);padding:12px 22px;font-size:15px;justify-self:start}
+  button:focus-visible,input:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+  .pill{position:fixed;left:50%;transform:translateX(-50%);background:var(--panel);backdrop-filter:blur(10px);z-index:3;max-width:calc(100vw - 32px)}
+  #styles{top:16px;display:flex;flex-wrap:wrap;gap:6px;padding:6px;border-radius:999px;justify-content:center}
+  #styles button{border-color:transparent;padding:6px 12px}
+  #styles button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+  #bar{bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 14px;border-radius:16px}
+  #bar label{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+  #status{bottom:84px;padding:8px 14px;border-radius:999px;font-size:13px;white-space:nowrap}
+  #toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;z-index:4;pointer-events:none;opacity:0;
+         text-shadow:0 2px 18px rgba(0,0,0,.55)}
+  #toast small{display:block;font:700 13px var(--display);letter-spacing:.3em;opacity:.8}
+  #toast b{display:block;font:900 clamp(44px,9vw,96px)/1.05 var(--body)}
+  #toast.show{animation:pop 1.1s ease-out}
+  @keyframes pop{0%{opacity:0;transform:translate(-50%,-40%) scale(.9)}15%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%{opacity:1}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){#toast.show{animation:fade 1.1s linear}@keyframes fade{0%,70%{opacity:1}100%{opacity:0}}}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="start">
+  <div class="box">
+    <div class="stripe"><i style="background:var(--red)"></i><i style="background:var(--blue)"></i><i style="background:#c9d43c"></i><i style="background:#29adff"></i><i style="background:#222"></i><i style="background:#ff3c8c"></i></div>
+    <h1>手势<span>取景框</span></h1>
+    <p>伸出双手，用两只手的<b>拇指和食指</b>比出一个框，框里的画面会变成另一种画风。</p>
+    <ul>
+      <li><b>换风格：</b>双手捏合（像按快门），再张开</li>
+      <li><b>也可以：</b>只举一只手，快速向左或向右挥一下</li>
+      <li>键盘 ← → 或 1–6，或点顶部的风格按钮</li>
+    </ul>
+    <p style="font-size:13px">需要联网加载 MediaPipe 模型，并允许浏览器使用摄像头。画面只在本机处理，不会上传。</p>
+    <button class="primary" id="go">开启摄像头</button>
+  </div>
+</div>
+
+<div id="styles" class="pill" hidden></div>
+<div id="status" class="pill" hidden>正在加载模型…</div>
+<div id="toast"><small id="toastEn"></small><b id="toastZh"></b></div>
+
+<div id="bar" class="pill" hidden>
+  <label for="cell">颗粒大小 <input type="range" id="cell" min="3" max="9" value="5"></label>
+  <label for="bgw"><input type="checkbox" id="bgw" checked> 背景留白</label>
+  <button id="skel">显示骨架</button>
+  <button id="shot">拍照保存</button>
+</div>
+
+<video id="cam" playsinline muted hidden></video>
+
+<script type="module">
+import { FilesetResolver, HandLandmarker, ImageSegmenter } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+
+const $ = s => document.querySelector(s);
+const video = $("#cam"), view = $("#view"), ctx = view.getContext("2d");
+let hands, seg, showSkel = false;
+
+/* ---------- 处理画布 ---------- */
+const EW = 320; let EH = 180;
+const small = document.createElement("canvas"), sctx = small.getContext("2d", { willReadFrequently: true });
+const fx = document.createElement("canvas"), fctx = fx.getContext("2d");
+let fxImg, lum, maskS, blurL, edge, tmp, noise, stroke;
+let maskBuf = null, maskW = 0, maskH = 0;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+
+/* ---------- 风格 ---------- */
+const STYLES = [
+  { zh: "三段滤镜", en: "TRIPTYCH", smooth: false, run: runTriptych },
+  { zh: "像素风",   en: "PIXEL",    smooth: false, run: runPixel },
+  { zh: "漫画风",   en: "MANGA",    smooth: false, run: runManga },
+  { zh: "水墨风",   en: "INK WASH", smooth: true,  run: runInk, overlay: sealOverlay },
+  { zh: "油画风",   en: "OIL",      smooth: true,  run: runOil },
+  { zh: "波普艺术", en: "POP ART",  smooth: false, run: runPop },
+];
+let styleIdx = 0, lastSwitch = 0;
+
+const chips = $("#styles");
+STYLES.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.textContent = s.zh; b.id = "style-" + i;
+  b.onclick = () => setStyle(i);
+  chips.appendChild(b);
+});
+function setStyle(i) {
+  styleIdx = (i + STYLES.length) % STYLES.length; lastSwitch = performance.now();
+  [...chips.children].forEach((b, j) => b.setAttribute("aria-pressed", j === styleIdx));
+  $("#toastEn").textContent = "STYLE 0" + (styleIdx + 1) + " · " + STYLES[styleIdx].en;
+  $("#toastZh").textContent = STYLES[styleIdx].zh;
+  const t = $("#toast"); t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
+}
+addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") setStyle(styleIdx + 1);
+  else if (e.key === "ArrowLeft") setStyle(styleIdx - 1);
+  else if (/^[1-6]$/.test(e.key)) setStyle(+e.key - 1);
+});
+
+function say(t) { $("#status").textContent = t; $("#status").hidden = !t; }
+
+$("#go").onclick = async () => {
+  $("#go").disabled = true;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }, audio: false });
+    video.srcObject = stream; await video.play();
+  } catch (e) {
+    $("#go").disabled = false;
+    alert("无法打开摄像头：" + e.message + "\n请在 Chrome 里打开本文件，并允许摄像头权限。");
+    return;
+  }
+  $("#start").hidden = true; say("正在加载模型…");
+  const files = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+  const mk = async delegate => {
+    hands = await HandLandmarker.createFromOptions(files, {
+      baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task", delegate },
+      runningMode: "VIDEO", numHands: 2 });
+    seg = await ImageSegmenter.createFromOptions(files, {
+      baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite", delegate },
+      runningMode: "VIDEO", outputConfidenceMasks: true, outputCategoryMask: false });
+  };
+  try { await mk("GPU"); } catch { await mk("CPU"); }
+  setup();
+  chips.hidden = false; $("#bar").hidden = false;
+  [...chips.children].forEach((b, j) => b.setAttribute("aria-pressed", j === styleIdx));
+  say("双手比框 · 捏合再张开换风格");
+  requestAnimationFrame(loop);
+};
+
+function setup() {
+  view.width = video.videoWidth; view.height = video.videoHeight;
+  EH = Math.round(EW * video.videoHeight / video.videoWidth);
+  small.width = fx.width = EW; small.height = fx.height = EH;
+  fxImg = fctx.createImageData(EW, EH);
+  const N = EW * EH;
+  lum = new Float32Array(N); maskS = new Float32Array(N); blurL = new Float32Array(N);
+  edge = new Float32Array(N); tmp = new Float32Array(N);
+  noise = new Float32Array(N); stroke = new Float32Array(N);
+  for (let i = 0; i < N; i++) noise[i] = Math.random();
+  // 油画笔触纹理：静态噪声沿 45° 方向拉长
+  for (let y = 0; y < EH; y++) for (let x = 0; x < EW; x++) {
+    let s = 0, n = 0;
+    for (let k = -3; k <= 3; k++) { const xx = x + k, yy = y - k; if (xx >= 0 && xx < EW && yy >= 0 && yy < EH) { s += noise[yy * EW + xx]; n++; } }
+    stroke[y * EW + x] = s / n - .5;
+  }
+}
+
+$("#skel").onclick = () => { showSkel = !showSkel; $("#skel").textContent = showSkel ? "隐藏骨架" : "显示骨架"; };
+$("#shot").onclick = () => { const a = document.createElement("a"); a.download = "gesture-" + Date.now() + ".png"; a.href = view.toDataURL("image/png"); a.click(); };
+
+/* ---------- 手势：快门（捏合→张开）与挥手 ---------- */
+let quad = null, lost = 99, lastTs = 0, statusCleared = false;
+let shutter = "none", closedAt = 0;
+let wristHist = [];
+
+function quadArea(P, aspect) {
+  let s = 0;
+  for (let i = 0; i < 4; i++) { const a = P[i], b = P[(i + 1) % 4]; s += a.x * aspect * b.y - b.x * aspect * a.y; }
+  return Math.abs(s) / 2 / aspect;
+}
+function palmOpen(h) {
+  const d = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  let n = 0;
+  [[8, 6], [12, 10], [16, 14], [20, 18]].forEach(([tip, pip]) => { if (d(h[tip], h[0]) > d(h[pip], h[0]) * 1.1) n++; });
+  return n >= 3;
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  if (video.readyState < 2) return;
+  let ts = performance.now(); if (ts <= lastTs) ts = lastTs + 1; lastTs = ts;
+
+  const hr = hands.detectForVideo(video, ts);
+  seg.segmentForVideo(video, ts, r => {
+    const m = r.confidenceMasks && r.confidenceMasks[0]; if (!m) return;
+    const arr = m.getAsFloat32Array();
+    if (!maskBuf || maskBuf.length !== arr.length) maskBuf = new Float32Array(arr.length);
+    maskBuf.set(arr); maskW = m.width; maskH = m.height;
+  });
+
+  const W = view.width, H = view.height;
+  ctx.save(); ctx.translate(W, 0); ctx.scale(-1, 1); ctx.drawImage(video, 0, 0, W, H); ctx.restore();
+
+  const hs = (hr.landmarks || []).map(l => l.map(p => ({ x: 1 - p.x, y: p.y })));
+  if (hs.length === 2) {
+    hs.sort((a, b) => a[0].x - b[0].x);
+    const [L, R] = hs;
+    const P = [L[8], R[8], R[4], L[4]];
+    if (!quad || lost > 6) quad = P.map(p => ({ ...p }));
+    else quad.forEach((q, i) => { q.x = lerp(q.x, P[i].x, .55); q.y = lerp(q.y, P[i].y, .55); });
+    lost = 0; wristHist = [];
+    if (!statusCleared) { statusCleared = true; setTimeout(() => say(""), 2500); }
+
+    // 快门手势：框打开 → 捏合 → 2 秒内再张开 = 下一个风格
+    const area = quadArea(P, W / H);
+    if (area < .006) { if (shutter === "open") { shutter = "closed"; closedAt = ts; } }
+    else if (area > .02) {
+      if (shutter === "closed" && ts - closedAt < 2000 && ts - lastSwitch > 500) setStyle(styleIdx + 1);
+      shutter = "open";
+    }
+  } else {
+    lost++;
+    if (lost > 6) shutter = "none";
+    // 挥手：单只张开的手，0.3 秒内横向移动超过画面 25%
+    if (hs.length === 1 && palmOpen(hs[0])) {
+      wristHist.push({ t: ts, x: hs[0][9].x });
+      wristHist = wristHist.filter(p => ts - p.t < 300);
+      const dx = wristHist[wristHist.length - 1].x - wristHist[0].x;
+      if (Math.abs(dx) > .25 && ts - lastSwitch > 900) { setStyle(styleIdx + (dx > 0 ? 1 : -1)); wristHist = []; }
+    } else wristHist = [];
+  }
+
+  if (quad && lost <= 6 && maskBuf) renderWindow(W, H);
+  if (showSkel) hs.forEach(h => drawSkel(h, W, H));
+}
+
+/* ---------- 渲染 ---------- */
+let G; // 当前帧共享数据
+
+function renderWindow(W, H) {
+  sctx.save(); sctx.translate(EW, 0); sctx.scale(-1, 1); sctx.drawImage(video, 0, 0, EW, EH); sctx.restore();
+  const src = sctx.getImageData(0, 0, EW, EH).data;
+  for (let y = 0; y < EH; y++) {
+    const my = Math.min(maskH - 1, ((y + .5) / EH * maskH) | 0);
+    for (let x = 0; x < EW; x++) {
+      const i = y * EW + x, k = i * 4;
+      const l = (.299 * src[k] + .587 * src[k + 1] + .114 * src[k + 2]) / 255;
+      lum[i] = clamp01((l - .5) * 1.45 + .52);
+      const mx = Math.min(maskW - 1, ((1 - (x + .5) / EW) * maskW) | 0);
+      maskS[i] = maskBuf[my * maskW + mx];
+    }
+  }
+  const q = quad.map(p => ({ x: p.x * EW, y: p.y * EH }));
+  const a = { x: (q[0].x + q[3].x) / 2, y: (q[0].y + q[3].y) / 2 };
+  const b = { x: (q[1].x + q[2].x) / 2, y: (q[1].y + q[2].y) / 2 };
+  const dx = b.x - a.x, dy = b.y - a.y;
+  G = {
+    src, out: fxImg.data, CS: +$("#cell").value, bgWhite: $("#bgw").checked,
+    x0: Math.max(0, Math.floor(Math.min(...q.map(p => p.x)))), x1: Math.min(EW - 1, Math.ceil(Math.max(...q.map(p => p.x)))),
+    y0: Math.max(0, Math.floor(Math.min(...q.map(p => p.y)))), y1: Math.min(EH - 1, Math.ceil(Math.max(...q.map(p => p.y)))),
+    t: (x, y) => ((x - a.x) * dx + (y - a.y) * dy) / (dx * dx + dy * dy || 1),
+  };
+  const style = STYLES[styleIdx];
+  style.run();
+  fctx.putImageData(fxImg, 0, 0);
+
+  ctx.save();
+  ctx.beginPath();
+  quad.forEach((p, i) => i ? ctx.lineTo(p.x * W, p.y * H) : ctx.moveTo(p.x * W, p.y * H));
+  ctx.closePath(); ctx.clip();
+  ctx.imageSmoothingEnabled = style.smooth; ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(fx, 0, 0, W, H);
+  if (style.overlay) style.overlay(W, H);
+  ctx.restore();
+}
+
+const put = (k, c) => { G.out[k] = c[0]; G.out[k + 1] = c[1]; G.out[k + 2] = c[2]; G.out[k + 3] = 255; };
+const isBg = i => G.bgWhite && maskS[i] < .5;
+const cellCenter = (x, y, B) => {
+  const cx = Math.min(EW - 1, Math.floor(x / B) * B + (B >> 1)), cy = Math.min(EH - 1, Math.floor(y / B) * B + (B >> 1));
+  return [cx, cy, cy * EW + cx];
+};
+
+function blur(L, out, r) {
+  for (let y = 0; y < EH; y++) for (let x = 0; x < EW; x++) {
+    let s = 0, n = 0;
+    for (let k = -r; k <= r; k++) { const xx = x + k; if (xx >= 0 && xx < EW) { s += L[y * EW + xx]; n++; } }
+    tmp[y * EW + x] = s / n;
+  }
+  for (let y = 0; y < EH; y++) for (let x = 0; x < EW; x++) {
+    let s = 0, n = 0;
+    for (let k = -r; k <= r; k++) { const yy = y + k; if (yy >= 0 && yy < EH) { s += tmp[yy * EW + x]; n++; } }
+    out[y * EW + x] = s / n;
+  }
+}
+function sobel(L) {
+  for (let y = 1; y < EH - 1; y++) for (let x = 1; x < EW - 1; x++) {
+    const i = y * EW + x;
+    const gx = -L[i - EW - 1] - 2 * L[i - 1] - L[i + EW - 1] + L[i - EW + 1] + 2 * L[i + 1] + L[i + EW + 1];
+    const gy = -L[i - EW - 1] - 2 * L[i - EW] - L[i - EW + 1] + L[i + EW - 1] + 2 * L[i + EW] + L[i + EW + 1];
+    edge[i] = Math.sqrt(gx * gx + gy * gy);
+  }
+}
+
+/* 01 三段滤镜：红色网点 / 蓝色抖动 / 热感噪点 */
+const PAPER = [246, 243, 236];
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map(v => v / 16);
+const THERMAL = [[0, [244, 241, 208]], [.3, [233, 216, 74]], [.55, [90, 168, 60]], [.8, [30, 90, 168]], [1, [18, 40, 110]]];
+function grad(stops, v) {
+  for (let i = 1; i < stops.length; i++) {
+    const [p1, c1] = stops[i], [p0, c0] = stops[i - 1];
+    if (v <= p1) { const t = (v - p0) / (p1 - p0); return [lerp(c0[0], c1[0], t), lerp(c0[1], c1[1], t), lerp(c0[2], c1[2], t)]; }
+  }
+  return stops[stops.length - 1][1];
+}
+function runTriptych() {
+  const { CS } = G;
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const i = y * EW + x, k = i * 4, t = G.t(x, y);
+    let c = PAPER;
+    if (t < 1 / 3) {
+      const [cx, cy, ci] = cellCenter(x, y, CS);
+      if (!isBg(ci)) {
+        const d = 1 - lum[ci], r = d * CS * .72, ex = x - cx, ey = y - cy;
+        if (ex * ex + ey * ey <= r * r) c = d > .45 ? [224, 50, 43] : [240, 150, 160];
+      }
+    } else if (!isBg(i)) {
+      if (t < 2 / 3) {
+        const v = lum[i] + (BAYER[(y & 3) * 4 + (x & 3)] - .5) * .4;
+        c = v < .38 ? [29, 79, 160] : v < .66 ? [111, 155, 224] : PAPER;
+      } else c = grad(THERMAL, clamp01(1 - lum[i] + (Math.random() - .5) * .3));
+    }
+    put(k, c);
+  }
+}
+
+/* 02 像素风：大像素 + PICO-8 16 色 */
+const PICO = [[0,0,0],[29,43,83],[126,37,83],[0,135,81],[171,82,54],[95,87,79],[194,195,199],[255,241,232],[255,0,77],[255,163,0],[255,236,39],[0,228,54],[41,173,255],[131,118,156],[255,119,168],[255,204,170]];
+function nearest(r, g, b) {
+  let best = PICO[0], bd = 1e9;
+  for (const c of PICO) { const d = 2 * (r - c[0]) ** 2 + 4 * (g - c[1]) ** 2 + 3 * (b - c[2]) ** 2; if (d < bd) { bd = d; best = c; } }
+  return best;
+}
+function runPixel() {
+  const B = G.CS + 3, s = G.src;
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const k = (y * EW + x) * 4, [, , ci] = cellCenter(x, y, B), ck = ci * 4;
+    let c = isBg(ci) ? [255, 241, 232] : nearest(s[ck], s[ck + 1], s[ck + 2]);
+    if (x % B === 0 || y % B === 0) c = [c[0] * .82, c[1] * .82, c[2] * .82];
+    put(k, c);
+  }
+}
+
+/* 03 漫画风：黑色描线 + 网点纸 + 斜排线 */
+function runManga() {
+  blur(lum, blurL, 1); sobel(blurL);
+  const INK = [18, 18, 20], WHITE = [250, 250, 247], CS = Math.max(3, G.CS - 1);
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const i = y * EW + x, k = i * 4;
+    let c = WHITE;
+    if (!isBg(i)) {
+      const L = blurL[i];
+      if (edge[i] > .55 || L < .22) c = INK;
+      else if (L < .5) {
+        const [cx, cy] = cellCenter(x, y, CS), ex = x - cx, ey = y - cy, r = CS * .38;
+        if (ex * ex + ey * ey <= r * r) c = INK;
+      } else if (L < .72 && (x + y) % 4 === 0) c = INK;
+    }
+    put(k, c);
+  }
+}
+
+/* 04 水墨风：晕染墨色分层 + 断续墨线 + 宣纸纤维 + 红印章 */
+function runInk() {
+  blur(lum, blurL, 2); sobel(blurL);
+  const TONES = [[0, [238, 232, 218]], [.35, [238, 232, 218]], [.5, [176, 173, 165]], [.7, [102, 100, 97]], [.85, [36, 36, 38]], [1, [20, 20, 22]]];
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const i = y * EW + x, k = i * 4, paper = .97 + noise[i] * .03;
+    let c;
+    if (isBg(i)) c = TONES[0][1];
+    else {
+      let d = 1 - blurL[i];
+      if (edge[i] > .32 && noise[i] > .12) d = Math.max(d, .9);
+      c = grad(TONES, clamp01(d + (noise[i] - .5) * .08));
+    }
+    put(k, [c[0] * paper, c[1] * paper, c[2] * paper]);
+  }
+}
+function sealOverlay(W, H) {
+  const cx = quad.reduce((s, p) => s + p.x, 0) / 4 * W, cy = quad.reduce((s, p) => s + p.y, 0) / 4 * H;
+  const px = lerp(quad[2].x * W, cx, .22), py = lerp(quad[2].y * H, cy, .22), s = W * .038;
+  ctx.fillStyle = "rgba(190,30,30,.9)"; ctx.fillRect(px - s, py - s, s * 1.4, s * 1.4);
+  ctx.fillStyle = "#f6efe2"; ctx.font = `900 ${s}px "Noto Sans SC",serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText("墨", px - s * .3, py - s * .3);
+}
+
+/* 05 油画风：Kuwahara 色块 + 提饱和 + 斜向笔触纹理 */
+function runOil() {
+  const s = G.src, r = 2, CANVAS = [228, 218, 196];
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const i = y * EW + x, k = i * 4;
+    if (isBg(i)) { const n = 1 + stroke[i] * .25; put(k, [CANVAS[0] * n, CANVAS[1] * n, CANVAS[2] * n]); continue; }
+    let best = null, bv = 1e9;
+    for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      let R = 0, Gc = 0, Bc = 0, m = 0, m2 = 0, n = 0;
+      for (let v = 0; v <= r; v++) for (let u = 0; u <= r; u++) {
+        const xx = Math.min(EW - 1, Math.max(0, x + u * sx)), yy = Math.min(EH - 1, Math.max(0, y + v * sy)), j = yy * EW + xx, jk = j * 4;
+        R += s[jk]; Gc += s[jk + 1]; Bc += s[jk + 2]; m += lum[j]; m2 += lum[j] * lum[j]; n++;
+      }
+      const vari = m2 / n - (m / n) ** 2;
+      if (vari < bv) { bv = vari; best = [R / n, Gc / n, Bc / n]; }
+    }
+    const gray = (best[0] + best[1] + best[2]) / 3, n = 1 + stroke[i] * .35;
+    put(k, best.map(v => Math.min(255, Math.max(0, ((gray + (v - gray) * 1.45) - 128) * 1.15 + 132) * n)));
+  }
+}
+
+/* 06 波普艺术：四格撞色 + 本戴点，背景纯色 */
+const POP = [
+  { bg: [255, 60, 140], dark: [20, 20, 90],  mid: [255, 230, 0],  light: [255, 250, 235] },
+  { bg: [255, 220, 0],  dark: [10, 10, 10],  mid: [0, 170, 220],  light: [255, 245, 240] },
+  { bg: [0, 190, 120],  dark: [90, 0, 120],  mid: [255, 120, 0],  light: [255, 240, 200] },
+  { bg: [30, 70, 210],  dark: [200, 0, 40],  mid: [255, 150, 200], light: [255, 245, 225] },
+];
+function runPop() {
+  const CS = G.CS;
+  for (let y = G.y0; y <= G.y1; y++) for (let x = G.x0; x <= G.x1; x++) {
+    const i = y * EW + x, k = i * 4, p = POP[Math.min(3, Math.max(0, Math.floor(G.t(x, y) * 4)))];
+    let c;
+    if (maskS[i] < .5 && G.bgWhite) c = p.bg;
+    else {
+      const L = lum[i];
+      if (L < .35) c = p.dark;
+      else if (L < .62) {
+        const [cx, cy] = cellCenter(x, y, CS), ex = x - cx, ey = y - cy, r = CS * .42;
+        c = ex * ex + ey * ey <= r * r ? p.mid : p.light;
+      } else c = p.light;
+    }
+    put(k, c);
+  }
+}
+
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+function drawSkel(h, W, H) {
+  ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 2; ctx.beginPath();
+  BONES.forEach(([i, j]) => { ctx.moveTo(h[i].x * W, h[i].y * H); ctx.lineTo(h[j].x * W, h[j].y * H); });
+  ctx.stroke();
+  ctx.fillStyle = "#e0322b";
+  [4, 8].forEach(i => { ctx.beginPath(); ctx.arc(h[i].x * W, h[i].y * H, 6, 0, 7); ctx.fill(); });
+}
+</script>
+</body>
+</html>

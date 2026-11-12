@@ -117,7 +117,26 @@ footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom,0px));border-top:1p
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:13px var(--mono);color:var(--muted)}
 footer a{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
-.poster .access-note{z-index:3;cursor:help}.access-note::after{content:attr(data-help);display:none;position:absolute;right:0;top:calc(100% + 8px);width:min(270px,65vw);box-sizing:border-box;padding:12px 14px;border:1px solid #88a9dd;border-radius:10px;background:#17243c;color:#fff;font:500 13px/1.7 var(--sans);white-space:normal;text-align:left;box-shadow:0 8px 28px #0006;pointer-events:none}.access-note:hover::after,.access-note:focus-visible::after,.access-note.is-open::after{display:block}.access-note:focus-visible{outline:2px solid #a9c8ff;outline-offset:3px}</style>
+
+/* Paper-toned access notes: immediate hover, focus or tap. */
+.poster .num{z-index:1}
+.poster-wrap{position:relative}.poster-wrap .poster{width:100%}
+.access-note{position:absolute;right:10px;top:10px;z-index:3;border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:999px;padding:6px 10px;background:var(--surface);color:var(--ink);font:500 11px/1.5 var(--sans);cursor:pointer;box-shadow:0 2px 10px #0001;max-width:calc(100% - 50px)}
+.access-note::after{content:attr(data-help);visibility:hidden;opacity:0;position:absolute;right:0;top:calc(100% + 9px);width:min(265px,calc(100vw - 72px));padding:14px 16px;border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:12px;background:var(--surface);color:var(--ink);font:400 13px/1.8 var(--sans);white-space:normal;text-align:left;box-shadow:0 12px 30px #0002;pointer-events:none;transition:opacity .1s}
+.access-note:hover::after,.access-note:focus-visible::after,.access-note.is-open::after{visibility:visible;opacity:1}
+.tip{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-top:2px solid var(--accent);box-shadow:0 8px 28px #0002;padding:12px 14px;line-height:1.8}
+.tip b{color:var(--muted);opacity:1}
+.btn{cursor:pointer;background:transparent;color:var(--ink)}
+.tl-mobile{display:none}.undated{padding:12px 0 0;font-size:13px;color:var(--muted)}
+.undated button{border:0;border-bottom:1px dotted var(--muted);background:none;color:var(--ink);font:inherit;cursor:pointer;padding:2px 0;margin-right:12px}
+dialog{width:min(760px,calc(100% - 28px));max-height:85dvh;padding:clamp(20px,4vw,36px);border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink);box-shadow:0 25px 90px #0004;overscroll-behavior:contain}
+dialog::backdrop{background:#16140f70;backdrop-filter:blur(5px)}
+body:has(dialog[open]){overflow:hidden}
+.history-head{display:flex;justify-content:space-between;align-items:start;gap:16px}.history-head h2{margin:4px 0 18px;font-size:28px}.history-head .kicker{margin:0}.history-head button{font-size:28px;padding:0 8px}
+.history-note{color:var(--muted);font-size:13px;line-height:1.85}.history-entry{border-top:1px solid var(--line);padding:20px 0}.history-entry time{font:11px/1.7 var(--mono);color:var(--muted)}.history-entry h3{font-size:17px;margin:6px 0}.history-entry p{margin:6px 0;font-size:14px;line-height:1.85}.history-entry small{font:11px/1.7 var(--mono);color:var(--muted);overflow-wrap:anywhere}.history-entry a{color:var(--accent)}
+.timeline-list-row{display:flex;justify-content:space-between;gap:14px;width:100%;padding:14px 0;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:14px var(--sans);text-align:left;cursor:pointer}.timeline-list-row small{display:block;color:var(--muted);font:11px/1.8 var(--mono);margin-top:4px}.timeline-list-row b{font:12px var(--mono);white-space:nowrap;color:var(--muted)}
+@media(max-width:640px){.tl svg{display:none}.tl-mobile{display:block}.hero{min-height:480px;height:74svh;max-height:700px}.intro{font-size:15px}.stats{gap:8px 14px}.history-head h2{font-size:24px}.links .btn{padding:9px 12px}.head p{line-height:1.8}.top nav{gap:0}.top nav a,.icon-btn{padding:8px 6px}.logo{font-size:10px;letter-spacing:0}.logo span{max-width:114px;white-space:normal;line-height:1.3}.undated{line-height:2}}
+</style>
 </head>
 <body>
 <header class="top" id="top">
@@ -127,6 +146,7 @@ footer a{color:var(--ink)}
       <a href="#works">作品</a>
       <a href="#timeline" class="hide-sm">迭代</a>
       <a href="https://github.com/Crystalll0/digital-playground" target="_blank" rel="noopener">GitHub ↗</a>
+      <button class="icon-btn" id="language" type="button" aria-label="Switch to English">EN</button>
       <button class="icon-btn" id="theme" type="button" aria-label="切换深浅色">◐</button>
     </nav>
   </div>
@@ -137,7 +157,7 @@ footer a{color:var(--ink)}
   <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
   <div class="wrap">
     <div class="kicker">欢迎来到 Crystal · 数字游乐场</div>
-    <p class="intro">近期我在尝试使用Ai和代码做一些<b>有意思的东西</b>，比如：一组可以通过手势控制的视觉实验、几个小游戏，还有一些解决生活小问题或者满足好奇心的网站。您可以点击以下的任何作品打开试玩，以及他们的<b>迭代过程～</b>。</p>
+    <p class="intro">近期我在尝试使用 AI 和代码做一些<b>有意思的东西</b>，比如：一组可以通过手势控制的视觉实验、几个小游戏，还有一些解决生活小问题或者满足好奇心的网站。您可以点击以下的任何作品打开试玩，以及它们的<b>迭代过程～</b>。</p>
     <div class="stats"><span><b id="sWorks">0</b> 个作品</span><span><b id="sCommits">0</b> 次迭代</span><span><b id="sRange"></b></span></div>
   </div>
 </section>
@@ -169,7 +189,77 @@ footer a{color:var(--ink)}
   </div>
 </footer>
 <div class="tip" id="tip" role="tooltip"></div>
+<dialog id="historyDialog" aria-labelledby="historyTitle"><div class="history-head"><div><p class="kicker">PROCESS / ARCHIVE</p><h2 id="historyTitle"></h2></div><button class="icon-btn" id="closeHistory" type="button" aria-label="关闭 / Close">×</button></div><div id="historyContent"></div></dialog>
 
+<script>
+/* Curated from the author's supplied records. Dates are Hong Kong dates;
+   null dates remain undated. Ranges are not exact release timestamps.
+   A record is a merged change round, including the first build. */
+const PROJECT_HISTORY = {
+  '行迹 The Personal Atlas': {
+    note:['基础阶段日期不确定；11 月 5、7 日的需求截图不作为上线证据。在线入口持续更新，离线地图不含街道与建筑，搜索需联网。尚无完整的本地双击运行与真实手机兼容性验证记录。','The foundation is undated; request screenshots from November 5 and 7 do not establish release dates. The live URL is continuously updated. Offline maps omit streets and buildings; search requires a connection. Full local launch and real-phone compatibility testing is not documented.'],
+    entries:[
+      [null,null,'d453427c',['基础阶段','Foundation'],['建立地图落钉、单个／批量地点、旅行分类与路线排序；支持照片、邮戳、自定义图钉、回收站、ChatGPT 登录、手动云端同步、指定旅程 HTML 分享及手札打开动画。早于 2026-11-09，具体日期不确定。','Map pins, single and bulk places, trip categories and route ordering; photos, postmarks, custom pins, trash, ChatGPT sign-in, manual cloud sync, trip HTML sharing and a journal-opening animation. Before November 9; exact date unknown.']],
+      ['2026-11-09',null,'9ccf6505 · 10:17',['照片导入与到访统计','Photo import & visit counts'],['单张／批量照片导入，读取拍摄时间与 GPS；可新建或加入旅程。HEIC／HEIF 转静态照片，暂不支持实况视频；到访次数支持自动累计与手动修改。源码：photo-import.js、visits.js。','Import single or multiple photos with capture time and GPS, into new or existing trips. HEIC/HEIF conversion supports still photos, not Live Photo video. Visit counts can accumulate automatically or be edited. Source: photo-import.js, visits.js.']],
+      ['2026-11-09',null,'2fe50689 · 14:59',['个性化图钉','Personalized pins'],['支持 Emoji、1–4 个短文字、圆形／圆角方形／无边框和颜色设置；实时预览，随备份及云端记录保存。源码：app.js、journal.css。','Emoji or 1–4 characters; round, rounded-square or borderless pins with color controls and live previews. Settings persist in backups and cloud records. Source: app.js, journal.css.']],
+      ['2026-11-09',null,'本地交付 / Local delivery',['本地版与离线地图','Portable HTML & offline map'],['制作单文件 HTML；“保存便携 HTML”将收藏嵌入文件。内置 Natural Earth 世界国界，离线展示概览、图钉与路线；整理本地版、源码和资源 ZIP。具体时间不确定，无独立发布编号。','A standalone HTML file and portable export with embedded collections. A Natural Earth country map displays pins and routes offline. Local HTML, source and resources were packaged in a ZIP. Time unknown; no independent release ID.']],
+      ['2026-11-09',null,'0019ad9f · 16:24',['照片调整与隐私说明','Photo editing & privacy'],['加入左右旋转、水平翻转、恢复原图及预览后保存；说明本机处理、手动上传、账户隔离和导出边界。云端旧图片尚未自动清理，永久删除记录不等于彻底擦除云端图片。同步更新本地版及 ZIP。','Rotate, flip, restore originals and preview before saving. Privacy notes explain local processing, manual upload, account isolation and exports. Old cloud images are not automatically cleaned up; deleting a record does not erase every cloud image. Local files and ZIP updated.']],
+      ['2026-11-09',null,'af219649 → 6ae87da8 · 16:40–16:43',['国家、城市分别计次','Separate country & city counts'],['拆分国家与城市的“第几次到访”，按旅程日期排序，同一旅程不重复计次；固定标签编号、常用城市标签、导入统一设置及旧记录批量确认。两次提交合并为一轮。','Separate country and city visit counts, ordered by trip date with no duplicates within a trip. Stable label IDs, common city labels, import defaults and bulk confirmation of old records. Two commits form one round.']],
+      ['2026-11-10',null,'fc1b87fb · 09:27',['国家与城市直接选择','Country → city selection'],['两级下拉选择，内置 7,330 个城市；已有标签标 ★ 并优先显示。更新本地版与 ZIP。11 月 9 日制作，发布中断后于 10 日上线，合并计为一轮。','Two-level selectors with 7,330 cities; used labels are starred and prioritized. Local HTML and ZIP updated. Built November 9 and released November 10 after a publishing interruption; counted once.']]
+    ]
+  },
+  '月隐 Moonveil': {
+    note:['两份重叠记录已按修改轮次合并：v2／v3、v4／v4.1 各合并为一轮。2026-11-11 是 v4.1 文件保存记录，不作为制作日期。项目创建于 2026-09-17 10:58，但不据此推定初版上线日期。星盘不包含上升星座、宫位和完整本命盘。','Overlapping histories are merged by change round: v2/v3 and v4/v4.1 each form one round. The November 11 v4.1 file-save record is not its creation date. Project creation on September 17 at 10:58 does not establish the initial release date. Astrology does not include ascendants, houses or a full natal chart.'],
+    entries:[
+      [null,null,'v1',['首次制作','Initial build'],['深夜紫与月光银风格，适配电脑和手机；今日运势、幸运色与数字、水晶球、茶占、求签、龟甲、六爻与解梦；文字及兼容浏览器的语音输入。首次在线发布因证书超时失败，随后交付 Moonveil-Experience.html。','Purple and moon-silver styling for desktop and mobile; daily fortunes, lucky colors and numbers, crystal ball, tea reading, lots, turtle-shell divination, I Ching and dreams. Text and browser-supported voice input. Initial publication timed out on a certificate; Moonveil-Experience.html was delivered locally.']],
+      ['2026-09-18',null,'v2 → v3',['可读性、星盘与六爻解读','Readability, astrology & I Ching'],['修正深色背景的文字、输入框与按钮对比度；新增行星落点、月相、顺逆行和观测方位；三个东方、三个西方入口及独立解梦。修复六行卦象、本卦与之卦；扩充十类主题、十二组象征、情境分支及保留结果的连续追问。此阶段为本地规则解读。','Improved text and control contrast; added planetary positions, lunar phases, retrograde status and viewing direction, with three Eastern and three Western entrances plus dreams. Fixed the six-line hexagram layout; expanded ten themes, twelve symbol groups, contextual branches and result-preserving follow-ups. Interpretation was rule-based at this stage.']],
+      ['2026-09-24',null,'v4 → v4.1 · 平台 / Platform 5',['署名与页脚优化','Credits & footer refinement'],['加入 Yueru (Crystal) Chen 署名、版权与使用声明；页脚居中、对称留白，署名缩小至 12px，统一字体、字重和间距并移除显眼版本行。文件内版本标记：4.1 · 2026-09-24。','Added Yueru (Crystal) Chen credits, copyright and usage notes. Centered the footer with balanced spacing, 12px credits and consistent typography; removed the prominent version line. Internal file label: 4.1 · 2026-09-24.']],
+      ['2026-10-27','2026-10-29','5.0 · AI · 平台 / Platform 6 → 7',['AI 文字解读','AI text interpretation'],['接入 OpenAI Responses API，为占卜、解梦和星盘加入文字解读及连续追问；保留原抽取与计算。加入加载、校验、失败提示及保留结果重试；密钥留在后台，按方式传递对应象征资料。未新增语音播放。版本 6 于 10 月 27 日上线实测；版本 7 当日保存，10 月 29 日 09:24 发布成功，合并计一次。','Integrated the OpenAI Responses API for divination, dreams and astrology with text follow-ups, preserving draws and calculations. Added loading, validation, errors and retries that keep results. Keys stay server-side; each method receives its own symbols. No voice playback added. Platform 6 was tested live October 27; platform 7 was saved then and published October 29 at 09:24. Counted as one round.']]
+    ]
+  },
+  '爪爪衣橱 Pawmoire': {
+    note:['V1–V5 为整理用阶段编号。10 月 23 日的资料归档不计网站迭代；压缩包已校验并排除 API 密钥，但未直接存入当时指定的桌面位置。接入接口不等于已验证生成成功。','V1–V5 are retrospective stage labels. The October 23 archive is not a website iteration; its ZIP was checked and excluded API keys, but was not saved directly to the requested desktop location. API integration alone does not establish successful generation.'],
+    entries:[
+      ['2026-10-22',null,'V1 · 92703da · 22:10',['初始网站','Initial website'],['宠物照片及穿搭参考图双上传，类别、补充要求、预览、原图对比与下载入口；AI 接口待连接。源码：app/page.tsx、app/globals.css。','Dual uploads for pet and outfit reference images; categories, extra requests, preview, original comparison and download. AI was not connected yet. Source: app/page.tsx, app/globals.css.']],
+      ['2026-10-22',null,'V2 · f4bf272 · 22:37',['AI 服务接入','AI service integration'],['接入图像编辑接口，增加服务状态、图片格式与大小校验及失败提示。密钥完成配置，但测试遇到余额不足，未验证成功生成。源码：app/api/try-on/route.ts、app/api/status/route.ts。','Connected image editing with service status, image format/size checks and failure messages. Keys were configured, but testing hit insufficient credits; successful generation was not verified. Source: app/api/try-on/route.ts, app/api/status/route.ts.']],
+      ['2026-10-22',null,'V3 · 0d3510f · 22:49',['日系原野视觉','Meadow-inspired visual design'],['草木、花朵与爪印，猫狗原野插画；同步调整首页、上传区、空状态和文案。','Added plants, flowers, paw prints and a cat-and-dog meadow illustration; updated the home page, uploads, empty states and copy.']],
+      ['2026-10-23',null,'V4 · e13ddcf · 10:56',['八宠物轮播与森林试衣间','Eight-pet carousel & forest fitting room'],['猫、狗、鸟、蛇、仓鼠、兔子、刺猬、豚鼠共八张 AI 摄影质感穿搭示例；自动播放、切换与暂停，帘子、拱形试衣镜及缩略图衣橱。猫形象调整与扩充轮播合并，10:57 发布。源码：components/PetShowcase.tsx 等。','Eight photographic-style AI outfit examples: cat, dog, bird, snake, hamster, rabbit, hedgehog and guinea pig. Autoplay, manual switching and pause; curtains, an arched mirror and wardrobe thumbnails. Cat refinements and carousel expansion are merged. Published 10:57. Source includes components/PetShowcase.tsx.']],
+      ['2026-10-23',null,'V5 · 2b90283 · 11:01',['展示名称统一','Consistent showcase names'],['移除私人昵称及原照来源说明；顶部统一宠物名称，底部使用斗篷皇冠、格纹围巾、草编帽等穿搭名称；保留 AI 示例标识，11:02 发布。','Removed private nicknames and original-photo provenance text. Used species names above and outfit names below, retaining AI-example labels. Published 11:02.']]
+    ]
+  },
+  '序章 Index': {
+    note:['版本为作品集整理编号；10 月 5 日的记录没有逐条时间戳。10 月 29 日首次在线发布成功，数据仍在各设备浏览器中，通过备份迁移，未实现云端同步。本机逻辑检查有记录，但全面浏览器视觉验收未完成。','Versions are retrospective portfolio labels. October 5 entries have no individual timestamps. First published online October 29; data remains in each browser and moves through backups, without cloud sync. Logic checks are documented, but complete browser visual testing was not completed.'],
+    entries:[
+      ['2026-10-05',null,'V0.1',['本机首版','Initial local build'],['今日计划、类别、单条／批量录入、历史完成补录、周／月历、重复任务、阶段权重、专注记录、徽章和备份导入导出；采用浏览器本地存储。','Daily plans, categories, single/bulk entry, past completions, week/month calendars, recurring tasks, weighted stages, focus records, badges and backup import/export using browser-local storage.']],
+      ['2026-10-05',null,'V0.2',['录入与视觉优化','Entry & visual refinement'],['仅填名称即可保存；单日／日期范围选择，录入时新增类别；按需展开重复与长期任务。徽章改为浅色金属收藏风格。','Save with a name alone; single-date/range selection and inline categories; expandable repeat and long-term options. Badges use a light metallic collection style.']],
+      ['2026-10-05',null,'V0.3',['编辑、删除与恢复','Edit, delete & restore'],['任务状态切换、编辑、删除、撤回及回收站；删类别前迁移任务；重新打开任务恢复完成前阶段。','Task status, editing, deletion, undo and trash recovery. Move tasks before deleting a category; reopening restores the previous stage.']],
+      ['2026-10-05',null,'V0.4',['徽章回退与分类统计','Badge rollback & category counts'],['根据有效记录重新计算徽章；撤销完成或删除后重新锁定不满足条件的徽章。分类显示总项目／待完成／已完成，以深棕、红、绿区分。','Recalculate badges from valid records, relocking after deletion or undone completion. Category totals distinguish all, pending and completed items in brown, red and green.']],
+      ['2026-10-05',null,'V0.4.1',['类别管理入口','Category management entry'],['类别旁“＋”改为设置图标，加入“管理类别”悬停提示，放大图标与点击区域；连续微调合并。','Replaced the category plus sign with settings, added a Manage categories tooltip and enlarged the icon and hit area. Consecutive tweaks are merged.']],
+      ['2026-10-05',null,'V0.5',['批量日期快捷填写','Bulk date shortcuts'],['可沿用发布日期为开始日期、截止日期为完成日期，并逐行修改；截止时刻改为可选展开。','Copy publication dates to start dates and deadlines to completion dates, with per-row editing and optional deadline time controls.']],
+      ['2026-10-05',null,'V0.5.1',['日期联动与批量编辑','Date linking & bulk editing'],['修正逐行日期联动；取消复制完成日期时的行状态限制，保存仍仅为已完成任务记录完成日期。新增多选、全选当前结果、批量移类与删除。','Fixed per-row date linking and removed the status restriction on copying completion dates; only completed tasks save them. Added multi-select, select-current-results, bulk moves and deletion.']],
+      ['2026-10-05',null,'V0.6',['收藏册筛选修正','Collection filtering fixes'],['增加“全部收藏”，原“全部任务”改为“全局累计”；展示系列数量和卡片归属，补回未解锁徽章及条件。','Added All collectibles, renamed All tasks to Overall totals, displayed series counts and card ownership, and restored locked badges and requirements.']],
+      ['2026-10-29',null,'V1.0',['首次网址发布','First online publication'],['通过 Sites 成功发布；当时设为仅本人访问。本机数据需备份导入迁移，尚无云端同步。历史权限不代表当前访问状态。','Successfully published through Sites, with owner-only access at that time. Local records require backup import; no cloud sync. Historical access settings do not describe current availability.']]
+    ]
+  },
+  '纸间 Paper Room': {
+    note:['v4、v5 为工作阶段名称，未核实为 Release 标签。日期范围来自提供的阶段记录，不推定各功能的具体上线日。概念探索、用户试用和课程提交为里程碑，不计功能迭代。','v4 and v5 are working-stage names, not verified release tags. Date ranges come from the supplied stage records and do not establish individual feature release dates. Concept research, user trials and coursework submission are milestones, not functional iterations.'],
+    source:'https://github.com/Crystalll0/PAPER-ROOM/blob/e98a7b3/PROCESS.md',
+    entries:[
+      ['2026-10-20','2026-10-23','初始原型 / Prototype → v4',['初始原型与纸艺操作','Initial prototype & paper tools'],['迭代折叠、裁剪后折痕、保存分类、回收站、胶水、翻面、吸附、三语、明暗主题与圆规裁剪；允许有效向外折叠。各功能具体完成日不确定。','Iterated folding, post-cut creases, saving/categories, trash, glue, flipping, snapping, three languages, themes and compass cuts. Allowed valid outward folds. Individual completion dates are unknown.']],
+      ['2026-10-24','2026-10-26','v5 · f869f3a / ada87aa / 5ac4e9d',['原型细化与提交材料','Prototype refinement & documentation'],['细化原型并整理源码、本地运行说明、英文 README、PROCESS、Credits 和截图；教学板块介绍基础操作，作品教程待后续。上述提交准确时间未独立核实。','Refined the prototype and prepared source, local setup, English README, PROCESS, credits and screenshots. Teaching covers basic controls; project tutorials remain future work. Exact commit times were not independently checked.']],
+      ['2026-10-29',null,'a2abc15 → 3205fa0',['用户反馈改进轮','User-feedback improvements'],['欢迎页与七步实操教程：纸张、折叠确认、移动、裁剪、胶水、翻面、展开；可跳过／重看。新增纸旁确认、字号／辅助线／半透明设置、自由画线裁剪、单铰接纸面翻开及引导纸条结；后两项为有限原型。同轮初版及修订合并。','A welcome page and seven-step practice tour: paper, confirm folds, move, cut, glue, flip and unfold, with skip/replay. Added nearby confirmation, text/guide/transparency settings, freehand cuts, single-hinge unfolding and a guided strip knot; the last two are limited prototypes. Initial and revised implementations count once.']],
+      ['2026-10-29',null,'c04b3fb',['语言入口修订','Language selector revision'],['欢迎页固定显示“选择语言 / 選擇語言 / Select Language”，便于识别切换入口。修改 dist/tour.js 和 dist/index.html，未改说明文档。','The welcome screen always displays 选择语言 / 選擇語言 / Select Language so the selector remains recognizable. Updated dist/tour.js and dist/index.html; documentation unchanged.']],
+      ['2026-10-29','2026-10-30','74d6a77 → 57d9a23 → e98a7b3',['折后裁剪与提交收尾','Folded-layer cutting & final delivery'],['剪穿重叠平折纸层，展开保留对称切口；验证两层／四层裁剪、碎片分离与面积保持。更新截图及英文文档、限制和检查记录；网络失败曾延迟同步，最终推送发布成功。功能、截图和文档合并一轮，实现完成于 10 月 30 日。','Cut through overlapping flat-folded layers and retain symmetric openings after unfolding. Checked two/four layers, fragments and area preservation. Updated screenshots, English docs, limitations and checks. Network failures delayed sync; final push/publication succeeded. Feature, screenshot and documentation work form one round, completed October 30.']]
+    ],
+    milestones:[
+      ['2026-10-15 — 2026-10-20',['概念探索：虚拟折纸、预览后确认、裁剪与碎片回收。','Concept research: virtual folding, preview before confirmation, cutting and fragment recycling.']],
+      ['2026-10-27 — 2026-10-28',['四人试用：两位同学及约 50 岁、16 岁参与者；反馈涉及确认、显示大小、纸层对齐及高级折剪限制。','Four-user trial: two classmates and participants aged about 50 and 16; feedback on confirmation, display size, layer alignment and advanced folding/cutting limitations.']],
+      ['2026-10-30 20:20',['Canvas 显示 Submitted!，提交公开仓库链接；时区按聊天上下文记为香港时间。','Canvas showed Submitted! for the public repository link; Hong Kong time is based on the conversation context.']]
+    ]
+  }
+};
+
+</script>
 <script>
 (() => {
 'use strict';
@@ -184,15 +274,15 @@ const W = [
   {key:'手势绽放 Bloom', zh:'手势 · 绽放', en:'Nocturne Bloom', big:true, cat:['gesture','art'], dir:'12｜手势 · 绽放 · Bloom', play:'play/bloom/', img:'assets/covers/bloom.jpg', color:'#ff9ab5',
    desc:'张开手掌，花卉绽放；握拳，花变回花苞。您也可以上传自己喜欢的花卉绽放视频，进行互动体验！程序会自动将其拆成逐帧画面，跟着你的手势走～', tags:['MediaPipe','Canvas','AI 视频']},
   {key:'手势取景框 Window', zh:'手势 · 取景框', en:'Gesture Window', big:true, cat:['gesture'], dir:'13｜手势 · 取景框 · Window', play:'play/window/', poster:'window', color:'#e0322b',
-   desc:'伸出双手，比出拍照的姿势，即为现实解锁不同的画风！', tags:['MediaPipe','人像分割','8 种风格']},
+   desc:'伸出双手，比出拍照的姿势，即可为现实解锁不同的画风！', tags:['MediaPipe','人像分割','8 种风格']},
   {key:'手势星云 Nebula', zh:'手势 · 星云', en:'Gesture Nebula', cat:['gesture','art'], dir:'11｜手势 · 星云 · Nebula', play:'play/nebula/', poster:'nebula', color:'#7cf2d6',
    desc:'用手势互动，尽情探索这片星系吧……', tags:['手势','粒子','音景']},
   {key:'撕开现实 Tear Reality', zh:'撕开现实', en:'Tear Reality', cat:['gesture','art'], dir:'14｜手势 · 撕开现实 · Tear Reality', play:'play/tear-reality/', poster:'tear', color:'#3d8bff',
-   desc:'想解压或与环境互动？本程序先已支持与实时画面互动，使用手机后置摄像头打开体验更佳～ 你也可以上传想互动的图片或视频进行体验', tags:['Three.js','WebGL','Shader']},
+   desc:'想解压或与环境互动？本程序现已支持与实时画面互动，使用手机后置摄像头打开体验更佳～ 你也可以上传想互动的图片或视频进行体验', tags:['Three.js','WebGL','Shader']},
   {key:'流场花园 Flow Garden', zh:'流场花园', en:'Flow Garden', cat:['art'], dir:'09｜流场花园· Flow', play:'play/flow-garden/', poster:'flow', color:'#a99bff',
    desc:'试试随心点一下、拖一下，看看线条会如何流动…… ', tags:['生成艺术','Perlin 噪声','录屏']},
   {key:'薯饼接接乐 Hash Brown Catch', zh:'薯饼接接乐', en:'Hash Brown Catch', big:true, cat:['game'], dir:'06｜薯饼接接乐 · Hash Brown Catch', play:'play/hash-brown-catch/', img:'assets/covers/hash-brown.jpg', color:'#f5a623',
-   desc:'8-bit 早餐小游戏！尝试滑动炸篮接住掉下来的薯饼，这可没有很简单哦。更多彩蛋惊喜，等你来解锁……', tags:['p5.js','游戏','IP 设计']},
+   desc:'8-bit 早餐小游戏！尝试滑动炸篮接住掉下来的薯饼，这可没那么简单哦。更多彩蛋惊喜，等你来解锁……', tags:['p5.js','游戏','IP 设计']},
   {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', color:'#ffd25a',
    desc:'不知道吃什么？拉一下拉杆，亦可使用快速筛选工具！想要了解食物选择，价格、地点、营业时间？打开立即查看理大校内和周边的一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
   {key:'月隐 Moonveil', zh:'月隐', en:'Moonveil', big:true, cat:['web'], dir:'01｜月隐 · MOONVEIL ｜占卜', play:'https://moonveil.yueruchen.online/', external:true, img:'assets/covers/moonveil.jpg', color:'#9b7cff',
@@ -205,59 +295,98 @@ const W = [
    desc:'旅行手札：您的专属旅行记忆收集册！不管是文字、照片、印章或是邮戳，上传即可记录你的过往旅行路线，亦可导出成一份可分享的手札～', tags:['Leaflet','离线','照片 EXIF']},
   {key:'爪爪衣橱 Pawmoire', zh:'爪爪衣橱', en:'Pawmoire', cat:['web'], dir:'05｜爪爪衣橱· Pawmoire｜宠物换装', play:'https://pawmoire.yueruchen.online/', external:true, img:'assets/covers/pawmoire.jpg', color:'#8aa37a',
    desc:'超便利给自家毛孩子换装的网站！只需要一张宝贝的图片&一张参考图即可立即体验', tags:['Next.js','AI 换装','线上站']},
-  {key:'序章 Index', zh:'序章', en:'Index', big:true, cat:['tool'], dir:'03｜序章 · Index ｜日程&计划', play:'https://prologue.yueruchen.online/', external:true, poster:'index', color:'#ff4d2e',
+  {key:'序章 Index', zh:'序章', en:'Prologue', big:true, cat:['tool'], dir:'03｜序章 · Index ｜日程&计划', play:'https://prologue.yueruchen.online/', external:true, poster:'index', color:'#ff4d2e',
    desc:'把每一步，写成成就！一个把日程和计划变成「解锁成就」的工具，依旧是很好用的日程规划表。', tags:['计划','日程']},
   {key:'毛孩子日历 Pet Calendar', zh:'毛孩子日历', en:'Pet Calendar', big:true, cat:['tool'], dir:'10｜毛孩子日历', play:'play/pet-calendar/', poster:'pet', color:'#e8a23a',
    desc:'记录家里毛孩子的专属日历：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你～', tags:['日历','本地保存']},
 ];
-const CATS = [['all','全部'],['gesture','手势交互'],['art','生成艺术'],['game','游戏'],['tool','工具'],['web','网站']];
-const count = k => COMMITS.filter(c => c[1].split(' · ')[0] === k).length;
-W.forEach((w, i) => { w.n = count(w.key); w.idx = i; });
-
-const grid = document.getElementById('grid');
-W.forEach((w, i) => {
-  const el = document.createElement('article');
-  el.className = 'card' + (w.big ? ' big' : '');
-  el.dataset.cat = w.cat.join(' ');
-  const href = w.external ? w.play : enc(w.play);
-  const hist = `${GH}/commits/main/${enc('works/' + w.dir)}`;
-  el.innerHTML = `
-    <a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="打开 ${w.zh}">
-      ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
-      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge access-note" role="button" tabindex="0" aria-label="访问提示：若无法打开，请尝试切换网络或使用 VPN。" data-help="若无法打开，请尝试切换网络或使用 VPN。" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle(&quot;is-open&quot;)" onkeydown="if(event.keyCode===13||event.keyCode===32){event.preventDefault();event.stopPropagation();this.classList.toggle(&quot;is-open&quot;)}if(event.keyCode===27)this.classList.remove(&quot;is-open&quot;)">ⓘ 部分地区可能访问受限</span>' : ''}
-      
-    </a>
-    <div class="body">
-      <div class="title"><h3>${w.zh}</h3><small>${w.en}</small></div>
-      <p class="desc">${w.desc}</p>
-      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>
-      <div class="links">
-        <a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external ? '打开线上版 ↗' : '打开试玩 →'}</a>
-        <a class="btn" href="${hist}" target="_blank" rel="noopener">迭代过程 <span class="v">${w.n} 次</span></a>
-      </div>
-    </div>`;
-  grid.appendChild(el);
-});
-
-const fbox = document.getElementById('filters');
-CATS.forEach(([k, label]) => {
-  const b = document.createElement('button');
-  b.type = 'button'; b.dataset.k = k;
-  b.innerHTML = `${label}<span>${k === 'all' ? W.length : W.filter(w => w.cat.includes(k)).length}</span>`;
-  b.setAttribute('aria-pressed', k === 'all');
-  b.onclick = () => {
-    fbox.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    grid.querySelectorAll('.card').forEach(c => c.hidden = k !== 'all' && !c.dataset.cat.split(' ').includes(k));
-  };
-  fbox.appendChild(b);
-});
-
-/* stats */
-const days = d => new Date(d * 1000);
-const fmt = d => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-document.getElementById('sWorks').textContent = W.length;
-document.getElementById('sCommits').textContent = COMMITS.length;
-document.getElementById('sRange').textContent = `${fmt(days(COMMITS[0][0]))} — 至今`;
+const escapeHTML = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let lang='zh';
+try{lang=localStorage.getItem('dp-language')==='en'?'en':'zh';}catch(e){}
+const tr=(zh,en)=>lang==='en'?en:zh;
+const pick=pair=>pair[lang==='en'?1:0];
+const CATS=[['all','全部','All'],['gesture','手势交互','Gestures'],['art','生成艺术','Generative art'],['game','游戏','Games'],['tool','工具','Tools'],['web','网站','Websites']];
+const EN_DESC=[
+  'Open your palm to bloom; make a fist to return to a bud. Upload a blooming-flower video and the app turns it into frames that follow your gestures.',
+  'Frame a shot with both hands to unlock different visual styles in your surroundings.',
+  'Explore a galaxy through gestures, particles and sound.',
+  'Unwind and interact with your surroundings. Live camera interaction is now supported; try your phone’s rear camera for a better view. You can also upload an image or video.',
+  'Tap, drag and see where the flowing lines take you.',
+  'An 8-bit breakfast game! Slide the basket to catch falling hash browns. It is trickier than it looks, with surprises to discover.',
+  'Not sure what to eat? Pull the lever or use quick filters. Explore over a thousand dishes on and around the PolyU campus, with prices, locations and opening hours.',
+  'A moonlit room for divination and inspiration: crystal balls, moonlight and a little ritual.',
+  'Your live memories: turn concert moments into a crystal charm bracelet.',
+  'A digital paper studio for folding, cutting and gluing. Choose paper colors and sizes, then build your own collection.',
+  'A personal travel journal for words, photos, stamps and postmarks. Collect routes and memories, then export a journal to share.',
+  'A pet styling studio: upload a photo of your pet and an outfit reference to try a new look.',
+  'Turn every step into an achievement. A planner that brings schedules, goals and collectible badges together.',
+  'A calendar for your pets: keep track of meals, parasite prevention, vaccines and bath times.'
+];
+const EN_TAGS={'AI 视频':'AI video','人像分割':'Segmentation','8 种风格':'8 styles','手势':'Gestures','粒子':'Particles','音景':'Soundscape','生成艺术':'Generative art','Perlin 噪声':'Perlin noise','录屏':'Recording','游戏':'Game','IP 设计':'Character design','拉霸机':'Slot machine','简 / 繁 / EN':'简 / 繁 / EN','菜单数据':'Menu data','网站':'Website','交互叙事':'Interactive narrative','定制工具':'Customizer','几何':'Geometry','教程':'Tutorials','中 / EN':'中文 / EN','离线':'Offline','照片 EXIF':'Photo EXIF','AI 换装':'AI styling','线上站':'Live site','计划':'Planning','日程':'Schedule','日历':'Calendar','本地保存':'Local storage'};
+const historyFor=w=>PROJECT_HISTORY[w.key];
+const legacy=w=>COMMITS.filter(c=>c[1].split(' · ')[0]===w.key);
+const count=w=>historyFor(w)?historyFor(w).entries.length:legacy(w).length;
+W.forEach((w,i)=>{w.idx=i;w.n=count(w);});
+let activeFilter='all',openWork=null;
+const grid=document.getElementById('grid'),fbox=document.getElementById('filters');
+const dialog=document.getElementById('historyDialog');
+const dateLabel=e=>e[0]?(e[1]?`${e[0]} — ${e[1]}`:e[0]):tr('日期待确认','Date unconfirmed');
+function openHistory(w){
+  openWork=w;
+  document.getElementById('historyTitle').textContent=tr(w.zh,w.en);
+  const h=historyFor(w);
+  let html=`<p class="history-note">${tr('含首次制作；同一轮修改合并计数。日期均为香港时间。','Includes the first build; related changes are merged into one round. All dates use Hong Kong time.')}</p>`;
+  if(h){
+    html+=`<p class="history-note">${escapeHTML(pick(h.note))}</p>`;
+    html+=h.entries.map(e=>`<article class="history-entry"><time>${dateLabel(e)}</time><h3>${escapeHTML(pick(e[3]))}</h3><small>${escapeHTML(e[2])}</small><p>${escapeHTML(pick(e[4]))}</p></article>`).join('');
+    if(h.milestones){html+=`<h3>${tr('相关里程碑 · 不计迭代','Related milestones · not counted')}</h3>`+h.milestones.map(m=>`<article class="history-entry"><time>${m[0]}</time><p>${escapeHTML(pick(m[1]))}</p></article>`).join('');}
+    if(h.source)html+=`<a href="${h.source}" target="_blank" rel="noopener noreferrer">${tr('查看开发记录 ↗','Read the development log ↗')}</a>`;
+  }else{
+    html+=`<p class="history-note">${tr('以下为原有文件修改记录，尚未按功能修改轮次重新整理；文件、资源与资料交付可能分别计数，不等于独立功能版本。','These are existing file-modification records, not yet curated into functional change rounds. Files, assets and deliveries may be counted separately; they are not necessarily separate software versions.')}</p>`;
+    html+=legacy(w).map(c=>`<article class="history-entry"><time>${fmt(days(c[0]))}</time><p>${escapeHTML(c[1].split(' · ').slice(1).join(' · '))}</p></article>`).join('');
+  }
+  html+=`<p class="history-note"><a href="${GH}/commits/main/${enc('works/'+w.dir)}" target="_blank" rel="noopener noreferrer">${tr('作品集归档的 GitHub 历史 ↗','Portfolio archive on GitHub ↗')}</a></p>`;
+  document.getElementById('historyContent').innerHTML=html;
+  if(!dialog.open){dialog.showModal();dialog.scrollTop=0;}
+}
+document.getElementById('closeHistory').onclick=()=>dialog.close();
+dialog.addEventListener('close',()=>{openWork=null;});
+dialog.addEventListener('click',e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}});
+function render(){
+  document.documentElement.lang=lang==='en'?'en':'zh-CN';
+  document.title=tr('Digital Playground · Crystal','Digital Playground · Crystal');
+  document.querySelector('meta[name="description"]').content=tr('Crystal 的数字游乐场：手势交互、生成艺术、小游戏和小工具，以及它们的迭代记录。','Crystal’s digital playground: gesture experiments, generative art, games, tools and their development histories.');
+  const nav=document.querySelectorAll('.top nav a');nav[0].textContent=tr('作品','Works');nav[1].textContent=tr('迭代','Process');
+  document.getElementById('language').textContent=lang==='en'?'中文':'EN';
+  document.getElementById('language').setAttribute('aria-label',tr('Switch to English','切换为中文'));
+  document.getElementById('theme').setAttribute('aria-label',tr('切换深浅色','Toggle light and dark theme'));
+  document.querySelector('.hero').setAttribute('aria-label',tr('介绍','Introduction'));
+  document.querySelector('.hero .kicker').textContent=tr('欢迎来到 Crystal · 数字游乐场','Welcome to Crystal’s digital playground');
+  document.querySelector('.intro').innerHTML=tr('近期我在尝试使用 AI 和代码做一些<b>有意思的东西</b>，比如手势视觉实验、小游戏，以及解决生活小问题或满足好奇心的网站。你可以打开作品试玩，也可以查看它们的<b>迭代过程</b>。','Lately I have been using AI and code to make <b>curious little things</b>: gesture experiments, games and websites for everyday problems and playful ideas. Try a project or explore <b>how it evolved</b>.');
+  document.getElementById('hint').textContent=tr('↖ 用鼠标或手指拨一拨','↖ Stir the dots with your mouse or finger');
+  document.querySelector('#works h2').innerHTML=tr('作品 <em>Works</em>','Works <em>Play & explore</em>');
+  document.querySelector('#works .head p').textContent=tr('体验手势类作品需要摄像头权限，画面仅在你的设备上处理。','Gesture projects require camera access; video is processed on your device.');
+  document.querySelector('#timeline h2').innerHTML=tr('迭代 <em>Process</em>','Process <em>In progress</em>');
+  document.querySelector('#timeline .head p').textContent=tr('点作品名查看记录。日期范围以短线表示；同日记录合并为一组，日期待确认的记录另列。','Select a project to read its history. Bars show date ranges; same-day records are grouped. Undated records are listed separately.');
+  fbox.setAttribute('aria-label',tr('筛选作品','Filter projects'));
+  grid.innerHTML='';fbox.innerHTML='';
+  W.forEach((w,i)=>{
+    const el=document.createElement('article');el.className='card'+(w.big?' big':'');el.dataset.cat=w.cat.join(' ');el.hidden=activeFilter!=='all'&&!w.cat.includes(activeFilter);
+    const href=w.external?w.play:enc(w.play),name=tr(w.zh,w.en);
+    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${tr('访问提示：若无法打开，请尝试切换网络或使用 VPN。','Access note: if the site does not load, try a different network or a VPN.')}" data-help="${tr('若无法打开，请尝试切换网络或使用 VPN。','If the site does not load, try a different network or a VPN.')}">ⓘ ${tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,EN_DESC[i]))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',' records')}</span></button></div></div>`;
+    el.querySelector('.history-button').onclick=()=>openHistory(w);
+    const note=el.querySelector('.access-note');if(note)note.onclick=()=>{const isOpen=note.classList.toggle('is-open');note.setAttribute('aria-expanded',isOpen);};
+    grid.appendChild(el);
+  });
+  CATS.forEach(([k,zh,en])=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',k===activeFilter);b.innerHTML=`${tr(zh,en)}<span>${k==='all'?W.length:W.filter(w=>w.cat.includes(k)).length}</span>`;b.onclick=()=>{activeFilter=k;render();};fbox.appendChild(b);});
+  document.querySelector('.stats').innerHTML=`<span><b id="sWorks">${W.length}</b> ${tr('个作品','projects')}</span><span><b id="sCommits">${W.reduce((n,w)=>n+w.n,0)}</b> ${tr('条迭代记录','history records')}</span><span><b id="sRange">2026.09.17 — ${tr('至今','present')}</b></span>`;
+  timeline();paintPosters();if(openWork)openHistory(openWork);
+}
+document.getElementById('language').onclick=()=>{lang=lang==='zh'?'en':'zh';try{localStorage.setItem('dp-language',lang);}catch(e){}render();};
+document.addEventListener('click',e=>{document.querySelectorAll('.access-note.is-open').forEach(n=>{if(n!==e.target){n.classList.remove('is-open');n.setAttribute('aria-expanded','false');}});});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.access-note').forEach(n=>{n.classList.remove('is-open');n.setAttribute('aria-expanded','false');});});
+const days=d=>new Date(d*1000);
+const fmt=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong',year:'numeric',month:'2-digit',day:'2-digit'}).format(d).replaceAll('-','.');
 
 /* ---------------- generated posters for works without a picture ---------------- */
 function rng(seed){ let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
@@ -332,7 +461,7 @@ const POSTERS = {
     const gr = g.createLinearGradient(0, my, 0, my + mh); gr.addColorStop(0, '#bb4a33'); gr.addColorStop(1, '#6e2519');
     g.fillStyle = gr; g.beginPath(); g.roundRect(mx, my, mw, mh, 22); g.fill();
     for (let i = 0; i < 14; i++){ g.fillStyle = i % 2 ? '#ffd25a' : '#7a4a1c'; g.beginPath(); g.arc(mx + 24 + i * (mw - 48) / 13, my + 16, 5, 0, 7); g.fill(); }
-    const words = ['校内', '饭堂', '烧味饭'], rw = (mw - 56) / 3;
+    const words = lang === 'en' ? ['Campus', 'Canteen', 'Roast'] : ['校内', '饭堂', '烧味饭'], rw = (mw - 56) / 3;
     g.fillStyle = '#24110d'; g.fillRect(mx + 18, my + 40, mw - 36, mh - 66);
     words.forEach((t, i) => {
       const x = mx + 24 + i * (rw + 4);
@@ -340,7 +469,7 @@ const POSTERS = {
       g.fillStyle = '#24110d'; g.font = `700 ${Math.round(w / 17)}px "Noto Sans SC",sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle';
       g.fillText(t, x + rw / 2, my + 46 + (mh - 78) / 2);
       g.fillStyle = 'rgba(36,17,13,.25)'; g.font = `${Math.round(w / 26)}px "Noto Sans SC",sans-serif`;
-      g.fillText(['校外', '咖啡', '叉烧'][i], x + rw / 2, my + 64); g.fillText(['校外', '面', '饺子'][i], x + rw / 2, my + mh - 50);
+      g.fillText((lang === 'en' ? ['Nearby','Coffee','Pork'] : ['校外', '咖啡', '叉烧'])[i], x + rw / 2, my + 64); g.fillText((lang === 'en' ? ['Nearby','Noodles','Dumplings'] : ['校外', '面', '饺子'])[i], x + rw / 2, my + mh - 50);
     });
     g.fillStyle = '#e8322a'; g.fillRect(mx + 18, my + 46 + (mh - 78) / 2 - 1, mw - 36, 2);
     g.fillStyle = '#e8322a'; g.beginPath(); g.arc(mx + mw + 22, my + 10, 14, 0, 7); g.fill();
@@ -385,7 +514,7 @@ const POSTERS = {
     g.fillStyle = '#fbf3e4'; g.fillRect(0, 0, w, h);
     const x0 = w * .1, y0 = h * .2, cw = w * .8 / 7, ch = h * .68 / 5;
     g.fillStyle = '#e8a23a'; g.fillRect(x0, h * .08, w * .8, h * .09);
-    g.fillStyle = '#fff'; g.font = `700 ${Math.round(h / 16)}px "Noto Sans SC",sans-serif`; g.textBaseline = 'middle'; g.fillText('十一月 · 毛孩子日历', x0 + 12, h * .125);
+    g.fillStyle = '#fff'; g.font = `700 ${Math.round(h / 16)}px "Noto Sans SC",sans-serif`; g.textBaseline = 'middle'; g.fillText(tr('十一月 · 毛孩子日历','November · Pet Calendar'), x0 + 12, h * .125);
     for (let r2 = 0; r2 < 5; r2++) for (let c = 0; c < 7; c++){
       const x = x0 + c * cw, y = y0 + r2 * ch;
       g.strokeStyle = 'rgba(80,50,20,.15)'; g.strokeRect(x, y, cw, ch);
@@ -408,43 +537,42 @@ let pt; addEventListener('resize', () => { clearTimeout(pt); pt = setTimeout(pai
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(paintPosters);
 paintPosters();
 
-/* ---------------- timeline ---------------- */
-function timeline(){
-  const box = document.getElementById('tl'), tip = document.getElementById('tip');
-  const rowsW = W.slice().sort((a, b) => (COMMITS.find(c => c[1].startsWith(a.key)) || [0])[0] - (COMMITS.find(c => c[1].startsWith(b.key)) || [0])[0]);
-  const t0 = COMMITS[0][0] - 86400 * 2, t1 = COMMITS[COMMITS.length - 1][0] + 86400 * 2;
-  const VW = 1100, L = 150, R = 20, RH = 26, T = 30, H = T + rowsW.length * RH + 10;
-  const X = t => L + (t - t0) / (t1 - t0) * (VW - L - R);
-  let s = `<svg viewBox="0 0 ${VW} ${H}" role="img" aria-label="作品迭代时间线">`;
-  s += '<g class="axis">';
-  for (let d = new Date(t0 * 1000); d.getTime() / 1000 < t1; d.setDate(d.getDate() + 1)){
-    if (d.getDate() !== 1 && d.getDate() !== 15) continue;
-    const x = X(d.getTime() / 1000);
-    s += `<line class="grid-line" x1="${x}" x2="${x}" y1="${T - 8}" y2="${H}"/><text x="${x + 4}" y="${T - 12}">${d.getMonth() + 1}/${d.getDate()}</text>`;
-  }
-  s += '</g>';
-  rowsW.forEach((w, i) => {
-    const y = T + i * RH + RH / 2;
-    const cs = COMMITS.filter(c => c[1].split(' · ')[0] === w.key);
-    const hist = `${GH}/commits/main/${enc('works/' + w.dir)}`;
-    s += `<a href="${hist}" target="_blank" rel="noopener"><text class="row-label" x="0" y="${y + 4}">${w.zh}</text></a>`;
-    if (cs.length > 1) s += `<line x1="${X(cs[0][0])}" x2="${X(cs[cs.length - 1][0])}" y1="${y}" y2="${y}" stroke="${w.color}" stroke-width="2" opacity=".45"/>`;
-    cs.forEach(c => { s += `<circle cx="${X(c[0])}" cy="${y}" r="5" fill="${w.color}" stroke="var(--surface)" stroke-width="1.5" data-t="${c[0]}" data-m="${c[1].replace(/"/g, '&quot;')}"/>`; });
-  });
-  s += '</svg>';
-  box.innerHTML = s;
-  box.addEventListener('pointermove', e => {
-    const c = e.target.closest('circle');
-    if (!c){ tip.style.opacity = 0; return; }
-    const d = new Date(+c.dataset.t * 1000);
-    tip.innerHTML = `<b>${fmt(d)} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}</b>${c.dataset.m.split(' · ').slice(1).join(' · ')}`;
-    tip.style.opacity = 1;
-    tip.style.left = Math.min(innerWidth - 300, e.clientX + 14) + 'px'; tip.style.top = (e.clientY + 14) + 'px';
-  });
-  box.addEventListener('pointerleave', () => tip.style.opacity = 0);
-  document.getElementById('tlNote').textContent = `从 ${fmt(days(COMMITS[0][0]))} 到 ${fmt(days(COMMITS[COMMITS.length - 1][0]))}，一共 ${COMMITS.length} 次提交。时间按香港时间显示。`;
+/* Curated ranges retain their precision; legacy timestamps keep their provenance. */
+function records(w){
+  const h=historyFor(w);
+  return h?h.entries.map(e=>({start:e[0],end:e[1]||e[0],label:dateLabel(e),title:pick(e[3]),version:e[2]})):legacy(w).map(c=>({start:fmt(days(c[0])).replaceAll('.','-'),end:fmt(days(c[0])).replaceAll('.','-'),label:fmt(days(c[0])),title:c[1].split(' · ').slice(1).join(' · '),version:tr('文件修改记录','File-modification record')}));
 }
-timeline();
+function timeline(){
+  const box=document.getElementById('tl'),tip=document.getElementById('tip');tip.style.opacity=0;
+  const all=W.flatMap(w=>records(w));const dated=all.filter(e=>e.start);
+  const stamp=d=>Date.parse(d+'T00:00:00+08:00');
+  const t0=Math.min(...dated.map(e=>stamp(e.start)))-2*86400000,t1=Math.max(...dated.map(e=>stamp(e.end)))+2*86400000;
+  const rows=W.slice().sort((a,b)=>Math.min(...records(a).filter(e=>e.start).map(e=>stamp(e.start)))-Math.min(...records(b).filter(e=>e.start).map(e=>stamp(e.start))));
+  const VW=1100,L=165,R=20,RH=30,T=32,H=T+rows.length*RH+10,X=t=>L+(t-t0)/(t1-t0)*(VW-L-R);
+  let svg=`<svg viewBox="0 0 ${VW} ${H}" role="img" aria-label="${tr('作品迭代时间线','Project history timeline')}"><g class="axis">`;
+  for(let d=new Date(t0+8*3600000);d.getTime()-8*3600000<t1;d.setUTCDate(d.getUTCDate()+1)){
+    if(d.getUTCDate()!==1&&d.getUTCDate()!==15)continue;
+    const x=X(d.getTime()-8*3600000);svg+=`<line class="grid-line" x1="${x}" x2="${x}" y1="${T-8}" y2="${H}"/><text x="${x+4}" y="${T-12}">${d.getUTCMonth()+1}/${d.getUTCDate()}</text>`;
+  }
+  svg+='</g>';
+  rows.forEach((w,i)=>{
+    const y=T+i*RH+RH/2,rs=records(w).filter(e=>e.start),groups=new Map();
+    rs.forEach(r=>{const key=r.start+'|'+r.end;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(r);});
+    svg+=`<a href="#history" data-work="${w.idx}" aria-label="${escapeHTML(tr('查看记录：','Read history: ')+tr(w.zh,w.en))}"><text class="row-label" x="0" y="${y+4}">${escapeHTML(tr(w.zh,w.en))}</text></a>`;
+    groups.forEach(group=>{const r=group[0],x=X(stamp(r.start)),end=X(stamp(r.end));const title=escapeHTML(r.label+' · '+group.map(z=>z.title+' ('+z.version+')').join(' / '));
+      if(end>x)svg+=`<line x1="${x}" x2="${end}" y1="${y}" y2="${y}" stroke="${w.color}" stroke-width="7" opacity=".35"><title>${title}</title></line>`;
+      svg+=`<a href="#history" data-work="${w.idx}"><circle cx="${end}" cy="${y}" r="${group.length>1?7:5}" fill="${w.color}" stroke="var(--surface)" stroke-width="1.5" tabindex="0" aria-label="${title}" data-label="${title}"><title>${title}</title></circle>${group.length>1?`<text x="${end}" y="${y+3}" text-anchor="middle" style="font:8px var(--mono);fill:var(--surface);pointer-events:none">${group.length}</text>`:''}</a>`;
+    });
+  });svg+='</svg>';
+  const mobile=`<div class="tl-mobile">${rows.map(w=>{const rs=records(w).filter(e=>e.start);const starts=rs.map(r=>r.start).sort(),ends=rs.map(r=>r.end).sort();return `<button class="timeline-list-row" data-work="${w.idx}" type="button"><span>${escapeHTML(tr(w.zh,w.en))}<small>${starts[0]} — ${ends.at(-1)}</small></span><b>${w.n} ${tr('条 ↗','records ↗')}</b></button>`;}).join('')}</div>`;
+  const unknown=W.filter(w=>records(w).some(e=>!e.start));
+  box.innerHTML=svg+mobile+`<div class="undated">${tr('日期待确认：','Date unconfirmed: ')}${unknown.map(w=>`<button type="button" data-work="${w.idx}">${escapeHTML(tr(w.zh,w.en))} · ${records(w).filter(e=>!e.start).length}</button>`).join('')}</div>`;
+  box.onclick=e=>{const target=e.target.closest('[data-work]');if(target){e.preventDefault();openHistory(W[Number(target.dataset.work)]);}};
+  box.onpointermove=e=>{const c=e.target.closest('circle');if(!c){tip.style.opacity=0;return;}tip.textContent=c.dataset.label;tip.style.opacity=1;const r=tip.getBoundingClientRect();tip.style.left=Math.max(8,Math.min(innerWidth-r.width-8,e.clientX+14))+'px';tip.style.top=Math.max(8,Math.min(innerHeight-r.height-8,e.clientY+14))+'px';};
+  box.onpointerleave=()=>tip.style.opacity=0;
+  document.getElementById('tlNote').textContent=tr('持续更新至今。已补充的五个项目按修改轮次整理；其余项目保留原文件记录，尚不等于独立功能版本。日期均按香港时间显示，日期待确认的记录不放入时间轴。','Ongoing. Five projects use curated change rounds; other projects retain legacy file records, which may not be separate feature versions. Dates use Hong Kong time. Undated records are excluded from the date axis.');
+}
+render();
 
 /* ---------------- hero: words made of dots that you can push around ---------------- */
 const cv = document.getElementById('field'), ctx = cv.getContext('2d');
@@ -526,3 +654,4 @@ addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 10),
 </script>
 </body>
 </html>
+

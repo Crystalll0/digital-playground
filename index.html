@@ -224,7 +224,7 @@ W.forEach((w, i) => {
   el.innerHTML = `
     <a class="poster" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''} aria-label="打开 ${w.zh}">
       ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
-      <span class="num">№${String(i + 1).padStart(2, '0')}</span>
+      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge" title="若无法打开，请尝试切换网络或使用 VPN。">部分地区访问受限</span>' : ''}
       
     </a>
     <div class="body">

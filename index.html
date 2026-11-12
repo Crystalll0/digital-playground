@@ -242,19 +242,19 @@ const PROJECT_HISTORY = {
     ]
   },
   '纸间 Paper Room': {
-    note:['v4、v5 为工作阶段名称，未核实为 Release 标签。日期范围来自提供的阶段记录，不推定各功能的具体上线日。概念探索、用户试用和课程提交为里程碑，不计功能迭代。','v4 and v5 are working-stage names, not verified release tags. Date ranges come from the supplied stage records and do not establish individual feature release dates. Concept research, user trials and coursework submission are milestones, not functional iterations.'],
+    note:['v4、v5 为工作阶段名称，未核实为 Release 标签。日期范围来自提供的阶段记录，不推定各功能的具体上线日。概念探索与用户试用另列为研究记录，不计功能迭代。','v4 and v5 are working-stage names, not verified release tags. Date ranges come from the supplied stage records and do not establish individual feature release dates. Concept research and user trials are listed separately and are not counted as functional iterations.'],
     source:'https://github.com/Crystalll0/PAPER-ROOM/blob/e98a7b3/PROCESS.md',
     entries:[
       ['2026-10-20','2026-10-23','初始原型 / Prototype → v4',['初始原型与纸艺操作','Initial prototype & paper tools'],['迭代折叠、裁剪后折痕、保存分类、回收站、胶水、翻面、吸附、三语、明暗主题与圆规裁剪；允许有效向外折叠。各功能具体完成日不确定。','Iterated folding, post-cut creases, saving/categories, trash, glue, flipping, snapping, three languages, themes and compass cuts. Allowed valid outward folds. Individual completion dates are unknown.']],
-      ['2026-10-24','2026-10-26','v5 · f869f3a / ada87aa / 5ac4e9d',['原型细化与提交材料','Prototype refinement & documentation'],['细化原型并整理源码、本地运行说明、英文 README、PROCESS、Credits 和截图；教学板块介绍基础操作，作品教程待后续。上述提交准确时间未独立核实。','Refined the prototype and prepared source, local setup, English README, PROCESS, credits and screenshots. Teaching covers basic controls; project tutorials remain future work. Exact commit times were not independently checked.']],
+      ['2026-10-24','2026-10-26','v5 · f869f3a / ada87aa / 5ac4e9d',['原型细化与开发文档','Prototype refinement & documentation'],['细化原型并整理源码、本地运行说明、英文 README、PROCESS、Credits 和截图；教学板块介绍基础操作，作品教程待后续。上述提交准确时间未独立核实。','Refined the prototype and prepared source, local setup, English README, PROCESS, credits and screenshots. Teaching covers basic controls; project tutorials remain future work. Exact commit times were not independently checked.']],
       ['2026-10-29',null,'a2abc15 → 3205fa0',['用户反馈改进轮','User-feedback improvements'],['欢迎页与七步实操教程：纸张、折叠确认、移动、裁剪、胶水、翻面、展开；可跳过／重看。新增纸旁确认、字号／辅助线／半透明设置、自由画线裁剪、单铰接纸面翻开及引导纸条结；后两项为有限原型。同轮初版及修订合并。','A welcome page and seven-step practice tour: paper, confirm folds, move, cut, glue, flip and unfold, with skip/replay. Added nearby confirmation, text/guide/transparency settings, freehand cuts, single-hinge unfolding and a guided strip knot; the last two are limited prototypes. Initial and revised implementations count once.']],
       ['2026-10-29',null,'c04b3fb',['语言入口修订','Language selector revision'],['欢迎页固定显示“选择语言 / 選擇語言 / Select Language”，便于识别切换入口。修改 dist/tour.js 和 dist/index.html，未改说明文档。','The welcome screen always displays 选择语言 / 選擇語言 / Select Language so the selector remains recognizable. Updated dist/tour.js and dist/index.html; documentation unchanged.']],
-      ['2026-10-29','2026-10-30','74d6a77 → 57d9a23 → e98a7b3',['折后裁剪与提交收尾','Folded-layer cutting & final delivery'],['剪穿重叠平折纸层，展开保留对称切口；验证两层／四层裁剪、碎片分离与面积保持。更新截图及英文文档、限制和检查记录；网络失败曾延迟同步，最终推送发布成功。功能、截图和文档合并一轮，实现完成于 10 月 30 日。','Cut through overlapping flat-folded layers and retain symmetric openings after unfolding. Checked two/four layers, fragments and area preservation. Updated screenshots, English docs, limitations and checks. Network failures delayed sync; final push/publication succeeded. Feature, screenshot and documentation work form one round, completed October 30.']]
+      ['2026-10-29','2026-10-30','74d6a77 → 57d9a23 → e98a7b3',['折后裁剪与体验完善','Folded-layer cutting & experience refinement'],['剪穿重叠平折纸层，展开保留对称切口；验证两层／四层裁剪、碎片分离与面积保持。更新截图及英文文档、限制和检查记录；网络失败曾延迟同步，最终推送发布成功。功能、截图和文档合并一轮，实现完成于 10 月 30 日。','Cut through overlapping flat-folded layers and retain symmetric openings after unfolding. Checked two/four layers, fragments and area preservation. Updated screenshots, English docs, limitations and checks. Network failures delayed sync; final push/publication succeeded. Feature, screenshot and documentation work form one round, completed October 30.']]
     ],
     milestones:[
       ['2026-10-15 — 2026-10-20',['概念探索：虚拟折纸、预览后确认、裁剪与碎片回收。','Concept research: virtual folding, preview before confirmation, cutting and fragment recycling.']],
       ['2026-10-27 — 2026-10-28',['四人试用：两位同学及约 50 岁、16 岁参与者；反馈涉及确认、显示大小、纸层对齐及高级折剪限制。','Four-user trial: two classmates and participants aged about 50 and 16; feedback on confirmation, display size, layer alignment and advanced folding/cutting limitations.']],
-      ['2026-10-30 20:20',['Canvas 显示 Submitted!，提交公开仓库链接；时区按聊天上下文记为香港时间。','Canvas showed Submitted! for the public repository link; Hong Kong time is based on the conversation context.']]
+
     ]
   }
 };
@@ -302,7 +302,13 @@ const W = [
 ];
 const escapeHTML = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let lang='zh';
+function requestedLanguage(){
+  const value=new URL(location.href).searchParams.get('lang');
+  return value==='en'?'en':(value==='cn'||value==='zh'?'zh':null);
+}
 try{lang=localStorage.getItem('dp-language')==='en'?'en':'zh';}catch(e){}
+lang=requestedLanguage()||lang;
+const initialLanguage=lang;
 const tr=(zh,en)=>lang==='en'?en:zh;
 const pick=pair=>pair[lang==='en'?1:0];
 const CATS=[['all','全部','All'],['gesture','手势交互','Gestures'],['art','生成艺术','Generative art'],['game','游戏','Games'],['tool','工具','Tools'],['web','网站','Websites']];
@@ -323,8 +329,13 @@ const EN_DESC=[
   'A calendar for your pets: keep track of meals, parasite prevention, vaccines and bath times.'
 ];
 const EN_TAGS={'AI 视频':'AI video','人像分割':'Segmentation','8 种风格':'8 styles','手势':'Gestures','粒子':'Particles','音景':'Soundscape','生成艺术':'Generative art','Perlin 噪声':'Perlin noise','录屏':'Recording','游戏':'Game','IP 设计':'Character design','拉霸机':'Slot machine','简 / 繁 / EN':'简 / 繁 / EN','菜单数据':'Menu data','网站':'Website','交互叙事':'Interactive narrative','定制工具':'Customizer','几何':'Geometry','教程':'Tutorials','中 / EN':'中文 / EN','离线':'Offline','照片 EXIF':'Photo EXIF','AI 换装':'AI styling','线上站':'Live site','计划':'Planning','日程':'Schedule','日历':'Calendar','本地保存':'Local storage'};
+const accessHelp=w=>w.key==='月隐 Moonveil'
+  ?tr('本作品使用 OpenAI 服务提供 AI 解读功能。若无法打开，请尝试切换网络或使用 VPN。','This project uses OpenAI services for AI interpretations. If it does not load, try a different network or a VPN.')
+  :w.key==='爪爪衣橱 Pawmoire'
+  ?tr('本作品使用 OpenAI 服务提供 AI 图像生成功能。若无法打开，请尝试切换网络或使用 VPN。','This project uses OpenAI services for AI image generation. If it does not load, try a different network or a VPN.')
+  :tr('本作品托管于 ChatGPT Sites，部分地区可能访问受限。若无法打开，请尝试切换网络或使用 VPN。','This project is hosted on ChatGPT Sites and access may be restricted in some regions. If it does not load, try a different network or a VPN.');
 const historyFor=w=>PROJECT_HISTORY[w.key];
-const legacy=w=>COMMITS.filter(c=>c[1].split(' · ')[0]===w.key);
+const legacy=w=>COMMITS.filter(c=>c[1].split(' · ')[0]===w.key&&!/Final-Submission-Checklist|final-2026-12-06/.test(c[1]));
 const count=w=>historyFor(w)?historyFor(w).entries.length:legacy(w).length;
 W.forEach((w,i)=>{w.idx=i;w.n=count(w);});
 let activeFilter='all',openWork=null;
@@ -373,7 +384,7 @@ function render(){
   W.forEach((w,i)=>{
     const el=document.createElement('article');el.className='card'+(w.big?' big':'');el.dataset.cat=w.cat.join(' ');el.hidden=activeFilter!=='all'&&!w.cat.includes(activeFilter);
     const href=w.external?w.play:enc(w.play),name=tr(w.zh,w.en);
-    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${tr('访问提示：若无法打开，请尝试切换网络或使用 VPN。','Access note: if the site does not load, try a different network or a VPN.')}" data-help="${tr('若无法打开，请尝试切换网络或使用 VPN。','If the site does not load, try a different network or a VPN.')}">ⓘ ${tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,EN_DESC[i]))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',' records')}</span></button></div></div>`;
+    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${escapeHTML(accessHelp(w))}" data-help="${escapeHTML(accessHelp(w))}">ⓘ ${tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,EN_DESC[i]))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',' records')}</span></button></div></div>`;
     el.querySelector('.history-button').onclick=()=>openHistory(w);
     const note=el.querySelector('.access-note');if(note)note.onclick=()=>{const isOpen=note.classList.toggle('is-open');note.setAttribute('aria-expanded',isOpen);};
     grid.appendChild(el);
@@ -382,7 +393,14 @@ function render(){
   document.querySelector('.stats').innerHTML=`<span><b id="sWorks">${W.length}</b> ${tr('个作品','projects')}</span><span><b id="sCommits">${W.reduce((n,w)=>n+w.n,0)}</b> ${tr('条迭代记录','history records')}</span><span><b id="sRange">2026.09.17 — ${tr('至今','present')}</b></span>`;
   timeline();paintPosters();if(openWork)openHistory(openWork);
 }
-document.getElementById('language').onclick=()=>{lang=lang==='zh'?'en':'zh';try{localStorage.setItem('dp-language',lang);}catch(e){}render();};
+document.getElementById('language').onclick=()=>{
+  lang=lang==='zh'?'en':'zh';
+  const url=new URL(location.href);url.searchParams.set('lang',lang==='en'?'en':'cn');
+  history.pushState(null,'',url);
+  try{localStorage.setItem('dp-language',lang);}catch(e){}
+  render();
+};
+addEventListener('popstate',()=>{lang=requestedLanguage()||initialLanguage;render();});
 document.addEventListener('click',e=>{document.querySelectorAll('.access-note.is-open').forEach(n=>{if(n!==e.target){n.classList.remove('is-open');n.setAttribute('aria-expanded','false');}});});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.access-note').forEach(n=>{n.classList.remove('is-open');n.setAttribute('aria-expanded','false');});});
 const days=d=>new Date(d*1000);
@@ -654,4 +672,5 @@ addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 10),
 </script>
 </body>
 </html>
+
 

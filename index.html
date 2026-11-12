@@ -222,17 +222,17 @@ W.forEach((w, i) => {
   const href = w.external ? w.play : enc(w.play);
   const hist = `${GH}/commits/main/${enc('works/' + w.dir)}`;
   el.innerHTML = `
-    <a class="poster" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''} aria-label="打开 ${w.zh}">
+    <a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="打开 ${w.zh}">
       ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
-      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge" title="若无法打开，请尝试切换网络或使用 VPN。">部分地区访问受限</span>' : ''}
+      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge" title="若无法打开，请尝试切换网络或使用 VPN。">ⓘ 部分地区可能访问受限</span>' : ''}
       
     </a>
     <div class="body">
       <div class="title"><h3>${w.zh}</h3><small>${w.en}</small></div>
       <p class="desc">${w.desc}</p>
-      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>${w.external ? '<p style="margin:0;font-size:12px;line-height:1.6;color:color-mix(in srgb,#739de0 70%,var(--ink));background:color-mix(in srgb,#739de0 10%,transparent);padding:6px 9px;border-radius:8px">ⓘ 若无法打开，请尝试切换网络或使用 VPN。</p>' : ''}
       <div class="links">
-        <a class="btn primary" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''}>${w.external ? '打开线上版 ↗' : '打开试玩 →'}</a>
+        <a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external ? '打开线上版 ↗' : '打开试玩 →'}</a>
         <a class="btn" href="${hist}" target="_blank" rel="noopener">迭代过程 <span class="v">${w.n} 次</span></a>
       </div>
     </div>`;

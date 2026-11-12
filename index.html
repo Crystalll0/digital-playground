@@ -143,6 +143,31 @@ body:has(dialog[open]){overflow:hidden}
 .reflection{position:relative;margin:0 0 14px 13px;padding:15px 18px;border-left:2px dashed color-mix(in srgb,var(--project-color) 70%,var(--line));background:color-mix(in srgb,var(--chip) 35%,var(--surface));border-radius:0 12px 12px 0}.reflection::before{content:'';position:absolute;left:-6px;top:19px;width:7px;height:7px;border:1.5px solid var(--project-color);border-radius:50%;background:var(--surface)}
 .reflection-label{font:500 11px/1.7 var(--sans);color:var(--muted)}.reflection p{margin:10px 0 0;font:13px/1.9 var(--sans)}.reflection b{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-bottom:3px}.history-entry{scroll-margin-top:18px}
 @media(max-width:640px){.tl.process-view svg{display:none}.process-mobile{display:block}.process-project{padding:14px 0;border-bottom:1px solid var(--line)}.process-name{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0;border:0;background:none;color:var(--ink);font:500 14px var(--sans);cursor:pointer;text-align:left}.process-name small{font:11px var(--mono);color:var(--muted)}.stage-track{display:flex;gap:0;overflow-x:auto;padding:16px 0 8px;scroll-snap-type:x proximity}.stage-step,.stage-future{position:relative;display:flex;flex-direction:column;align-items:center;width:100px;min-width:100px;padding:0 7px;border:0;background:none;color:var(--muted);font:11px/1.7 var(--sans);text-align:center;scroll-snap-align:start}.stage-step{cursor:pointer}.stage-step b{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--project-color);color:#16140f;font:11px var(--mono);margin-bottom:8px}.stage-step::after{content:'';position:absolute;top:10px;left:50%;width:100%;height:2px;background:var(--project-color);opacity:.5}.stage-step:nth-last-child(2)::after{height:0;border-top:2px dashed var(--project-color);background:none}.stage-future b{width:14px;height:14px;margin:4px 0 12px;border:1.5px solid var(--project-color);border-radius:50%;background:var(--surface);z-index:1}.reflection{margin-left:8px;padding:14px}}
+
+.site-preview{position:absolute;inset:0;background:#f6ead7;overflow:hidden;pointer-events:none}.site-preview iframe{display:block;width:1200px;height:750px;border:0;transform:scale(.4);transform-origin:0 0;pointer-events:none}
+.card{position:relative;isolation:isolate;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.poster::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,50%),#fff2,transparent 62%);opacity:0;transition:opacity .3s;z-index:1}
+.poster .num{z-index:2}.poster .badge{z-index:2}
+.btn,.filters button,.icon-btn,.process-toolbar button,.process-name,.stage-step,.timeline-list-row,.undated button{transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s,border-radius .2s}
+.btn:active,.filters button:active,.icon-btn:active,.process-toolbar button:active,.stage-step:active{transform:scale(.95)}
+.btn:focus-visible,.filters button:focus-visible,.icon-btn:focus-visible{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 13%,transparent)}
+.card:focus-within{border-color:color-mix(in srgb,var(--work-accent) 65%,var(--line))}
+.tl circle{transition:filter .2s,r .2s,stroke-width .2s}.tl a:hover circle,.tl a:focus-visible circle{filter:drop-shadow(0 0 5px var(--accent));stroke-width:2.5}
+.stage-step b{transition:transform .2s,box-shadow .2s}.stage-step:focus-visible b{box-shadow:0 0 0 5px color-mix(in srgb,var(--project-color) 25%,transparent)}
+.tap-spark{position:fixed;z-index:1000;width:4px;height:4px;border-radius:50%;background:var(--accent);pointer-events:none;animation:tap-spark .45s ease-out forwards}
+@keyframes tap-spark{from{opacity:.7;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.25)}}
+@media(hover:hover) and (pointer:fine){
+  .card:hover{transform:perspective(1100px) translateY(-4px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));border-color:color-mix(in srgb,var(--work-accent) 55%,var(--line));box-shadow:0 18px 40px -22px color-mix(in srgb,var(--work-accent) 45%,#0005)}
+  .card:hover .poster::after{opacity:1}.card:hover .poster img{filter:saturate(1.08)}
+  .btn:not(.primary):hover{background:var(--chip);border-color:color-mix(in srgb,var(--work-accent,var(--accent)) 70%,var(--line));border-radius:14px;transform:translateY(-2px)}
+  .btn.primary:hover{box-shadow:0 5px 16px color-mix(in srgb,var(--accent) 22%,transparent);transform:translateY(-2px)}
+  .filters button:hover{border-color:var(--accent);transform:translateY(-2px)}.filters button:not([aria-pressed="true"]):hover{background:var(--chip)}
+  .icon-btn:hover,.process-toolbar button:hover{color:var(--accent)}
+  .tags span{transition:color .2s,background .2s,transform .2s}.tags span:hover{background:color-mix(in srgb,var(--work-accent) 20%,var(--chip));color:var(--ink);transform:rotate(-2deg)}
+  .stage-step:hover b{transform:translateY(-3px);box-shadow:0 4px 12px color-mix(in srgb,var(--project-color) 35%,transparent)}
+  .process-name:hover,.timeline-list-row:hover,.undated button:hover{color:var(--accent)}
+}
+@media(prefers-reduced-motion:reduce){.card:hover,.btn:hover,.btn:active,.filters button:hover,.filters button:active,.icon-btn:active,.stage-step b,.tags span:hover{transform:none!important}.tap-spark{display:none}.poster::after{display:none}}
 </style>
 </head>
 <body>
@@ -292,7 +317,7 @@ const W = [
    desc:'试试随心点一下、拖一下，看看线条会如何流动…… ', tags:['生成艺术','Perlin 噪声','录屏']},
   {key:'薯饼接接乐 Hash Brown Catch', zh:'薯饼接接乐', en:'Hash Brown Catch', big:true, cat:['game'], dir:'06｜薯饼接接乐 · Hash Brown Catch', play:'play/hash-brown-catch/', img:'assets/covers/hash-brown.jpg', color:'#f5a623',
    desc:'8-bit 早餐小游戏！尝试滑动炸篮接住掉下来的薯饼，这可没那么简单哦。更多彩蛋惊喜，等你来解锁……', tags:['p5.js','游戏','IP 设计']},
-  {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', color:'#ffd25a',
+  {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', livePreview:true, color:'#ffd25a',
    desc:'不知道吃什么？拉一下拉杆，亦可使用快速筛选工具！想要了解食物选择，价格、地点、营业时间？打开立即查看理大校内和周边的一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
   {key:'月隐 Moonveil', zh:'月隐', en:'Moonveil', big:true, cat:['web'], dir:'01｜月隐 · MOONVEIL ｜占卜', play:'https://moonveil.yueruchen.online/', external:true, img:'assets/covers/moonveil.jpg', color:'#9b7cff',
    desc:'一间夜色里的灵感占卜室：水晶球、月光和一点点仪式感。', tags:['网站','交互叙事']},
@@ -391,9 +416,9 @@ function render(){
   fbox.setAttribute('aria-label',tr('筛选作品','Filter projects'));
   grid.innerHTML='';fbox.innerHTML='';
   W.forEach((w,i)=>{
-    const el=document.createElement('article');el.className='card'+(w.big?' big':'');el.dataset.cat=w.cat.join(' ');el.hidden=activeFilter!=='all'&&!w.cat.includes(activeFilter);
+    const el=document.createElement('article');el.className='card'+(w.big?' big':'');el.dataset.cat=w.cat.join(' ');el.style.setProperty('--work-accent',w.color);el.hidden=activeFilter!=='all'&&!w.cat.includes(activeFilter);
     const href=w.external?w.play:enc(w.play),name=tr(w.zh,w.en);
-    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${escapeHTML(accessHelp(w))}" data-help="${escapeHTML(accessHelp(w))}">ⓘ ${tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,EN_DESC[i]))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',' records')}</span></button></div></div>`;
+    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.livePreview?`<div class="site-preview"><iframe src="${href}" title="${escapeHTML(name)}" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" data-live-preview></iframe></div>`:w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${escapeHTML(accessHelp(w))}" data-help="${escapeHTML(accessHelp(w))}">ⓘ ${tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,EN_DESC[i]))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',w.n===1?' record':' records')}</span></button></div></div>`;
     el.querySelector('.history-button').onclick=()=>openHistory(w);
     const note=el.querySelector('.access-note');if(note)note.onclick=()=>{const isOpen=note.classList.toggle('is-open');note.setAttribute('aria-expanded',isOpen);};
     grid.appendChild(el);
@@ -552,6 +577,10 @@ const POSTERS = {
   },
 };
 function paintPosters(){
+  document.querySelectorAll('iframe[data-live-preview]').forEach(frame=>{
+    const width=frame.parentElement.getBoundingClientRect().width;
+    if(width)frame.style.transform=`scale(${width/1200})`;
+  });
   document.querySelectorAll('canvas[data-poster]').forEach(c => {
     const b = c.getBoundingClientRect(); if (!b.width) return;
     const d = Math.min(2, devicePixelRatio || 1);
@@ -643,6 +672,32 @@ function reflectionHTML(w,index){
 
 render();
 
+
+/* Delegated feedback survives filtering and language switches. */
+let tiltCard=null,tiltFrame=0;
+if(!reduce&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.addEventListener('pointermove',e=>{
+    const card=e.target.closest('.card');
+    if(tiltCard&&tiltCard!==card){tiltCard.style.removeProperty('--tilt-x');tiltCard.style.removeProperty('--tilt-y');}
+    tiltCard=card;if(!card)return;
+    const x=e.clientX,y=e.clientY;cancelAnimationFrame(tiltFrame);
+    tiltFrame=requestAnimationFrame(()=>{
+      if(tiltCard!==card)return;const r=card.getBoundingClientRect(),px=(x-r.left)/r.width-.5,py=(y-r.top)/r.height-.5;
+      card.style.setProperty('--tilt-x',`${-py*3}deg`);card.style.setProperty('--tilt-y',`${px*3}deg`);
+      card.style.setProperty('--light-x',`${(px+.5)*100}%`);card.style.setProperty('--light-y',`${(py+.5)*100}%`);
+    });
+  },{passive:true});
+  document.addEventListener('pointerleave',()=>{if(tiltCard){tiltCard.style.removeProperty('--tilt-x');tiltCard.style.removeProperty('--tilt-y');tiltCard=null;}});
+}
+document.addEventListener('click',e=>{
+  if(reduce||!e.target.closest('a,button'))return;
+  const target=e.target.closest('a,button'),r=target.getBoundingClientRect();
+  const x=e.detail?e.clientX:r.left+r.width/2,y=e.detail?e.clientY:r.top+r.height/2;
+  for(let i=0;i<6;i++){
+    const dot=document.createElement('span'),a=i*Math.PI/3;dot.className='tap-spark';dot.setAttribute('aria-hidden','true');dot.style.left=x+'px';dot.style.top=y+'px';dot.style.setProperty('--dx',`${Math.cos(a)*22}px`);dot.style.setProperty('--dy',`${Math.sin(a)*22}px`);document.body.appendChild(dot);setTimeout(()=>dot.remove(),500);
+  }
+});
+
 /* ---------------- hero: words made of dots that you can push around ---------------- */
 const cv = document.getElementById('field'), ctx = cv.getContext('2d');
 let P = [], Wd = 0, Hd = 0, DPR = 1, mx = -9999, my = -9999, active = false;
@@ -723,6 +778,7 @@ addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 10),
 </script>
 </body>
 </html>
+
 
 
 

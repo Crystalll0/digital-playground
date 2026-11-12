@@ -225,7 +225,7 @@ W.forEach((w, i) => {
     <a class="poster" href="${href}" ${w.external ? 'target="_blank" rel="noopener"' : ''} aria-label="打开 ${w.zh}">
       ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
       <span class="num">№${String(i + 1).padStart(2, '0')}</span>
-      ${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}
+      
     </a>
     <div class="body">
       <div class="title"><h3>${w.zh}</h3><small>${w.en}</small></div>

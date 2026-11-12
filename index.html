@@ -117,7 +117,7 @@ footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom,0px));border-top:1p
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:13px var(--mono);color:var(--muted)}
 footer a{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
-</style>
+.poster .access-note{z-index:3;cursor:help}.access-note::after{content:attr(data-help);display:none;position:absolute;right:0;top:calc(100% + 8px);width:min(270px,65vw);box-sizing:border-box;padding:12px 14px;border:1px solid #88a9dd;border-radius:10px;background:#17243c;color:#fff;font:500 13px/1.7 var(--sans);white-space:normal;text-align:left;box-shadow:0 8px 28px #0006;pointer-events:none}.access-note:hover::after,.access-note:focus-visible::after,.access-note.is-open::after{display:block}.access-note:focus-visible{outline:2px solid #a9c8ff;outline-offset:3px}</style>
 </head>
 <body>
 <header class="top" id="top">
@@ -224,13 +224,13 @@ W.forEach((w, i) => {
   el.innerHTML = `
     <a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="打开 ${w.zh}">
       ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : `<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}
-      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge" title="若无法打开，请尝试切换网络或使用 VPN。">ⓘ 部分地区可能访问受限</span>' : ''}
+      <span class="num">№${String(i + 1).padStart(2, '0')}</span>${w.cat.includes('gesture') ? '<span class="badge">✋ 需要摄像头</span>' : ''}${w.external ? '<span class="badge access-note" role="button" tabindex="0" aria-label="访问提示：若无法打开，请尝试切换网络或使用 VPN。" data-help="若无法打开，请尝试切换网络或使用 VPN。" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle(&quot;is-open&quot;)" onkeydown="if(event.keyCode===13||event.keyCode===32){event.preventDefault();event.stopPropagation();this.classList.toggle(&quot;is-open&quot;)}if(event.keyCode===27)this.classList.remove(&quot;is-open&quot;)">ⓘ 部分地区可能访问受限</span>' : ''}
       
     </a>
     <div class="body">
       <div class="title"><h3>${w.zh}</h3><small>${w.en}</small></div>
       <p class="desc">${w.desc}</p>
-      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>${w.external ? '<p style="margin:0;font-size:12px;line-height:1.6;color:color-mix(in srgb,#739de0 70%,var(--ink));background:color-mix(in srgb,#739de0 10%,transparent);padding:6px 9px;border-radius:8px">ⓘ 若无法打开，请尝试切换网络或使用 VPN。</p>' : ''}
+      <div class="tags">${w.tags.map(t => `<span>${t}</span>`).join('')}</div>
       <div class="links">
         <a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external ? '打开线上版 ↗' : '打开试玩 →'}</a>
         <a class="btn" href="${hist}" target="_blank" rel="noopener">迭代过程 <span class="v">${w.n} 次</span></a>
@@ -257,7 +257,7 @@ const days = d => new Date(d * 1000);
 const fmt = d => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 document.getElementById('sWorks').textContent = W.length;
 document.getElementById('sCommits').textContent = COMMITS.length;
-document.getElementById('sRange').textContent = `${fmt(days(COMMITS[0][0]))} — ${fmt(days(COMMITS[COMMITS.length - 1][0]))}`;
+document.getElementById('sRange').textContent = `${fmt(days(COMMITS[0][0]))} — 至今`;
 
 /* ---------------- generated posters for works without a picture ---------------- */
 function rng(seed){ let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }

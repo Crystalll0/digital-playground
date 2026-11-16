@@ -252,6 +252,20 @@ Added competitive rooms with a randomly sealed puzzle, revealed with a shared ti
 
 Added deferred human-host selection, initial DM capacity, and volunteer join/leave controls. At least one DM is required to start, and questions pause if none remain. Capacity changes use anonymous timed ballots and cannot remove occupied slots. Former DMs remain informed spectators and cannot ask or verify. Only the first answer is accepted. Fixed simultaneous cooperative/competitive selection.
 
+### 体验复盘 · 试用记录
+
+观察与反馈：先完成的玩家需要反馈和后续去向，完整榜单也应等其他玩家结束；个人档案还缺少问答复盘和暂停后继续游玩的入口。
+
+下一轮方向：补齐个人完成提示、最终榜单和可回看的对抗记录，并将暂停进度保存为独立私人存档。
+
+## 2026-11-16 · v1.13 · 排行榜与存档 / Leaderboards and checkpoints
+
+**新增对抗排行榜、游玩记录与进度存档**
+
+核验成功后显示完成顺序，其他玩家可继续；全员成功或弃权后展示最终排行榜。支持按用时或提问次数排序，记录提示次数及无提示标签。成功后可换汤、复盘或退出，稍后从对抗记录联网查看结果。档案新增游玩记录、对抗记录和存档，支持删除；存档保留进度并可继续为单人或合作新房间，删除私人存档不影响共享原房间。
+
+Show completion order after verification while others continue; finalize standings when everyone solves or withdraws. Sort by time or question count and show hint use. Finished players can leave, review or play another puzzle, then refresh results from competitive records. Added deletable play records, competitive history and private checkpoints, resumable into new solo or cooperative rooms without changing the original shared room.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

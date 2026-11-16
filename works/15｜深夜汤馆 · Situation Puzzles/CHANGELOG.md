@@ -1,6 +1,6 @@
 # Development history / 迭代历史
 
-Dates use Hong Kong time. Initial work is grouped by actual change round rather than every deployment or configuration action.
+Dates use Hong Kong time. 复盘记录问题与调整方向，版本说明记录实际改动。
 
 ## 2026-11-16 · v1 · 首次制作 / Initial build
 
@@ -10,21 +10,63 @@ Dates use Hong Kong time. Initial work is grouped by actual change round rather 
 
 Built a dark-green and warm-gold soup-house interface, with 36 deduplicated reference stories and one original practice puzzle. Added search and filters, solo and room-code multiplayer, AI or human hosting, four answer types, shared question limits, history and a clue board. Personal notes, writing/import tools and private/room/public puzzle scopes are included. Authorization, solution secrecy and concurrent quotas were checked.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+试用后发现，“来一碗想不通的汤”读起来不自然。
+
+The original soup metaphor felt unnatural during use.
+
+**下一轮方向 / Direction for the next stage**
+
+让首页邀请更简洁，保留深夜讲故事的氛围。
+
+Make the invitation simpler while keeping the late-night storytelling mood.
+
 ## 2026-11-16 · v1.1 · 首页文案 / Homepage copy
 
 **故事才刚开始 / The story is just beginning**
 
-根据作者认为“来一碗想不通的汤”不自然的试用反馈，将首页标题改为“夜深了，故事才刚开始。”，介绍同步改为“有些故事，只讲了一半。独自推敲，或与朋友一起，拼回真相。”，并发布到原站点。
+将首页标题改为“夜深了，故事才刚开始。”，同步精简介绍文案。
 
-Following the author's feedback that the original soup metaphor sounded unnatural, revised the headline to “夜深了，故事才刚开始。” and simplified the supporting invitation to piece together the truth alone or with friends. Published the copy update to the existing site.
+Changed the homepage headline to “夜深了，故事才刚开始。” and shortened the introduction.
+
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+只问了题型和少量事实，右侧就显示了完整汤底，推理过程被打断。
+
+The clue board revealed the full solution after only a few basic questions, interrupting the mystery.
+
+**下一轮方向 / Direction for the next stage**
+
+限制线索来源，避免提前透露尚未问出的信息。
+
+Restrict clue sources so unasked details stay hidden.
 
 ## 2026-11-16 · v1.2 · 线索防剧透 / Spoiler-safe clues
 
 **线索只引用玩家提问 / Clues quote player questions**
 
-修复初期提问就出现完整答案的问题：AI不再生成线索摘要，线索板只引用玩家已提出且得到肯定回答的问题；旧记录也经过同样过滤，题型问题不收集为线索。
+线索板改为引用玩家已提出且获肯定的问题；同步过滤旧记录，排除题型类提问。
 
-Fixed premature solution disclosure: AI no longer writes clue summaries. The clue board quotes only player questions confirmed as true, filters legacy records, and excludes puzzle-type questions.
+Changed the clue board to quote confirmed player questions, applied the same filter to older records, and excluded puzzle-type questions.
+
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+次数用完后仍想继续猜；还原完整故事时，只回答“是”缺少完成感。选下一道题也需要离开当前页面。
+
+Reaching the limit did not mean wanting to stop; a plain yes lacked closure after reconstructing the story. Choosing another puzzle also meant leaving the room view.
+
+**下一轮方向 / Direction for the next stage**
+
+让继续推理、确认猜对和进入下一局衔接得更顺畅。
+
+Make continuing, recognizing a solution and starting another round flow smoothly.
 
 ## 2026-11-16 · v1.3 · 揭晓与下一碗 / Reveals and next puzzles
 
@@ -34,69 +76,49 @@ Fixed premature solution disclosure: AI no longer writes clue summaries. The clu
 
 Added optional reveals at 15 questions or the configured limit, with continued questioning and negative remaining counts; unlimited stays unlimited. Semantic completion around 95% prompts an optional reveal; 99% or a complete reconstruction gives “完全正确！” and opens the solution. Human hosts can make the same judgments. Added in-room random selection, search and difficulty filtering, controlled by the multiplayer host. Removed the in-game content notice.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+普通提问和完整故事共用入口，不容易区分；次数快用完时，也缺少整理推理的引导。
+
+Ordinary questions and complete reconstructions shared one input mode, with little guidance near the limit.
+
+**下一轮方向 / Direction for the next stage**
+
+增加主动核验的入口，并在合适的时机提醒整理完整故事。
+
+Provide a clear verification entry and timely prompts to assemble the whole story.
+
 ## 2026-11-16 · v1.4 · 主动核验 / Story verification
 
-根据作者试用反馈，在提问区加入“核验故事”，可输入或口述完整推理，按语义而非原文核对；通过后揭晓，未通过则鼓励继续推理而不泄露汤底。剩余3次时提示立即核验或再猜猜，15问及次数用完的提醒也加入核验入口。
+**讲出故事，核验推理 / Tell the story, check the reasoning**
 
-Following author tryouts, added a dedicated story-verification mode for typed or spoken reconstructions. Semantic agreement passes; incomplete attempts receive encouragement without solution hints. Added a three-questions-left prompt and verification access from the 15-question and limit reminders.
+提问区新增“核验故事”，支持文字和语音输入，按语义判断完整推理。通过后揭晓，未通过可继续猜。剩余3次、满15问及次数用完时提供核验入口。
 
-## 体验复盘 · 作者试用 / Experience reviews · Author tryouts
+Added “核验故事” for typed or spoken reconstructions, checked by meaning. Passing reveals the solution; failed attempts can continue. Verification is also available at three remaining questions, 15 questions and the limit.
 
-### 首页文案 · 体验复盘 / Author tryout
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
 
-**观察与反馈 / Observation & feedback:** 作者试用后觉得“来一碗想不通的汤”读起来奇怪，汤馆主题与中文表达需要更自然地衔接。
+**观察与反馈 / Observation & feedback**
 
-The author found the original headline awkward and wanted more natural Chinese wording.
+挑选下一道题时，无法直接分辨哪些已经玩过、知道了汤底。
 
-**提出的调整及对应迭代 / Proposed change and iteration:** 保留深夜氛围，提出改用“故事才刚开始”；下一版据此调整标题及介绍。
+It was hard to distinguish new stories from those whose solutions were already known.
 
-Keep the late-night mood and revise the invitation to “the story is just beginning”; the next stage updates the copy.
+**下一轮方向 / Direction for the next stage**
 
-### 线索防剧透 · 体验复盘 / Author tryout
+保留可管理的游玩标记，让选题和重新挑战更方便。
 
-**观察与反馈 / Observation & feedback:** 作者仅询问题型和少量事实，就发现右侧线索板提前显示完整汤底，直接破坏了推理体验。
-
-During a tryout, the author saw the clue board reveal the full solution after only a few basic questions.
-
-**提出的调整及对应迭代 / Proposed change and iteration:** 作者要求避免提前剧透；下一版取消AI线索摘要，只引用玩家已提出并获肯定的内容，同时过滤旧记录。
-
-The author requested spoiler prevention; the next stage removes generated summaries and quotes only confirmed player questions, including legacy records.
-
-### 揭晓与下一碗 · 体验复盘 / Author tryout
-
-**观察与反馈 / Observation & feedback:** 作者提出次数达到上限后仍想继续推理；接近或已猜对完整故事时，仅回答“是”缺少完成反馈，也不方便在本页继续挑选下一道汤。
-
-The author wanted to keep guessing past the limit, receive completion feedback for reconstructed stories, and choose the next puzzle in the room.
-
-**提出的调整及对应迭代 / Proposed change and iteration:** 依建议加入继续猜与负数计次、接近真相提示、完整猜对揭晓，以及随机换汤和搜索筛选入口。
-
-Add optional overtime, near-solution prompts, correct-story reveals, and in-room random selection and search.
-
-### 主动核验 · 体验复盘 / Author tryout
-
-**观察与反馈 / Observation & feedback:** 作者试用后提出，应有独立入口提交完整故事核验；“我猜出来了 · 核验故事”过长，次数快用完时也需要更清晰的引导。
-
-The author requested a dedicated full-story check, a shorter button label, and clearer guidance near the question limit.
-
-**提出的调整及对应迭代 / Proposed change and iteration:** 将按钮简化为“核验故事”，支持文字或语音；剩3次、满15问或超限时提供核验入口，未通过可继续猜且不泄露答案。
-
-Use “核验故事”, support text or voice, and offer verification at three remaining questions, 15 questions or the limit, without revealing answers on failed attempts.
+Keep manageable played markers to support choosing new stories and replaying old ones.
 
 ## 2026-11-16 · v1.5 · 品汤档案 / Played puzzle archive
 
-根据作者提出的复玩辨识需求，实际查看汤底后显示“已玩过”标签，加入“我的档案”，支持逐题或全部清除标记。记录只保存在当前浏览器，不保存汤底，不跨设备同步。
+**记住喝过的汤 / Remember the stories you played**
 
-Following the author’s replay-identification request, mark a puzzle as played after its solution is viewed. Added a personal archive with per-puzzle and full reset controls. Records remain in the current browser without solution text or cross-device synchronization.
+新增“已玩过”标签和“我的档案”，支持逐题或全部清除标记。记录仅保存在当前浏览器，不保存汤底。
 
-**体验复盘 · 作者试用 / Author tryout**
-
-观察与反馈：作者提出，玩过且已经知道汤底的题目需要明显标记，方便挑选新故事；同时希望能够自行去掉标记。
-
-The author requested visible labels for stories whose solutions are already known, with a way to clear those labels.
-
-提出的调整及对应迭代：下一版加入“已玩过”标签和“我的档案”，只在实际看过汤底后记录，提供逐题及全部清除，并明确浏览器本地保存范围。
-
-Add played labels and a personal archive after actual solution viewing, with individual/full resets and clear browser-local storage wording.
+Added played labels and a personal archive with individual and full reset controls. Records stay in the current browser without solution text.
 
 ## Related milestones / 相关里程碑
 
@@ -107,9 +129,3 @@ Add played labels and a personal archive after actual solution viewing, with ind
 - **2026-11-16** — 添加 mystery.yueruchen.online 自定义域名并配置DNS；接入作品集时HTTPS已激活，平台仍在完成域名路由发布。
 
   Added mystery.yueruchen.online and configured DNS. HTTPS was active at portfolio integration, while the platform was completing domain routing.
-
-## Recorded author feedback / 作者反馈
-
-“来一碗想不通的汤”被作者认为不自然，因此改为“夜深了，故事才刚开始。”。此反馈来自实际对话，不代表外部用户研究。
-
-The author found the original headline unnatural. The revised wording preserves the late-night mood while inviting players into a story; no external user study is claimed.

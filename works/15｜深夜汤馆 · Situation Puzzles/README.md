@@ -1,0 +1,37 @@
+# 深夜汤馆 · Situation Puzzles
+
+夜深了，故事才刚开始。  
+A late-night lateral thinking mystery game, designed by Crystal Chen.
+
+**Live site / 在线入口:** [mystery.yueruchen.online](https://mystery.yueruchen.online/)  
+**Platform URL / 平台入口:** [Situation Puzzles](https://situation-puzzles-crystal.wry-toast-5992.chatgpt.site/)
+
+> Current access: owner-private preview. An authorized ChatGPT account is required; entering a room code does not grant access to the site. 当前为作者私有预览，房间码不等于网站访问权限。
+
+## Experience / 玩法
+
+- Play solo or join the same room using a custom or random numeric room code.
+- Choose an AI host or a human host. The host answers only 是 / 不是 / 是与不是 / 无关.
+- Review shared questions and confirmed clues; keep unconfirmed thoughts in a private browser-local notebook.
+- Change the shared question limit during play, including unlimited.
+- Search and filter 36 deduplicated reference stories plus one original practice puzzle.
+- Write puzzles manually, save drafts, import structured TXT/JSON or paste text. Optional AI generation and revision require server-side API access.
+- Choose private, designated-room or public puzzle visibility. Players do not receive the solution until reveal; human hosts and authors can know it in advance.
+
+单人或房间码多人共同解谜；可选择 AI 店主或由房主担任真人 DM。共享提问记录、确认线索与次数，个人猜想留在私有便签。支持题库搜索筛选、上传、在线创作及三种可见范围。
+
+## Verification / 验证情况
+
+Room authorization, solution secrecy, host-only settings, human answers, clues, scope changes, duplicate imports and concurrent question limits were checked. Browser checks covered room creation, example questions and editing controls. Live API tests confirmed yes/no answers, clue collection and question counting.
+
+Voice transcription and AI-assisted puzzle writing are implemented but have **not yet completed live testing**. Room synchronization polls approximately every three seconds. No fixed player cap is imposed in the application, but this is not an unlimited-capacity or load-tested service.
+
+语音识别与 AI 写汤尚未完成实测；多人同步约每三秒刷新。程序没有固定人数上限，但实际容量仍受托管资源及 API 限制影响。
+
+## This portfolio archive / 作品集归档范围
+
+This folder documents the live project and its development. GitHub Pages hosts the portfolio; the game backend and private puzzle records remain on the live service. No API keys, private user data or puzzle solutions are included here.
+
+本目录收录介绍与迭代记录，游戏仍在在线服务运行；不把密钥、私人题库或汤底放进公开作品集。
+
+See [CHANGELOG.md](CHANGELOG.md) for dated development records. All dates use Hong Kong time.

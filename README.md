@@ -32,8 +32,11 @@ Crystal 的数字游乐场，收录手势交互、生成艺术、小游戏和小
 | 12 | 爪爪衣橱 Pawmoire | 网站（需要服务器，线上版另有地址） | `works/05｜爪爪衣橱· Pawmoire｜宠物换装/` |
 | 13 | 序章 Index | 工具 | `works/03｜序章 · Index ｜日程&计划/` |
 | 14 | 毛孩子日历 Pet Calendar | 工具 | `play/pet-calendar/` |
+| 15 | 深夜汤馆 Situation Puzzles | 游戏 · AI · 多人解谜 | [在线预览（需授权）](https://mystery.yueruchen.online/) |
 
 ## 说明
+
+- 深夜汤馆的游戏后端在在线服务运行，GitHub Pages 仅提供作品集入口；当前为私有预览，需授权登录。项目介绍与迭代记录位于 `works/15｜深夜汤馆 · Situation Puzzles/`。
 
 - 手势类作品需要摄像头和网络（用来加载 MediaPipe 手势模型）。画面只在本机处理，不会上传。
 - `play/` 里的版本为了能在 GitHub Pages 上独立运行，做了少量调整：

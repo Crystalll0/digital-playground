@@ -18,6 +18,22 @@ Built a dark-green and warm-gold soup-house interface, with 36 deduplicated refe
 
 Following the author's feedback that the original soup metaphor sounded unnatural, revised the headline to “夜深了，故事才刚开始。” and simplified the supporting invitation to piece together the truth alone or with friends. Published the copy update to the existing site.
 
+## 2026-11-16 · v1.2 · 线索防剧透 / Spoiler-safe clues
+
+**线索只引用玩家提问 / Clues quote player questions**
+
+修复初期提问就出现完整答案的问题：AI不再生成线索摘要，线索板只引用玩家已提出且得到肯定回答的问题；旧记录也经过同样过滤，题型问题不收集为线索。
+
+Fixed premature solution disclosure: AI no longer writes clue summaries. The clue board quotes only player questions confirmed as true, filters legacy records, and excludes puzzle-type questions.
+
+## 2026-11-16 · v1.3 · 揭晓与下一碗 / Reveals and next puzzles
+
+**猜中真相，继续下一碗 / Solve the mystery, choose the next**
+
+提问达到15次或设定上限时可选择立即解锁或继续猜，超限显示负数，不限模式保持不限。约95%语义还原时提示接近真相，99%或完整猜对时回复“完全正确！”并展示汤底；真人主持可手动判断。加入本局随机换汤、关键词搜索及难度筛选，多人由房主操作。移除游戏内内容提示框。
+
+Added optional reveals at 15 questions or the configured limit, with continued questioning and negative remaining counts; unlimited stays unlimited. Semantic completion around 95% prompts an optional reveal; 99% or a complete reconstruction gives “完全正确！” and opens the solution. Human hosts can make the same judgments. Added in-room random selection, search and difficulty filtering, controlled by the multiplayer host. Removed the in-game content notice.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

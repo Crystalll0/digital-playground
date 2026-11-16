@@ -20,7 +20,9 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 单人或房间码多人共同解谜；可选择 AI 店主或由房主担任真人 DM。共享提问记录、确认线索与次数，个人猜想留在私有便签。支持题库搜索筛选、上传、在线创作及三种可见范围。
 
-## Hints, voice and imports / 提示、语音与导入
+## Cooperative and competitive rooms / 合作与对抗
+
+Cooperative rooms solve one story together with shared question and hint counts. Competitive rooms use an AI-hosted, randomly sealed puzzle; at least two players must all click Start before it is revealed and the shared clock begins. Each player sees only their own questions, clues, hints and counts. Opponents show question and failed-verification counts, near-solution, verified-success and withdrawal statuses. First successful story verification wins; others can continue or withdraw. Hints and counts are individual, and room-wide changes or premature reveals are blocked. Players may withdraw or leave; rejoining after the start is disabled for new members. Start time is shared, while each browser receives it on the room synchronization poll.\n\nAPI tests cover sealed lobby visibility, readiness, private records, status-only opponent data, winner recognition and withdrawal guards. Real multiplayer browser play still needs broader testing.\n\n## Hints, voice and imports / 提示、语音与导入
 
 - Hints have a separate shared limit (default 3; 0 means unlimited). Solo players can change the limit immediately. In multiplayer, both requesting a hint and changing the limit need an anonymous timed ballot. After 10 seconds, more yes than no passes; more no rejects. Abstentions do not enter the comparison. A tie receives one five-second extension, settled as soon as a majority appears; another tie ends the request. Each player shares a 60-second initiation cooldown across both request types. The initiator starts with a yes vote, and votes can change before settlement. Only an approved, delivered hint reserves a slot; failures consume none.
 - AI hints are short directional nudges with a spoiler check; human hosts can write a hint or preview an AI suggestion before sending. Hint generation is not a guarantee against every possible spoiler.

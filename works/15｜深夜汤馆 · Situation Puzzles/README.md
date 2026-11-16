@@ -20,6 +20,10 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 单人或房间码多人共同解谜；可选择 AI 店主或由房主担任真人 DM。共享提问记录、确认线索与次数，个人猜想留在私有便签。支持题库搜索筛选、上传、在线创作及三种可见范围。
 
+## Welcome and nicknames / 入馆引导与昵称
+
+First visits show short host dialogue with highlights, arrows and subtle animation. Skip or close at any time; replay the current page guide from 入馆须知. Tour completion and default nicknames are saved in the current browser. Room display names can be changed at any time without changing previous message signatures. Story verification sits beside submitting a question.
+
 ## Personal archive / 我的档案
 
 Viewing a solution marks that puzzle as played in the current browser. “我的档案” lists known stories and allows clearing one or all labels without deleting puzzles or room conversations. Visitors can use it without sign-in. It stores titles and dates locally, not solutions, and does not synchronize across devices.

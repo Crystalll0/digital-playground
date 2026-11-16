@@ -82,6 +82,22 @@ The author requested a dedicated full-story check, a shorter button label, and c
 
 Use “核验故事”, support text or voice, and offer verification at three remaining questions, 15 questions or the limit, without revealing answers on failed attempts.
 
+## 2026-11-16 · v1.5 · 品汤档案 / Played puzzle archive
+
+根据作者提出的复玩辨识需求，实际查看汤底后显示“已玩过”标签，加入“我的档案”，支持逐题或全部清除标记。记录只保存在当前浏览器，不保存汤底，不跨设备同步。
+
+Following the author’s replay-identification request, mark a puzzle as played after its solution is viewed. Added a personal archive with per-puzzle and full reset controls. Records remain in the current browser without solution text or cross-device synchronization.
+
+**体验复盘 · 作者试用 / Author tryout**
+
+观察与反馈：作者提出，玩过且已经知道汤底的题目需要明显标记，方便挑选新故事；同时希望能够自行去掉标记。
+
+The author requested visible labels for stories whose solutions are already known, with a way to clear those labels.
+
+提出的调整及对应迭代：下一版加入“已玩过”标签和“我的档案”，只在实际看过汤底后记录，提供逐题及全部清除，并明确浏览器本地保存范围。
+
+Add played labels and a personal archive after actual solution viewing, with individual/full resets and clear browser-local storage wording.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

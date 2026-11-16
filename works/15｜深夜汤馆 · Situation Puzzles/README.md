@@ -20,6 +20,12 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 单人或房间码多人共同解谜；可选择 AI 店主或由房主担任真人 DM。共享提问记录、确认线索与次数，个人猜想留在私有便签。支持题库搜索筛选、上传、在线创作及三种可见范围。
 
+## Personal archive / 我的档案
+
+Viewing a solution marks that puzzle as played in the current browser. “我的档案” lists known stories and allows clearing one or all labels without deleting puzzles or room conversations. Visitors can use it without sign-in. It stores titles and dates locally, not solutions, and does not synchronize across devices.
+
+实际查看汤底后显示“已玩过”，可在“我的档案”中逐题或一键清除。记录仅保存在当前浏览器，不保存汤底、不跨设备同步；不会删除题库或问答记录。
+
 ## Verification / 验证情况
 
 Room authorization, solution secrecy, host-only settings, human answers, clues, scope changes, duplicate imports and concurrent question limits were checked. Browser checks covered room creation, example questions and editing controls. Live API tests confirmed yes/no answers, clue collection and question counting.

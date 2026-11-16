@@ -4,7 +4,7 @@ Dates use Hong Kong time. 复盘记录问题与调整方向，版本说明记录
 
 ## 2026-11-16 · v1 · 首次制作 / Initial build
 
-**深夜汤馆与共同解谜 / Late-night soup house & shared mysteries**
+**创建单人和多人合作解谜功能 / Late-night soup house & shared mysteries**
 
 建立暗绿与暖金的汤馆界面，整理36道去重参考题并加入1道原创试玩题。支持搜索筛选、单人及房间码多人游玩、AI或房主真人主持、四种回答、共享提问次数、记录与线索板；加入个人便签、手写与导入题库，以及私人／指定房间／公开可见范围。已检查权限隔离、汤底保密和并发计次。
 
@@ -26,11 +26,11 @@ Make the invitation simpler while keeping the late-night storytelling mood.
 
 ## 2026-11-16 · v1.1 · 首页文案 / Homepage copy
 
-**故事才刚开始 / The story is just beginning**
+**修改首页标题与介绍 / The story is just beginning**
 
-将首页标题改为“夜深了，故事才刚开始。”，同步精简介绍文案。
+将首页标题改为“夜深了，修改首页标题与介绍。”，同步精简介绍文案。
 
-Changed the homepage headline to “夜深了，故事才刚开始。” and shortened the introduction.
+Changed the homepage headline to “夜深了，修改首页标题与介绍。” and shortened the introduction.
 
 ### 体验复盘 · 试用记录 / Experience review · Tryout notes
 
@@ -48,7 +48,7 @@ Restrict clue sources so unasked details stay hidden.
 
 ## 2026-11-16 · v1.2 · 线索防剧透 / Spoiler-safe clues
 
-**线索只引用玩家提问 / Clues quote player questions**
+**修复线索板提前泄露汤底 / Clues quote player questions**
 
 线索板改为引用玩家已提出且获肯定的问题；同步过滤旧记录，排除题型类提问。
 
@@ -70,7 +70,7 @@ Make continuing, recognizing a solution and starting another round flow smoothly
 
 ## 2026-11-16 · v1.3 · 揭晓与下一碗 / Reveals and next puzzles
 
-**猜中真相，继续下一碗 / Solve the mystery, choose the next**
+**新增猜对反馈、揭晓提醒和换题功能 / Solve the mystery, choose the next**
 
 提问达到15次或设定上限时可选择立即解锁或继续猜，超限显示负数，不限模式保持不限。约95%语义还原时提示接近真相，99%或完整猜对时回复“完全正确！”并展示汤底；真人主持可手动判断。加入本局随机换汤、关键词搜索及难度筛选，多人由房主操作。移除游戏内内容提示框。
 
@@ -92,7 +92,7 @@ Provide a clear verification entry and timely prompts to assemble the whole stor
 
 ## 2026-11-16 · v1.4 · 主动核验 / Story verification
 
-**讲出故事，核验推理 / Tell the story, check the reasoning**
+**新增完整故事核验功能 / Tell the story, check the reasoning**
 
 提问区新增“核验故事”，支持文字和语音输入，按语义判断完整推理。通过后揭晓，未通过可继续猜。剩余3次、满15问及次数用完时提供核验入口。
 
@@ -114,7 +114,7 @@ Keep manageable played markers to support choosing new stories and replaying old
 
 ## 2026-11-16 · v1.5 · 品汤档案 / Played puzzle archive
 
-**记住喝过的汤 / Remember the stories you played**
+**新增已玩标记和个人档案 / Remember the stories you played**
 
 新增“已玩过”标签和“我的档案”，支持逐题或全部清除标记。记录仅保存在当前浏览器，不保存汤底。
 
@@ -219,6 +219,24 @@ Use short anonymous ballots for both hints and limit changes, with clear tie, ab
 多人查看提示和修改提示上限统一采用匿名投票：10秒后比较赞反票，弃票不计入；平票加时5秒，加时中出现多数即结算，仍平票则结束。发起者默认赞成，每位玩家两类申请共用60秒间隔，可查看倒计时和更改自己的选择。投票未通过或生成失败不扣提示次数，真人主持只在通过后发送提示。
 
 Unified multiplayer hint requests and limit changes under anonymous ballots: compare yes/no totals after 10 seconds, ignoring abstentions. Ties get one five-second extension; a majority during the extension settles immediately, and another tie ends the request. Initiators default to yes; each player shares a 60-second initiation cooldown across both request types. Added countdowns and editable votes. Failed ballots or hint generation consume no hints; human hosts send only after approval.
+
+### 体验复盘 · 试用记录
+
+**观察与反馈**
+
+合作解谜之外，还希望同房间玩家各自推理，比谁先还原真相，并能看到对手进展而不被剧透。
+
+**下一轮方向**
+
+增加统一开局计时的对抗模式，隔离个人记录，只公开进度，并提供弃权和退出。
+
+## 2026-11-16 · v1.11 · 多人对抗 / Competitive rooms
+
+**新增多人对抗模式 / Add multiplayer competitive mode**
+
+新增随机封题的对抗房间，至少两人全部准备后统一展示汤面并计时。问答、线索、提示和计数按玩家隔离，仅公开对手的提问次数、核验失败次数、接近真相、核验成功和弃权状态。以首位核验成功判定胜出，支持弃权和退出；合作模式仍共享同一汤和提问、提示次数。
+
+Added competitive rooms with a randomly sealed puzzle, revealed with a shared timer after at least two players are ready. Questions, clues, hints and counts stay private per player; opponents expose only counts and progress/withdrawal statuses. First successful story verification wins. Withdrawal and exit are supported; cooperative rooms retain shared questions and hints.
 
 ## Related milestones / 相关里程碑
 

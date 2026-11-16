@@ -160,6 +160,46 @@ Center the welcome, place other cards near their targets, guide from top to bott
 
 Centered the welcome without an arrow, anchored later cards beside highlighted targets, and connected arrows to measured edges. Reordered the homepage tour to welcome, header, seating actions and menu. Included writing and a new upload entry in the header highlight. Fixed repeated scrolling on room polls and narrowed oversized highlights.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+推理卡住时缺少轻微提示；多人调整提示次数需要共同决定。提问后希望直接按Enter发送，录音也存在内容截断和状态不清楚的问题。
+
+Stalled reasoning needed light hints and shared control over their limit. Sending should work with Enter, while recording needed clearer state and fewer truncation problems.
+
+**下一轮方向 / Direction for the next stage**
+
+把提示与问答分别计次，加入全员表决；补齐键盘发送、录音反馈与长语音转写流程。
+
+Count hints independently, add unanimous voting, and improve keyboard submission, recording feedback and longer transcription.
+
+## 2026-11-16 · v1.8 · 轻提示与语音 / Hints and voice
+
+新增独立计次的提示按钮，开局可设上限；AI给轻微方向，真人主持可自行填写或预览AI建议再发送。单人局内可直接修改，多人须全体成员同意。Enter发送、Shift+Enter换行，兼容中文输入法选字。录音改为点击开始／结束，增加计时和实时音量波形，最长2分钟；转写保留长文本、追加到输入框，采用中文提示和较完整的转写模型。
+
+Added separately counted hints, configurable at setup. AI gives gentle directions; human hosts can write hints or preview AI suggestions before sending. Solo limits change immediately; multiplayer changes require unanimous consent. Enter sends and Shift+Enter adds a line, with IME protection. Recording uses click-to-start/stop with a timer and live input meter, up to two minutes. Longer transcripts are appended for review with Chinese context and the full transcription model.
+
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+粘贴小红书链接后，读取和解析看起来没有反应；只支持知乎也限制了题库来源。截图里的题目还需要手动录入。
+
+A pasted Xiaohongshu link appeared unresponsive, the Zhihu-only restriction narrowed sources, and screenshots required manual typing.
+
+**下一轮方向 / Direction for the next stage**
+
+扩大公开网页的读取范围，在弹窗内说明结果，并提供图片转文字入口，让内容先检查再导入。
+
+Broaden public webpage support, keep feedback in the dialog, and add reviewed image-to-text imports.
+
+## 2026-11-16 · v1.9 · 链接与图片导入 / Links and image imports
+
+链接读取扩展至公开网页与分享短链接，逐次检查跳转地址。导入弹窗内显示加载、成功和失败原因，空内容不再显示解析成功。新增PNG/JPG/WebP图片上传、剪贴板粘贴和拖入，预览后识别原文并填入文本框，检查后再解析、保存。登录限制、反自动读取和纯图片网页仍可能无法读取；不会自动公开识别内容。
+
+Expanded link reading to public webpages and short links with checked redirects. Loading and errors stay inside the import dialog, and empty inputs no longer appear successful. Added PNG/JPG/WebP upload, clipboard paste and drag-and-drop, followed by image preview and OCR into editable text before parsing or saving. Login walls, automated-access restrictions and image-only pages may still block URL extraction; recognized content is never automatically published.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

@@ -6,7 +6,7 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 **Live site / 在线入口:** [mystery.yueruchen.online](https://mystery.yueruchen.online/)  
 **Platform URL / 平台入口:** [Situation Puzzles](https://situation-puzzles-crystal.wry-toast-5992.chatgpt.site/)
 
-> Current access: owner-private preview. An authorized ChatGPT account is required; entering a room code does not grant access to the site. 当前为作者私有预览，房间码不等于网站访问权限。
+> Current access: public. Anyone with the link can open the game and join a room. Sign-in is required to save a personal collection; private puzzle scopes and hidden solutions remain protected. 网站现已公开，保存个人题库需登录，私人题目和未揭晓的汤底仍受保护。
 
 ## Experience / 玩法
 

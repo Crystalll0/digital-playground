@@ -238,6 +238,20 @@ Unified multiplayer hint requests and limit changes under anonymous ballots: com
 
 Added competitive rooms with a randomly sealed puzzle, revealed with a shared timer after at least two players are ready. Questions, clues, hints and counts stay private per player; opponents expose only counts and progress/withdrawal statuses. First successful story verification wins. Withdrawal and exit are supported; cooperative rooms retain shared questions and hints.
 
+### 体验复盘 · 试用记录
+
+观察与反馈：人工主持只能由房主担任，无法稍后决定或多人协作；对抗模式与朋友同桌也出现了同时选中的状态。
+
+下一轮方向：拆分房主与DM权限，增加可投票调整的主持名额，同时让三个模式互斥选择。
+
+## 2026-11-16 · v1.12 · 多DM与模式单选 / Multiple DMs and mode selection
+
+**新增多位真人DM与名额投票，修复模式单选**
+
+新增“真人主持·稍后决定DM”，开房设定DM名额上限，入房后可自行认领或退出。至少1位DM才能开局，进行中无人主持时暂停提问。修改上限采用匿名限时投票，不能少于在任人数。退出DM后保留知情旁观身份，不能提问或核验；同一问题只接受首条DM回答。修复朋友同桌与对抗模式同时选中的问题。
+
+Added deferred human-host selection, initial DM capacity, and volunteer join/leave controls. At least one DM is required to start, and questions pause if none remain. Capacity changes use anonymous timed ballots and cannot remove occupied slots. Former DMs remain informed spectators and cannot ask or verify. Only the first answer is accepted. Fixed simultaneous cooperative/competitive selection.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

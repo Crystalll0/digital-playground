@@ -8,6 +8,12 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 > Current access: public. Anyone with the link can open the game and join a room. Sign-in is required to save a personal collection; private puzzle scopes and hidden solutions remain protected. 网站现已公开，保存个人题库需登录，私人题目和未揭晓的汤底仍受保护。
 
+## Language / 语言
+
+Use the EN / 中文 control in the header. The browser remembers the selection. Common controls switch directly; puzzle text and dynamic interface content are translated on demand using the configured AI service, so the first English view may take a moment and requires working API access. Nickname and input values are preserved, and option values remain stable. English voice input and standard-answer readout follow the selected language. Automated translation quality still needs bilingual playtesting.
+
+The portfolio groups this project into eight functional stages. Both stage and date views use the same history. The Works grid features Situation Puzzles beside Nocturne Bloom, followed by alternating rows of three small and two large cards.
+
 ## Experience / 玩法
 
 - Play solo or join the same room using a custom or random numeric room code.

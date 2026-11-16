@@ -140,6 +140,26 @@ Guide visitors with short host dialogue, group related actions, and distinguish 
 
 Added page-specific first-visit tours with host dialogue, highlights and arrows, plus skip, close and replay controls. A default nickname can be saved after the welcome and reused when entering rooms; room display names remain editable. Moved story verification beside the question button.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+试用时，弹窗固定在右下角，与功能区距离过远；箭头错位，房间页面还会被反复拉动。顶部介绍也漏掉了写汤入口。
+
+Cards stayed in the bottom-right corner far from their targets. Arrows were misaligned and room polling repeatedly moved the page; the header tour missed the writing entry.
+
+**下一轮方向 / Direction for the next stage**
+
+让欢迎语独立居中，其余指引贴近目标，按页面从上到下介绍，并让滚动只发生在真正切换步骤时。
+
+Center the welcome, place other cards near their targets, guide from top to bottom, and scroll only when changing steps.
+
+## 2026-11-16 · v1.7 · 指引定位 / Anchored guide cards
+
+欢迎弹窗居中且不显示箭头；后续弹窗按高亮区域就近定位，箭头连接真实边界。首页顺序调整为欢迎、顶部、中间入座区、下方汤单。顶部高亮包含写汤与新增上传题库入口。修复房间轮询导致引导反复滚动，缩小过大的高亮范围。
+
+Centered the welcome without an arrow, anchored later cards beside highlighted targets, and connected arrows to measured edges. Reordered the homepage tour to welcome, header, seating actions and menu. Included writing and a new upload entry in the header highlight. Fixed repeated scrolling on room polls and narrowed oversized highlights.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

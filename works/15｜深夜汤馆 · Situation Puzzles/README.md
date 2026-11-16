@@ -11,9 +11,9 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 ## Experience / 玩法
 
 - Play solo or join the same room using a custom or random numeric room code.
-- Choose an AI host or a human host. The host answers only 是 / 不是 / 是与不是 / 无关.
+- Choose an AI host or a human host. Ordinary questions receive 是 / 不是 / 是与不是 / 无关; a complete semantic reconstruction receives 完全正确！ and opens the solution.
 - Review shared questions and confirmed clues; keep unconfirmed thoughts in a private browser-local notebook.
-- Change the shared question limit during play, including unlimited.
+- Change the shared question limit during play, including unlimited. At 15 questions or the configured limit, choose to unlock or keep guessing; remaining counts may become negative.\n- Around 95% semantic completion prompts an optional reveal; 99% or complete reconstruction opens the solution. These thresholds are AI judgments, not measured accuracy guarantees. Human hosts can also mark near-complete or correct guesses.\n- Select another puzzle without leaving the room: random, keyword search or difficulty filter. The room host controls shared puzzle changes.\n- Clues quote confirmed player questions rather than AI-generated solution summaries, including when reading older records.
 - Search and filter 36 deduplicated reference stories plus one original practice puzzle.
 - Write puzzles manually, save drafts, import structured TXT/JSON or paste text. Optional AI generation and revision require server-side API access.
 - Choose private, designated-room or public puzzle visibility. Players do not receive the solution until reveal; human hosts and authors can know it in advance.
@@ -28,7 +28,7 @@ Voice transcription and AI-assisted puzzle writing are implemented but have **no
 
 语音识别与 AI 写汤尚未完成实测；多人同步约每三秒刷新。程序没有固定人数上限，但实际容量仍受托管资源及 API 限制影响。
 
-## This portfolio archive / 作品集归档范围
+The latest update passed focused clue/progress unit tests and the production build. The new semantic-completion flow still needs broader live playtesting.\n\n最新一轮加入接近真相提示、猜对揭晓、超限继续猜，以及本局随机／搜索换汤。已通过线索和进度判断单元测试及生产构建；AI语义完成判断仍需更多真实对局验证。\n\n## This portfolio archive / 作品集归档范围
 
 This folder documents the live project and its development. GitHub Pages hosts the portfolio; the game backend and private puzzle records remain on the live service. No API keys, private user data or puzzle solutions are included here.
 

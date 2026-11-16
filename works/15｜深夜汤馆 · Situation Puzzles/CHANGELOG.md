@@ -120,6 +120,26 @@ Keep manageable played markers to support choosing new stories and replaying old
 
 Added played labels and a personal archive with individual and full reset controls. Records stay in the current browser without solution text.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+首次进入各页面时，缺少与汤馆氛围结合的功能介绍；核验入口与提问按钮分离，昵称的保存和房间改名方式也不够清楚。
+
+First visits lacked an atmospheric introduction. Verification sat apart from submitting questions, and nickname persistence and room renaming needed clearer controls.
+
+**下一轮方向 / Direction for the next stage**
+
+用简短的店主对白带路，让主要操作集中在顺手的位置，并区分默认昵称和房间显示昵称。
+
+Guide visitors with short host dialogue, group related actions, and distinguish default names from room display names.
+
+## 2026-11-16 · v1.6 · 店主带路 / Guided first visit
+
+新增分页面首次引导，以店主对白、高亮和箭头介绍功能，支持跳过、关闭和重看。首次引导后可保存默认昵称，开房自动带入；房间内可随时修改显示昵称。将“核验故事”移到提问按钮旁。
+
+Added page-specific first-visit tours with host dialogue, highlights and arrows, plus skip, close and replay controls. A default nickname can be saved after the welcome and reused when entering rooms; room display names remain editable. Moved story verification beside the question button.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

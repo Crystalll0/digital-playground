@@ -200,6 +200,26 @@ Broaden public webpage support, keep feedback in the dialog, and add reviewed im
 
 Expanded link reading to public webpages and short links with checked redirects. Loading and errors stay inside the import dialog, and empty inputs no longer appear successful. Added PNG/JPG/WebP upload, clipboard paste and drag-and-drop, followed by image preview and OCR into editable text before parsing or saving. Login walls, automated-access restrictions and image-only pages may still block URL extraction; recognized content is never automatically published.
 
+### 体验复盘 · 试用记录 / Experience review · Tryout notes
+
+**观察与反馈 / Observation & feedback**
+
+房间人数多时，等待所有人同意容易让提示申请停滞；也需要避免连续发起申请，并保留不表态的选择。
+
+In larger rooms, waiting for unanimous consent could stall requests. Repeated requests also needed a pause and a way to abstain.
+
+**下一轮方向 / Direction for the next stage**
+
+用短时匿名投票兼顾节奏与意愿，统一提示和次数修改的规则，并处理平票、弃票与申请间隔。
+
+Use short anonymous ballots for both hints and limit changes, with clear tie, abstention and cooldown rules.
+
+## 2026-11-16 · v1.10 · 匿名限时投票 / Timed anonymous ballots
+
+多人查看提示和修改提示上限统一采用匿名投票：10秒后比较赞反票，弃票不计入；平票加时5秒，加时中出现多数即结算，仍平票则结束。发起者默认赞成，每位玩家两类申请共用60秒间隔，可查看倒计时和更改自己的选择。投票未通过或生成失败不扣提示次数，真人主持只在通过后发送提示。
+
+Unified multiplayer hint requests and limit changes under anonymous ballots: compare yes/no totals after 10 seconds, ignoring abstentions. Ties get one five-second extension; a majority during the extension settles immediately, and another tie ends the request. Initiators default to yes; each player shares a 60-second initiation cooldown across both request types. Added countdowns and editable votes. Failed ballots or hint generation consume no hints; human hosts send only after approval.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

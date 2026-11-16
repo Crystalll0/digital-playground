@@ -12,14 +12,18 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 Use the EN / 中文 control in the header. The browser remembers the selection. Common controls switch directly; puzzle text and dynamic interface content are translated on demand using the configured AI service, so the first English view may take a moment and requires working API access. Nickname and input values are preserved, and option values remain stable. English voice input and standard-answer readout follow the selected language. Automated translation quality still needs bilingual playtesting.
 
-The portfolio groups this project into eight functional stages. Both stage and date views use the same history. The Works grid features Situation Puzzles beside Nocturne Bloom, followed by alternating rows of three small and two large cards.
+The portfolio groups this project into ten functional stages. Both stage and date views use the same history. The Works grid features Situation Puzzles beside Nocturne Bloom, followed by alternating rows of three small and two large cards.
 
 ## Experience / 玩法
 
 - Play solo or join the same room using a custom or random numeric room code.
 - Choose an AI host or a human host. Ordinary questions receive 是 / 不是 / 是与不是 / 无关; a complete semantic reconstruction receives 完全正确！ and opens the solution.
 - Review shared questions and confirmed clues; keep unconfirmed thoughts in a private browser-local notebook.
-- Change the shared question limit during play, including unlimited. At 15 questions or the configured limit, choose to unlock or keep guessing; remaining counts may become negative.\n- Submit a complete reconstruction through “核验故事” using text or voice. Meaning matters rather than exact wording; failed checks do not reveal missing facts. A reminder at three remaining questions and the 15-question/limit dialogs offer direct access. Each submission counts as one question.\n- Around 95% semantic completion prompts an optional reveal; 99% or complete reconstruction opens the solution. These thresholds are AI judgments, not measured accuracy guarantees. Human hosts can also mark near-complete or correct guesses.\n- Select another puzzle without leaving the room: random, keyword search or difficulty filter. The room host controls shared puzzle changes.\n- Clues quote confirmed player questions rather than AI-generated solution summaries, including when reading older records.
+- Change the shared question limit during play, including unlimited. At 15 questions or the configured limit, choose to unlock or keep guessing; remaining counts stop at zero.
+- Submit a complete reconstruction through “核验故事” using text or voice. Meaning matters rather than exact wording; failed checks do not reveal missing facts. A reminder at three remaining questions and the 15-question/limit dialogs offer direct access. Each submission counts as one question.
+- An independent audit checks key facts and contradictions before accepting a reconstruction. Near-complete answers invite more detail without automatically revealing the solution. Human hosts can also mark near-complete or correct guesses.
+- Select another puzzle without leaving the room: random, keyword search or difficulty filter. The room host controls shared puzzle changes.
+- Clues quote confirmed player questions rather than AI-generated solution summaries, including when reading older records.
 - Search and filter 36 deduplicated reference stories plus one original practice puzzle.
 - Write puzzles manually, save drafts, import structured TXT/JSON or paste text. Optional AI generation and revision require server-side API access.
 - Choose private, designated-room or public puzzle visibility. Players do not receive the solution until reveal; human hosts and authors can know it in advance.
@@ -28,7 +32,11 @@ The portfolio groups this project into eight functional stages. Both stage and d
 
 ## Cooperative and competitive rooms / 合作与对抗
 
-Cooperative rooms solve one story together with shared question and hint counts. Competitive rooms use an AI-hosted, randomly sealed puzzle; at least two players must all click Start before it is revealed and the shared clock begins. Each player sees only their own questions, clues, hints and counts. Opponents show question and failed-verification counts, near-solution, verified-success and withdrawal statuses. First successful story verification wins; others can continue or withdraw. Hints and counts are individual, and room-wide changes or premature reveals are blocked. Players may withdraw or leave; rejoining after the start is disabled for new members. Start time is shared, while each browser receives it on the room synchronization poll.\n\nAPI tests cover sealed lobby visibility, readiness, private records, status-only opponent data, winner recognition and withdrawal guards. Real multiplayer browser play still needs broader testing.\n\n## Hints, voice and imports / 提示、语音与导入
+Cooperative rooms solve one story together with shared question and hint counts. Competitive rooms draw an AI-hosted puzzle unseen by every active participant, using each player’s current-browser played markers submitted when ready. The draw occurs only after everyone is ready; no shared unseen candidates means the lobby stays sealed and untimed. at least two players must all click Start before it is revealed and the shared clock begins. Each player sees only their own questions, clues, hints and counts. Opponents show question and failed-verification counts, near-solution, verified-success and withdrawal statuses. First successful story verification wins; others can continue or withdraw. Hints and counts are individual, and room-wide changes or premature reveals are blocked. Players may withdraw or leave; rejoining after the start is disabled for new members. Start time is shared, while each browser receives it on the room synchronization poll.
+
+API tests cover sealed lobby visibility, readiness, private records, status-only opponent data, winner recognition and withdrawal guards. Real multiplayer browser play still needs broader testing.
+
+## Hints, voice and imports / 提示、语音与导入
 
 - Hints have a separate shared limit (default 3; 0 means unlimited). Solo players can change the limit immediately. In multiplayer, both requesting a hint and changing the limit need an anonymous timed ballot. After 10 seconds, more yes than no passes; more no rejects. Abstentions do not enter the comparison. A tie receives one five-second extension, settled as soon as a majority appears; another tie ends the request. Each player shares a 60-second initiation cooldown across both request types. The initiator starts with a yes vote, and votes can change before settlement. Only an approved, delivered hint reserves a slot; failures consume none.
 - AI hints are short directional nudges with a spoiler check; human hosts can write a hint or preview an AI suggestion before sending. Hint generation is not a guarantee against every possible spoiler.
@@ -45,9 +53,9 @@ First visits show short host dialogue with highlights, arrows and subtle animati
 
 ## Personal archive / 我的档案
 
-Viewing a solution marks that puzzle as played in the current browser. “我的档案” lists known stories and allows clearing one or all labels without deleting puzzles or room conversations. Visitors can use it without sign-in. It stores titles and dates locally, not solutions, and does not synchronize across devices.
+Viewing a solution marks that puzzle as played in the current browser. “我的档案” lists known stories and allows clearing one or all labels without deleting puzzles or room conversations. Visitors can use it without sign-in. Play records include permitted questions and answers, revealed solutions and available question/time/hint statistics. Personal records remain browser-local and can be deleted. Manual played markers also exclude stories from solo random draws and competitive selection.
 
-实际查看汤底后显示“已玩过”，可在“我的档案”中逐题或一键清除。记录仅保存在当前浏览器，不保存汤底、不跨设备同步；不会删除题库或问答记录。
+实际查看汤底后显示“已玩过”，可在“我的档案”中逐题或一键清除。游玩记录可查看问答、已揭晓汤底及已记录的提问／用时／提示统计，仅保存在当前浏览器，不跨设备同步。可手动标记已玩；删除个人记录不会删除共享房间。
 
 ## Verification / 验证情况
 
@@ -57,10 +65,18 @@ Voice transcription and AI-assisted puzzle writing are implemented but have **no
 
 语音识别与 AI 写汤尚未完成实测；多人同步约每三秒刷新。程序没有固定人数上限，但实际容量仍受托管资源及 API 限制影响。
 
-The latest update passed focused clue/progress unit tests and the production build. The new semantic-completion flow still needs broader live playtesting.\n\n最新一轮加入接近真相提示、猜对揭晓、超限继续猜，以及本局随机／搜索换汤。已通过线索和进度判断单元测试及生产构建；AI语义完成判断仍需更多真实对局验证。\n\n## This portfolio archive / 作品集归档范围
+The latest update passed focused clue/progress unit tests and the production build. The new semantic-completion flow still needs broader live playtesting.
+
+最新一轮加入接近真相提示、猜对揭晓、超限继续猜，以及本局随机／搜索换汤。已通过线索和进度判断单元测试及生产构建；AI语义完成判断仍需更多真实对局验证。
+
+## This portfolio archive / 作品集归档范围
 
 This folder documents the live project and its development. GitHub Pages hosts the portfolio; the game backend and private puzzle records remain on the live service. No API keys, private user data or puzzle solutions are included here.
 
 本目录收录介绍与迭代记录，游戏仍在在线服务运行；不把密钥、私人题库或汤底放进公开作品集。
 
 See [CHANGELOG.md](CHANGELOG.md) for dated development records. All dates use Hong Kong time.
+
+## Puzzle feedback / 题目反馈
+
+Submit a difficulty suggestion and optional rating, reason or proposed changes beside the puzzle. Feedback Records shows your submissions. Sign in with the configured administrator account to review all submissions; access is checked server-side.

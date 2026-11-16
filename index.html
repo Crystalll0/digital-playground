@@ -545,35 +545,41 @@ function records(w){
   const h=historyFor(w);
   return h?h.entries.map(e=>({start:e[0],end:e[1]||e[0],label:dateLabel(e),title:pick(e[3]),version:e[2]})):legacy(w).map(c=>({start:fmt(days(c[0])).replaceAll('.','-'),end:fmt(days(c[0])).replaceAll('.','-'),label:fmt(days(c[0])),title:c[1].split(' · ').slice(1).join(' · '),version:tr('文件修改记录','File-modification record')}));
 }
+function spacedDateTicks(ticks,gap=58){
+  const kept=[];for(const tick of ticks.slice().reverse())if(!kept.length||kept.at(-1).x-tick.x>=gap)kept.push(tick);return kept.reverse();
+}
+function packDateGroups(groups){
+  const lanes=[];return groups.map(g=>{let lane=lanes.findIndex(end=>end+5<=g.x-g.radius);if(lane<0)lane=lanes.length;lanes[lane]=g.end+g.radius;return {...g,lane};});
+}
 function timeline(){
   if(timelineMode==='process'){processTimeline();return;}
-  document.getElementById('tl').classList.remove('process-view');
-  const box=document.getElementById('tl'),tip=document.getElementById('tip');tip.style.opacity=0;
-  const all=W.flatMap(w=>records(w));const dated=all.filter(e=>e.start);
-  const stamp=d=>Date.parse(d+'T00:00:00+08:00');
-  const t0=Math.min(...dated.map(e=>stamp(e.start)))-2*86400000,t1=Math.max(...dated.map(e=>stamp(e.end)))+2*86400000;
+  const box=document.getElementById('tl'),tip=document.getElementById('tip');box.classList.remove('process-view');tip.style.opacity=0;
+  const all=W.flatMap(w=>records(w)),dated=all.filter(e=>e.start),stamp=d=>Date.parse(d+'T00:00:00+08:00');
+  const latest=dated.map(e=>e.end).sort().at(-1),t0=Math.min(...dated.map(e=>stamp(e.start)))-2*86400000,t1=stamp(latest)+2*86400000;
   const rows=W.slice().sort((a,b)=>Math.min(...records(a).filter(e=>e.start).map(e=>stamp(e.start)))-Math.min(...records(b).filter(e=>e.start).map(e=>stamp(e.start))));
-  const VW=1100,L=165,R=20,RH=30,T=32,H=T+rows.length*RH+10,X=t=>L+(t-t0)/(t1-t0)*(VW-L-R);
-  let svg=`<svg viewBox="0 0 ${VW} ${H}" role="img" aria-label="${tr('作品迭代时间线','Project history timeline')}"><g class="axis">`;
-  for(let d=new Date(t0+8*3600000);d.getTime()-8*3600000<t1;d.setUTCDate(d.getUTCDate()+1)){
-    if(d.getUTCDate()!==1&&d.getUTCDate()!==15&&fmt(d.getTime()-8*3600000).replaceAll('.','-')!==dated.map(e=>e.end).sort().at(-1))continue;
-    const x=X(d.getTime()-8*3600000);svg+=`<line class="grid-line" x1="${x}" x2="${x}" y1="${T-8}" y2="${H}"/><text x="${x+4}" y="${T-12}">${d.getUTCMonth()+1}/${d.getUTCDate()}</text>`;
-  }
-  svg+='</g>';
-  rows.forEach((w,i)=>{
-    const y=T+i*RH+RH/2,rs=records(w).filter(e=>e.start),groups=new Map();
-    rs.forEach(r=>{const key=r.start+'|'+r.end;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(r);});
-    svg+=`<a href="#history" data-work="${w.idx}" aria-label="${escapeHTML(tr('查看记录：','Read history: ')+tr(w.zh,w.en))}"><text class="row-label" x="0" y="${y+4}">${escapeHTML(tr(w.zh,w.en))}</text></a>`;
-    groups.forEach(group=>{const r=group[0],x=X(stamp(r.start)),end=X(stamp(r.end));const title=escapeHTML(r.label+' · '+group.map(z=>z.title+' ('+z.version+')').join(' / '));
-      if(end>x)svg+=`<line x1="${x}" x2="${end}" y1="${y}" y2="${y}" stroke="${w.color}" stroke-width="7" opacity=".35"><title>${title}</title></line>`;
-      svg+=`<a href="#history" data-work="${w.idx}"><circle cx="${end}" cy="${y}" r="${group.length>1?7:5}" fill="${w.color}" stroke="var(--surface)" stroke-width="1.5" tabindex="0" aria-label="${title}" data-label="${title}"><title>${title}</title></circle>${group.length>1?`<text x="${end}" y="${y+3}" text-anchor="middle" style="font:8px var(--mono);fill:var(--surface);pointer-events:none">${group.length}</text>`:''}</a>`;
+  const VW=1100,L=165,R=32,T=42,X=t=>L+(t-t0)/(t1-t0)*(VW-L-R);
+  let cursor=T;
+  const layout=rows.map(w=>{const grouped=new Map();records(w).filter(e=>e.start).forEach(r=>{const key=r.start+'|'+r.end;if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(r);});
+    const groups=packDateGroups([...grouped.values()].map(group=>({group,x:X(stamp(group[0].start)),end:X(stamp(group[0].end)),radius:group.length>1?8:5})).sort((a,b)=>a.x-b.x||a.end-b.end));
+    const lanes=Math.max(1,...groups.map(g=>g.lane+1)),height=Math.max(34,lanes*20+14),top=cursor;cursor+=height;return {w,groups,lanes,height,top};
+  });
+  const H=cursor+10,ticks=[];
+  for(let day=Math.ceil(t0/86400000)*86400000-8*3600000;day<t1;day+=86400000){const d=new Date(day+8*3600000),date=fmt(day).replaceAll('.','-');if(d.getUTCDate()===1||d.getUTCDate()===15||date===latest)ticks.push({x:X(day),label:(d.getUTCMonth()+1)+'/'+d.getUTCDate()});}
+  let svg='<svg viewBox="0 0 '+VW+' '+H+'" role="img" aria-label="'+tr('作品迭代时间线','Project history timeline')+'"><g class="axis">';
+  spacedDateTicks(ticks).forEach(t=>{svg+='<line class="grid-line" x1="'+t.x+'" x2="'+t.x+'" y1="'+(T-10)+'" y2="'+H+'"/><text x="'+t.x+'" y="20" text-anchor="middle">'+t.label+'</text>';});svg+='</g>';
+  layout.forEach(({w,groups,height,top,lanes})=>{
+    const center=top+height/2;
+    svg+='<a href="#history" data-work="'+w.idx+'" aria-label="'+escapeHTML(tr('查看记录：','Read history: ')+tr(w.zh,w.en))+'"><text class="row-label" x="0" y="'+(center+4)+'">'+escapeHTML(tr(w.zh,w.en))+'</text></a>';
+    groups.forEach(({group,x,end,radius,lane})=>{const y=center+(lane-(lanes-1)/2)*20,r=group[0],title=escapeHTML(r.label+' · '+group.map(z=>z.title+' ('+z.version+')').join(' / '));
+      if(end>x)svg+='<line x1="'+x+'" x2="'+end+'" y1="'+y+'" y2="'+y+'" stroke="'+w.color+'" stroke-width="7" opacity=".35"><title>'+title+'</title></line>';
+      svg+='<a href="#history" data-work="'+w.idx+'" aria-label="'+title+'"><circle cx="'+end+'" cy="'+y+'" r="'+radius+'" fill="'+w.color+'" stroke="var(--surface)" stroke-width="1.5" tabindex="0" aria-label="'+title+'" data-label="'+title+'"><title>'+title+'</title></circle>'+(group.length>1?'<text x="'+end+'" y="'+(y+3)+'" text-anchor="middle" style="font:8px var(--mono);fill:var(--surface);pointer-events:none">'+group.length+'</text>':'')+'</a>';
     });
   });svg+='</svg>';
-  const mobile=`<div class="tl-mobile">${rows.map(w=>{const rs=records(w).filter(e=>e.start);const starts=rs.map(r=>r.start).sort(),ends=rs.map(r=>r.end).sort();return `<button class="timeline-list-row" data-work="${w.idx}" type="button"><span>${escapeHTML(tr(w.zh,w.en))}<small>${rs.length?starts[0]+' — '+ends.at(-1):tr('日期待确认','Date unconfirmed')}</small></span><b>${w.n} ${tr('条 ↗','records ↗')}</b></button>`;}).join('')}</div>`;
+  const mobile='<div class="tl-mobile">'+rows.map(w=>{const rs=records(w).filter(e=>e.start),starts=rs.map(r=>r.start).sort(),ends=rs.map(r=>r.end).sort();return '<button class="timeline-list-row" data-work="'+w.idx+'" type="button"><span>'+escapeHTML(tr(w.zh,w.en))+'<small>'+(rs.length?starts[0]+' — '+ends.at(-1):tr('日期待确认','Date unconfirmed'))+'</small></span><b>'+w.n+' '+tr('条 ↗','records ↗')+'</b></button>';}).join('')+'</div>';
   const unknown=W.filter(w=>records(w).some(e=>!e.start));
-  box.innerHTML=timelineToolbar()+svg+mobile+`<div class="undated">${tr('日期待确认：','Date unconfirmed: ')}${unknown.map(w=>`<button type="button" data-work="${w.idx}">${escapeHTML(tr(w.zh,w.en))} · ${records(w).filter(e=>!e.start).length}</button>`).join('')}</div>`;
+  box.innerHTML=timelineToolbar()+svg+mobile+'<div class="undated">'+tr('日期待确认：','Date unconfirmed: ')+unknown.map(w=>'<button type="button" data-work="'+w.idx+'">'+escapeHTML(tr(w.zh,w.en))+' · '+records(w).filter(e=>!e.start).length+'</button>').join('')+'</div>';
   bindTimeline(box);
-  document.getElementById('tlNote').textContent=tr('持续更新至今。记录按功能变化整理，重复源码与资源包已合并。部分日期为历史文件保存日期，并非首次上线日期；各项目内有说明。日期待确认的阶段另列。','Ongoing. Histories describe functional changes; duplicate sources and resource packs are merged. Some dates reflect archive-file saves rather than first releases, as noted per project. Undated stages are listed separately.');
+  document.getElementById('tlNote').textContent=tr('持续更新至今。同日记录合并显示数量；相邻日期的节点自动错层，日期标签按间距显示。部分日期为历史文件保存日期，并非首次上线日期；日期待确认的阶段另列。','Ongoing. Same-day records show a count; nearby nodes use separate lanes and date labels keep a readable gap. Some dates reflect archive-file saves rather than first releases. Undated stages are listed separately.');
 }
 let timelineMode='process';
 function timelineToolbar(){

@@ -34,6 +34,54 @@ Fixed premature solution disclosure: AI no longer writes clue summaries. The clu
 
 Added optional reveals at 15 questions or the configured limit, with continued questioning and negative remaining counts; unlimited stays unlimited. Semantic completion around 95% prompts an optional reveal; 99% or a complete reconstruction gives “完全正确！” and opens the solution. Human hosts can make the same judgments. Added in-room random selection, search and difficulty filtering, controlled by the multiplayer host. Removed the in-game content notice.
 
+## 2026-11-16 · v1.4 · 主动核验 / Story verification
+
+根据作者试用反馈，在提问区加入“核验故事”，可输入或口述完整推理，按语义而非原文核对；通过后揭晓，未通过则鼓励继续推理而不泄露汤底。剩余3次时提示立即核验或再猜猜，15问及次数用完的提醒也加入核验入口。
+
+Following author tryouts, added a dedicated story-verification mode for typed or spoken reconstructions. Semantic agreement passes; incomplete attempts receive encouragement without solution hints. Added a three-questions-left prompt and verification access from the 15-question and limit reminders.
+
+## 体验复盘 · 作者试用 / Experience reviews · Author tryouts
+
+### 首页文案 · 体验复盘 / Author tryout
+
+**观察与反馈 / Observation & feedback:** 作者试用后觉得“来一碗想不通的汤”读起来奇怪，汤馆主题与中文表达需要更自然地衔接。
+
+The author found the original headline awkward and wanted more natural Chinese wording.
+
+**提出的调整及对应迭代 / Proposed change and iteration:** 保留深夜氛围，提出改用“故事才刚开始”；下一版据此调整标题及介绍。
+
+Keep the late-night mood and revise the invitation to “the story is just beginning”; the next stage updates the copy.
+
+### 线索防剧透 · 体验复盘 / Author tryout
+
+**观察与反馈 / Observation & feedback:** 作者仅询问题型和少量事实，就发现右侧线索板提前显示完整汤底，直接破坏了推理体验。
+
+During a tryout, the author saw the clue board reveal the full solution after only a few basic questions.
+
+**提出的调整及对应迭代 / Proposed change and iteration:** 作者要求避免提前剧透；下一版取消AI线索摘要，只引用玩家已提出并获肯定的内容，同时过滤旧记录。
+
+The author requested spoiler prevention; the next stage removes generated summaries and quotes only confirmed player questions, including legacy records.
+
+### 揭晓与下一碗 · 体验复盘 / Author tryout
+
+**观察与反馈 / Observation & feedback:** 作者提出次数达到上限后仍想继续推理；接近或已猜对完整故事时，仅回答“是”缺少完成反馈，也不方便在本页继续挑选下一道汤。
+
+The author wanted to keep guessing past the limit, receive completion feedback for reconstructed stories, and choose the next puzzle in the room.
+
+**提出的调整及对应迭代 / Proposed change and iteration:** 依建议加入继续猜与负数计次、接近真相提示、完整猜对揭晓，以及随机换汤和搜索筛选入口。
+
+Add optional overtime, near-solution prompts, correct-story reveals, and in-room random selection and search.
+
+### 主动核验 · 体验复盘 / Author tryout
+
+**观察与反馈 / Observation & feedback:** 作者试用后提出，应有独立入口提交完整故事核验；“我猜出来了 · 核验故事”过长，次数快用完时也需要更清晰的引导。
+
+The author requested a dedicated full-story check, a shorter button label, and clearer guidance near the question limit.
+
+**提出的调整及对应迭代 / Proposed change and iteration:** 将按钮简化为“核验故事”，支持文字或语音；剩3次、满15问或超限时提供核验入口，未通过可继续猜且不泄露答案。
+
+Use “核验故事”, support text or voice, and offer verification at three remaining questions, 15 questions or the limit, without revealing answers on failed attempts.
+
 ## Related milestones / 相关里程碑
 
 - **2026-11-16** — 配置服务端 AI 密钥并重新部署，真实提问验证了“是／不是”、线索收集、次数累计与汤底隐藏。此项是配置及验证，不另计一个代码版本。

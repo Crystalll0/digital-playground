@@ -20,6 +20,17 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 单人或房间码多人共同解谜；可选择 AI 店主或由房主担任真人 DM。共享提问记录、确认线索与次数，个人猜想留在私有便签。支持题库搜索筛选、上传、在线创作及三种可见范围。
 
+## Hints, voice and imports / 提示、语音与导入
+
+- Hints have a separate shared limit (default 3; 0 means unlimited). A request reserves one slot. Solo players can change the limit immediately; multiplayer proposals need all current members to agree. One rejection cancels the proposal.
+- AI hints are short directional nudges with a spoiler check; human hosts can write a hint or preview an AI suggestion before sending. Hint generation is not a guarantee against every possible spoiler.
+- Enter submits and Shift+Enter inserts a line break, with Chinese IME composition protected.
+- Click to start recording and click again to stop. A timer and microphone input meter show recording state, with a two-minute ceiling. Transcripts are appended for manual review, with longer text retained. Actual microphone accuracy still requires device testing.
+- Import links may point to public webpages or share redirects. Login walls, automation restrictions and image-only pages may prevent extraction. Loading and error feedback appear inside the dialog.
+- PNG/JPG/WebP images up to 5MB can be uploaded, pasted or dropped into the import dialog. Preview and AI OCR produce editable text; review and parse it before saving. Link reading, OCR and saving require sign-in. No extracted content is automatically published.
+
+The hint/voting/import/OCR paths passed mocked API integration checks, alongside existing room and secrecy tests. Real microphone and OCR accuracy are not established by these tests.
+
 ## Welcome and nicknames / 入馆引导与昵称
 
 First visits show short host dialogue with highlights, arrows and subtle animation. Skip or close at any time; replay the current page guide from 入馆须知. Tour completion and default nicknames are saved in the current browser. Room display names can be changed at any time without changing previous message signatures. Story verification sits beside submitting a question.

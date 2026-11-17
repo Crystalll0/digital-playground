@@ -22,6 +22,10 @@ Update copy, fix spoilers and add Chinese/English
 
 Simplified homepage copy, restricted clues to confirmed player questions, and filtered older spoilers. Added Chinese/English switching with remembered preference.
 
+2026-11-17 第23版：我的题库隐藏顶部介绍，直接展示个人列表与搜索筛选；寻一碗汤首页底部增加居中下拉箭头，可点击滚动至全部汤面。切换页面返回顶部，支持手机布局和减少动态效果偏好。
+
+Version 23 (2026-11-17): My puzzles opens directly on the personal list and filters, without the hero. A centered downward cue on Find a puzzle scrolls to and focuses the full menu. View changes return to the top; phone layouts and reduced-motion preferences are supported.
+
 ## 阶段 3 / Stage 3 · 新增故事核验、揭晓和换题功能
 
 2026-11-16

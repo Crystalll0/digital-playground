@@ -8,6 +8,21 @@ A late-night lateral thinking mystery game, designed by Crystal Chen.
 
 > Current access: public. Anyone with the link can open the game and join a room. Sign-in is required to save a personal collection; private puzzle scopes and hidden solutions remain protected. 网站现已公开，保存个人题库需登录，私人题目和未揭晓的汤底仍受保护。
 
+## Latest release / 最新发布
+
+**第22版 / Version 22 — 2026-11-17 17:09（香港时间 / Hong Kong time）**  
+Sites source commit: `c2758966874dbc550288d73a842364fa760cd5ad`.
+
+全员准备后从所有参赛者共同未玩过的题目中抽题，无候选题时保持等待。第22版将状态、个人用时、提问与提示次数整合到同桌侧栏；合作局明确显示全桌共享统计，数字独立于语言翻译。个人成功与全员结束时自动弹出居中结算，可重新打开或从档案查看。新增真正的离房、未完成者弃权确认、房主转交及成员通知；完成者离开后保留成绩与排名，离线不自动弃权。提示改为针对当前汤面及已有问答给出下一步可问的具体问题，未通过检查不扣提示次数。保留第21版请求校验。通过17个测试文件、类型检查、构建及本地桌面/手机界面检查；已发布第22版，AI测试使用模拟响应。
+
+Draw only from puzzles unseen by every active participant after everyone is ready; wait if none remain. Version 22 moves status, personal time and question/hint counts beside the conversation, labels cooperative totals as shared, and keeps numbers independent of DOM translation. Centered results open automatically on personal success and final completion, with reopening and archive review. Add server-side departure, confirmation before unfinished players concede, host transfer and member notices; preserve finishers’ scores/ranks and never auto-concede offline players. Hints suggest concrete next questions grounded in the public puzzle and prior discussion, with no hint charge for failed checks. Retain version 21 request validation. Passed 17 test files, type checks, build and local desktop/phone checks; version 22 is deployed. AI tests use mocked responses.
+
+退出房间请使用“同桌的客人 → 退出房间”。返回汤单只是暂离；关闭网页或断线30秒后显示暂时离线，不会自动弃权。已完成玩家可保留成绩去玩下一碗，再从“我的档案 → 对抗记录”查看更新后的榜单。
+
+Use **At this table → Leave room** to leave. Returning to the menu is temporary; a closed or disconnected page becomes offline after 30 seconds without automatically conceding. Finishers can leave with their score saved and review the updated leaderboard through **My archive → Competitive records**.
+
+This public repository remains a portfolio/documentation archive. Original application source stays in the authorized Sites repository; production data, secrets and hidden puzzle solutions are not copied here.
+
 ## Language / 语言
 
 Use the EN / 中文 control in the header. The browser remembers the selection. Common controls switch directly; puzzle text and dynamic interface content are translated on demand using the configured AI service, so the first English view may take a moment and requires working API access. Nickname and input values are preserved, and option values remain stable. English voice input and standard-answer readout follow the selected language. Automated translation quality still needs bilingual playtesting.

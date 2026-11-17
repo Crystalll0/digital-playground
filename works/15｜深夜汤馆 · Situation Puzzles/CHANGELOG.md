@@ -92,12 +92,15 @@ Fix puzzle switching and verification; add feedback and administrator ratings
 
 Isolate solution requests by puzzle to prevent cross-round reveals and incorrect played markers. Independently audit core facts and contradictions, with an almost-there prompt for incomplete reconstructions. Add difficulty suggestions, optional ratings, reasons and proposed edits, plus authenticated administrator review. Add manual played markers, archive statistics and a completion dialog; correct genre answers, English punctuation and layout, and remove editorial solution addenda. Reveal administrator access with 19 consecutive logo clicks and a server-verified passphrase. Initial setup/reset requires the existing administrator account; optionally remember a device for 30 days, sign out at any time, and edit public puzzle difficulty for all visitors.
 
-## 阶段 10 / Stage 10 · 对抗随机题排除所有参赛者已玩题目
+## 阶段 10 / Stage 10 · 完善对抗公平性、同桌统计、结算与离房
 
-2026-11-17
+2026-11-17 · 第22版 / Version 22
 
-每位玩家准备时同步当前浏览器的已玩标记，包含手动标记及看过汤底的题目。全部参赛者准备后，排除所有人的已玩题合集，再随机抽取共同未玩题；没有符合条件的题目时提示无法开局，不揭题、不计时。支持两人或多人，退出玩家不参与筛选，个人已玩清单不向对手公开。
+全员准备后从所有参赛者共同未玩过的题目中抽题，无候选题时保持等待。第22版将状态、个人用时、提问与提示次数整合到同桌侧栏；合作局明确显示全桌共享统计，数字独立于语言翻译。个人成功与全员结束时自动弹出居中结算，可重新打开或从档案查看。新增真正的离房、未完成者弃权确认、房主转交及成员通知；完成者离开后保留成绩与排名，离线不自动弃权。提示改为针对当前汤面及已有问答给出下一步可问的具体问题，未通过检查不扣提示次数。保留第21版请求校验。通过17个测试文件、类型检查、构建及本地桌面/手机界面检查；已发布第22版，AI测试使用模拟响应。
 
-Exclude every participant's played puzzles from competitive draws
+Improve competitive fairness, table statistics, results and departures
 
-Sync each participant's current-browser played markers when they ready up, including manual markers and revealed solutions. Once everyone is ready, exclude the union of all active participants' played puzzles and draw from the remaining shared unseen pool. If none remain, keep the lobby sealed and untimed with a clear message. Supports two or more players, excludes withdrawn players, and keeps individual played lists private.
+Draw only from puzzles unseen by every active participant after everyone is ready; wait if none remain. Version 22 moves status, personal time and question/hint counts beside the conversation, labels cooperative totals as shared, and keeps numbers independent of DOM translation. Centered results open automatically on personal success and final completion, with reopening and archive review. Add server-side departure, confirmation before unfinished players concede, host transfer and member notices; preserve finishers’ scores/ranks and never auto-concede offline players. Hints suggest concrete next questions grounded in the public puzzle and prior discussion, with no hint charge for failed checks. Retain version 21 request validation. Passed 17 test files, type checks, build and local desktop/phone checks; version 22 is deployed. AI tests use mocked responses.
+
+Sites source commit: `c2758966874dbc550288d73a842364fa760cd5ad`  
+Published: 2026-11-17 17:09 (Hong Kong time).

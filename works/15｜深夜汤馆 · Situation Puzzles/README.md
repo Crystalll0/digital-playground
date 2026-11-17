@@ -79,4 +79,4 @@ See [CHANGELOG.md](CHANGELOG.md) for dated development records. All dates use Ho
 
 ## Puzzle feedback / 题目反馈
 
-Submit a difficulty suggestion and optional rating, reason or proposed changes beside the puzzle. Feedback Records shows your submissions. Sign in with the configured administrator account to review all submissions; access is checked server-side.
+Submit a difficulty suggestion and optional rating, reason or proposed changes beside the puzzle. Feedback Records shows your submissions. Click the top-left logo 19 times to reveal administrator access. The existing administrator account is required only to set or reset a 12–128-character passphrase. Thereafter the passphrase works without account sign-in, with optional 30-day device access. Administrators can review all feedback and edit public puzzle difficulty. Passphrases are stored as salted PBKDF2 hashes; device sessions are server-checked, expire automatically and are revoked by logout or passphrase reset. Normal Feedback Records shows only the visitor's own submissions.

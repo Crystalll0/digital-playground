@@ -82,15 +82,15 @@ Add competitive play and multiple human DMs
 
 Added synchronized competitive starts, private question/hint histories and status-only opponents, plus volunteer multiple DMs, deferred hosting, capacity votes and informed spectators; fixed exclusive mode selection.
 
-## 阶段 9 / Stage 9 · 修复换汤剧透与核验误判，新增题目反馈
+## 阶段 9 / Stage 9 · 修复换汤与核验，新增反馈和管理员评级
 
 2026-11-17
 
-按题目隔离汤底请求，避免换汤后泄露答案或误标已玩；完整故事增加关键事实与矛盾复核，接近时提示继续补充。新增难度建议、好评／差评、理由与修改方案，管理员登录后可查看全部反馈；支持手动标记已玩、档案统计和题库通关提示，并修正题型判断、英文标点与排版，移除汤底额外说明。
+按题目隔离汤底请求，避免换汤后泄露答案或误标已玩；完整故事增加关键事实与矛盾复核，接近时提示继续补充。新增难度建议、好评／差评、理由与修改方案，管理员登录后可查看全部反馈；支持手动标记已玩、档案统计和题库通关提示，并修正题型判断、英文标点与排版，移除汤底额外说明。 管理员入口改为连续点击Logo19次并验证口令；首次设置／重置需原管理员账号授权，可记住设备30天、随时退出，并在线调整公开题库难度，所有访客同步生效。
 
-Fix cross-round spoilers and verification; add puzzle feedback
+Fix puzzle switching and verification; add feedback and administrator ratings
 
-Isolate solution requests by puzzle to prevent cross-round reveals and incorrect played markers. Independently audit core facts and contradictions, with an almost-there prompt for incomplete reconstructions. Add difficulty suggestions, optional ratings, reasons and proposed edits, plus authenticated administrator review. Add manual played markers, archive statistics and a completion dialog; correct genre answers, English punctuation and layout, and remove editorial solution addenda.
+Isolate solution requests by puzzle to prevent cross-round reveals and incorrect played markers. Independently audit core facts and contradictions, with an almost-there prompt for incomplete reconstructions. Add difficulty suggestions, optional ratings, reasons and proposed edits, plus authenticated administrator review. Add manual played markers, archive statistics and a completion dialog; correct genre answers, English punctuation and layout, and remove editorial solution addenda. Reveal administrator access with 19 consecutive logo clicks and a server-verified passphrase. Initial setup/reset requires the existing administrator account; optionally remember a device for 30 days, sign out at any time, and edit public puzzle difficulty for all visitors.
 
 ## 阶段 10 / Stage 10 · 对抗随机题排除所有参赛者已玩题目
 

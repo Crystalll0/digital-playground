@@ -190,7 +190,7 @@ body:has(dialog[open]){overflow:hidden}
   <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
   <div class="wrap">
     <div class="kicker">Crystal 的数字游乐场</div>
-    <p class="intro">我用 AI 和代码做交互实验。你可以<b>用双手让花开</b>，也可以在像素早餐店接薯饼。选个作品玩一会儿，或看看它<b>从第一版到现在</b>改了什么。</p>
+    <p class="intro">最近我在用 AI 和代码做一些<b>有意思的东西</b>，有用手势控制的视觉实验、小游戏，也有为了解决日常小问题，或是纯粹出于好奇做的网站。你可以点开玩一玩，也可以看看每个作品的<b>迭代过程</b>。</p>
     <div class="stats"><span><b id="sWorks">0</b> 个作品</span><span><b id="sCommits">0</b> 次迭代</span><span><b id="sRange"></b></span></div>
   </div>
 </section>
@@ -355,7 +355,7 @@ function render(){
   document.getElementById('theme').setAttribute('aria-label',tr('切换深浅色','Toggle light and dark theme'));
   document.querySelector('.hero').setAttribute('aria-label',tr('介绍','Introduction'));
   document.querySelector('.hero .kicker').textContent=tr('Crystal 的数字游乐场','Welcome to Crystal’s digital playground');
-  document.querySelector('.intro').innerHTML=tr('我用 AI 和代码做交互实验。你可以<b>用双手让花开</b>，也可以在像素早餐店接薯饼。选个作品玩一会儿，或看看它<b>从第一版到现在</b>改了什么。','I build interactive experiments with AI and code. <b>Open your hand to make a flower bloom</b>, or catch hash browns in a pixel-art diner. Pick a project to play, or see <b>what changed after the first build</b>.');
+  document.querySelector('.intro').innerHTML=tr('最近我在用 AI 和代码做一些<b>有意思的东西</b>，有用手势控制的视觉实验、小游戏，也有为了解决日常小问题，或是纯粹出于好奇做的网站。你可以点开玩一玩，也可以看看每个作品的<b>迭代过程</b>。','Lately I’ve been using AI and code to make <b>things I find interesting</b>. Some are gesture experiments or games. Others are websites I made to solve a small everyday problem or just to see if an idea would work. Try one out, or see <b>how it evolved</b>.');
   document.getElementById('hint').textContent=tr('↖ 用鼠标或手指拨一拨','↖ Stir the dots with your mouse or finger');
   document.querySelector('#works h2').innerHTML=tr('作品 <em>Works</em>','Works <em>Play & explore</em>');
   document.querySelector('#works .head p').textContent=tr('体验手势类作品需要摄像头权限，画面仅在你的设备上处理。','Gesture projects require camera access; video is processed on your device.');

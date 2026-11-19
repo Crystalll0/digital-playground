@@ -168,6 +168,7 @@ body:has(dialog[open]){overflow:hidden}
   .process-name:hover,.timeline-list-row:hover,.undated button:hover{color:var(--accent)}
 }
 @media(prefers-reduced-motion:reduce){.card:hover,.btn:hover,.btn:active,.filters button:hover,.filters button:active,.icon-btn:active,.stage-step b,.tags span:hover{transform:none!important}.tap-spark{display:none}.poster::after{display:none}}
+.card:focus-within{border-color:var(--work-accent,var(--accent))}.card :focus-visible,.filters :focus-visible,.process-toolbar :focus-visible{outline:3px solid var(--ink);outline-offset:3px}.card .desc{line-height:1.65;text-wrap:pretty}.card .poster:focus-visible{outline-offset:-4px}.block{scroll-margin-top:5rem}
 </style>
 </head>
 <body>
@@ -188,8 +189,8 @@ body:has(dialog[open]){overflow:hidden}
   <canvas id="field" aria-hidden="true"></canvas>
   <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
   <div class="wrap">
-    <div class="kicker">欢迎来到 Crystal · 数字游乐场</div>
-    <p class="intro">近期我在尝试使用 AI 和代码做一些<b>有意思的东西</b>，比如：一组可以通过手势控制的视觉实验、几个小游戏，还有一些解决生活小问题或者满足好奇心的网站。您可以点击以下的任何作品打开试玩，以及它们的<b>迭代过程～</b>。</p>
+    <div class="kicker">Crystal 的数字游乐场</div>
+    <p class="intro">我用 AI 和代码做交互实验。你可以<b>用双手让花开</b>，也可以在像素早餐店接薯饼。选个作品玩一会儿，或看看它<b>从第一版到现在</b>改了什么。</p>
     <div class="stats"><span><b id="sWorks">0</b> 个作品</span><span><b id="sCommits">0</b> 次迭代</span><span><b id="sRange"></b></span></div>
   </div>
 </section>
@@ -246,33 +247,33 @@ PROJECT_HISTORY["深夜汤馆 Situation Puzzles"] = {"note":["根据本次对话
 PROCESS_REFLECTIONS["深夜汤馆 Situation Puzzles"] = [{"kind":"author","observation":["基本玩法已建立，首页表达和线索显示仍需改进。","The core game needed clearer copy and safer clues."],"direction":["修改首页文案、修复剧透并新增中英文。","Update copy, fix spoilers and add Chinese/English."]},{"kind":"author","observation":["试用中需要更明确的完成反馈和下一局入口。","Play needed clearer completion feedback and a next-round entry."],"direction":["新增故事核验、揭晓和换题功能。","Add story verification, reveals and puzzle switching."]},{"kind":"author","observation":["游玩后需要复盘、留存成绩，以及暂停后继续的方式。","Play needed reviews, retained results and resumable progress."],"direction":["新增游玩档案、排行榜和进度存档。","Add records, rankings and resumable saves."]},{"kind":"author","observation":["首次进入多个功能页面时，不清楚从哪里开始。","First visits needed clearer entry points and guidance."],"direction":["新增首次访问指引与昵称设置。","Add first-visit guides and nickname settings."]},{"kind":"author","observation":["推理卡住时缺少轻微提示，录音状态和发送方式也不够顺手。","Stalled solving needed hints and better voice/submission controls."],"direction":["新增提示、匿名投票并优化语音输入。","Add hints, anonymous voting and voice improvements."]},{"kind":"author","observation":["题库来源不止知乎，截图内容也需要便捷录入。","Imports needed more sources and screenshot text extraction."],"direction":["扩展链接读取并新增图片文字识别。","Expand link imports and add image OCR."]},{"kind":"author","observation":["合作之外还希望各自竞赛，真人主持也需要多人协作。","Play needed private competition and multiple human hosts."],"direction":["新增对抗模式与多DM主持。","Add competitive play and multiple human DMs."]},{"kind":"test","observation":["核验成功后换汤会串出答案，缺少关键因果的猜测也被判为完成；玩家需要直接反馈题目问题。","After solving, switching puzzles could carry over a solution, while incomplete reconstructions passed verification; players also needed a way to report puzzle issues."],"direction":["隔离每局汤底请求，增加独立核验，补齐题目反馈与管理员查看。","Isolate round-specific solution requests, add an independent verification audit, and introduce puzzle feedback with administrator review."]},{"kind":"test","observation":["对抗中随机到某位参赛者已经玩过的故事，会影响比赛公平。","A random competitive puzzle already known to any participant makes the match unfair."],"direction":["全员准备后从所有人共同未玩过的题目中抽题，没有候选题时保持等待。","Draw only from puzzles unseen by all active participants after everyone is ready; keep the lobby waiting if no candidates remain."]},{"kind":"users","observation":["试用反馈指出次数不易看到、结算位于顶部，以及离房未同步；空泛提示不能帮助下一步提问。","Tryouts found hidden counts, results above the play area, unsynchronized departures and hints too vague to guide the next question."],"direction":["把实时统计放到同桌侧栏，加入居中结算与明确后续入口；区分离线和离房，保留完成成绩并转交房主；提示围绕当前汤面提出具体问题。","Move live statistics to the table panel; center result dialogs with clear next steps. Separate offline presence from departure, retain finished scores and transfer hosting. Ground hints in concrete questions about the public puzzle."]}];
 const W = [
   {key:'手势绽放 Bloom', zh:'手势 · 绽放', en:'Nocturne Bloom', big:true, cat:['gesture','art'], dir:'12｜手势 · 绽放 · Bloom', play:'play/bloom/', img:'assets/covers/bloom.jpg', color:'#ff9ab5',
-   desc:'张开手掌，花卉绽放；握拳，花变回花苞。您也可以上传自己喜欢的花卉绽放视频，进行互动体验！程序会自动将其拆成逐帧画面，跟着你的手势走～', tags:['MediaPipe','Canvas','AI 视频']},
+   desc:'张开手掌，看花朵绽放；握拳，让它收回花苞。也可以上传一段开花视频，用手势控制它的播放进度。', tags:['MediaPipe','Canvas','AI 视频']},
   {key:'手势取景框 Window', zh:'手势 · 取景框', en:'Gesture Window', big:true, cat:['gesture'], dir:'13｜手势 · 取景框 · Window', play:'play/window/', poster:'window', color:'#e0322b',
-   desc:'伸出双手，比出拍照的姿势，即可为现实解锁不同的画风！', tags:['MediaPipe','人像分割','8 种风格']},
+   desc:'双手比出取景框，看看眼前的场景换上不同画风是什么样子。', tags:['MediaPipe','人像分割','8 种风格']},
   {key:'手势星云 Nebula', zh:'手势 · 星云', en:'Gesture Nebula', cat:['gesture','art'], dir:'11｜手势 · 星云 · Nebula', play:'play/nebula/', poster:'nebula', color:'#7cf2d6',
-   desc:'用手势互动，尽情探索这片星系吧……', tags:['手势','粒子','音景']},
+   desc:'移动双手，在粒子与声音构成的星系中探索。', tags:['手势','粒子','音景']},
   {key:'撕开现实 Tear Reality', zh:'撕开现实', en:'Tear Reality', cat:['gesture','art'], dir:'14｜手势 · 撕开现实 · Tear Reality', play:'play/tear-reality/', poster:'tear', color:'#3d8bff',
-   desc:'想解压或与环境互动？本程序现已支持与实时画面互动，使用手机后置摄像头打开体验更佳～ 你也可以上传想互动的图片或视频进行体验', tags:['Three.js','WebGL','Shader']},
+   desc:'用手势撕开摄像头里的画面。试试手机后置摄像头，也可以上传照片或视频。', tags:['Three.js','WebGL','Shader']},
   {key:'流场花园 Flow Garden', zh:'流场花园', en:'Flow Garden', cat:['art'], dir:'09｜流场花园· Flow', play:'play/flow-garden/', poster:'flow', color:'#a99bff',
-   desc:'试试随心点一下、拖一下，看看线条会如何流动…… ', tags:['生成艺术','Perlin 噪声','录屏']},
+   desc:'轻点或拖动画布，看看线条会沿着哪条路径流动。', tags:['生成艺术','Perlin 噪声','录屏']},
   {key:'薯饼接接乐 Hash Brown Catch', zh:'薯饼接接乐', en:'Hash Brown Catch', big:true, cat:['game'], dir:'06｜薯饼接接乐 · Hash Brown Catch', play:'play/hash-brown-catch/', img:'assets/covers/hash-brown.jpg', color:'#f5a623',
-   desc:'8-bit 早餐小游戏！尝试滑动炸篮接住掉下来的薯饼，这可没那么简单哦。更多彩蛋惊喜，等你来解锁……', tags:['p5.js','游戏','IP 设计']},
+   desc:'左右滑动炸篮，接住掉下来的薯饼。看看你能在这家像素早餐店接住多少！', tags:['p5.js','游戏','IP 设计']},
   {key:'理大食乜机 PolyU Lunch', zh:'理大食乜机', en:'PolyU Lunch Machine', big:true, cat:['game','tool'], dir:'08｜理大食乜机 PolyU Lunch decide', play:'play/polyu-eats/', poster:'polyu', livePreview:true, color:'#ffd25a',
-   desc:'不知道吃什么？拉一下拉杆，亦可使用快速筛选工具！想要了解食物选择，价格、地点、营业时间？打开立即查看理大校内和周边的一千多道菜。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
+   desc:'拉动摇杆，随机选一道菜；也可以按条件筛选。菜单收录了香港理工大学及周边的一千多道菜，附价格、地点和营业时间。', tags:['拉霸机','简 / 繁 / EN','菜单数据']},
   {key:'月隐 Moonveil', zh:'月隐', en:'Moonveil', big:true, cat:['web'], dir:'01｜月隐 · MOONVEIL ｜占卜', play:'https://moonveil.yueruchen.online/', external:true, img:'assets/covers/moonveil.jpg', color:'#9b7cff',
-   desc:'一间夜色里的灵感占卜室：水晶球、月光和一点点仪式感。', tags:['网站','交互叙事']},
+   desc:'走进月光下的占卜室，向水晶球提一个问题。', tags:['网站','交互叙事']},
   {key:'安可工作室 Encore Studio', zh:'安可工作室', en:'Encore Studio', big:true, cat:['web'], dir:'02｜安可工作室 · Encore Studio｜ 启德 · 手链', play:'works/02｜安可工作室 · Encore Studio｜ 启德 · 手链/Encore_Studio_v5_1.html', img:'assets/covers/encore.png', color:'#c9b6ff',
-   desc:'Your live memories：把在演唱会的现场回忆，串成一条水晶手链。', tags:['网站','定制工具']},
+   desc:'挑选珠子，把演唱会的回忆串成一条水晶手链。', tags:['网站','定制工具']},
   {key:'纸间 Paper Room', zh:'纸间', en:'Paper Room', cat:['tool'], dir:'04｜纸间 · Paper Room｜折纸&剪纸', play:'works/04｜纸间 · Paper Room｜折纸&剪纸/PAPER-ROOM 3/dist/index.html', img:'assets/covers/paper.jpg', color:'#2f6b55',
-   desc:'欢迎体验线上纸艺工作室！折纸、剪纸、粘贴，自由搭配纸张颜色和选择纸张尺寸，建立你的电子作品库～', tags:['几何','教程','中 / EN']},
+   desc:'选好纸张的颜色和尺寸，试着折、剪、贴，把完成的纸艺作品收入自己的收藏。', tags:['几何','教程','中 / EN']},
   {key:'行迹 The Personal Atlas', zh:'行迹', en:'The Personal Atlas', cat:['tool','web'], dir:'07｜行迹 · The Personal Atlas', play:'https://atlas.yueruchen.online/', external:true, poster:'atlas', color:'#c8553d',
-   desc:'旅行手札：您的专属旅行记忆收集册！不管是文字、照片、印章或是邮戳，上传即可记录你的过往旅行路线，亦可导出成一份可分享的手札～', tags:['Leaflet','离线','照片 EXIF']},
+   desc:'用照片和文字记录走过的路线，配上印章与邮戳，再导出一本可以分享的旅行手札。', tags:['Leaflet','离线','照片 EXIF']},
   {key:'爪爪衣橱 Pawmoire', zh:'爪爪衣橱', en:'Pawmoire', cat:['web'], dir:'05｜爪爪衣橱· Pawmoire｜宠物换装', play:'https://pawmoire.yueruchen.online/', external:true, img:'assets/covers/pawmoire.jpg', color:'#8aa37a',
-   desc:'超便利给自家毛孩子换装的网站！只需要一张宝贝的图片&一张参考图即可立即体验', tags:['Next.js','AI 换装','线上站']},
+   desc:'上传一张宠物照片和一张穿搭参考图，看看它换上新造型的样子。', tags:['Next.js','AI 换装','线上站']},
   {key:'序章 Index', zh:'序章', en:'Prologue', big:false, cat:['tool'], dir:'03｜序章 · Index ｜日程&计划', play:'https://prologue.yueruchen.online/', external:true, poster:'index', color:'#ff4d2e',
-   desc:'把每一步，写成成就！一个把日程和计划变成「解锁成就」的工具，依旧是很好用的日程规划表。', tags:['计划','日程']},
+   desc:'安排日程、设定目标，让完成的小事变成可以收藏的成就徽章。', tags:['计划','日程']},
   {key:'毛孩子日历 Pet Calendar', zh:'毛孩子日历', en:'Pet Calendar', big:false, cat:['tool'], dir:'10｜毛孩子日历', play:'play/pet-calendar/', poster:'pet', color:'#e8a23a',
-   desc:'记录家里毛孩子的专属日历：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你～', tags:['日历','本地保存']},
+   desc:'把喂食、驱虫、接种疫苗和洗澡的日子记在宠物专属日历上。', tags:['日历','本地保存']},
   {"key":"深夜汤馆 Situation Puzzles","zh":"深夜汤馆","en":"Situation Puzzles","big":false,"cat":["game","web"],"dir":"15｜深夜汤馆 · Situation Puzzles","play":"https://mystery.yueruchen.online/","external":true,"privatePreview":false,"img":"assets/covers/situation-puzzles.svg","color":"#dfbd7f","desc":"夜深了，故事才刚开始。独自推敲，或与朋友同桌，通过文字与语音提问，一点点拼回海龟汤的真相；也可以自己当主持、上传题库或在线写汤。","tags":["AI 主持","多人解谜","原创题库"]},
 ];
 const escapeHTML = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -288,15 +289,15 @@ const tr=(zh,en)=>lang==='en'?en:zh;
 const pick=pair=>pair[lang==='en'?1:0];
 const CATS=[['all','全部','All'],['gesture','手势交互','Gestures'],['art','生成艺术','Generative art'],['game','游戏','Games'],['tool','工具','Tools'],['web','网站','Websites']];
 const EN_DESC=[
-  'Open your palm to bloom; make a fist to return to a bud. Upload a blooming-flower video and the app turns it into frames that follow your gestures.',
+  'Open your hand to make a flower bloom. Close it to turn the flower back into a bud. Upload a blooming-flower video and the app turns it into frames that follow your gestures.',
   'Frame a shot with both hands to unlock different visual styles in your surroundings.',
   'Explore a galaxy through gestures, particles and sound.',
-  'Unwind and interact with your surroundings. Live camera interaction is now supported; try your phone’s rear camera for a better view. You can also upload an image or video.',
+  'Tear through a live camera image with a gesture. Try your phone’s rear camera to play with the scene around you. You can also upload an image or video.',
   'Tap, drag and see where the flowing lines take you.',
   'An 8-bit breakfast game! Slide the basket to catch falling hash browns. It is trickier than it looks, with surprises to discover.',
   'Not sure what to eat? Pull the lever or use quick filters. Explore over a thousand dishes on and around the PolyU campus, with prices, locations and opening hours.',
   'A moonlit room for divination and inspiration: crystal balls, moonlight and a little ritual.',
-  'Your live memories: turn concert moments into a crystal charm bracelet.',
+  'Choose beads and string your concert memories into a crystal bracelet.',
   'A digital paper studio for folding, cutting and gluing. Choose paper colors and sizes, then build your own collection.',
   'A personal travel journal for words, photos, stamps and postmarks. Collect routes and memories, then export a journal to share.',
   'A pet styling studio: upload a photo of your pet and an outfit reference to try a new look.',
@@ -304,7 +305,7 @@ const EN_DESC=[
   'A calendar for your pets: keep track of meals, parasite prevention, vaccines and bath times.',
   "A late-night lateral thinking game. Play solo or share a room, ask questions by text or transcribed voice, and piece together the truth. Host a game yourself, import puzzles or write your own."
 ];
-const EN_TAGS={'AI 主持':'AI host','多人解谜':'Multiplayer mysteries','原创题库':'Puzzle creation','AI 视频':'AI video','人像分割':'Segmentation','8 种风格':'8 styles','手势':'Gestures','粒子':'Particles','音景':'Soundscape','生成艺术':'Generative art','Perlin 噪声':'Perlin noise','录屏':'Recording','游戏':'Game','IP 设计':'Character design','拉霸机':'Slot machine','简 / 繁 / EN':'简 / 繁 / EN','菜单数据':'Menu data','网站':'Website','交互叙事':'Interactive narrative','定制工具':'Customizer','几何':'Geometry','教程':'Tutorials','中 / EN':'中文 / EN','离线':'Offline','照片 EXIF':'Photo EXIF','AI 换装':'AI styling','线上站':'Live site','计划':'Planning','日程':'Schedule','日历':'Calendar','本地保存':'Local storage'};
+const EN_TAGS={'AI 主持':'AI host','多人解谜':'Multiplayer mysteries','原创题库':'Puzzle creation','AI 视频':'AI video','人像分割':'Person segmentation','8 种风格':'8 styles','手势':'Gestures','粒子':'Particles','音景':'Soundscape','生成艺术':'Generative art','Perlin 噪声':'Perlin noise','录屏':'Recording','游戏':'Game','IP 设计':'Character design','拉霸机':'Slot machine','简 / 繁 / EN':'Simplified Chinese / Traditional Chinese / English','菜单数据':'Menu data','网站':'Website','交互叙事':'Interactive narrative','定制工具':'Customizer','几何':'Geometry','教程':'Tutorials','中 / EN':'Chinese / English','离线':'Offline','照片 EXIF':'Photo EXIF','AI 换装':'AI styling','线上站':'Live site','计划':'Planning','日程':'Schedule','日历':'Calendar','本地保存':'Local storage'};
 const accessHelp=w=>w.key==='深夜汤馆 Situation Puzzles'
   ?tr('本项目已公开，可通过链接进入并使用房间码共同游玩。保存个人题库需要登录；私人题库和未揭晓的汤底仍受权限保护。AI 功能使用 OpenAI 服务，部分地区可能访问受限。','This project is public: open the link and use a room code to play together. Sign-in is required to save a personal puzzle collection. Private puzzles and unrevealed solutions remain protected. AI features use OpenAI services; regional access may vary.')
   :w.key==='月隐 Moonveil'
@@ -353,12 +354,12 @@ function render(){
   document.getElementById('language').setAttribute('aria-label',tr('Switch to English','切换为中文'));
   document.getElementById('theme').setAttribute('aria-label',tr('切换深浅色','Toggle light and dark theme'));
   document.querySelector('.hero').setAttribute('aria-label',tr('介绍','Introduction'));
-  document.querySelector('.hero .kicker').textContent=tr('欢迎来到 Crystal · 数字游乐场','Welcome to Crystal’s digital playground');
-  document.querySelector('.intro').innerHTML=tr('近期我在尝试使用 AI 和代码做一些<b>有意思的东西</b>，比如手势视觉实验、小游戏，以及解决生活小问题或满足好奇心的网站。你可以打开作品试玩，也可以查看它们的<b>迭代过程</b>。','Lately I have been using AI and code to make <b>curious little things</b>: gesture experiments, games and websites for everyday problems and playful ideas. Try a project or explore <b>how it evolved</b>.');
+  document.querySelector('.hero .kicker').textContent=tr('Crystal 的数字游乐场','Welcome to Crystal’s digital playground');
+  document.querySelector('.intro').innerHTML=tr('我用 AI 和代码做交互实验。你可以<b>用双手让花开</b>，也可以在像素早餐店接薯饼。选个作品玩一会儿，或看看它<b>从第一版到现在</b>改了什么。','I build interactive experiments with AI and code. <b>Open your hand to make a flower bloom</b>, or catch hash browns in a pixel-art diner. Pick a project to play, or see <b>what changed after the first build</b>.');
   document.getElementById('hint').textContent=tr('↖ 用鼠标或手指拨一拨','↖ Stir the dots with your mouse or finger');
   document.querySelector('#works h2').innerHTML=tr('作品 <em>Works</em>','Works <em>Play & explore</em>');
   document.querySelector('#works .head p').textContent=tr('体验手势类作品需要摄像头权限，画面仅在你的设备上处理。','Gesture projects require camera access; video is processed on your device.');
-  document.querySelector('#timeline h2').innerHTML=tr('迭代 <em>Process</em>','Process <em>In progress</em>');
+  document.querySelector('#timeline h2').innerHTML=tr('迭代 <em>Process</em>','Process <em>Project history</em>');
   document.querySelector('#timeline .head p').textContent=tr('从需求、试用与反馈走向下一轮调整。点击节点查看阶段与体验复盘，也可切换日期视图。','From ideas and feedback to the next iteration. Select a node to explore a stage and its reflections, or switch to the date view.');
   fbox.setAttribute('aria-label',tr('筛选作品','Filter projects'));
   grid.innerHTML='';fbox.innerHTML='';
@@ -371,7 +372,7 @@ function render(){
     grid.appendChild(el);
   });
   CATS.forEach(([k,zh,en])=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',k===activeFilter);b.innerHTML=`${tr(zh,en)}<span>${k==='all'?W.length:W.filter(w=>w.cat.includes(k)).length}</span>`;b.onclick=()=>{activeFilter=k;render();};fbox.appendChild(b);});
-  document.querySelector('.stats').innerHTML=`<span><b id="sWorks">${W.length}</b> ${tr('个作品','projects')}</span><span><b id="sCommits">${W.reduce((n,w)=>n+w.n,0)}</b> ${tr('条迭代记录','history records')}</span><span><b id="sRange">2026.09.17 — ${tr('至今','present')}</b></span>`;
+  document.querySelector('.stats').innerHTML=`<span><b id="sWorks">${W.length}</b> ${tr('个作品','projects')}</span><span><b id="sCommits">${W.reduce((n,w)=>n+w.n,0)}</b> ${tr('条迭代记录','development updates')}</span><span><b id="sRange">2026.09.17 — ${tr('至今','present')}</b></span>`;
   timeline();paintPosters();if(openWork)openHistory(openWork);
 }
 document.getElementById('language').onclick=()=>{
@@ -583,7 +584,7 @@ function timeline(){
 }
 let timelineMode='process';
 function timelineToolbar(){
-  return `<div class="process-toolbar" role="group" aria-label="${tr('记录视图','History view')}"><button type="button" data-view="process" aria-pressed="${timelineMode==='process'}">${tr('迭代过程','Stage sequence')}</button><button type="button" data-view="dates" aria-pressed="${timelineMode==='dates'}">${tr('日期视图','By date')}</button></div>`;
+  return `<div class="process-toolbar" role="group" aria-label="${tr('记录视图','History view')}"><button type="button" data-view="process" aria-pressed="${timelineMode==='process'}">${tr('迭代过程','By stage')}</button><button type="button" data-view="dates" aria-pressed="${timelineMode==='dates'}">${tr('日期视图','By date')}</button></div>`;
 }
 function bindTimeline(box){
   const tip=document.getElementById('tip');
@@ -619,7 +620,7 @@ function processTimeline(){
 }
 function reflectionHTML(w,index){
   const reflection=PROCESS_REFLECTIONS[w.key]?.[index];if(!reflection)return '';
-  const label=reflection.kind==='author'?tr(w.key==='深夜汤馆 Situation Puzzles'?'体验复盘 · 试用记录':'体验复盘 · 作者试用',w.key==='深夜汤馆 Situation Puzzles'?'Experience review · Tryout notes':'Experience review · Author tryout'):reflection.kind==='users'?tr('体验复盘 · 用户试用','Experience review · User tryout'):reflection.kind==='feedback'?tr('体验复盘 · 已记录反馈','Experience review · Recorded feedback'):tr('设计思考 · 根据版本变化整理','Design reflection · Reconstructed from version changes');
+  const label=reflection.kind==='author'?tr(w.key==='深夜汤馆 Situation Puzzles'?'体验复盘 · 试用记录':'体验复盘 · 作者试用',w.key==='深夜汤馆 Situation Puzzles'?'Playtest notes':'Creator’s playtest notes'):reflection.kind==='users'?tr('体验复盘 · 用户试用','User testing notes'):reflection.kind==='feedback'?tr('体验复盘 · 已记录反馈','Experience review · Recorded feedback'):tr('设计思考 · 根据版本变化整理','Design reflection · Reconstructed from version changes');
   return `<aside class="reflection" style="--project-color:${w.color}"><span class="reflection-label">${label}</span><p><b>${reflection.kind==='design'?tr('思考角度','Design question'):tr('观察与反馈','Observation & feedback')}</b>${escapeHTML(pick(reflection.observation))}</p><p><b>${tr('下一轮方向','Direction for the next stage')}</b>${escapeHTML(pick(reflection.direction))}</p></aside>`;
 }
 

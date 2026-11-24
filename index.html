@@ -46,9 +46,10 @@ a{color:inherit}
 @media (max-width:370px){.logo span{display:none}}
 
 /* hero */
-.hero{position:relative;height:min(72vh,640px);min-height:440px;display:grid;align-content:end;padding-bottom:40px}
+.hero{position:relative;padding-bottom:40px}
+.hero-art{position:relative;height:clamp(200px,22vw,290px);overflow:hidden;isolation:isolate}
 #field{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;cursor:crosshair}
-.hero .wrap{position:relative;pointer-events:none;display:grid;gap:18px}
+.hero .wrap{position:relative;pointer-events:none;display:grid;gap:18px;margin-top:18px}
 .hero .wrap > *{pointer-events:auto}
 .kicker{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
 .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
@@ -135,7 +136,7 @@ body:has(dialog[open]){overflow:hidden}
 .history-head{display:flex;justify-content:space-between;align-items:start;gap:16px}.history-head h2{margin:4px 0 18px;font-size:28px}.history-head .kicker{margin:0}.history-head button{font-size:28px;padding:0 8px}
 .history-note{color:var(--muted);font-size:13px;line-height:1.85}.history-entry{border-top:1px solid var(--line);padding:20px 0}.history-entry time{font:11px/1.7 var(--mono);color:var(--muted)}.history-entry h3{font-size:17px;margin:6px 0}.history-entry p{margin:6px 0;font-size:14px;line-height:1.85}.history-entry small{font:11px/1.7 var(--mono);color:var(--muted);overflow-wrap:anywhere}.history-entry a{color:var(--accent)}
 .timeline-list-row{display:flex;justify-content:space-between;gap:14px;width:100%;padding:14px 0;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:14px var(--sans);text-align:left;cursor:pointer}.timeline-list-row small{display:block;color:var(--muted);font:11px/1.8 var(--mono);margin-top:4px}.timeline-list-row b{font:12px var(--mono);white-space:nowrap;color:var(--muted)}
-@media(max-width:640px){.tl svg{display:none}.tl-mobile{display:block}.hero{min-height:480px;height:74svh;max-height:700px}.intro{font-size:15px}.stats{gap:8px 14px}.history-head h2{font-size:24px}.links .btn{padding:9px 12px}.head p{line-height:1.8}.top nav{gap:0}.top nav a,.icon-btn{padding:8px 6px}.logo{font-size:10px;letter-spacing:0}.logo span{max-width:114px;white-space:normal;line-height:1.3}.undated{line-height:2}}
+@media(max-width:640px){.tl svg{display:none}.tl-mobile{display:block}.intro{font-size:15px}.stats{gap:8px 14px}.history-head h2{font-size:24px}.links .btn{padding:9px 12px}.head p{line-height:1.8}.top nav{gap:0}.top nav a,.icon-btn{padding:8px 6px}.logo{font-size:10px;letter-spacing:0}.logo span{max-width:114px;white-space:normal;line-height:1.3}.undated{line-height:2}}
 
 .process-toolbar{display:flex;gap:4px;margin:0 0 18px;position:sticky;left:0;width:max-content;background:var(--chip);padding:4px;border-radius:999px}
 .process-toolbar button{font:500 12px var(--sans);border:0;background:none;color:var(--muted);border-radius:999px;padding:7px 14px;cursor:pointer}.process-toolbar button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 5px #0001}
@@ -169,6 +170,18 @@ body:has(dialog[open]){overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){.card:hover,.btn:hover,.btn:active,.filters button:hover,.filters button:active,.icon-btn:active,.stage-step b,.tags span:hover{transform:none!important}.tap-spark{display:none}.poster::after{display:none}}
 .card:focus-within{border-color:color-mix(in srgb,var(--work-accent) 65%,var(--line))}
+
+/* Give the particle title its own flow space; copy can grow at any text size. */
+.hero .kicker{min-width:0;align-items:flex-start;line-height:1.7;letter-spacing:.1em}
+.hero .kicker::before{flex:0 0 8px;margin-top:.5em}
+.hero .intro{overflow-wrap:break-word}.hero .stats{min-width:0;line-height:1.8}
+.hero-art .hint{top:16px}
+.dual-entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.dual-entry .btn{min-width:0;white-space:normal;justify-content:center;text-align:center;line-height:1.5}
+.dual-entry .history-button{grid-column:1/-1;justify-self:start}
+.entry-note{margin:2px 0 0;font-size:12px;line-height:1.75;color:var(--muted)}
+@media(max-width:699px){.hero-art{height:clamp(220px,64vw,390px)}.hero .wrap{gap:16px;margin-top:12px}.hero{padding-bottom:24px}.hero .kicker{font-size:11px;letter-spacing:.08em}.hero .stats{gap:8px 16px}.dual-entry .btn{font-size:12px;padding:9px 8px}}
+@media(max-width:370px){.hero .wrap{gap:14px}.hero .stats{font-size:12px}}
 </style>
 </head>
 <body>
@@ -186,8 +199,10 @@ body:has(dialog[open]){overflow:hidden}
 </header>
 
 <section class="hero" aria-label="介绍">
+  <div class="hero-art">
   <canvas id="field" aria-hidden="true"></canvas>
   <p class="hint" id="hint">↖ 用鼠标或手指拨一拨</p>
+  </div>
   <div class="wrap">
     <div class="kicker">欢迎来到 Crystal · 数字游乐场</div>
     <p class="intro">近期我在尝试使用 AI 和代码做一些<b>有意思的东西</b>，比如：一组可以通过手势控制的视觉实验、几个小游戏，还有一些解决生活小问题或者满足好奇心的网站。您可以点击以下的任何作品打开试玩，以及它们的<b>迭代过程～</b>。</p>
@@ -274,7 +289,7 @@ const W = [
    desc:'把每一步，写成成就！一个把日程和计划变成「解锁成就」的工具，依旧是很好用的日程规划表。', tags:['计划','日程']},
   {key:'毛孩子日历 Pet Calendar', zh:'毛孩子日历', en:'Pet Calendar', big:false, cat:['tool'], dir:'10｜毛孩子日历', play:'play/pet-calendar/', poster:'pet', color:'#e8a23a',
    desc:'记录家里毛孩子的专属日历：喂食、驱虫、疫苗、洗澡，到点了就在日历上提醒你～', tags:['日历','本地保存']},
-  {"key":"深夜汤馆 Situation Puzzles","zh":"深夜汤馆","en":"Situation Puzzles","big":false,"cat":["game","web"],"dir":"15｜深夜汤馆 · Situation Puzzles","play":"https://mystery.yueruchen.online/","external":true,"privatePreview":false,"img":"assets/covers/situation-puzzles.svg","color":"#dfbd7f","desc":"夜深了，故事才刚开始。独自推敲，或与朋友同桌，通过文字与语音提问，一点点拼回海龟汤的真相；也可以自己当主持、上传题库或在线写汤。","tags":["AI 主持","多人解谜","原创题库"]},
+  {"key":"深夜汤馆 Situation Puzzles","zh":"深夜汤馆","en":"Situation Puzzles","big":false,"cat":["game","web"],"dir":"15｜深夜汤馆 · Situation Puzzles","play":"https://mystery.yueruchen.online/","alternatePlay":"https://soup.ccstudio.site/","external":true,"privatePreview":false,"img":"assets/covers/situation-puzzles.svg","color":"#dfbd7f","desc":"夜深了，故事才刚开始。独自推敲，或与朋友同桌，通过文字与语音提问，一点点拼回海龟汤的真相；也可以自己当主持、上传题库或在线写汤。","tags":["AI 主持","多人解谜","原创题库"]},
 ];
 const escapeHTML = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let lang='zh';
@@ -307,7 +322,7 @@ const EN_DESC=[
 ];
 const EN_TAGS={'AI 主持':'AI host','多人解谜':'Multiplayer mysteries','原创题库':'Puzzle creation','AI 视频':'AI video','人像分割':'Segmentation','8 种风格':'8 styles','手势':'Gestures','粒子':'Particles','音景':'Soundscape','生成艺术':'Generative art','Perlin 噪声':'Perlin noise','录屏':'Recording','游戏':'Game','IP 设计':'Character design','拉霸机':'Slot machine','简 / 繁 / EN':'简 / 繁 / EN','菜单数据':'Menu data','网站':'Website','交互叙事':'Interactive narrative','定制工具':'Customizer','几何':'Geometry','教程':'Tutorials','中 / EN':'中文 / EN','离线':'Offline','照片 EXIF':'Photo EXIF','AI 换装':'AI styling','线上站':'Live site','计划':'Planning','日程':'Schedule','日历':'Calendar','本地保存':'Local storage'};
 const accessHelp=w=>w.key==='深夜汤馆 Situation Puzzles'
-  ?tr('本项目已公开，可通过链接进入并使用房间码共同游玩。保存个人题库需要登录；私人题库和未揭晓的汤底仍受权限保护。AI 功能使用 OpenAI 服务，部分地区可能访问受限。','This project is public: open the link and use a room code to play together. Sign-in is required to save a personal puzzle collection. Private puzzles and unrevealed solutions remain protected. AI features use OpenAI services; regional access may vary.')
+  ?tr('提供 OpenAI 与 DeepSeek 两个入口。若一个入口无法访问，可尝试另一个；实际可用性取决于当地网络及服务状态。','Choose the OpenAI or DeepSeek version. If one does not load, try the other; availability depends on your network and service status.')
   :w.key==='月隐 Moonveil'
   ?tr('本作品使用 OpenAI 服务提供 AI 解读功能。若无法打开，请尝试切换网络或使用 VPN。','This project uses OpenAI services for AI interpretations. If it does not load, try a different network or a VPN.')
   :w.key==='爪爪衣橱 Pawmoire'
@@ -366,7 +381,7 @@ function render(){
   W.forEach((w,i)=>{
     const el=document.createElement('article');el.className='card'+(w.big?' big':'');el.dataset.cat=w.cat.join(' ');el.style.setProperty('--work-accent',w.color);el.hidden=activeFilter!=='all'&&!w.cat.includes(activeFilter);
     const href=w.external?w.play:enc(w.play),name=tr(w.zh,w.en);
-    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.livePreview?`<div class="site-preview"><iframe src="${href}" title="${escapeHTML(name)}" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" data-live-preview></iframe></div>`:w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${escapeHTML(accessHelp(w))}" data-help="${escapeHTML(accessHelp(w))}">ⓘ ${w.privatePreview?tr('私有预览 · 需授权','Private preview · authorization required'):tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,w.enDesc))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a><button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',w.n===1?' record':' records')}</span></button></div></div>`;
+    el.innerHTML=`<div class="poster-wrap"><a class="poster" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${tr('打开 ','Open ')}${escapeHTML(name)}"><span class="num">№${String(i+1).padStart(2,'0')}</span>${w.livePreview?`<div class="site-preview"><iframe src="${href}" title="${escapeHTML(name)}" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" data-live-preview></iframe></div>`:w.img?`<img src="${w.img}" alt="" loading="lazy">`:`<canvas data-poster="${w.poster}" data-color="${w.color}"></canvas>`}${w.cat.includes('gesture')?`<span class="badge">✋ ${tr('需要摄像头','Camera required')}</span>`:''}</a>${w.external?`<button class="access-note" type="button" aria-expanded="false" aria-label="${escapeHTML(accessHelp(w))}" data-help="${escapeHTML(accessHelp(w))}">ⓘ ${w.alternatePlay?tr('双入口可选','Two versions available'):w.privatePreview?tr('私有预览 · 需授权','Private preview · authorization required'):tr('部分地区可能访问受限','Access may vary by region')}</button>`:''}</div><div class="body"><div class="title"><h3>${escapeHTML(name)}</h3><small>${escapeHTML(tr(w.en,w.zh))}</small></div><p class="desc">${escapeHTML(tr(w.desc,w.enDesc))}</p><div class="tags">${w.tags.map(t=>`<span>${escapeHTML(lang==='en'?(EN_TAGS[t]||t):t)}</span>`).join('')}</div><div class="links${w.alternatePlay?' dual-entry':''}"><a class="btn primary" href="${href}" target="_blank" rel="noopener noreferrer">${w.alternatePlay?tr('OpenAI 版 ↗','OpenAI version ↗'):w.external?tr('打开线上版 ↗','Open live site ↗'):tr('打开试玩 ↗','Try it ↗')}</a>${w.alternatePlay?`<a class="btn alternate-entry" href="${w.alternatePlay}" target="_blank" rel="noopener noreferrer">${tr('DeepSeek 版 ↗','DeepSeek version ↗')}</a>`:''}<button class="btn history-button" type="button">${tr('迭代记录','History')} <span class="v">${w.n}${tr(' 条',w.n===1?' record':' records')}</span></button></div>${w.alternatePlay?`<p class="entry-note">${tr('两个入口使用不同的 AI 服务；若一个无法访问，可尝试另一个。','The two versions use different AI services. If one does not load, try the other.')}</p>`:''}</div>`;
     el.querySelector('.history-button').onclick=()=>openHistory(w);
     const note=el.querySelector('.access-note');if(note)note.onclick=()=>{const isOpen=note.classList.toggle('is-open');note.setAttribute('aria-expanded',isOpen);};
     grid.appendChild(el);
@@ -670,8 +685,12 @@ function build(){
   if (maxW > Wd * .92){ fs *= Wd * .92 / maxW; o.font = `italic 400 ${fs}px "Instrument Serif", serif`; }
   o.textBaseline = 'alphabetic'; o.fillStyle = '#000';
   const pad = Math.max(16, (Wd - 1180) / 2 + 16);
-  const top = narrow ? Hd * .06 : Hd * .1;
-  lines.forEach((l, i) => o.fillText(l, pad, top + fs * (i + .85) * (narrow ? .92 : 1)));
+  const metrics=lines.map(line=>o.measureText(line));
+  const ascent=Math.max(...metrics.map(m=>m.actualBoundingBoxAscent||fs*.8));
+  const descent=Math.max(...metrics.map(m=>m.actualBoundingBoxDescent||fs*.2));
+  const lineHeight=fs*1.02;
+  const firstBaseline=(Hd-ascent-descent-(lines.length-1)*lineHeight)/2+ascent;
+  lines.forEach((line,i)=>o.fillText(line,pad,firstBaseline+i*lineHeight));
   const data = o.getImageData(0, 0, off.width, off.height).data;
   const step = Math.max(3, Math.round(fs / 30));
   const old = P; P = [];
@@ -732,5 +751,6 @@ addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 10),
 </script>
 </body>
 </html>
+
 
 

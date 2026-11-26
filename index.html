@@ -208,6 +208,10 @@ body:has(dialog[open]){overflow:hidden}
 .card .btn:not(.primary):hover { background: var(--card-chip); }
 .card .btn.primary { background: var(--card-action); border-color: var(--card-action); color: var(--card-action-ink); }
 .card .btn.primary:hover { background: color-mix(in srgb, var(--card-action) 80%, #fff); border-color: var(--card-action); color: var(--card-action-ink); }
+
+html[lang="en"] .dual-entry{gap:6px}
+html[lang="en"] .dual-entry .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;font-size:12px;line-height:1.4;padding:8px 9px}
+html[lang="en"] .dual-entry .history-button .v{font-size:10px;letter-spacing:0}
 </style>
 </head>
 <body>

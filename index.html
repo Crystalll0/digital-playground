@@ -145,7 +145,7 @@ body:has(dialog[open]){overflow:hidden}
 .reflection-label{font:500 11px/1.7 var(--sans);color:var(--muted)}.reflection p{margin:10px 0 0;font:13px/1.9 var(--sans)}.reflection b{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-bottom:3px}.history-entry{scroll-margin-top:18px}
 @media(max-width:640px){.tl.process-view svg{display:none}.process-mobile{display:block}.process-project{padding:14px 0;border-bottom:1px solid var(--line)}.process-name{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0;border:0;background:none;color:var(--ink);font:500 14px var(--sans);cursor:pointer;text-align:left}.process-name small{font:11px var(--mono);color:var(--muted)}.stage-track{display:flex;gap:0;overflow-x:auto;padding:16px 0 8px;scroll-snap-type:x proximity}.stage-step,.stage-future{position:relative;display:flex;flex-direction:column;align-items:center;width:100px;min-width:100px;padding:0 7px;border:0;background:none;color:var(--muted);font:11px/1.7 var(--sans);text-align:center;scroll-snap-align:start}.stage-step{cursor:pointer}.stage-step b{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--project-color);color:#16140f;font:11px var(--mono);margin-bottom:8px}.stage-step::after{content:'';position:absolute;top:10px;left:50%;width:100%;height:2px;background:var(--project-color);opacity:.5}.stage-step:nth-last-child(2)::after{height:0;border-top:2px dashed var(--project-color);background:none}.stage-future b{width:14px;height:14px;margin:4px 0 12px;border:1.5px solid var(--project-color);border-radius:50%;background:var(--surface);z-index:1}.reflection{margin-left:8px;padding:14px}}
 
-.site-preview{position:absolute;inset:0;background:#f6ead7;overflow:hidden;pointer-events:none}.site-preview iframe{display:block;width:1200px;height:750px;border:0;transform:scale(.4);transform-origin:0 0;pointer-events:none}
+.site-preview{position:absolute;inset:0;background:#f6ead7;overflow:hidden;pointer-events:none}.site-preview iframe{display:block;width:1200px;height:600px;border:0;transform:scale(.4);transform-origin:0 0;pointer-events:none}
 .card{position:relative;isolation:isolate;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
 .poster::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,50%),#fff2,transparent 62%);opacity:0;transition:opacity .3s;z-index:1}
 .poster .num{z-index:2}.poster .badge{z-index:2}
@@ -319,7 +319,7 @@ const W = [
   {"key":"深夜汤馆 Situation Puzzles","zh":"深夜汤馆","en":"Situation Puzzles","big":false,"cat":["game","web"],"dir":"15｜深夜汤馆 · Situation Puzzles","play":"https://mystery.yueruchen.online/","alternatePlay":"https://soup.ccstudio.site/","external":true,"privatePreview":false,"img":"assets/covers/situation-puzzles.svg","color":"#dfbd7f","desc":"夜深了，故事才刚开始。独自推敲，或与朋友同桌，通过文字与语音提问，一点点拼回海龟汤的真相；也可以自己当主持、上传题库或在线写汤。","tags":["AI 主持","多人解谜","原创题库"]},
   {"key":"心愿邮局 Wishpost","zh":"心愿邮局","en":"Wishpost","big":false,"cat":["web","tool"],"dir":"16｜心愿邮局 · Wishpost","play":"https://wishpost.ccstudio.site/","external":true,"privatePreview":false,"img":"assets/covers/wishpost.svg","color":"#e7b2ab","desc":"一间复古的网上邮局。写心愿信、设计礼物包装，把限量礼物链接寄给朋友，再把收到的礼物收藏起来。","tags":["互动网站","数字礼物","简 / 繁 / EN"]},
 ];
-const PROJECT_LANGUAGES = {"流场花园 Flow Garden":["简","繁","EN"],"撕开现实 Tear Reality":["简","繁","EN"],"手势星云 Nebula":["简","繁","EN"],"手势取景框 Window":["简","繁","EN"],"薯饼接接乐 Hash Brown Catch":["简","繁","EN","IT"],"理大食乜机 PolyU Lunch":["简","繁","EN"],"安可工作室 Encore Studio":["简","繁","EN"],"纸间 Paper Room":["简","繁","EN"],"深夜汤馆 Situation Puzzles":["简","EN"],"心愿邮局 Wishpost":["简","繁","EN"]};
+const PROJECT_LANGUAGES = {"手势绽放 Bloom":["简","繁","EN"],"流场花园 Flow Garden":["简","繁","EN"],"撕开现实 Tear Reality":["简","繁","EN"],"手势星云 Nebula":["简","繁","EN"],"手势取景框 Window":["简","繁","EN"],"薯饼接接乐 Hash Brown Catch":["简","繁","EN","IT"],"理大食乜机 PolyU Lunch":["简","繁","EN"],"安可工作室 Encore Studio":["简","繁","EN"],"纸间 Paper Room":["简","繁","EN"],"深夜汤馆 Situation Puzzles":["简","EN"],"心愿邮局 Wishpost":["简","繁","EN"]};
 const escapeHTML = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let lang='zh';
 function requestedLanguage(){
@@ -580,8 +580,11 @@ const POSTERS = {
 };
 function paintPosters(){
   document.querySelectorAll('iframe[data-live-preview]').forEach(frame=>{
-    const width=frame.parentElement.getBoundingClientRect().width;
-    if(width)frame.style.transform=`scale(${width/1200})`;
+    const {width,height}=frame.parentElement.getBoundingClientRect();
+    if(!width||!height)return;
+    const scale=Math.max(width/1200,height/600);
+    const offset=(width-1200*scale)/2;
+    frame.style.transform=`translateX(${offset}px) scale(${scale})`;
   });
   document.querySelectorAll('canvas[data-poster]').forEach(c => {
     const b = c.getBoundingClientRect(); if (!b.width) return;

@@ -119,9 +119,10 @@ button.on{background:var(--petal);color:var(--ink);border-color:var(--petal)}
   .cam{width:88px}
   #toast{top:auto;bottom:170px;font-size:11px;white-space:nowrap}
 }
+#bloom-language{position:fixed;bottom:12px;right:12px;z-index:20;background:#1b1423;color:#fff;border:1px solid #8a708e;border-radius:6px;padding:5px 8px;font:inherit}
 </style>
 </head>
-<body>
+<body><select id="bloom-language" aria-label="简体中文 / 繁體中文 / English"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>
 <canvas id="stage" aria-label="花朵舞台：上下拖动或滚轮控制开合"></canvas>
 
 <div class="ui">
@@ -189,6 +190,26 @@ button.on{background:var(--petal);color:var(--ink);border-color:var(--petal)}
 </div>
 
 <script>
+const bloomStrings={"花朵舞台：上下拖动或滚轮控制开合":["花朵舞台：上下拖曳或滾輪控制開合","Flower stage: drag up or down or scroll to open and close"],"· 夜花":["· 夜花","· Night flowers"],"手势花开实验":["手勢花開實驗","Gesture-controlled flowers"],"开启手势":["啟用手勢","Enable gestures"],"关闭手势":["停用手勢","Disable gestures"],"导入花朵视频":["匯入花朵影片","Import flower videos"],"视频规格与提示词":["影片規格與提示詞","Video specs and prompts"],"花园":["花園","Garden"],"开放度 BLOOM":["綻放程度 BLOOM","Bloom level"],"鼠标模式":["滑鼠模式","Mouse mode"],"触屏模式":["觸控模式","Touch mode"],"张开手掌":["張開手掌","Open your palm"],"花开 ·":["花開 ·"," to bloom ·"],"握拳":["握拳","Make a fist"],"花合":["花合"," to close"],"左右挥手":["左右揮手","Swipe left or right"],"换花 ·":["切換花朵 ·"," to switch flowers ·"],"捏合食指拇指":["捏合食指和拇指","Pinch thumb and index finger"],"撒花瓣":["撒花瓣"," to scatter petals"],"没有摄像头：":["無攝影機時：","Without a camera:"],"滚轮 / 上下拖动":["滾輪／上下拖曳","Scroll or drag vertically"],"开合 ·":["開合 ·"," to open and close ·"],"空格":["空白鍵","Space"],"撒花":["撒花"," to scatter petals"],"松开鼠标，把视频种进花园（可以一次拖多个）":["放開滑鼠將影片種入花園（可一次拖入多段）","Drop to plant videos in your garden. You can add several at once."],"视频规格":["影片規格","Video specifications"],"格式":["格式","Format"],"时长":["片長","Duration"],"分辨率":["解析度","Resolution"],"比例":["比例","Aspect ratio"],"背景":["背景","Background"],"内容":["內容","Subject"],"大小 / 数量":["大小／數量","Size and count"],"中文提示词":["中文提示詞","Chinese prompt"],"复制中文":["複製中文","Copy Chinese"],"关闭":["關閉","Close"],"删除?":["刪除？","Delete?"],"+ 添加视频":["＋ 新增影片","+ Add video"],"无法播放":["無法播放","Cannot play"],"花园里至少要留一朵花。先添加新的，再删这一朵。":["花園裡至少要留一朵花。先新增，再刪除這一朵。","Keep at least one flower in the garden. Add another before deleting this one."],"给这朵花起个名字":["為這朵花命名","Name this flower"],"没找到视频文件。支持 MP4、MOV、WebM。":["找不到影片檔案。支援 MP4、MOV、WebM。","No video files found. MP4, MOV and WebM are supported."],"上下滑动让花开合 · 左右滑动换花":["上下滑動控制開合 · 左右滑動切換花朵","Swipe vertically to bloom and horizontally to switch flowers"],"这个视频打不开":["無法開啟此影片","Could not open this video"],"排队中…":["等待處理…","Queued…"],"正在请求摄像头…":["正在要求攝影機權限…","Requesting camera access…"],"正在加载手势模型…（首次约几秒）":["正在載入手勢模型…（首次需幾秒）","Loading gesture model… (a few seconds on first use)"],"手势已开启 · 把手举到镜头前":["手勢已啟用 · 將手舉到鏡頭前","Gestures enabled · Raise your hand in front of the camera"],"手势已开启 · 已识别":["手勢已啟用 · 已辨識","Gestures enabled · Hand detected"],"没拿到摄像头权限。点地址栏左边的图标允许摄像头，再点一次「开启手势」。":["未取得攝影機權限。允許攝影機後，再按一次「啟用手勢」。","Camera permission was denied. Allow access in the browser and enable gestures again."],"没找到摄像头。可以先用滚轮或上下拖动来控制花朵。":["找不到攝影機。可使用滾輪或上下拖曳控制花朵。","No camera found. Scroll or drag vertically to control the flower."],"手势模型没加载成功，检查一下网络后再试。现在先用鼠标控制。":["手勢模型未載入。請檢查網路後再試，或先使用滑鼠控制。","The gesture model did not load. Check your connection and try again, or use the mouse."],"已复制":["已複製","Copied"],"已选中，按 ⌘C 复制":["已選取，按 ⌘C 複製","Selected. Press ⌘C to copy."],"牡丹 · 花开富贵":["牡丹 · 花開富貴","Peony · Prosperity"],"牡丹 · Tree Peony":["牡丹 · Tree Peony","Tree Peony"],"睡莲 · Blue Water Lily":["睡蓮 · Blue Water Lily","Blue Water Lily"],"山茶 · Camellia":["山茶 · Camellia","Camellia"],"彼岸花 · Red Spider Lily":["彼岸花 · Red Spider Lily","Red Spider Lily"],"鸢尾 · Iris":["鳶尾 · Iris","Iris"],"菊花 · Chrysanthemum":["菊花 · Chrysanthemum","Chrysanthemum"],"用 AI 视频工具（即梦、可灵、Veo、Sora 等）生成花朵绽放视频，再导入这里。手势控制视频播到哪一帧：握拳是第一帧，张开手是最后一帧。":["使用 AI 影片工具生成花朵綻放影片，再匯入這裡。握拳對應第一格，張開手掌對應最後一格。","Generate a blooming-flower video with an AI video tool, then import it here. A closed fist selects the first frame and an open palm selects the last."],"MP4（H.264）最稳。WebM、MOV 一般也行":["建議使用 MP4（H.264），通常也支援 WebM 和 MOV","MP4 (H.264) works best. WebM and MOV usually work too."],"iPhone 拍的 HEVC 视频如果打不开，转成 H.264 MP4 再导入":["若無法開啟 iPhone 的 HEVC 影片，請轉成 H.264 MP4 後再匯入","Convert iPhone HEVC clips to H.264 MP4 if they do not open."],"3–8 秒最好":["建議 3–8 秒","3–8 seconds works best."],"页面最多取 96 帧，视频越长，帧和帧之间跳得越大，开合就没那么顺":["最多擷取 96 格。片段愈長，開合愈不平順。","Up to 96 frames are sampled. Longer clips can make blooming less smooth."],"720p 或 1080p 就够":["720p 或 1080p 即可","720p or 1080p is enough."],"页面会缩到长边 720px 处理，4K 不会更清晰，只会解析得更慢":["處理時長邊縮為 720px。4K 只會增加處理時間。","The long edge is resized to 720 px. 4K takes longer to process."],"正方形、竖版、横版都行，花要在画面正中":["方形、直式、橫式都可以，花朵須置中","Square, portrait or landscape all work. Centre the flower."],"纯黑最好，会自动抠掉黑色":["建議使用純黑，黑色會自動移除","Pure black works best and is removed automatically."],"其他背景会把四周羽化成暗色，花周围会带一点原背景":["其他背景會柔化邊緣，花周圍可能保留原背景","Other backgrounds fade at the edges and may remain visible around the flower."],"第一帧花苞，最后一帧盛开；镜头固定不动":["第一格為花苞，最後一格完全綻放；鏡頭保持固定","Start with a bud and end in full bloom. Keep the camera still."],"单个建议 50MB 以内；数量不限":["建議每段低於 50 MB；段數不限","Aim for under 50 MB per clip. There is no fixed clip count."],"同时只有 3 段留在内存里，切到更早的花会重新解析几秒":["記憶體同時保留三段，切回較早的花可能需重新處理幾秒","Three clips stay in memory. Switching back to an older flower may take a few seconds."]}, bloomURL=new URL(location.href), bloomPicker=document.getElementById('bloom-language');
+let bloomSaved;try{bloomSaved=localStorage.getItem('nocturne-bloom-language')}catch{}
+const bloomAliases={cn:'zh-CN',zh:'zh-CN',tw:'zh-TW','zh-CN':'zh-CN','zh-TW':'zh-TW',en:'en'};
+const bloomLocale=bloomAliases[bloomURL.searchParams.get('lang')||bloomSaved]||'zh-CN';
+const bloomText=value=>bloomLocale==='zh-CN'?value:bloomStrings[value]?.[bloomLocale==='en'?1:0]??value;
+document.documentElement.lang=bloomLocale;
+document.title=bloomLocale==='en'?'Nocturne Bloom':document.title;
+bloomPicker.value=bloomLocale;
+bloomPicker.onchange=()=>{try{localStorage.setItem('nocturne-bloom-language',bloomPicker.value)}catch{}bloomURL.searchParams.set('lang',bloomPicker.value);location.href=bloomURL.href};
+const bloomWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(bloomWalker.nextNode()){
+  const node=bloomWalker.currentNode;
+  if(node.parentElement.closest('script,style,select,pre'))continue;
+  let current=node.data;
+  for(const key of current.split('\n').map(line=>line.trim()))if(Object.hasOwn(bloomStrings,key))current=current.replace(key,bloomText(key));
+  node.data=current;
+}
+for(const element of document.querySelectorAll('[aria-label]'))element.setAttribute('aria-label',bloomText(element.getAttribute('aria-label')));
+</script>
+<script>
 (() => {
 'use strict';
 const $ = id => document.getElementById(id);
@@ -215,7 +236,7 @@ function layoutStage(){
   }
 }
 const COARSE = matchMedia('(pointer: coarse)').matches;
-const MODE_TXT = COARSE ? '触屏模式' : '鼠标模式';
+const MODE_TXT = COARSE ? bloomText(bloomText("触屏模式")) : bloomText(bloomText("鼠标模式"));
 
 const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b, v));
 const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
@@ -256,12 +277,12 @@ const saveHidden = () => { try { localStorage.setItem(HIDE_KEY, JSON.stringify([
 const vid = (id, latin, glow) => ({id, latin, cn:'', kind:'video', seq:true, data:'f-' + id.slice(2),
   blobs:[], bm:[], pend:[], pal:{glow, core:glow}});
 const SAMPLES = [
-  vid('b-peony',    '牡丹 · Tree Peony',       '#ffb3c8'),
-  vid('b-lily',     '睡莲 · Blue Water Lily',  '#9db2ff'),
-  vid('b-camellia', '山茶 · Camellia',         '#f3eee6'),
-  vid('b-lycoris',  '彼岸花 · Red Spider Lily', '#ff7466'),
-  vid('b-iris',     '鸢尾 · Iris',             '#b9a3ff'),
-  vid('b-chrys',    '菊花 · Chrysanthemum',    '#ffd45a'),
+  vid('b-peony',    bloomText(bloomText("牡丹 · Tree Peony")),       '#ffb3c8'),
+  vid('b-lily',     bloomText(bloomText("睡莲 · Blue Water Lily")),  '#9db2ff'),
+  vid('b-camellia', bloomText(bloomText("山茶 · Camellia")),         '#f3eee6'),
+  vid('b-lycoris',  bloomText(bloomText("彼岸花 · Red Spider Lily")), '#ff7466'),
+  vid('b-iris',     bloomText(bloomText("鸢尾 · Iris")),             '#b9a3ff'),
+  vid('b-chrys',    bloomText(bloomText("菊花 · Chrysanthemum")),    '#ffd45a'),
 ];
 // frames live in frames/<id>.txt next to this page (comma-separated WebP base64), fetched on load
 const framesReady = Promise.all(SAMPLES.map(f => fetch('frames/' + f.data + '.txt').then(r => r.text()).then(txt => {
@@ -363,13 +384,13 @@ let confirmId = null, confirmT = 0;
 function renderList(){
   listEl.innerHTML = '';
   const vids = flowers.filter(f => f.kind === 'video').length;
-  $('count').textContent = `${flowers.length} 朵 · ${vids} 段视频`;
+  $('count').textContent = (bloomLocale==='en'?`${flowers.length} flowers · ${vids} videos`:bloomLocale==='zh-TW'?`${flowers.length} 朵 · ${vids} 段影片`:`${flowers.length} 朵 · ${vids} 段视频`);
   flowers.forEach((f, i) => {
     const chip = document.createElement('span');
     chip.className = 'chip' + (i === cur ? ' on' : '') + (confirmId === f.id ? ' confirm' : '');
     const name = document.createElement('button');
     name.type = 'button'; name.className = 'name'; name.textContent = f.latin;
-    name.title = f.kind === 'video' ? `${f.latin}（双击改名）` : f.latin;
+    name.title = f.kind === 'video' ? (bloomLocale==='en'?`${f.latin} (double-click to rename)`:bloomLocale==='zh-TW'?`${f.latin}（雙擊重新命名）`:`${f.latin}（双击改名）`) : f.latin;
     name.addEventListener('click', () => select(i));
     if (f.kind === 'video') name.addEventListener('dblclick', () => rename(f));
     chip.appendChild(name);
@@ -380,19 +401,19 @@ function renderList(){
     }
     const del = document.createElement('button');
     del.type = 'button'; del.className = 'del';
-    del.textContent = confirmId === f.id ? '删除?' : '×';
-    del.setAttribute('aria-label', confirmId === f.id ? `确认删除 ${f.latin}` : `删除 ${f.latin}`);
+    del.textContent = confirmId === f.id ? bloomText(bloomText("删除?")) : '×';
+    del.setAttribute('aria-label', confirmId === f.id ? (bloomLocale==='en'?`Confirm deletion of ${f.latin}`:bloomLocale==='zh-TW'?`確認刪除 ${f.latin}`:`确认删除 ${f.latin}`) : (bloomLocale==='en'?`Delete ${f.latin}`:bloomLocale==='zh-TW'?`刪除 ${f.latin}`:`删除 ${f.latin}`));
     del.addEventListener('click', e => { e.stopPropagation(); askDelete(f); });
     chip.appendChild(del);
     listEl.appendChild(chip);
   });
   const add = document.createElement('label');
-  add.className = 'btn add'; add.htmlFor = 'fileIn'; add.textContent = '+ 添加视频'; add.style.fontSize = '11px'; add.style.padding = '7px 12px';
+  add.className = 'btn add'; add.htmlFor = 'fileIn'; add.textContent = bloomText(bloomText("+ 添加视频")); add.style.fontSize = '11px'; add.style.padding = '7px 12px';
   listEl.appendChild(add);
   const missing = SAMPLES.filter(s => !flowers.includes(s));
   if (missing.length){
     const r = document.createElement('button');
-    r.type = 'button'; r.className = 'restore'; r.textContent = `恢复内置花（${missing.length}）`;
+    r.type = 'button'; r.className = 'restore'; r.textContent = (bloomLocale==='en'?`Restore built-in flowers (${missing.length})`:bloomLocale==='zh-TW'?`還原內建花朵（${missing.length}）`:`恢复内置花（${missing.length}）`);
     r.addEventListener('click', () => {
       const keep = flowers[cur];
       missing.forEach(s => { hidden.delete(s.id); s.dead = false; s.bm.fill(null); s.pend.fill(false); posters(s); }); saveHidden();
@@ -403,7 +424,7 @@ function renderList(){
   }
   if (W <= 700){ const on = listEl.querySelector('.chip.on'); if (on) listEl.scrollTo({left: on.offsetLeft - 16, behavior:'smooth'}); }
 }
-const tagText = f => f.error ? '无法播放' : f.loading ? `${Math.round((f.progress||0)*100)}%` : '';
+const tagText = f => f.error ? bloomText(bloomText("无法播放")) : f.loading ? `${Math.round((f.progress||0)*100)}%` : '';
 function updateTag(f){   // progress updates touch only the tag, so clicks on the chips are never interrupted
   const el = listEl.querySelector(`.tag[data-id="${f.id}"]`);
   if (el) el.textContent = tagText(f);
@@ -415,7 +436,7 @@ function askDelete(f){
     return;
   }
   clearTimeout(confirmT); confirmId = null;
-  if (flowers.length === 1){ toast('花园里至少要留一朵花。先添加新的，再删这一朵。'); renderList(); return; }
+  if (flowers.length === 1){ toast(bloomText(bloomText("花园里至少要留一朵花。先添加新的，再删这一朵。"))); renderList(); return; }
   const i = flowers.indexOf(f); if (i < 0) return;
   const wasCur = i === cur;
   if (f.kind === 'video'){
@@ -427,10 +448,10 @@ function askDelete(f){
   if (i < cur) cur--;
   if (wasCur){ cur = Math.min(cur, flowers.length-1); open = Math.min(open, .05); applyTitle(); }
   renderList();
-  toast(`已删除「${f.latin}」`);
+  toast((bloomLocale==='en'?`Deleted ${f.latin}`:bloomLocale==='zh-TW'?`已刪除「${f.latin}」`:`已删除「${f.latin}」`));
 }
 function rename(f){
-  const n = prompt('给这朵花起个名字', f.latin);
+  const n = prompt(bloomText(bloomText("给这朵花起个名字")), f.latin);
   if (!n || !n.trim()) return;
   f.latin = n.trim().slice(0, 32);
   if (f.rec){ f.rec.name = f.latin; store.put(f.rec).catch(() => {}); }
@@ -558,7 +579,7 @@ async function decode(f){
     frames.forEach(bm => bm.close());
     if (err.message !== 'deleted'){
       f.error = true;
-      toast(`「${f.latin}」打不开。转成 MP4（H.264）格式再导入试试。`, 6000);
+      toast((bloomLocale==='en'?`Could not open ${f.latin}. Convert it to MP4 (H.264) and try again.`:bloomLocale==='zh-TW'?`無法開啟「${f.latin}」。請轉成 MP4（H.264）後重新匯入。`:`「${f.latin}」打不开。转成 MP4（H.264）格式再导入试试。`), 6000);
     }
   } finally {
     URL.revokeObjectURL(url); v.removeAttribute('src'); v.load();
@@ -584,7 +605,7 @@ function videoFlower(rec){
 }
 async function importFiles(list){
   const files = [...list].filter(f => f.type.startsWith('video/') || /\.(mp4|mov|m4v|webm)$/i.test(f.name));
-  if (!files.length){ toast('没找到视频文件。支持 MP4、MOV、WebM。'); return; }
+  if (!files.length){ toast(bloomText(bloomText("没找到视频文件。支持 MP4、MOV、WebM。"))); return; }
   let first = -1, saved = true;
   for (const file of files){
     const rec = {id:'v-' + Date.now().toString(36) + Math.random().toString(36).slice(2,7),
@@ -596,8 +617,8 @@ async function importFiles(list){
     ensureFrames(f);
   }
   select(first); renderList();
-  toast(saved ? `已添加 ${files.length} 段视频，正在解析。下次打开这个页面它们还在。`
-              : `已添加 ${files.length} 段视频。浏览器没允许保存，刷新后需要重新导入。`, 4500);
+  toast(saved ? (bloomLocale==='en'?`Added ${files.length} videos. Processing now. They’ll be here next time.`:bloomLocale==='zh-TW'?`已新增 ${files.length} 段影片，正在處理。下次開啟頁面時仍會保留。`:`已添加 ${files.length} 段视频，正在解析。下次打开这个页面它们还在。`)
+              : (bloomLocale==='en'?`Added ${files.length} videos. Browser storage is unavailable, so import them again after reloading.`:bloomLocale==='zh-TW'?`已新增 ${files.length} 段影片。瀏覽器未允許儲存，重新整理後需再次匯入。`:`已添加 ${files.length} 段视频。浏览器没允许保存，刷新后需要重新导入。`), 4500);
 }
 $('fileIn').addEventListener('change', e => { importFiles(e.target.files); e.target.value = ''; });
 let dragDepth = 0;
@@ -624,7 +645,7 @@ store.all().then(recs => {
 }).catch(() => {});
 renderList(); applyTitle();
 $('status').textContent = MODE_TXT;
-if (COARSE) setTimeout(() => toast('上下滑动让花开合 · 左右滑动换花', 4000), 800);
+if (COARSE) setTimeout(() => toast(bloomText(bloomText("上下滑动让花开合 · 左右滑动换花")), 4000), 800);
 setTimeout(() => flowers.slice(0, KEEP).forEach(f => f.kind === 'video' && ensureFrames(f)), 300);
 
 /* ---------- procedural flower ---------- */
@@ -726,7 +747,7 @@ function drawPending(f, t, cx, cy, R, alpha){
   ctx.beginPath(); ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2 + Math.PI*2*(f.loading ? Math.max(.02,p) : 0)); ctx.stroke();
   ctx.fillStyle = '#f1ebf0'; ctx.textAlign = 'center';
   ctx.font = '12px "JetBrains Mono", ui-monospace, monospace';
-  const msg = f.error ? '这个视频打不开' : f.loading ? `解析视频 ${Math.round(p*100)}%` : '排队中…';
+  const msg = f.error ? bloomText(bloomText("这个视频打不开")) : f.loading ? (bloomLocale==='en'?`Processing video ${Math.round(p*100)}%`:bloomLocale==='zh-TW'?`處理影片 ${Math.round(p*100)}%`:`解析视频 ${Math.round(p*100)}%`) : bloomText(bloomText("排队中…"));
   ctx.fillText(msg, cx, cy+4);
   ctx.restore();
 }
@@ -815,12 +836,12 @@ const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
 $('camBtn').addEventListener('click', async () => {
   if (camOn){ stopCam(); return; }
   try {
-    status('正在请求摄像头…');
+    status(bloomText(bloomText("正在请求摄像头…")));
     const stream = await navigator.mediaDevices.getUserMedia({video:{width:640, height:480, facingMode:'user'}, audio:false});
     camVideo.srcObject = stream; await camVideo.play();
-    $('cam').hidden = false; camOn = true; $('camBtn').classList.add('on'); $('camBtn').textContent = '关闭手势';
+    $('cam').hidden = false; camOn = true; $('camBtn').classList.add('on'); $('camBtn').textContent = bloomText(bloomText("关闭手势"));
     if (!landmarker){
-      status('正在加载手势模型…（首次约几秒）');
+      status(bloomText(bloomText("正在加载手势模型…（首次约几秒）")));
       const vision = await import(MP + '/vision_bundle.mjs');
       const files = await vision.FilesetResolver.forVisionTasks(MP + '/wasm');
       const opts = d => ({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task', delegate:d},
@@ -828,19 +849,19 @@ $('camBtn').addEventListener('click', async () => {
       try { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('GPU')); }
       catch { landmarker = await vision.HandLandmarker.createFromOptions(files, opts('CPU')); }
     }
-    status('手势已开启 · 把手举到镜头前');
+    status(bloomText(bloomText("手势已开启 · 把手举到镜头前")));
   } catch (err){
     console.error(err); stopCam();
     if (err && (err.name === 'NotAllowedError' || err.name === 'SecurityError'))
-      toast('没拿到摄像头权限。点地址栏左边的图标允许摄像头，再点一次「开启手势」。', 6000);
-    else if (err && err.name === 'NotFoundError') toast('没找到摄像头。可以先用滚轮或上下拖动来控制花朵。', 5000);
-    else toast('手势模型没加载成功，检查一下网络后再试。现在先用鼠标控制。', 6000);
+      toast(bloomText(bloomText("没拿到摄像头权限。点地址栏左边的图标允许摄像头，再点一次「开启手势」。")), 6000);
+    else if (err && err.name === 'NotFoundError') toast(bloomText(bloomText("没找到摄像头。可以先用滚轮或上下拖动来控制花朵。")), 5000);
+    else toast(bloomText(bloomText("手势模型没加载成功，检查一下网络后再试。现在先用鼠标控制。")), 6000);
   }
 });
 function stopCam(){
   const s = camVideo.srcObject; if (s) s.getTracks().forEach(t => t.stop());
   camVideo.srcObject = null; camOn = false; handOn = false; tip = null;
-  $('cam').hidden = true; $('camBtn').classList.remove('on'); $('camBtn').textContent = '开启手势';
+  $('cam').hidden = true; $('camBtn').classList.remove('on'); $('camBtn').textContent = bloomText(bloomText("开启手势"));
   status(MODE_TXT);
 }
 const D = (a,b) => Math.hypot((a.x-b.x)*4/3, a.y-b.y);
@@ -853,8 +874,8 @@ function track(now){
   cc.clearRect(0,0,cw,ch);
   const lm = res.landmarks && res.landmarks[0];
   const was = handOn; handOn = !!lm;
-  if (!lm){ tip = null; if (was) status('手势已开启 · 把手举到镜头前'); return; }
-  if (!was) status('手势已开启 · 已识别');
+  if (!lm){ tip = null; if (was) status(bloomText(bloomText("手势已开启 · 把手举到镜头前"))); return; }
+  if (!was) status(bloomText(bloomText("手势已开启 · 已识别")));
   cc.strokeStyle = flowers[cur].pal.glow; cc.lineWidth = 2*DPR; cc.beginPath();
   for (const [a,b] of BONES){ cc.moveTo(lm[a].x*cw, lm[a].y*ch); cc.lineTo(lm[b].x*cw, lm[b].y*ch); }
   cc.stroke();
@@ -883,8 +904,8 @@ $('closePanel').addEventListener('click', () => { $('panel').hidden = true; });
 $('panel').addEventListener('click', e => { if (e.target.id === 'panel') $('panel').hidden = true; });
 document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
   const el = $(b.dataset.copy);
-  try { await navigator.clipboard.writeText(el.textContent); toast('已复制'); }
-  catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('已选中，按 ⌘C 复制'); }
+  try { await navigator.clipboard.writeText(el.textContent); toast(bloomText(bloomText("已复制"))); }
+  catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast(bloomText(bloomText("已选中，按 ⌘C 复制"))); }
 }));
 
 /* ---------- main loop ---------- */

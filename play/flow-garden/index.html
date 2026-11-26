@@ -1,4 +1,5 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}#flow-language{position:fixed;top:12px;right:12px;z-index:50;background:#171729;color:#fff;border:1px solid #737080;border-radius:6px;padding:5px 8px;font:inherit}
+</style></head><body><select id="flow-language" aria-label="简体中文 / 繁體中文 / English"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>
 <title>流场花园</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0a1f'/%3E%3Cg fill='none' stroke-linecap='round' stroke-width='4.5'%3E%3Cpath d='M32 33C26 22 14 24 11 11' stroke='%237f6bff'/%3E%3Cpath d='M32 33C38 20 50 25 53 11' stroke='%23ff6fd2'/%3E%3Cpath d='M32 33C33 45 44 47 53 53' stroke='%234fb8ff'/%3E%3Cpath d='M32 33C25 43 17 41 11 53' stroke='%23ffc96b'/%3E%3C/g%3E%3Ccircle cx='32' cy='33' r='5.5' fill='%23fff'/%3E%3C/svg%3E">
@@ -197,6 +198,19 @@ body[data-world="pixel"] .info{border-radius:0;font-style:normal;font-family:var
 </div>
 
 <script>
+const flowTranslations={"流场花园":["流場花園","Flow Garden"],"画布：点击或拖动，画面会生长几秒后消散":["畫布：點擊或拖曳，圖案生長後消散","Canvas: click or drag to grow a pattern"],"点一下 · 或拖动":["點一下 · 或拖曳","Click or drag"],"流场":["流場","Flow"],"收起说明":["收合說明","Hide guide"],"展开说明":["展開說明","Show guide"],"控制":["控制","Controls"],"玩法":["玩法","Mode"],"说明":["說明","About this control"],"即兴":["即興","Live"],"草图":["草圖","Sketch"],"生长 ▶":["生長 ▶","Grow ▶"],"生长并录制":["生長並錄製","Grow and record"],"擦除":["清除","Clear"],"风格 ·":["風格 ·","Style ·"],"对称":["對稱","Symmetry"],"无":["無","None"],"镜":["鏡像","Mirror"],"大小":["大小","Size"],"速度":["速度","Speed"],"湍流":["湍流","Turbulence"],"声音":["聲音","Sound"],"快照":["快照","Snapshot"],"录制":["錄製","Record"],"风格与配色":["風格與配色","Styles and colours"],"风格":["風格","Styles"],"完成":["完成","Done"],"自选配色 · 当前风格":["自訂配色 · 目前風格","Custom colours · Current style"],"恢复默认":["恢復預設","Reset colours"],"快捷配色":["快速配色","Colour presets"],"当前画面的快照":["目前畫面快照","Canvas snapshot"],"保存到电脑":["儲存到電腦","Save to device"],"关闭":["關閉","Close"],"梦境":["夢境","Dream"],"梦境星云":["夢境星雲","Dream Nebula"],"像素":["像素","Pixel"],"像素街机":["像素街機","Pixel Arcade"],"墨线":["墨線","Ink"],"墨线等高":["墨線等高","Ink Contours"],"霓虹":["霓虹","Neon"],"霓虹灯管":["霓虹燈管","Neon Tubes"],"水彩":["水彩","Watercolour"],"湿画水彩":["濕畫水彩","Wet Watercolour"],"漆金":["漆金","Lacquer"],"漆金描花":["漆金描花","Gilded Lacquer"],"这个浏览器不支持录屏":["此瀏覽器不支援錄影","This browser does not support recording"],"录屏启动失败":["無法開始錄影","Could not start recording"],"背景":["背景","Background"],"先画出图案 · 再按「生长」":["先畫圖案 · 再按「生長」","Draw a pattern, then press Grow"],"已保存 ":["已儲存 ","Saved "],"已取消保存":["已取消儲存","Saving cancelled"],"保存失败：":["儲存失敗：","Could not save: "],"未知原因":["未知原因","Unknown error"],"先在画布上画点什么":["請先在畫布上畫圖","Draw something on the canvas first"],"点一下炸开一团星尘，拖动会甩出光带。它们沿着星云气流漂几秒，然后熄灭，夜空重新变空。":["點擊綻開星塵，拖曳甩出光帶，幾秒後逐漸淡去。","Click for stardust or drag to leave a ribbon of light. Both fade after a few seconds."],"四分之一分辨率的调色盘画布。每次点击都是一发像素烟花，几秒后像旧屏幕一样淡出。":["每次點擊都會放出像素煙火，幾秒後如舊螢幕般淡出。","Each click launches pixel fireworks that fade like an old screen."],"每一下都是一滴墨落在纸上，散开成水纹和等高线，停手后慢慢被纸吸干。少数墨丝带着朱砂。":["墨水在紙上散成水紋，停手後慢慢滲入紙張。","Ink spreads into ripples and contours, then soaks into the paper."],"每条轨迹都是一根通电的灯管，外圈是晕开的辉光。拖得越快，灯管甩得越长。":["拖曳越快，霓虹光帶越長。","Drag faster to create longer neon trails."],"宽而透明的笔触叠在白纸上，颜色相交处会叠出第三种颜色，几秒后被水洗淡。":["透明筆觸交疊混色，幾秒後逐漸淡去。","Translucent washes mix where they overlap, then fade."],"黑红漆面上描金线，细到像发丝。少量朱红夹在金线之间，像漆器上的纹样。":["在黑紅漆面描出細金線，間或夾著硃紅。","Draw hairline gold strokes on dark lacquer, with accents of vermilion."],"挑战：选 6 重对称，按住不放，在中心慢慢画一圈。":["挑戰：選六重對稱，按住並畫一圈。","Try sixfold symmetry and draw a slow circle."],"挑战：用「镜」对称，连点几下拼出一只小怪兽。":["挑戰：用鏡像對稱拼出小怪獸。","Use Mirror and tap repeatedly to make a little monster."],"挑战：只轻点一下，看一滴墨能走多远；再调高湍流对比。":["挑戰：輕點一下，再調高湍流比較。","Tap once, then raise turbulence and compare."],"挑战：调高速度、调低湍流，甩出一串长长的霓虹字。":["挑戰：提高速度、降低湍流，畫霓虹字。","Raise speed, lower turbulence, and draw neon lettering."],"挑战：大小拉到最大，在同一处点两种颜色，看它们混色。":["挑戰：調大尺寸，觀察兩色混合。","Set size to maximum and watch two colours mix."],"挑战：选 4 重对称，速度调慢，描一个盘子中央的团花。":["挑戰：選四重對稱，降低速度，畫出團花。","Use fourfold symmetry and slow it down to draw a rosette."],"「即兴」：点击或拖动，画面立刻生长，3–5 秒后消散。<br>「草图」：先在空白画布上画线，按「生长」后种子沿着线依次点燃。":["即興會立刻生長。草圖模式下先畫線，再按「生長」。","Live grows immediately. In Sketch, draw a line and then press Grow."],"把每一笔按画布中心复制。「镜」是左右镜像；4 和 6 是万花筒，会复制成 8 份和 12 份。":["鏡像左右反射。4 與 6 分別形成八次和十二次重複。","Mirror reflects strokes. Modes 4 and 6 create eight and twelve copies."],"每次放出多少粒子、爆开的范围多大、线条多粗。往右拖，一下就是一大团。":["控制粒子數量、範圍及線條粗細。","Controls particle count, burst size and line weight."],"粒子漂得多快。生长时长不变（约 3–5 秒），所以越快走得越远，图案越舒展；越慢越紧凑。":["控制粒子速度。速度愈快，圖案延伸愈遠。","Controls particle speed. Faster particles produce wider patterns."],"看不见的气流有多弯。<br>往左：平缓的长弧线，像微风吹过。<br>往右：密集的漩涡和卷曲，像沸腾的水。":["控制氣流的彎曲程度。","Controls how sharply the flow bends."]};
+const flowURL=new URL(location.href),flowPicker=document.getElementById("flow-language");
+let flowSaved;try{flowSaved=localStorage.getItem("flow-garden-language")}catch{}
+const flowAlias={cn:"zh-CN",zh:"zh-CN",tw:"zh-TW","zh-CN":"zh-CN","zh-TW":"zh-TW",en:"en"};
+const flowLocale=flowAlias[flowURL.searchParams.get("lang")||flowSaved]||"zh-CN";
+const flowText=key=>flowLocale==="zh-CN"?key:flowTranslations[key]?.[flowLocale==="en"?1:0]??key;
+document.documentElement.lang=flowLocale;document.title=flowText(document.title);flowPicker.value=flowLocale;
+flowPicker.onchange=()=>{try{localStorage.setItem("flow-garden-language",flowPicker.value)}catch{}flowURL.searchParams.set("lang",flowPicker.value);location.href=flowURL.href};
+const flowWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(flowWalker.nextNode()){const node=flowWalker.currentNode,key=node.data.trim();if(Object.hasOwn(flowTranslations,key)&&!node.parentElement.closest("script,style,select"))node.data=node.data.replace(key,flowText(key))}
+for(const el of document.querySelectorAll("[aria-label],img[alt]"))for(const attr of ["aria-label","alt"])if(el.hasAttribute(attr))el.setAttribute(attr,flowText(el.getAttribute(attr)));
+</script>
+<script>
 (()=>{
 const TAU=Math.PI*2;
 // ---- Perlin noise 3D ----
@@ -211,23 +225,23 @@ function noise(x,y,z){const X=Math.floor(x)&255,Y=Math.floor(y)&255,Z=Math.floor
 // ---- Worlds ----
 // life is in frames (~60/s): 3–5 s of growth, then the canvas dissolves back to empty.
 const WORLDS={
- dream:{n:"I",short:"梦境",name:"梦境星云",kind:"glow",sound:"bell",base:220,desc:"点一下炸开一团星尘，拖动会甩出光带。它们沿着星云气流漂几秒，然后熄灭，夜空重新变空。",
-  quest:"挑战：选 6 重对称，按住不放，在中心慢慢画一圈。",
+ dream:{n:"I",short:flowText("梦境"),name:flowText("梦境星云"),kind:"glow",sound:"bell",base:220,desc:flowText("点一下炸开一团星尘，拖动会甩出光带。它们沿着星云气流漂几秒，然后熄灭，夜空重新变空。"),
+  quest:flowText("挑战：选 6 重对称，按住不放，在中心慢慢画一圈。"),
   bg:"#0b0a1f",fade:.07,colors:["#7f6bff","#4fb8ff","#ff6fd2","#ffc96b","#8affc8"],alpha:.38,width:1.4,scale:.0024,life:[150,280],max:1100,burst:80},
- pixel:{n:"II",short:"像素",name:"像素街机",kind:"pixel",sound:"chip",base:262,desc:"四分之一分辨率的调色盘画布。每次点击都是一发像素烟花，几秒后像旧屏幕一样淡出。",
-  quest:"挑战：用「镜」对称，连点几下拼出一只小怪兽。",
+ pixel:{n:"II",short:flowText("像素"),name:flowText("像素街机"),kind:"pixel",sound:"chip",base:262,desc:flowText("四分之一分辨率的调色盘画布。每次点击都是一发像素烟花，几秒后像旧屏幕一样淡出。"),
+  quest:flowText("挑战：用「镜」对称，连点几下拼出一只小怪兽。"),
   bg:"#1d1a2f",fade:.12,colors:["#ff004d","#ffa300","#ffec27","#00e436","#29adff"],px:4,scale:.004,life:[120,240],max:900,burst:70},
- ink:{n:"III",short:"墨线",name:"墨线等高",kind:"ink",sound:"wood",base:147,desc:"每一下都是一滴墨落在纸上，散开成水纹和等高线，停手后慢慢被纸吸干。少数墨丝带着朱砂。",
-  quest:"挑战：只轻点一下，看一滴墨能走多远；再调高湍流对比。",
+ ink:{n:"III",short:flowText("墨线"),name:flowText("墨线等高"),kind:"ink",sound:"wood",base:147,desc:flowText("每一下都是一滴墨落在纸上，散开成水纹和等高线，停手后慢慢被纸吸干。少数墨丝带着朱砂。"),
+  quest:flowText("挑战：只轻点一下，看一滴墨能走多远；再调高湍流对比。"),
   bg:"#eceeea",fade:.025,colors:["#181c20","#c8372a"],alpha:.16,width:.8,scale:.0018,life:[180,300],max:1300,burst:60},
- neon:{n:"IV",short:"霓虹",name:"霓虹灯管",kind:"neon",sound:"saw",base:196,desc:"每条轨迹都是一根通电的灯管，外圈是晕开的辉光。拖得越快，灯管甩得越长。",
-  quest:"挑战：调高速度、调低湍流，甩出一串长长的霓虹字。",
+ neon:{n:"IV",short:flowText("霓虹"),name:flowText("霓虹灯管"),kind:"neon",sound:"saw",base:196,desc:flowText("每条轨迹都是一根通电的灯管，外圈是晕开的辉光。拖得越快，灯管甩得越长。"),
+  quest:flowText("挑战：调高速度、调低湍流，甩出一串长长的霓虹字。"),
   bg:"#06060c",fade:.1,colors:["#00f0ff","#ff2bd6","#fffb00"],alpha:.7,width:1.3,scale:.003,life:[140,250],max:700,burst:45},
- wash:{n:"V",short:"水彩",name:"湿画水彩",kind:"wash",sound:"wood",base:175,desc:"宽而透明的笔触叠在白纸上，颜色相交处会叠出第三种颜色，几秒后被水洗淡。",
-  quest:"挑战：大小拉到最大，在同一处点两种颜色，看它们混色。",
+ wash:{n:"V",short:flowText("水彩"),name:flowText("湿画水彩"),kind:"wash",sound:"wood",base:175,desc:flowText("宽而透明的笔触叠在白纸上，颜色相交处会叠出第三种颜色，几秒后被水洗淡。"),
+  quest:flowText("挑战：大小拉到最大，在同一处点两种颜色，看它们混色。"),
   bg:"#f7f9fb",fade:.035,colors:["#3a7bd5","#e05a8a","#f2b134","#2fa39a"],alpha:.06,width:7,scale:.0016,life:[150,260],max:500,burst:30},
- lacquer:{n:"VI",short:"漆金",name:"漆金描花",kind:"glow",sound:"bell",base:247,desc:"黑红漆面上描金线，细到像发丝。少量朱红夹在金线之间，像漆器上的纹样。",
-  quest:"挑战：选 4 重对称，速度调慢，描一个盘子中央的团花。",
+ lacquer:{n:"VI",short:flowText("漆金"),name:flowText("漆金描花"),kind:"glow",sound:"bell",base:247,desc:flowText("黑红漆面上描金线，细到像发丝。少量朱红夹在金线之间，像漆器上的纹样。"),
+  quest:flowText("挑战：选 4 重对称，速度调慢，描一个盘子中央的团花。"),
   bg:"#160909",fade:.05,colors:["#d4a64a","#f3d48a","#b5322a"],alpha:.3,width:.9,scale:.002,life:[170,300],max:1100,burst:70}
 };
 const ORDER=Object.keys(WORLDS);
@@ -419,17 +433,17 @@ let recorder=null,chunks=[],recStart=0,recMime='',recBlob=null;
 function pickMime(){const c=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'];
  for(const m of c)if(window.MediaRecorder&&MediaRecorder.isTypeSupported(m))return m;return''}
 function startRec(){
- if(recorder||!window.MediaRecorder||!rec.captureStream){flash('这个浏览器不支持录屏');return false}
+ if(recorder||!window.MediaRecorder||!rec.captureStream){flash(flowText(flowText("这个浏览器不支持录屏")));return false}
  const sc=Math.min(1,1920/cv.width);rec.width=Math.round(cv.width*sc);rec.height=Math.round(cv.height*sc);
  ensureAudio();const st=rec.captureStream(60);
  if(streamDest&&soundOn)streamDest.stream.getAudioTracks().forEach(t=>st.addTrack(t));
  recMime=pickMime();chunks=[];
- try{recorder=new MediaRecorder(st,recMime?{mimeType:recMime,videoBitsPerSecond:8e6}:undefined)}catch(e){flash('录屏启动失败');return false}
+ try{recorder=new MediaRecorder(st,recMime?{mimeType:recMime,videoBitsPerSecond:8e6}:undefined)}catch(e){flash(flowText(flowText("录屏启动失败")));return false}
  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
  recorder.onstop=()=>{recBlob=new Blob(chunks,{type:recorder.mimeType||recMime||'video/webm'});recorder=null;showVideo()};
  recorder.start(250);recStart=performance.now();$('recBtn').classList.add('on');return true;
 }
-function stopRec(){if(recorder&&recorder.state!=='inactive')recorder.stop();$('recBtn').classList.remove('on');$('recBtn').textContent='录制';recAfterGrow=false}
+function stopRec(){if(recorder&&recorder.state!=='inactive')recorder.stop();$('recBtn').classList.remove('on');$('recBtn').textContent=flowText(flowText("录制"));recAfterGrow=false}
 function compositeRec(){
  if(!recorder)return;rctx.drawImage(cv,0,0,rec.width,rec.height);rctx.drawImage(fx,0,0,rec.width,rec.height);
  const s=Math.floor((performance.now()-recStart)/1000);$('recBtn').textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
@@ -467,9 +481,9 @@ function saveCustom(){try{localStorage.setItem('fg-custom',JSON.stringify(custom
 function renderPanel(){
  $('worldGrid').innerHTML=ORDER.map(k=>{const d=buildCfg(k);return`<button class="wc" data-w="${k}" aria-pressed="${k===world}" style="background:${d.bg};color:${hexRgb(d.bg).reduce((a,b)=>a+b)>380?'#1c2024':'#f2f2f2'}">
   <span class="nm"><small>${d.n}</small>${d.name}</span><span class="sw">${swatch(d.colors)}</span></button>`}).join('');
- $('cols').innerHTML=cfg.colors.map((c,i)=>`<label>线条${i+1}<input type="color" id="col${i}" data-i="${i}" value="${c}"></label>`).join('')+
-  `<span class="gap"></span><label>背景<input type="color" id="colbg" data-i="bg" value="${cfg.bg}"></label>`;
- $('presets').innerHTML=PRESETS.map((p,i)=>`<button class="pre" data-p="${i}" aria-label="配色 ${i+1}">${swatch(p)}</button>`).join('');
+ $('cols').innerHTML=cfg.colors.map((c,i)=>`<label>${flowLocale==='en'?'Line ':flowLocale==='zh-TW'?'線條':'线条'}${i+1}<input type="color" id="col${i}" data-i="${i}" value="${c}"></label>`).join('')+
+  `<span class="gap"></span><label>${flowText('背景')}<input type="color" id="colbg" data-i="bg" value="${cfg.bg}"></label>`;
+ $('presets').innerHTML=PRESETS.map((p,i)=>`<button class="pre" data-p="${i}" aria-label="${flowLocale==='en'?'Palette ':'配色 '}${i+1}">${swatch(p)}</button>`).join('');
 }
 $('worldGrid').onclick=e=>{const b=e.target.closest('.wc');if(b)setWorld(b.dataset.w)};
 $('cols').oninput=e=>{const i=e.target.dataset.i;if(i==null)return;custom[world]=custom[world]||{};
@@ -488,11 +502,11 @@ $('size').oninput=e=>size=+e.target.value;
 $('speed').oninput=e=>speed=+e.target.value;
 // ---- "i" popovers ----
 const TIPS={
- mode:['玩法','「即兴」：点击或拖动，画面立刻生长，3–5 秒后消散。<br>「草图」：先在空白画布上画线，按「生长」后种子沿着线依次点燃。'],
- sym:['对称','把每一笔按画布中心复制。「镜」是左右镜像；4 和 6 是万花筒，会复制成 8 份和 12 份。'],
- size:['大小','每次放出多少粒子、爆开的范围多大、线条多粗。往右拖，一下就是一大团。'],
- speed:['速度','粒子漂得多快。生长时长不变（约 3–5 秒），所以越快走得越远，图案越舒展；越慢越紧凑。'],
- turb:['湍流','看不见的气流有多弯。<br>往左：平缓的长弧线，像微风吹过。<br>往右：密集的漩涡和卷曲，像沸腾的水。']
+ mode:[flowText(flowText("玩法")),flowText(flowText("「即兴」：点击或拖动，画面立刻生长，3–5 秒后消散。<br>「草图」：先在空白画布上画线，按「生长」后种子沿着线依次点燃。"))],
+ sym:[flowText(flowText("对称")),flowText(flowText("把每一笔按画布中心复制。「镜」是左右镜像；4 和 6 是万花筒，会复制成 8 份和 12 份。"))],
+ size:[flowText(flowText("大小")),flowText(flowText("每次放出多少粒子、爆开的范围多大、线条多粗。往右拖，一下就是一大团。"))],
+ speed:[flowText(flowText("速度")),flowText(flowText("粒子漂得多快。生长时长不变（约 3–5 秒），所以越快走得越远，图案越舒展；越慢越紧凑。"))],
+ turb:[flowText(flowText("湍流")),flowText(flowText("看不见的气流有多弯。<br>往左：平缓的长弧线，像微风吹过。<br>往右：密集的漩涡和卷曲，像沸腾的水。"))]
 };
 const tip=$('tip');let tipBtn=null;
 function showTip(btn){
@@ -511,7 +525,7 @@ $('soundBtn').onclick=()=>{soundOn=!soundOn;$('soundBtn').setAttribute('aria-pre
 let pending=null; // what the overlay would save
 function openShot(kind){$('shotImg').hidden=kind!=='img';$('recVid').hidden=kind!=='vid';$('saveMsg').textContent='';$('shot').hidden=false}
 function flash(t){hint.querySelector('#hintTxt').textContent=t;hint.classList.remove('gone');setTimeout(setHint,1800)}
-function setHint(){$('hintTxt').textContent=mode==='sketch'?'先画出图案 · 再按「生长」':'点一下 · 或拖动';if(mode==='sketch'&&strokes.length)hint.classList.add('gone')}
+function setHint(){$('hintTxt').textContent=mode==='sketch'?flowText(flowText("先画出图案 · 再按「生长」")):flowText(flowText("点一下 · 或拖动"));if(mode==='sketch'&&strokes.length)hint.classList.add('gone')}
 $('shotBtn').onclick=()=>{
  const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d');x.drawImage(cv,0,0);
  const url=c.toDataURL('image/png');$('shotImg').src=url;
@@ -523,9 +537,9 @@ function showVideo(){
 let dl=null;try{window.claude?.use?.('downloads').then(d=>dl=d).catch(()=>{})}catch(e){}
 $('saveBtn').onclick=async e=>{
  e.stopPropagation();if(!pending)return;
- if(!dl){const a=document.createElement('a');a.href=URL.createObjectURL(pending.blob);a.download=pending.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);$('saveMsg').textContent='已保存 '+pending.name;return}
- try{await dl.save({filename:pending.name,data:pending.blob});$('saveMsg').textContent='已保存 '+pending.name}
- catch(err){$('saveMsg').textContent=err&&err.code==='declined'?'已取消保存':'保存失败：'+((err&&err.message)||'未知原因')}
+ if(!dl){const a=document.createElement('a');a.href=URL.createObjectURL(pending.blob);a.download=pending.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);$('saveMsg').textContent=flowText(flowText("已保存 "))+pending.name;return}
+ try{await dl.save({filename:pending.name,data:pending.blob});$('saveMsg').textContent=flowText(flowText("已保存 "))+pending.name}
+ catch(err){$('saveMsg').textContent=err&&err.code==='declined'?flowText(flowText("已取消保存")):flowText(flowText("保存失败："))+((err&&err.message)||flowText(flowText("未知原因")))}
 };
 const closeShot=()=>{$('shot').hidden=true;$('recVid').pause()};
 $('closeBtn').onclick=closeShot;$('shot').onclick=e=>{if(e.target===$('shot'))closeShot()};
@@ -534,10 +548,10 @@ function setMode(m){mode=m;$('sketchGrp').hidden=m!=='sketch';
  document.querySelectorAll('#modes .b').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
  if(m==='live'){strokes=[];hint.classList.toggle('gone',dirty)}setHint()}
 document.querySelectorAll('#modes .b').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
-$('growBtn').onclick=()=>{if(!grow())flash('先在画布上画点什么')};
-$('growRecBtn').onclick=()=>{if(!strokes.length){flash('先在画布上画点什么');return}if(!recorder&&!startRec())return;recAfterGrow=true;setTimeout(grow,300)};
+$('growBtn').onclick=()=>{if(!grow())flash(flowText(flowText("先在画布上画点什么")))};
+$('growRecBtn').onclick=()=>{if(!strokes.length){flash(flowText(flowText("先在画布上画点什么")));return}if(!recorder&&!startRec())return;recAfterGrow=true;setTimeout(grow,300)};
 $('eraseBtn').onclick=()=>{strokes=[];walk=null;parts=[];clearAll();setHint()};
-$('hideBtn').onclick=()=>{const c=$('card');c.classList.toggle('min');$('hideBtn').textContent=c.classList.contains('min')?'展开说明':'收起说明'};
+$('hideBtn').onclick=()=>{const c=$('card');c.classList.toggle('min');$('hideBtn').textContent=c.classList.contains('min')?flowText(flowText("展开说明")):flowText(flowText("收起说明"))};
 addEventListener('keydown',e=>{
  if(e.target.tagName==='INPUT')return;
  const k=e.key.toLowerCase();

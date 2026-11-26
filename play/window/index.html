@@ -37,10 +37,12 @@
   #bar label{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
   #status{bottom:84px;padding:8px 14px;border-radius:999px;font-size:13px;white-space:nowrap}
   [hidden]{display:none!important}
+#locale-control{position:fixed;right:12px;bottom:12px;z-index:20;padding:6px 8px;background:#18181d;color:#fff;border:1px solid #777;border-radius:6px;font:inherit}body:has(#bar:not([hidden])) #locale-control{bottom:64px}
 </style>
 </head>
 <body>
 <canvas id="view"></canvas>
+<select id="locale-control" aria-label="Interface language"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>
 
 <div id="start">
   <div class="box">
@@ -60,8 +62,8 @@
 <div id="status" class="pill" hidden>正在加载模型…</div>
 
 <div id="bar" class="pill" hidden>
-  <label for="cell">颗粒大小 <input type="range" id="cell" min="3" max="9" value="5"></label>
-  <label for="bgw"><input type="checkbox" id="bgw" checked> 背景留白</label>
+  <label for="cell"><span id="cell-label">颗粒大小</span> <input type="range" id="cell" min="3" max="9" value="5"></label>
+  <label for="bgw"><input type="checkbox" id="bgw" checked> <span id="bg-label">背景留白</span></label>
   <button id="skel">显示骨架</button>
   <button id="shot">拍照保存</button>
 </div>
@@ -119,7 +121,26 @@ addEventListener("keydown", e => {
   else if (/^[1-8]$/.test(e.key)) setStyle(+e.key - 1);
 });
 
-function say(t) { $("#status").textContent = t; $("#status").hidden = !t; }
+const LOCALES={"zh-CN":{"title":"手势取景框","heading":"手势<span>取景框</span>","intro":"伸出双手，用两只手的<b>拇指和食指</b>比出一个框，框里的画面会变成另一种画风。","gesture":"<b>换风格：</b>两只手同时把拇指和食指捏紧，再张开","keys":"键盘 ← → 或 1–8，或点顶部的风格按钮","privacy":"需要联网加载 MediaPipe 模型，并允许浏览器使用摄像头。画面只在本机处理，不会上传。","go":"开启摄像头","cell":"颗粒大小","bg":"背景留白","show":"显示骨架","hide":"隐藏骨架","shot":"拍照保存","loading":"正在加载模型…","ready":"双手比框 · 两手同时捏紧再张开换风格","error":"无法打开摄像头：","retry":"请允许浏览器使用摄像头后再试。","language":"界面语言"},"zh-TW":{"title":"手勢取景框","heading":"手勢<span>取景框</span>","intro":"伸出雙手，用兩隻手的<b>拇指和食指</b>比出一個框，框裡的畫面會變成另一種風格。","gesture":"<b>切換風格：</b>兩隻手同時捏緊拇指和食指，再張開","keys":"按鍵盤 ← → 或 1–8，或點選上方的風格按鈕","privacy":"需要連線載入 MediaPipe 模型，並允許瀏覽器使用攝影機。畫面只在裝置上處理，不會上傳。","go":"開啟攝影機","cell":"顆粒大小","bg":"背景留白","show":"顯示骨架","hide":"隱藏骨架","shot":"儲存照片","loading":"正在載入模型…","ready":"雙手比框 · 兩手同時捏緊再張開切換風格","error":"無法開啟攝影機：","retry":"請允許瀏覽器使用攝影機後再試。","language":"介面語言","filters":["三段濾鏡","像素風","漫畫風","普普藝術","霓虹燈","賽博故障","程式碼雨","熱成像"]},"en":{"title":"Gesture Window","heading":"Gesture <span>Window</span>","intro":"Frame the scene with both hands using your <b>thumbs and index fingers</b>. The view inside the frame takes on a different style.","gesture":"<b>Switch styles:</b> pinch both thumbs and index fingers together, then release.","keys":"Use ← →, keys 1–8, or the style buttons above.","privacy":"MediaPipe loads over the internet and needs camera permission. Video is processed on your device.","go":"Enable camera","cell":"Grain size","bg":"White background","show":"Show skeleton","hide":"Hide skeleton","shot":"Save photo","loading":"Loading models…","ready":"Frame with both hands · Pinch and release both hands to switch styles","error":"Could not open the camera: ","retry":"Allow camera access in your browser and try again.","language":"Interface language"}};
+const selectLocale=$("#locale-control");
+let activeLocale="zh-CN", statusKey="";
+const languageAliases={cn:"zh-CN",zh:"zh-CN",tw:"zh-TW",en:"en","zh-CN":"zh-CN","zh-TW":"zh-TW"};
+let requested=new URL(location.href).searchParams.get("lang");
+if(!requested){try{requested=localStorage.getItem("gesture-window-language")}catch{}}
+const t=key=>LOCALES[activeLocale][key];
+function say(key){statusKey=key;$("#status").textContent=key?t(key):"";$("#status").hidden=!key}
+function applyLocale(next){
+  activeLocale=Object.hasOwn(LOCALES,next)?next:"zh-CN";
+  document.documentElement.lang=activeLocale;document.title=t("title");selectLocale.value=activeLocale;
+  selectLocale.setAttribute("aria-label",t("language"));
+  for(const [selector,key] of [["#start h1","heading"],["#start p:first-of-type","intro"],["#start li:first-child","gesture"],["#start li:last-child","keys"],["#start p:last-of-type","privacy"]]) $(selector).innerHTML=t(key);
+  for(const [selector,key] of [["#go","go"],["#cell-label","cell"],["#bg-label","bg"],["#shot","shot"]]) $(selector).textContent=t(key);
+  $("#skel").textContent=t(showSkel?"hide":"show");
+  [...chips.children].forEach((button,i)=>{button.textContent=activeLocale==="en"?STYLES[i].en:activeLocale==="zh-TW"?t("filters")[i]:STYLES[i].zh});
+  if(statusKey)say(statusKey);
+}
+selectLocale.onchange=()=>{applyLocale(selectLocale.value);try{localStorage.setItem("gesture-window-language",activeLocale)}catch{}};
+applyLocale(Object.hasOwn(languageAliases,requested)?languageAliases[requested]:"zh-CN");
 
 $("#go").onclick = async () => {
   $("#go").disabled = true;
@@ -128,10 +149,10 @@ $("#go").onclick = async () => {
     video.srcObject = stream; await video.play();
   } catch (e) {
     $("#go").disabled = false;
-    alert("无法打开摄像头：" + e.message + "\n请在浏览器地址栏里允许摄像头权限后再试。");
+    alert(t("error") + e.message + "\n" + t("retry"));
     return;
   }
-  $("#start").hidden = true; say("正在加载模型…");
+  $("#start").hidden = true; say("loading");
   const files = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
   const mk = async delegate => {
     hands = await HandLandmarker.createFromOptions(files, {
@@ -145,7 +166,7 @@ $("#go").onclick = async () => {
   setup();
   chips.hidden = false; $("#bar").hidden = false;
   [...chips.children].forEach((b, j) => b.setAttribute("aria-pressed", j === styleIdx));
-  say("双手比框 · 两手同时捏紧再张开换风格");
+  say("ready");
   requestAnimationFrame(loop);
 };
 
@@ -161,7 +182,7 @@ function setup() {
   for (let i = 0; i < N; i++) noise[i] = Math.random();
 }
 
-$("#skel").onclick = () => { showSkel = !showSkel; $("#skel").textContent = showSkel ? "隐藏骨架" : "显示骨架"; };
+$("#skel").onclick = () => { showSkel = !showSkel; $("#skel").textContent = t(showSkel?"hide":"show"); };
 $("#shot").onclick = () => { const a = document.createElement("a"); a.download = "gesture-" + Date.now() + ".png"; a.href = view.toDataURL("image/png"); a.click(); };
 
 /* ---------- 手势：两手同时捏紧 → 张开 = 换风格 ---------- */

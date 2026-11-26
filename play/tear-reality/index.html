@@ -1,4 +1,6 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}#tear-language{position:fixed;right:12px;bottom:12px;z-index:40;background:#18191b;color:#fff;border:1px solid #666;padding:6px;border-radius:6px;font:inherit}
+</style></head><body>
+<select id="tear-language" aria-label="简体中文 / 繁體中文 / English"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>
 <title>撕开现实</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
@@ -91,6 +93,28 @@
 <div id="drop" hidden>松手即可载入这张图片 / 视频</div>
 <div class="hint" id="hint"><b>按住</b>画面<b>用力拉</b>就会撕开 · 多根手指可以同时撕</div>
 
+<script>
+const tearLocales={"撕开现实":["撕開現實","Tear Reality"],"收起":["收合","Collapse"],"展开":["展開","Expand"],"手指或鼠标按住拖拽 · 可上传自己的图片/视频":["按住並拖曳 · 可上傳自己的圖片或影片","Press and drag · Upload your own image or video"],"画面来源":["畫面來源","Source"],"实时取景":["即時取景","Live camera"],"上传图片 / 视频":["上傳圖片／影片","Upload image or video"],"示例画面":["示範畫面","Demo image"],"画面尺寸":["畫面尺寸","Fit"],"铺满（裁剪）":["填滿（裁切）","Cover (crop)"],"完整（原比例）":["完整（原比例）","Contain (original ratio)"],"缩放":["縮放","Zoom"],"操作":["操作","Controls"],"开启手势":["啟用手勢","Enable gestures"],"切换摄像头":["切換攝影機","Switch camera"],"修复画面 (R)":["修復畫面 (R)","Reset image (R)"],"自动愈合":["自動癒合","Auto-heal"],"松手即可载入这张图片 / 视频":["放開即可載入圖片或影片","Drop to load the image or video"],"按住":["按住","Press"],"画面":["畫面"," the image and "],"用力拉":["用力拉","pull"],"就会撕开 · 多根手指可以同时撕":["就會撕開 · 可用多根手指同時撕"," to tear · Use multiple fingers to tear at once."],"这个浏览器不让用摄像头：手机上需要用 https 网址打开":["瀏覽器無法使用攝影機：手機需透過 HTTPS 開啟","The camera is unavailable. On mobile, open the HTTPS URL."],"正在请求摄像头…":["正在要求攝影機權限…","Requesting camera access…"],"摄像头被拒绝了，可以继续用鼠标拖拽":["攝影機權限遭拒，仍可使用滑鼠拖曳","Camera access was denied. You can still drag with the mouse."],"打不开摄像头：":["無法開啟攝影機：","Could not open camera: "],"只支持图片或视频文件":["只支援圖片或影片檔案","Only images and videos are supported."],"这张图片读不出来，换一张试试":["無法讀取這張圖片，請試另一張","Could not read this image. Try another one."],"这个视频格式浏览器播放不了，试试 mp4":["瀏覽器不支援此影片格式，請試用 MP4","This video format is unsupported. Try MP4."],"已载入 ":["已載入 ","Loaded "]," · 按住拖拽撕开它":[" · 按住並拖曳以撕開"," · Press and drag to tear"],"手势模型没加载出来，请检查网络后刷新":["手勢模型未載入，請檢查網路並重新整理","The gesture model did not load. Check your connection and reload."],"正在加载手势模型…":["正在載入手勢模型…","Loading gesture model…"],"手势已就绪 · 捏合抓取":["手勢已就緒 · 捏合抓取","Gestures ready · Pinch to grab"],"手势识别出错：":["手勢辨識錯誤：","Gesture recognition error: "],"关闭手势":["停用手勢","Disable gestures"],"摄像头已关闭 · 鼠标拖拽也能玩":["攝影機已關閉 · 仍可使用滑鼠拖曳","Camera off · Drag with the mouse to play"],"前置 → 换后置":["前置 → 切換後置","Front → Switch to rear"],"后置 → 换前置":["後置 → 切換前置","Rear → Switch to front"],"已选前置摄像头":["已選擇前置攝影機","Front camera selected"],"已选后置摄像头":["已選擇後置攝影機","Rear camera selected"],"前置摄像头 · 捏合抓取":["前置攝影機 · 捏合抓取","Front camera · Pinch to grab"],"后置摄像头 · 把手伸到镜头前捏合":["後置攝影機 · 將手伸向鏡頭並捏合","Rear camera · Place your hand in view and pinch"],"示例画面 · 捏合抓取":["示範畫面 · 捏合抓取","Demo image · Pinch to grab"]};
+const tearLanguage=document.getElementById("tear-language");
+const tearURL=new URL(location.href);
+let tearSaved="";
+try{tearSaved=localStorage.getItem("tear-reality-language")}catch{}
+const tearAliases={cn:"zh-CN",zh:"zh-CN",tw:"zh-TW","zh-CN":"zh-CN","zh-TW":"zh-TW",en:"en"};
+const tearLocale=tearAliases[tearURL.searchParams.get("lang")||tearSaved]||"zh-CN";
+const tearText=key=>tearLocale==="zh-CN"?key:tearLocales[key]?.[tearLocale==="en"?1:0]??key;
+document.documentElement.lang=tearLocale;
+document.title=tearText(document.title);
+tearLanguage.value=tearLocale;
+tearLanguage.onchange=()=>{
+  try{localStorage.setItem("tear-reality-language",tearLanguage.value)}catch{}
+  tearURL.searchParams.set("lang",tearLanguage.value);location.href=tearURL.href;
+};
+const tearWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(tearWalker.nextNode()){
+  const node=tearWalker.currentNode,key=node.data.trim();
+  if(!node.parentElement.closest("script,style,select")&&Object.hasOwn(tearLocales,key))node.data=node.data.replace(key,tearText(key));
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (() => {
@@ -374,16 +398,16 @@ function syncCamAspect() {
 async function openCamera() {
   if (camStream) return true;
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    setStatus('这个浏览器不让用摄像头：手机上需要用 https 网址打开', 'warn'); return false;
+    setStatus(tearText("这个浏览器不让用摄像头：手机上需要用 https 网址打开"), 'warn'); return false;
   }
   try {
-    setStatus('正在请求摄像头…', 'warn');
+    setStatus(tearText("正在请求摄像头…"), 'warn');
     camStream = await navigator.mediaDevices.getUserMedia({video: {width: {ideal: 1280}, height: {ideal: 720}, facingMode: facing}, audio: false});
     video.srcObject = camStream; await video.play();
     syncCamAspect();
     return true;
   } catch (e) {
-    setStatus(e.name === 'NotAllowedError' ? '摄像头被拒绝了，可以继续用鼠标拖拽' : '打不开摄像头：' + e.message, 'warn');
+    setStatus(e.name === 'NotAllowedError' ? tearText("摄像头被拒绝了，可以继续用鼠标拖拽") : tearText("打不开摄像头：") + e.message, 'warn');
     return false;
   }
 }
@@ -398,7 +422,7 @@ async function useLive() {
 function loadFile(file) {
   if (!file) return;
   const isVideo = file.type.startsWith('video/'), isImage = file.type.startsWith('image/');
-  if (!isVideo && !isImage) { setStatus('只支持图片或视频文件', 'warn'); return; }
+  if (!isVideo && !isImage) { setStatus(tearText("只支持图片或视频文件"), 'warn'); return; }
   if (mediaURL) URL.revokeObjectURL(mediaURL);
   if (mediaVideo) { mediaVideo.pause(); mediaVideo = null; }
   mediaURL = URL.createObjectURL(file);
@@ -409,7 +433,7 @@ function loadFile(file) {
       setSource(tex, img.naturalWidth / img.naturalHeight, false, 'upload');
       afterUpload(file.name);
     };
-    img.onerror = () => setStatus('这张图片读不出来，换一张试试', 'warn');
+    img.onerror = () => setStatus(tearText("这张图片读不出来，换一张试试"), 'warn');
     img.src = mediaURL;
   } else {
     const v = document.createElement('video');
@@ -421,11 +445,11 @@ function loadFile(file) {
       setSource(tex, v.videoWidth / v.videoHeight, false, 'upload');
       afterUpload(file.name);
     };
-    v.onerror = () => setStatus('这个视频格式浏览器播放不了，试试 mp4', 'warn');
+    v.onerror = () => setStatus(tearText("这个视频格式浏览器播放不了，试试 mp4"), 'warn');
   }
 }
 function afterUpload(name) {
-  setStatus('已载入 ' + name + ' · 按住拖拽撕开它', 'on');
+  setStatus(tearText("已载入 ") + name + tearText(" · 按住拖拽撕开它"), 'on');
 }
 
 // ---------- MediaPipe 手势 ----------
@@ -465,11 +489,11 @@ function onHands(res) {
 
 async function startHands() {
   if (handsStarted) return;
-  if (typeof Hands === 'undefined') { setStatus('手势模型没加载出来，请检查网络后刷新', 'warn'); return; }
+  if (typeof Hands === 'undefined') { setStatus(tearText("手势模型没加载出来，请检查网络后刷新"), 'warn'); return; }
   if (!(await openCamera())) return;
   video.classList.toggle('pip', mode !== 'live');
   handsStarted = true;
-  setStatus('正在加载手势模型…', 'warn');
+  setStatus(tearText("正在加载手势模型…"), 'warn');
   hands = new Hands({locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${f}`});
   hands.setOptions({maxNumHands: 2, modelComplexity: 0, minDetectionConfidence: .6, minTrackingConfidence: .5});
   hands.onResults(onHands);
@@ -478,14 +502,14 @@ async function startHands() {
     if (!handsStarted) return;
     if (!busy && video.readyState >= 2) {
       busy = true;
-      try { await hands.send({image: video}); if (handsStarted && !handsReady) { handsReady = true; setStatus('手势已就绪 · 捏合抓取', 'on'); } }
-      catch (e) { setStatus('手势识别出错：' + e.message, 'warn'); }
+      try { await hands.send({image: video}); if (handsStarted && !handsReady) { handsReady = true; setStatus(tearText("手势已就绪 · 捏合抓取"), 'on'); } }
+      catch (e) { setStatus(tearText("手势识别出错：") + e.message, 'warn'); }
       busy = false;
     }
     requestAnimationFrame(loop);
   };
   loop();
-  btnCam.textContent = '关闭手势'; btnCam.setAttribute('aria-pressed', 'true');
+  btnCam.textContent = tearText("关闭手势"); btnCam.setAttribute('aria-pressed', 'true');
 }
 
 function stopHands() {
@@ -495,9 +519,9 @@ function stopHands() {
   for (const id in pinchState) { if (pinchState[id]) endGrab(id); delete pinchState[id]; }
   if (camStream) { camStream.getTracks().forEach(t => t.stop()); camStream = null; }
   video.srcObject = null; video.classList.remove('pip');
-  btnCam.textContent = '开启手势'; btnCam.setAttribute('aria-pressed', 'false');
+  btnCam.textContent = tearText("开启手势"); btnCam.setAttribute('aria-pressed', 'false');
   if (mode === 'live') setSource(fallbackTex, 16 / 9, false, 'demo');
-  setStatus('摄像头已关闭 · 鼠标拖拽也能玩', '');
+  setStatus(tearText("摄像头已关闭 · 鼠标拖拽也能玩"), '');
 }
 
 // ---------- 手部叠加层 ----------
@@ -522,17 +546,17 @@ function drawOverlay(t) {
 
 // ---------- UI ----------
 const btnFlip = document.getElementById('btnFlip');
-const flipLabel = () => { btnFlip.textContent = facing === 'user' ? '前置 → 换后置' : '后置 → 换前置'; };
+const flipLabel = () => { btnFlip.textContent = facing === 'user' ? tearText("前置 → 换后置") : tearText("后置 → 换前置"); };
 flipLabel();
 async function flipCamera() {
   facing = facing === 'user' ? 'environment' : 'user';
   flipLabel();
-  if (!camStream) { setStatus(facing === 'user' ? '已选前置摄像头' : '已选后置摄像头', ''); return; }
+  if (!camStream) { setStatus(facing === 'user' ? tearText("已选前置摄像头") : tearText("已选后置摄像头"), ''); return; }
   camStream.getTracks().forEach(t => t.stop()); camStream = null;
   if (!(await openCamera())) return;
   if (mode === 'live') { const vt = new THREE.VideoTexture(video); vt.minFilter = THREE.LinearFilter; setSource(vt, camAspect, camMirror(), 'live'); }
   else video.classList.toggle('pip', handsStarted);
-  if (handsReady) setStatus(facing === 'user' ? '前置摄像头 · 捏合抓取' : '后置摄像头 · 把手伸到镜头前捏合', 'on');
+  if (handsReady) setStatus(facing === 'user' ? tearText("前置摄像头 · 捏合抓取") : tearText("后置摄像头 · 把手伸到镜头前捏合"), 'on');
 }
 btnFlip.onclick = flipCamera;
 video.addEventListener('resize', () => {
@@ -541,7 +565,7 @@ video.addEventListener('resize', () => {
   if (mode === 'live' && Math.abs(old - camAspect) > .01) { sourceAspect = camAspect; grabs.clear(); layout(); }
 });
 const panel = document.querySelector('.panel'), btnFold = document.getElementById('btnFold');
-function fold(c) { panel.classList.toggle('collapsed', c); btnFold.textContent = c ? '展开' : '收起'; btnFold.setAttribute('aria-expanded', !c); }
+function fold(c) { panel.classList.toggle('collapsed', c); btnFold.textContent = c ? tearText("展开") : tearText("收起"); btnFold.setAttribute('aria-expanded', !c); }
 btnFold.onclick = () => fold(!panel.classList.contains('collapsed'));
 if (innerWidth < 600) fold(true);
 btnCam.onclick = () => handsStarted ? stopHands() : startHands();
@@ -558,7 +582,7 @@ fitContain.onclick = () => setFit('contain');
 scaleIn.oninput = () => setFit(fitMode, scaleIn.value / 100);
 btnLive.onclick = useLive;
 btnUpload.onclick = () => fileInput.click();
-btnDemo.onclick = () => { setSource(fallbackTex, 16 / 9, false, 'demo'); if (handsReady) setStatus('示例画面 · 捏合抓取', 'on'); };
+btnDemo.onclick = () => { setSource(fallbackTex, 16 / 9, false, 'demo'); if (handsReady) setStatus(tearText("示例画面 · 捏合抓取"), 'on'); };
 fileInput.onchange = () => { loadFile(fileInput.files[0]); fileInput.value = ''; };
 let dragDepth = 0;
 const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');

@@ -1,4 +1,6 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}#nebula-language{position:fixed;right:12px;bottom:12px;z-index:30;background:#111821;color:white;border:1px solid #71808d;border-radius:6px;padding:5px 8px;font:inherit}
+</style></head><body>
+<select id="nebula-language" aria-label="简体中文 / 繁體中文 / English"><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="en">English</option></select>
 <title>手势星云</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,6 +89,30 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <button id="help" aria-label="显示手势说明" hidden>?</button>
 
 <script type="module">
+
+const nebulaTranslations={"手势星云":["手勢星雲","Gesture Nebula"],"手势":["手勢","Gesture "],"星云":["星雲","Nebula"],"可缩放的粒子星云":["可縮放的粒子星雲","Zoomable particle nebula"],"鼠标模式":["滑鼠模式","Mouse mode"],"声音":["聲音","Sound"],"退回上一层（Esc）":["返回上一層（Esc）","Go up one level (Esc)"],"进入下一层（Enter）":["進入下一層（Enter）","Go down one level (Enter)"],"尺度":["尺度","Scale"],"一片可以一直钻下去的星空：星系、恒星、原子，然后又回到宇宙。对着摄像头抬起手，把手掌慢慢推向它，就会一点点潜进去。画面只在你的浏览器里处理，不会上传。":["一片可以不斷探索的星空：星系、恆星、原子，再回到宇宙。對著攝影機抬起手，慢慢將手掌推近鏡頭，就能逐步深入。影像只在瀏覽器內處理，不會上傳。","Explore an endless sky, from galaxies to stars to atoms and back into space. Raise your hand and slowly move it toward the camera to dive deeper. Video stays in your browser."],"打开摄像头":["開啟攝影機","Enable camera"],"先用鼠标玩":["先用滑鼠玩","Play with mouse"],"收起手势说明":["收起手勢說明","Hide gesture guide"],"手掌推向镜头":["手掌推向鏡頭","Move your palm toward the camera"],"缓缓潜入；往回收就浮出来":["緩緩深入；收回手掌即可浮出","Dive in slowly. Pull back to surface."],"拳头慢慢张开":["慢慢張開拳頭","Slowly open a fist"],"绽放着往里走；慢慢握拳往外退":["展開並深入；慢慢握拳可退回","Bloom and dive. Slowly close your fist to move back."],"单手张开":["張開單手","Open one hand"],"推开星尘":["推開星塵","Push stardust away"],"捏合手指":["捏合手指","Pinch your fingers"],"吸成漩涡":["吸成漩渦","Draw particles into a vortex"],"握拳 → 快速张开":["握拳 → 快速張開","Make a fist → open quickly"],"爆发":["爆發","Burst"],"双手张开":["張開雙手","Open both hands"],"拉出光束；拉开 / 合拢缩放，转动两手连线旋转":["拉出光束；拉開或合攏可縮放，轉動雙手連線可旋轉","Draw a beam. Spread or close your hands to zoom, and rotate the line between them to turn."],"鼠标":["滑鼠","Mouse"],"移动推开 · 按住漩涡，久按松开爆发 · 右键拖动旋转 · 滚轮潜入 / 浮出":["移動推開 · 按住形成漩渦，長按後放開引發爆發 · 右鍵拖曳旋轉 · 滾輪深入／浮出","Move to push particles. Hold for a vortex and release after a long hold for a burst. Right-drag to rotate and scroll to dive or surface."],"显示手势说明":["顯示手勢說明","Show gesture guide"],"正在打开…":["正在開啟…","Opening camera…"],"这个环境不支持摄像头":["此環境不支援攝影機","This environment does not support a camera"],"加载手势模型…":["載入手勢模型…","Loading gesture model…"],"加载模型":["載入模型","Loading model"],"摄像头 · 抬起手":["攝影機 · 抬起手","Camera · Raise your hand"],"再试一次":["再試一次","Try again"],"权限被拒绝或被页面拦截":["權限遭拒或被頁面阻擋","Permission was denied or blocked"],"未知原因":["未知原因","Unknown error"]};
+const nebulaAliases={cn:"zh-CN",zh:"zh-CN","zh-CN":"zh-CN",tw:"zh-TW","zh-TW":"zh-TW",en:"en"};
+const nebulaURL=new URL(location.href);
+let nebulaPreference;
+try{nebulaPreference=localStorage.getItem("gesture-nebula-language")}catch{}
+const nebulaLocale=nebulaAliases[nebulaURL.searchParams.get("lang")||nebulaPreference]||"zh-CN";
+const nebulaText=value=>nebulaLocale==="zh-CN"?value:nebulaTranslations[value]?.[nebulaLocale==="en"?1:0]??value;
+document.documentElement.lang=nebulaLocale;
+document.title=nebulaText(document.title);
+const nebulaSelector=document.getElementById("nebula-language");
+nebulaSelector.value=nebulaLocale;
+nebulaSelector.addEventListener("change",()=>{
+  try{localStorage.setItem("gesture-nebula-language",nebulaSelector.value)}catch{}
+  nebulaURL.searchParams.set("lang",nebulaSelector.value);
+  location.href=nebulaURL.href;
+});
+const nebulaWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(nebulaWalker.nextNode()){
+  const node=nebulaWalker.currentNode,key=node.data.trim();
+  if(node.parentElement.closest("script,style,select")||!Object.hasOwn(nebulaTranslations,key))continue;
+  node.data=node.data.replace(key,nebulaText(key));
+}
+for(const element of document.querySelectorAll("[aria-label]")) element.setAttribute("aria-label",nebulaText(element.getAttribute("aria-label")));
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const NLEV=5, KS=14, CAM=28;
 const wrapD=x=>x-NLEV*Math.round(x/NLEV);
@@ -209,7 +235,7 @@ function burst(x,y,c){
 /* ---------- textless scale dots & controls ---------- */
 const ruler=document.getElementById('ruler'), marker=document.getElementById('marker');
 for(let i=0;i<NLEV;i++){ const b=document.createElement('button'); b.className='stop'; b.style.top=(i/NLEV*100)+'%';
-  b.setAttribute('aria-label','第 '+(i+1)+' 层'); b.addEventListener('click',()=>{view.zt=i+NLEV*Math.round((view.zt-i)/NLEV);}); ruler.appendChild(b); }
+  b.setAttribute('aria-label',nebulaLocale==="en"?"Level "+(i+1):"第 "+(i+1)+(nebulaLocale==="zh-TW"?" 層":" 层")); b.addEventListener('click',()=>{view.zt=i+NLEV*Math.round((view.zt-i)/NLEV);}); ruler.appendChild(b); }
 document.getElementById('down').addEventListener('click',enterLevel);
 document.getElementById('up').addEventListener('click',exitLevel);
 addEventListener('keydown',e=>{ if(e.target.tagName==='BUTTON'&&(e.key==='Enter'||e.key===' '))return;
@@ -272,22 +298,23 @@ function detect(){
   for(const [k,h] of hands){ if(!seen.has(k)){ h.miss++; if(h.miss>8) hands.delete(k); } }
 }
 async function startCamera(){
-  const btn=document.getElementById('start'); btn.disabled=true; btn.textContent='正在打开…'; msg.hidden=true;
+  const btn=document.getElementById('start'); btn.disabled=true; btn.textContent=nebulaText("正在打开…"); msg.hidden=true;
   try{
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia) throw new Error('这个环境不支持摄像头');
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia) throw new Error(nebulaText("这个环境不支持摄像头"));
     const stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},facingMode:'user'},audio:false});
     video.srcObject=stream; await video.play();
-    btn.textContent='加载手势模型…'; stxt.textContent='加载模型';
+    btn.textContent=nebulaText("加载手势模型…"); stxt.textContent=nebulaText("加载模型");
     const V='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
     const vision=await import(V+'/vision_bundle.mjs');
     const fs=await vision.FilesetResolver.forVisionTasks(V+'/wasm');
     const opts=d=>({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:d},runningMode:'VIDEO',numHands:2,minHandDetectionConfidence:.5,minTrackingConfidence:.5});
     try{ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('GPU')); }
     catch(_){ landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('CPU')); }
-    statusEl.classList.add('live'); stxt.textContent='摄像头 · 抬起手'; intro.hidden=true; video.hidden=false;
+    statusEl.classList.add('live'); stxt.textContent=nebulaText("摄像头 · 抬起手"); intro.hidden=true; video.hidden=false;
   }catch(err){
-    btn.disabled=false; btn.textContent='再试一次'; msg.hidden=false;
-    msg.textContent='摄像头没能打开（'+(err&&err.name==='NotAllowedError'?'权限被拒绝或被页面拦截':(err&&err.message||'未知原因'))+'）。请在浏览器地址栏允许摄像头后再试。现在可以先用鼠标或触屏玩。';
+    btn.disabled=false; btn.textContent=nebulaText("再试一次"); msg.hidden=false;
+    const reason=err?.name==="NotAllowedError"?nebulaText("权限被拒绝或被页面拦截"):err?.message||nebulaText("未知原因");
+    msg.textContent=nebulaLocale==="en"?"Camera unavailable ("+reason+"). Allow camera access and try again, or continue with mouse or touch.":nebulaLocale==="zh-TW"?"無法開啟攝影機（"+reason+"）。請確認權限後再試，或先使用滑鼠或觸控。":"无法开启摄像头（"+reason+"）。请确认权限后再试，或先使用鼠标或触屏。";
   }
 }
 document.getElementById('start').addEventListener('click',startCamera);
@@ -454,7 +481,7 @@ function frame(now){
 
   updateAudio(view.z,Math.min(1,loose*.8+warp+vort.s*.5));
   marker.style.top=(((view.z%NLEV)+NLEV)%NLEV/NLEV*100)+'%';
-  if(landmarker&&(++fcount%15===0)) stxt.textContent= live.length?('摄像头 · '+live.length+' 只手'):'摄像头 · 抬起手';
+  if(landmarker&&(++fcount%15===0)) stxt.textContent= live.length?(nebulaLocale==="en"?"Camera · "+live.length+(live.length===1?" hand":" hands"):nebulaLocale==="zh-TW"?"攝影機 · "+live.length+" 隻手":"摄像头 · "+live.length+" 只手"):nebulaText("摄像头 · 抬起手");
 }
 function chargeRing(x,y,r,c,t){
   if(c<=0) return;

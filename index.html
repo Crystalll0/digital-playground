@@ -362,6 +362,18 @@ const accessHelp=w=>w.key==='深夜汤馆 Situation Puzzles'
   :w.key==='爪爪衣橱 Pawmoire'
   ?tr('本作品使用 OpenAI 服务提供 AI 图像生成功能。若无法打开，请尝试切换网络或使用 VPN。','This project uses OpenAI services for AI image generation. If it does not load, try a different network or a VPN.')
   :tr('本作品托管于 ChatGPT Sites，部分地区可能访问受限。若无法打开，请尝试切换网络或使用 VPN。','This project is hosted on ChatGPT Sites and access may be restricted in some regions. If it does not load, try a different network or a VPN.');
+for (const [project, languages] of Object.entries(PROJECT_LANGUAGES)) {
+  const history = PROJECT_HISTORY[project];
+  if (!history || !["简", "繁", "EN"].every(language => languages.includes(language))) continue;
+  const four = languages.includes("IT");
+  history.entries.push([
+    "2026-11-26", null, "国际化更新 / Localization update",
+    ["完善多语言版本", "Multilingual interface"],
+    four
+      ? ["提供简体中文、繁體中文、英文和意大利语界面，可通过语言栏切换。", "Provides Simplified Chinese, Traditional Chinese, English, and Italian through the language selector."]
+      : ["提供简体中文、繁體中文和英文界面，可通过语言控件切换。", "Provides Simplified Chinese, Traditional Chinese, and English through the language control."]
+  ]);
+}
 const historyFor=w=>PROJECT_HISTORY[w.key];
 const legacy=w=>COMMITS.filter(c=>c[1].split(' · ')[0]===w.key&&!/Final-Submission-Checklist|final-2026-12-06/.test(c[1]));
 const count=w=>historyFor(w)?historyFor(w).entries.length:legacy(w).length;
